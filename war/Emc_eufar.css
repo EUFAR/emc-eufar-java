@@ -1,0 +1,549 @@
+body {
+  padding: 10px;
+}
+
+
+@font-face {
+    font-family: DroidSans;
+    src: url(font/DroidSans.ttf);
+}
+
+
+@font-face {
+    font-family: DroidSansFallback;
+    src: url(font/DroidSansFallbackFull.ttf);
+}
+
+
+@font-face {
+    font-family: FreeSans;
+    src: url(font/FreeSans.ttf);
+}
+
+
+.emptyButton {
+  width: 25px;
+  height: 25px;
+  margin-left: 20px;
+}
+
+
+.infoButton {
+  width: 25px;
+  height: 25px;
+  margin-left: 20px;
+}
+
+
+.infoButton-down-hovering {
+  background-color: #cccccc;
+}
+
+
+.infoButton-up-hovering {
+  background-color: #cfcfcf;
+}
+
+
+.identTextLabel {
+  font-family: DroidSansFallback;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+
+.identTextBox {
+  width: 300px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+.identTextList {
+  width: 150px;
+  height: 30px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+.identTextArea {
+  width: 700px;
+  height: 100px;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.classTitleTextLabel {
+  font-family: DroidSansFallback;
+  margin-left: 20px;
+  margin-top: 150px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
+.classCheckBox {
+  margin-left: 40px;
+  font-family: DroidSansFallback;
+}
+
+.gwt-CheckBox {
+  margin-left: 40px;
+  font-family: DroidSansFallback;
+}
+
+
+.classVerticalPanel {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.keyTitleTextLabel {
+  font-family: DroidSansFallback;
+  margin-left: 20px;
+  margin-top: 10px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
+.airTitleTextLabel {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+
+.airVerticalPanel {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.airHorizontalPanel {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.airTextList {
+  width: 150px;
+  height: 30px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.airFlexTable {
+  width: 700px;
+  heigth: 300px;
+}
+
+
+.airFlexTableLabel1 {
+  margin-left: 40px;
+  margin-top: 20px;
+  font-family: DroidSansFallback;
+  
+}
+
+
+.airFlexTableLabel2 {
+  margin-top: 20px;
+  font-family: FreeSans;
+  font-style: italic;
+  font-weight: bold;
+  
+}
+
+
+.geoTitleTextLabel {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+
+.geoTextList {
+  width: 150px;
+  height: 30px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.geoVerticalPanel {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.geoTextBox {
+  width: 50px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+}
+
+
+.geoTextBox2 {
+  width: 150px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+  margin-left: 20px;
+}
+
+
+.geoTextBox3 {
+  width: 100px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+  margin-left: 20px;
+}
+
+
+
+.geoTitleTextLabel2 {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-right: 40px;
+}
+
+
+.refTextLabel {
+  font-family: DroidSansFallback;
+}
+
+
+.refHorizontalPanel {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+
+.refTitleTextLabel {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 8px;
+  margin-right: 60px;
+}
+
+
+.useVerticalPanel {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.useTextLabel {
+  font-family: DroidSansFallback;
+  margin-right: 40px;
+  width: 150px;
+  heigth: 30px;
+  text-align: justify;
+}
+
+
+.useTextArea {
+  width: 700px;
+  height: 100px;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+}
+
+
+.orgFlexTable {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.orgTextLabel {
+  font-family: DroidSansFallback;
+  margin-right: 40px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+
+.orgTextBox {
+  width: 200px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.orgTextList {
+  width: 210px;
+  height: 30px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.metVerticalPanel {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.metTextLabel {
+  font-family: DroidSansFallback;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+
+.metTextLabel2 {
+  font-family: DroidSansFallback;
+  text-align: justify;
+}
+
+
+.metTextList {
+  width: 100px;
+  height: 30px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+}
+
+
+.metHorizontalPanel {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+
+.metTitleTextLabel {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-right: 40px;
+  margin-top: -10px;
+}
+
+
+.metTextBox {
+  width: 200px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.metTextBox2 {
+  width: 200px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+}
+
+
+.saveTextBox {
+  width: 210px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: #ffffff;
+}
+
+
+.saveTextLabel {
+  font-family: DroidSansFallback;
+  margin-left: 20px;
+  margin-right: 15px;
+  text-align: justify;
+}
+
+
+.saveVerticalPanel {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+}
+
+
+.openTextBox {
+  width: 210px;
+  height: 30px;
+  padding: 5px 4px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+
+.myInfoBox {
+  background: #e5e5e5;
+  padding: 4px 8px 4px 4px;
+  cursor: default;
+  font-family: FreeSans;
+  border: 1px solid black;
+  
+}
+
+.myInfoBoxText {
+  font-size: 12px;
+  font-family: FreeSans;
+  margin-left: 10px;
+}
+
+
+.flexTable {
+  height: 10px;
+  width: 350px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.flexTable-SecondColumn {
+  width: 40px;
+}
+
+.gwt-StackLayoutPanel {
+  border-bottom: 1px solid #bbbbbb !important;
+}
+
+.gwt-StackLayoutPanel .gwt-StackLayoutPanelHeader {
+  cursor: pointer !important;
+  cursor: hand !important;
+  font-size: 1.05em !important;
+  font-family: DroidSans !important;
+  padding: 3px !important;
+  border: 1px solid #bbbbbb !important;
+  border-bottom: 0px !important;
+  background: #d3def6 !important;
+}
+
+.gwt-StackLayoutPanel .gwt-StackLayoutPanelHeader-hovering {
+  background: #bfcaec !important;
+  font-size: 1.2em !important;
+}
+
+.gwt-StackLayoutPanel .gwt-StackLayoutPanelContent {
+  background: #e6e6e6 !important;
+}
+
+.textrequired {
+	color: rgb(200,0,0);
+}
+
+
+.textuncorrect {
+	color: rgb(0,0,200);
+}
+
+
+.textcomplete {
+	color: black;
+}
+
+
+.gwt-DateBox {
+  padding: 5px 4px !important;
+  border: 1px solid #ccc !important;
+  width: 80px !important;
+  height: 15px !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  font-family: FreeSans !important;
+  background-color: #ffffff !important;
+}
+
+
+.myUploadBox {
+  background: #e5e5e5;
+  padding: 4px 8px 4px 4px;
+  cursor: default;
+  font-family: FreeSans;
+  border: 1px solid black;
+  
+}
