@@ -19,93 +19,56 @@ LICENSE END***/
 
 package com.eufar.emc.server;
 
-
-
 import java.io.*;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
-
 import org.apache.commons.io.FileUtils;
-//import org.apache.commons.logging.log4j.Logger;
-
 
 
 public class DownloadFunction extends HttpServlet {
-
 	private static final long serialVersionUID = -4356636877078339046L;
-	//private static Logger _log = Logger.getLogger(DownloadServlet.class);
-
 	byte[] bbuf = new byte[1024];
-
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		String filename = "";
-		ServletContext context = getServletConfig().getServletContext();
-		
-		//_log.info(" request original encoding: " + request.getCharacterEncoding());
-		
-		request.setCharacterEncoding("UTF-8");
-		String dir = "";
-		if (context.getRealPath("tmp")==null) dir = context.getRealPath("/tmp");
-		else dir = context.getRealPath("tmp");
-		File fileDir = new File(dir);
-		//FileUtils.cleanDirectory(fileDir);
-		
-		try {
-			String[] attrArray = request.getParameterValues("filename");			
-			if(attrArray != null) filename = attrArray[0];
-			String xmltree = "";
-			attrArray = request.getParameterValues("xmltree");
-			//_log.info(" request: " + attrArray);
-			if(attrArray != null) xmltree = attrArray[0];
-			//_log.debug(" tree: " + xmltree);
-	    	Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "/" + filename), "UTF-8"));
-	    	//xmltree = xmltree.replace("&amp;","&");
-	    	//xmltree = xmltree.replace("&","&amp;");
-	    	
-	    	out.append(xmltree);
-        	out.flush();
-       		out.close();
-	    }
-	    catch (IOException e)    {   
-	    	//e.printStackTrace();
-	    	//_log.error(" error " + e.getMessage());
-	    }
-	    try {	    	
-			ServletOutputStream out = response.getOutputStream();
-			//filename = "test.xml";
-			File file = new File(dir + "/" + filename);
-			String mimetype = context.getMimeType(filename);
-
-			response.setContentType((mimetype != null) ? mimetype : "application/octet-stream");
-			//response.setCharacterEncoding("UTF-8");
-			response.setContentLength((int) file.length());
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");			
-			response.setHeader("Pragma", "private");
-			response.setHeader("Cache-Control", "private, must-revalidate");
-			
-			DataInputStream in = new DataInputStream(new FileInputStream(file));
-
-			int length;
-			while ((in != null) && ((length = in.read(bbuf)) != -1)) {
-				out.write(bbuf, 0, length);
-			}
-
-			in.close();
-			out.flush();
-			out.close();
-			
-			FileUtils.cleanDirectory(fileDir);
-		}
-		catch (Exception e) {
-			//e.printStackTrace();
-			//_log.error(" error " + e.getMessage());
-		}		
+			String filename = "";
+			ServletContext context = getServletConfig().getServletContext();
+			request.setCharacterEncoding("UTF-8");
+			String dir = "";
+			if (context.getRealPath("tmp")==null) {dir = context.getRealPath("/tmp");}
+			else {dir = context.getRealPath("tmp");}
+			File fileDir = new File(dir);
+			try {
+				String[] attrArray = request.getParameterValues("filename");			
+				if(attrArray != null) {filename = attrArray[0];}
+				String xmltree = "";
+				attrArray = request.getParameterValues("xmltree");
+				if(attrArray != null) {xmltree = attrArray[0];}
+				Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "/" + filename), "UTF-8"));
+				out.append(xmltree);
+				out.flush();
+				out.close();
+			} catch (IOException e) {}
+			try {	    	
+				ServletOutputStream out = response.getOutputStream();
+				File file = new File(dir + "/" + filename);
+				String mimetype = context.getMimeType(filename);
+				response.setContentType((mimetype != null) ? mimetype : "application/octet-stream");
+				response.setContentLength((int) file.length());
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");			
+				response.setHeader("Pragma", "private");
+				response.setHeader("Cache-Control", "private, must-revalidate");
+				DataInputStream in = new DataInputStream(new FileInputStream(file));
+				int length;
+				while ((in != null) && ((length = in.read(bbuf)) != -1)) {out.write(bbuf, 0, length);}
+				in.close();
+				out.flush();
+				out.close();
+				FileUtils.cleanDirectory(fileDir);
+			} catch (Exception e) {}
 	}	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
-    	throws ServletException, IOException {
-		doPost(request, response);
+		throws ServletException, IOException {
+			doPost(request, response);
 	}
 }

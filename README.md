@@ -1,7 +1,7 @@
 # asmm-eufar
 
 A detailed changelog can be found in the Documentation directory.
-Current version: 0.9.3
+Current version: 0.9.4
 This is an Online version of the following software: https://github.com/eufarn7sp/emc-eufar. It has been coded with Java and Google Web Toolkit.
 
 Overview
