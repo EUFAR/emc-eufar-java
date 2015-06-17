@@ -27,7 +27,7 @@ June 17 2015, Release version 0.9.4
 
 
 June 16-17 2015, Release version 0.9.4b2-3
-=====================================
+==========================================
   FIXED:
     - in the "Temporal Reference" tab, the date displayed in the new period widgets (phase 2, phase 3, ...) was aligned on the left and not centered [OFFLINE][button_functions.py].
     - when a user tries to open an xml file, and an aircraft is included in the xml file, the C for the copyright of the picture is not displayed correctly [OFFLINE][eufar_metadata_xml.py].
@@ -39,6 +39,7 @@ June 16-17 2015, Release version 0.9.4b2-3
     - a cancel button has been included in the Ui_fillwindow [OFFLINE][Ui_fillwindow.py].
     - a function to append the suffix "modified" to the browser window title has been introduced when a modification is brought to a field, the suffix disapears if the file is saved or cleared [ONLINE].
     - when a user wants to create a new file and some fields are not empty or have been changed, a function will ask him if he wants to save the file before creating a new one [ONLINE].
+    - when a user tries to open an xml file and some fields are not empty, it is not prompted if the user wants to save his work before opening the xml file [ONLINE].
     
   MODIFIED:
     - the way to handle aircraft information and the dedicated combobox has been modified when a user load an xml file including an aircraft. [OFFLINE][eufar_metadata_xml.py].

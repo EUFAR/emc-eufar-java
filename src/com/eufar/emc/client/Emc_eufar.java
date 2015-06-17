@@ -2436,7 +2436,12 @@ public class Emc_eufar implements EntryPoint {
 		final FormPanel myForm = new FormPanel();
 		final Button cancelButton = new Button("Cancel/Close", new ClickHandler () {
 			@Override
-			public void onClick(ClickEvent event) {myUploadDialog.hide();}
+			public void onClick(ClickEvent event) {
+				myUploadDialog.hide();
+				if (string == "open") {
+					openAction();
+				}
+			}
 		});
 		final Button submitButton = new Button("Ok", new ClickHandler() {			
 			@Override
@@ -2461,8 +2466,8 @@ public class Emc_eufar implements EntryPoint {
 		fileBox.setName("filename");
 		verticalPanel03.add(fileBox);
 		/////////////////////////////////////////
-		myForm.setAction(GWT.getHostPageBaseURL() + "/download"); // for Tomcat7 Server
-		//myForm.setAction("/download"); // for Eclipse Dev Mode
+		//myForm.setAction(GWT.getHostPageBaseURL() + "/download"); // for Tomcat7 Server
+		myForm.setAction("/download"); // for Eclipse Dev Mode
 		/////////////////////////////////////////
 		myForm.setMethod(FormPanel.METHOD_POST);
 		myForm.add(verticalPanel03);
@@ -2873,8 +2878,62 @@ public class Emc_eufar implements EntryPoint {
 	}
 
 
-	/// open a file containing xml code
+	/// open a file containing xml code - 1
 	private void openFile() {
+		if (isModified) {
+			final DialogBox infoDialog = new DialogBox();
+			final VerticalPanel verticalPanel01 = new VerticalPanel();
+			final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
+			final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
+			final Image image = new Image("icons/warning_icon_popup.png");
+			final HTML label = new HTML("<p align=justify>The actual document has been modified. Changes will be lost if the document is not "
+					+ "saved.<br/></p><p><span style=\" font-weight:600;\">Do you want to save your changes ?</span></p>");
+			final Button saveButton = new Button("Save", new ClickHandler() {			
+				@Override
+				public void onClick(ClickEvent event) {
+					infoDialog.hide();
+					runCheck("open");
+				}
+			});
+			final Button cancelButton = new Button("Cancel", new ClickHandler() {			
+				@Override
+				public void onClick(ClickEvent event) {infoDialog.hide();}
+			});
+			final Button createButton = new Button("Open without saving", new ClickHandler() {			
+				@Override
+				public void onClick(ClickEvent event) {
+					infoDialog.hide();
+					openAction();
+				}
+			});
+			infoDialog.setGlassEnabled(true);
+			verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px !important;");
+			horizontalPanel01.add(image);
+			horizontalPanel01.add(label);
+			verticalPanel01.add(horizontalPanel01);
+			horizontalPanel02.add(createButton);
+			horizontalPanel02.add(cancelButton);
+			horizontalPanel02.add(saveButton);
+			verticalPanel01.add(horizontalPanel02);
+			label.getElement().setAttribute("style", "margin-left: 10px !important;");
+			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: DroidSansFallback !important; font-weight: "
+					+ "bold !important; margin-top: 10px !important;");
+			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: DroidSansFallback !important;"
+					+ " font-weight: bold !important; margin-top: 10px !important;");
+			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: DroidSansFallback !important;"
+					+ " font-weight: bold !important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
+			infoDialog.add(verticalPanel01);
+			infoDialog.setSize( "400px", "150px" );
+			infoDialog.setModal(true);
+			infoDialog.center();
+			infoDialog.setStyleName("myUploadBox");
+			infoDialog.show();
+		} else {openAction();}
+	}
+
+	
+	/// open a file containing xml code - 2
+	private void openAction() {
 		final DialogBox myUploadDialog = new DialogBox();
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final VerticalPanel verticalPanel02 = new VerticalPanel();
@@ -2903,8 +2962,8 @@ public class Emc_eufar implements EntryPoint {
 		myFileUpload.getElement().setId("myFile");
 		verticalPanel02.add(myFileUpload);
 		///////////////////////////////////////////////
-		myUploadForm.setAction(GWT.getHostPageBaseURL() + "/upload"); // for Tomcat7 Server
-		//myUploadForm.setAction("/upload"); // for Eclipse Dev Mode
+		//myUploadForm.setAction(GWT.getHostPageBaseURL() + "/upload"); // for Tomcat7 Server
+		myUploadForm.setAction("/upload"); // for Eclipse Dev Mode
 		///////////////////////////////////////////////
 		myUploadForm.setEncoding(FormPanel.ENCODING_MULTIPART);
 		myUploadForm.setMethod(FormPanel.METHOD_POST);
@@ -2916,7 +2975,8 @@ public class Emc_eufar implements EntryPoint {
 					event.cancel();
 				}		 
 				else {
-					newFile();
+					clearFields();
+					docNotModified();
 					myFileName = myFileUpload.getFilename();
 				}        
 			}
