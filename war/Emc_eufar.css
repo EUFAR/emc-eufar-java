@@ -32,22 +32,17 @@ body {
   width: 25px;
   height: 25px;
   margin-left: 20px;
+  background-color: #e6e6e6;
 }
 
 
-.infoButton-down-hovering {
+.infoButton:hover {
   background-color: #cccccc;
-}
-
-
-.infoButton-up-hovering {
-  background-color: #cfcfcf;
 }
 
 
 .identTextLabel {
   font-family: DroidSansFallback;
-  margin-bottom: 10px;
   text-align: justify;
 }
 
@@ -60,21 +55,27 @@ body {
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
-  margin-left: 20px;
-  margin-bottom: 10px;
   background-color: #ffffff;
 }
 
 .identTextList {
-  width: 150px;
-  height: 30px;
-  padding: 5px 4px;
+  width: 100px;
+  height: 25px;
   border: 1px solid #ccc;
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
-  margin-left: 20px;
-  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.identTextList:disabled {
+  width: 100px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
   background-color: #ffffff;
 }
 
@@ -82,19 +83,21 @@ body {
   width: 700px;
   height: 100px;
   border: 1px solid #ccc;
-  margin-left: 20px;
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
-  margin-bottom: 10px;
   background-color: #ffffff;
+}
+
+
+.identGrid {
+  margin-left: 20px; 
+  margin-top: 10px;
 }
 
 
 .classTitleTextLabel {
   font-family: DroidSansFallback;
-  margin-left: 20px;
-  margin-top: 150px;
   text-decoration: underline;
   font-weight: bold;
 }
@@ -106,14 +109,7 @@ body {
 }
 
 .gwt-CheckBox {
-  margin-left: 40px;
   font-family: DroidSansFallback;
-}
-
-
-.classVerticalPanel {
-  margin-left: 20px;
-  margin-top: 10px;
 }
 
 
@@ -142,13 +138,12 @@ body {
 
 .airHorizontalPanel {
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: -10px;
 }
 
 .airTextList {
-  width: 150px;
-  height: 30px;
-  padding: 5px 4px;
+  width: 180px;
+  height: 25px;
   border: 1px solid #ccc;
   font-size: 12px;
   font-weight: bold;
@@ -159,22 +154,86 @@ body {
 }
 
 
+.airTextList2 {
+  width: 300px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+}
+
+
+.airTextList3 {
+  width: 150px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  background-color: #ffffff;
+}
+
+
+.airTextBox {
+  width: 200px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  background-color: #ffffff;
+}
+
+
+.airTextBox2 {
+  width: 170px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 10px;
+  background-color: #ffffff;
+}
+
+
+.airTitleTextLabel2 {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+
+
 .airFlexTable {
-  width: 700px;
+  width: 550px;
   heigth: 300px;
+}
+
+
+.airVerticalPanel2 {
+  width: 550px !important;
 }
 
 
 .airFlexTableLabel1 {
   margin-left: 40px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   font-family: DroidSansFallback;
   
 }
 
 
 .airFlexTableLabel2 {
-  margin-top: 20px;
   font-family: FreeSans;
   font-style: italic;
   font-weight: bold;
@@ -186,21 +245,30 @@ body {
   font-family: DroidSansFallback;
   text-decoration: underline;
   font-weight: bold;
-  margin-top: 5px;
 }
 
 
 .geoTextList {
   width: 150px;
-  height: 30px;
-  padding: 5px 4px;
+  height: 25px;
   border: 1px solid #ccc;
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
   margin-left: 20px;
-  margin-bottom: 10px;
   background-color: #ffffff;
+}
+
+
+.geoTextList:disabled {
+  width: 150px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  background-color: #d6d6d6;
 }
 
 
@@ -247,6 +315,18 @@ body {
   margin-left: 20px;
 }
 
+
+.geoTextBox4 {
+  width: 50px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 7px;
+  background-color: #ffffff;
+}
 
 
 .geoTitleTextLabel2 {
@@ -312,8 +392,7 @@ body {
 
 .orgTextLabel {
   font-family: DroidSansFallback;
-  margin-right: 40px;
-  margin-bottom: 10px;
+  margin-right: 20px;
   text-align: justify;
 }
 
@@ -326,20 +405,17 @@ body {
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
-  margin-bottom: 10px;
   background-color: #ffffff;
 }
 
 
 .orgTextList {
   width: 210px;
-  height: 30px;
-  padding: 5px 4px;
+  height: 25px;
   border: 1px solid #ccc;
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
-  margin-bottom: 10px;
   background-color: #ffffff;
 }
 
@@ -352,7 +428,6 @@ body {
 
 .metTextLabel {
   font-family: DroidSansFallback;
-  margin-bottom: 10px;
   text-align: justify;
 }
 
@@ -365,8 +440,7 @@ body {
 
 .metTextList {
   width: 100px;
-  height: 30px;
-  padding: 5px 4px;
+  height: 25px;
   border: 1px solid #ccc;
   font-size: 12px;
   font-weight: bold;
@@ -398,7 +472,6 @@ body {
   font-size: 12px;
   font-weight: bold;
   font-family: FreeSans;
-  margin-bottom: 10px;
   background-color: #ffffff;
 }
 
@@ -460,7 +533,6 @@ body {
 }
 
 
-
 .myInfoBox {
   background: #e5e5e5;
   padding: 4px 8px 4px 4px;
@@ -468,12 +540,6 @@ body {
   font-family: FreeSans;
   border: 1px solid black;
   
-}
-
-.myInfoBoxText {
-  font-size: 12px;
-  font-family: FreeSans;
-  margin-left: 10px;
 }
 
 
@@ -493,7 +559,6 @@ body {
 }
 
 .gwt-StackLayoutPanel .gwt-StackLayoutPanelHeader {
-  cursor: pointer !important;
   cursor: hand !important;
   font-size: 1.05em !important;
   font-family: DroidSans !important;
@@ -512,18 +577,72 @@ body {
   background: #e6e6e6 !important;
 }
 
+
+.gwt-TabLayoutPanel {
+	
+}
+
+
+.gwt-TabLayoutPanel .gwt-TabLayoutPanelTabs {
+	
+}
+
+
+.gwt-TabLayoutPanel .gwt-TabLayoutPanelContent {
+  overflow: auto !important;
+  padding: 6px !important;
+  background: #e6e6e6 !important; 
+}
+
+
+.gwt-TabLayoutPanel .gwt-TabLayoutPanelTab {
+  cursor: hand !important;
+  color: black !important;
+  font-size: 1.1em !important;
+  text-align: middle !important;
+  background: #d3def6 !important;
+  font-family: DroidSansFallback !important;
+}
+
+
+.gwt-TabLayoutPanel .gwt-TabLayoutPanelTab-selected {
+  cursor: default !important;
+  background: #e6e6e6 !important;
+  font-size: 1.2em !important;
+  color: #000000 !important;
+  font-family: DroidSansFallback !important;
+}
+
+
+.gwt-TabLayoutPanelScrollPanel {
+  background: #e6e6e6 !important;
+}
+
+
+.gwt-TabLayoutPanelScrollButton:hover {
+  background: #c8c8c8!important;
+}
+
+
+.gwt-MenuBar .gwt-MenuItem {
+  font-family: DroidSans !important;
+  font-size: 15px !important;
+  vertical-align: middle !important;
+}
+
+
 .textrequired {
-	color: rgb(200,0,0);
+	color: rgb(200,0,0) !important;
 }
 
 
 .textuncorrect {
-	color: rgb(0,0,200);
+	color: rgb(0,0,200) !important;
 }
 
 
-.textcomplete {
-	color: black;
+.textcompleted {
+	color: Black !important;
 }
 
 
@@ -544,6 +663,176 @@ body {
   padding: 4px 8px 4px 4px;
   cursor: default;
   font-family: FreeSans;
-  border: 1px solid black;
-  
+  border: 1px solid black; 
+}
+
+
+.popupText {
+  font-family: DroidSansFallback;
+  margin-left: 20px;
+  text-align: justify;
+  font-size: 12px;
+}
+
+
+.gi_textBox {
+  width: 100px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 10px;
+  background-color: #ffffff;
+}
+
+
+.qv_imageRad {
+  margin-left: 100px;
+  font-family: DroidSansFallback;
+  font-weight: bold;
+}
+
+
+.qv_insituRad {
+  margin-left: 200px;
+  font-family: DroidSansFallback;
+  font-weight: bold;
+}
+
+
+.qv_insituLabel {
+  font-family: DroidSansFallback;
+  text-align: justify;
+  margin-left: 40px;
+}
+
+
+.qv_insituLabel2 {
+  font-family: DroidSansFallback;
+  text-align: justify;
+  width: 200px;
+  margin-left: 40px;
+}
+
+
+.qv_insituBox {
+  width: 700px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  margin-left: 20px;
+  background-color: #ffffff;
+}
+
+
+.qv_insituChk {
+  margin-left: 0px;
+  font-family: DroidSansFallback;
+}
+
+
+.qv_insituLabelTitle {
+  font-family: DroidSansFallback;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+.qv_insituLabelTitle2 {
+  font-family: DroidSansFallback;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+
+
+.qv_insituLabelTitle3 {
+  font-family: DroidSansFallback;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+.qv_insituTextAre {
+  width: 700px;
+  height: 100px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+  margin-left: 40px;
+}
+
+
+.qv_imageLabelTitle {
+  font-family: DroidSansFallback;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+.qv_imageLabelTitle2 {
+  font-family: DroidSansFallback;
+  text-decoration: underline;
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+
+.qv_imageLabel {
+  font-family: DroidSansFallback;
+  margin-left: 40px;
+  margin-right: 20px;
+}
+
+
+.qv_imageLabel2 {
+  font-family: DroidSansFallback;
+  margin-left: 80px;
+  margin-right: 20px;
+}
+
+
+.qv_imageBox {
+  width: 300px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+}
+
+
+.qv_imageBox2 {
+  width: 50px;
+  height: 15px;
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
+}
+
+
+.qv_imageList {
+  width: 150px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: FreeSans;
+  background-color: #ffffff;
 }

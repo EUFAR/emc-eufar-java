@@ -20,8 +20,10 @@ LICENSE END***/
 package com.eufar.emc.server;
 
 import java.io.*;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import org.apache.commons.io.FileUtils;
 
 
@@ -30,6 +32,7 @@ public class DownloadFunction extends HttpServlet {
 	byte[] bbuf = new byte[1024];
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+			System.out.println("DownloadFunction - the function started");
 			String filename = "";
 			ServletContext context = getServletConfig().getServletContext();
 			request.setCharacterEncoding("UTF-8");
@@ -47,7 +50,9 @@ public class DownloadFunction extends HttpServlet {
 				out.append(xmltree);
 				out.flush();
 				out.close();
-			} catch (IOException e) {}
+			} catch (IOException ex) {
+				System.out.println("ERROR during rendering: " + ex);
+			}
 			try {	    	
 				ServletOutputStream out = response.getOutputStream();
 				File file = new File(dir + "/" + filename);
@@ -64,7 +69,10 @@ public class DownloadFunction extends HttpServlet {
 				out.flush();
 				out.close();
 				FileUtils.cleanDirectory(fileDir);
-			} catch (Exception e) {}
+			} catch (Exception ex) {
+				System.out.println("ERROR during downloading: " + ex);
+			}
+			System.out.println("DownloadFunction - file ready to be donwloaded");
 	}	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

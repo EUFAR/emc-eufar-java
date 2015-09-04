@@ -1,2 +1,3 @@
 # Module emc_eufar
 # RPC service class, partial path of RPC policy file
+com.google.gwt.logging.shared.RemoteLoggingService, 070A73658752AB3D263DD0EFBE949B73.gwt.rpc

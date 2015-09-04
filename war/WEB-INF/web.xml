@@ -36,6 +36,17 @@
  	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
+  <!-- remote logging -->
+  <servlet>
+    <servlet-name>remoteLogging</servlet-name>
+    <servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>remoteLogging</servlet-name>
+    <url-pattern>/emc_eufar/remote_logging</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Emc_eufar.html</welcome-file>

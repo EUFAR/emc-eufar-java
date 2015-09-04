@@ -1,7 +1,7 @@
-# asmm-eufar
+# emc-eufar
 
 A detailed changelog can be found in the Documentation directory.
-Current version: 0.9.4
+Current version: 0.9.7
 This is an Online version of the following software: https://github.com/eufarn7sp/emc-eufar. It has been coded with Java and Google Web Toolkit.
 
 Overview
@@ -12,4 +12,7 @@ The goal of the EUFAR Metadata Creator is to produce metadata dedicated to a par
 Libraries
 
 This software needs the following libraries to allow proper operation:
-  - PyQt4 4.11.2+ -> http://www.riverbankcomputing.co.uk/software/pyqt/download
+  - GWT Query 1.4.2
+  - Commons Fileupload 1.2.2
+  - Commons io 2.3
+  - commons-logging-1.1.1.jar
