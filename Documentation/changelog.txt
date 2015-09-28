@@ -10,14 +10,86 @@ KNOWN ISSUES:
       
         //String emcPath = new String(GWT.getHostPageBaseURL()); // for Tomcat7/8 Server
         String emcPath = new String(""); // for Eclipse Dev Mode
+
+September 28 2015, Release version 1.0.0 [ONLINE]
+=====================================
+  Since the code is stable and no more bug has been found, the software is released in the current state, and version number increases to 1.0.0.
+
+
+September 28 2015, Release version 1.0.0 [OFFLINE]
+========================================
+  Since the code is stable and no more bug has been found, the software is released in the current state, and version number increases to 1.0.0.
+
+
+September 25-28 2015, Release version 1.0.0b1-2 [ONLINE]
+==========================================
+  MODIFIED:
+    - few GUI adjustments [ONLINE].
     
+  ADDED:
+    - a new layout has been added for computers with a screen height below 1000 px [mainwindow.py][Ui_mainwindow.py][OFFLINE]
+
+
+September 25 2015, Release version 0.9.7 [OFFLINE]
+========================================
+  Since the code is stable and no more bug has been found, the software is released in the current state, and version number increases to 0.9.7.
+
+
+September 23-25 2015, Release version 0.9.7b1-3 [OFFLINE]
+===============================================
+  New "Quality and Validity" items have been introduced for Earth obersation and atmospheric data.
+  
+  ADDED:
+    - new "Quality and Validity" items [button_function.py][mainwindow.py][OFFLINE].
+    - textboxes have been added to the aircraft section if the user wants to enter aircraft information which are not available in the database [mainwindow.py][button_function.py][OFFLINE].
+    - when a user add multiple widgets, a "x" icon appears in front of the original widget, it is possible now to delete it and make the first new widget the original one [button_function.py][mainwindow.py][OFFLINE].
     
-TO ADD:
-=======
-    - add the instrument tab [OFFLINE].
-    - rework "Quality and Validity" window [OFFLINE].
-    - add a function to enter automatically information from a database if some key information are entered by the user [ONLINE].
-    - remove dynamically widgets by choosing which one to remove. [OFFLINE]
+  MODIFIED:
+    - the checking and clearing function have been modified to take care of the new items in the "Quality and Validity" section [check_functions.py][eufar_database_creator.py][mainwindow.py][OFFLINE].
+    - the checking and clearing function have been modified to take care of the new textboxes in the "Aircraft and Instrument" section [check_functions.py][eufar_database_creator.py][mainwindow.py][OFFLINE].
+    - the saving and opening function have been modified to take care of the new textboxes in the "Aircraft and Instrument" section [eufar_creator_xml.py][OFFLINE].
+    - the saving and opening function have been modified to take care of the new items in the "Quality and Validity" section [eufar_creator_xml.py][OFFLINE].
+    
+  FIXED:
+    - fixed an issue with the reading of the location when the xml item is empty [eufar_creator_xml.py][OFFLINE].
+    - fixed an issue with the reading of the platform/aircraft information when those information are empty [eufar_creator_xml.py][OFFLINE].
+
+
+September 23 2015, Release version 0.9.6 [OFFLINE]
+========================================
+  Since the code is stable and no more bug has been found, the software is released in the current state, and version number increases to 0.9.6.
+
+
+September 22-23 2015, Release version 0.9.6b1-2 [OFFLINE]
+===============================================
+  The text in the different InfoButtons has been reviewed by the EUFAR N7SP members for simplification and addition of examples.
+  
+  ADDED:
+    - an about panel has been introduced to present INSPIRE [mainwindow.py][OFFLINE].
+    
+  MODIFIED:
+    - all infoButtons have been modified to display new texts and examples [eufar_database_creator.py][OFFLINE]
+
+
+September 22 2015, Release version 0.9.5 [OFFLINE]
+========================================
+  Since the code is stable and no more bug has been found, the software is released in the current state, and version number increases to 0.9.5.
+
+
+September 18-22 2015, Release version 0.9.5b1-3 [OFFLINE]
+===============================================
+  ADDED:
+    - few adjustements in the GUI to comply with the ONLINE version [Ui_mainwindow.py][OFFLINE].
+    - a simple "Instrument" selection has been introduced in the "Aircraft and Instrument" section [Ui_mainwindow.py][mainwindow.py][button_function.py][OFFLINE].
+    - a new function to delete widget created by the user, now the delete button will delete the widget with which it is created [mainwindow.py][button_function.py][OFFLINE].
+  
+  MODIFIED:
+    - the saving, reading and checking function have been modified to handle the instrument selection [eufar_metadata_xml.py][OFFLINE].
+    - the textbox to inform about the unit in the "Geographic Information" section has been replaced by a combobox listing necessary units [mainwindow.py][button_function.py][OFFLINE].
+    
+  FIXED:
+    - fixed two errors in the checking function which prevented the display of two incomplete elements in the Check Panel [check_functions.py][OFFLINE]
+    - the filename, when its length was greater than 40 caracters, wasn't well displayed in the window title [mainwindow.py][OFFLINE]
 
 
 September 4 2015, Release version 0.9.7 [ONLINE]
