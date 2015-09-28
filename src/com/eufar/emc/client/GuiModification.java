@@ -379,6 +379,11 @@ public class GuiModification {
 			@Override
 			public void onValueChange(ValueChangeEvent<Date> event) {Utilities.docIsModified();}
 		});
+		if (row == 1) {
+			Emc_eufar.refDelButton.setEnabled(true);
+			Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			Emc_eufar.refDelButton.setStyleName("infoButton");
+		}
 		dateBox1.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
 		dateBox1.setValue(new Date());
 		dateBox2.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
@@ -399,6 +404,12 @@ public class GuiModification {
 				Emc_eufar.refPhaseTab.removeRow(rowIndex);
 				Emc_eufar.refStartLst.remove(rowIndex);
 				Emc_eufar.refEndLst.remove(rowIndex);
+				int row = Emc_eufar.refPhaseTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.refDelButton.setEnabled(false);
+					Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.refDelButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Temporal ref added.");
@@ -422,6 +433,11 @@ public class GuiModification {
 			@Override
 			public void onValueChange(ValueChangeEvent<Date> event) {Utilities.docIsModified();}
 		});
+		if (row == 1) {
+			Emc_eufar.refDelButton.setEnabled(true);
+			Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			Emc_eufar.refDelButton.setStyleName("infoButton");
+		}
 		dateBox1.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
 		dateBox1.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(dateStart));
 		dateBox2.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
@@ -442,6 +458,12 @@ public class GuiModification {
 				Emc_eufar.refPhaseTab.removeRow(rowIndex);
 				Emc_eufar.refStartLst.remove(rowIndex);
 				Emc_eufar.refEndLst.remove(rowIndex);
+				int row = Emc_eufar.refPhaseTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.refDelButton.setEnabled(false);
+					Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.refDelButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Temporal ref added.");
@@ -449,7 +471,7 @@ public class GuiModification {
 
 
 	// add new text areas in the Access and Use Constraints tabs
-	public static void addUsePlus(final FlexTable table, final ArrayList<TextArea> arrayList) {
+	public static void addUsePlus(final FlexTable table, final ArrayList<TextArea> arrayList, final PushButton pushButton) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Constraints A/L add in progress...");
 		int row = table.getRowCount();
 		final Image image = new Image("icons/del_icon.png");
@@ -460,6 +482,11 @@ public class GuiModification {
 			@Override
 			public void onChange(ChangeEvent event) {Utilities.docIsModified();}
 		});
+		if (row == 1) {
+			pushButton.setEnabled(true);
+			pushButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			pushButton.setStyleName("infoButton");
+		}
 		delButton.setPixelSize(25, 25);
 		delButton.setStyleName("infoButton");
 		table.insertRow(row);
@@ -471,6 +498,12 @@ public class GuiModification {
 				int rowIndex = table.getCellForEvent(event).getRowIndex();
 				table.removeRow(rowIndex);
 				arrayList.remove(rowIndex);
+				int row = table.getRowCount();
+				if (row == 1) {
+					pushButton.setEnabled(false);
+					pushButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					pushButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Constraints A/L ref added.");
@@ -478,7 +511,7 @@ public class GuiModification {
 
 
 	// allow the program to create new text areas based on the reading of an xml file
-	public static void addUseRead(final FlexTable table, final ArrayList<TextArea> arrayList, final String string) {
+	public static void addUseRead(final FlexTable table, final ArrayList<TextArea> arrayList, final String string, final PushButton pushButton) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Constraints A/L add in progress...");
 		int row = table.getRowCount();
 		final Image image = new Image("icons/del_icon.png");
@@ -490,6 +523,11 @@ public class GuiModification {
 			@Override
 			public void onChange(ChangeEvent event) {Utilities.docIsModified();}
 		});
+		if (row == 1) {
+			pushButton.setEnabled(true);
+			pushButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			pushButton.setStyleName("infoButton");
+		}
 		delButton.setPixelSize(25, 25);
 		delButton.setStyleName("infoButton");
 		table.insertRow(row);
@@ -501,6 +539,12 @@ public class GuiModification {
 				int rowIndex = table.getCellForEvent(event).getRowIndex();
 				table.removeRow(rowIndex);
 				arrayList.remove(rowIndex);
+				int row = table.getRowCount();
+				if (row == 1) {
+					pushButton.setEnabled(false);
+					pushButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					pushButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Constraints A/L ref added.");
@@ -565,6 +609,11 @@ public class GuiModification {
 		horizontalPanel04.add(delButton);
 		verticalPanel01.add(horizontalPanel04);
 		int row = Emc_eufar.orgAddTab.getRowCount();
+		if (row == 1) {
+			Emc_eufar.orgDelButton.setEnabled(true);
+			Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			Emc_eufar.orgDelButton.setStyleName("infoButton");
+		}
 		Emc_eufar.orgAddTab.insertRow(row);
 		Emc_eufar.orgAddTab.setWidget(row, 0, verticalPanel01);
 		delButton.addClickHandler(new ClickHandler() {
@@ -574,6 +623,12 @@ public class GuiModification {
 				Emc_eufar.orgPartyLst.remove(rowIndex);
 				Emc_eufar.orgRole2Lst.remove(rowIndex);
 				Emc_eufar.orgEmailLst.remove(rowIndex);
+				int row = Emc_eufar.orgAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.orgDelButton.setEnabled(false);
+					Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.orgDelButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Contact Org added.");
@@ -641,6 +696,11 @@ public class GuiModification {
 		horizontalPanel04.add(delButton);
 		verticalPanel01.add(horizontalPanel04);
 		int row = Emc_eufar.orgAddTab.getRowCount();
+		if (row == 1) {
+			Emc_eufar.orgDelButton.setEnabled(true);
+			Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			Emc_eufar.orgDelButton.setStyleName("infoButton");
+		}
 		Emc_eufar.orgAddTab.insertRow(row);
 		Emc_eufar.orgAddTab.setWidget(row, 0, verticalPanel01);
 		delButton.addClickHandler(new ClickHandler() {
@@ -650,6 +710,12 @@ public class GuiModification {
 				Emc_eufar.orgPartyLst.remove(rowIndex);
 				Emc_eufar.orgRole2Lst.remove(rowIndex);
 				Emc_eufar.orgEmailLst.remove(rowIndex);
+				int row = Emc_eufar.orgAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.orgDelButton.setEnabled(false);
+					Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.orgDelButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Contact Org added.");
@@ -696,6 +762,11 @@ public class GuiModification {
 		metNameBox.setStyleName("metTextBox");
 		metEmailBox.setStyleName("metTextBox");
 		int row = Emc_eufar.metAddTab.getRowCount();
+		if (row == 1) {
+			Emc_eufar.mmDelButton.setEnabled(true);
+			Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			Emc_eufar.mmDelButton.setStyleName("infoButton");
+		}
 		Emc_eufar.metAddTab.insertRow(row);
 		Emc_eufar.metAddTab.setWidget(row, 0, verticalPanel01);
 		delButton.addClickHandler(new ClickHandler() {
@@ -704,6 +775,12 @@ public class GuiModification {
 				Emc_eufar.metAddTab.removeRow(rowIndex);
 				Emc_eufar.metNameLst.remove(rowIndex);
 				Emc_eufar.metEmailLst.remove(rowIndex);
+				int row = Emc_eufar.metAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.mmDelButton.setEnabled(false);
+					Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.mmDelButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Contact Met added.");
@@ -752,6 +829,11 @@ public class GuiModification {
 		metNameBox.setStyleName("metTextBox");
 		metEmailBox.setStyleName("metTextBox");
 		int row = Emc_eufar.metAddTab.getRowCount();
+		if (row == 1) {
+			Emc_eufar.mmDelButton.setEnabled(true);
+			Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/del_icon.png' />");
+			Emc_eufar.mmDelButton.setStyleName("infoButton");
+		}
 		Emc_eufar.metAddTab.insertRow(row);
 		Emc_eufar.metAddTab.setWidget(row, 0, verticalPanel01);
 		delButton.addClickHandler(new ClickHandler() {
@@ -760,6 +842,12 @@ public class GuiModification {
 				Emc_eufar.metAddTab.removeRow(rowIndex);
 				Emc_eufar.metNameLst.remove(rowIndex);
 				Emc_eufar.metEmailLst.remove(rowIndex);
+				int row = Emc_eufar.metAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.mmDelButton.setEnabled(false);
+					Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.mmDelButton.setStyleName("emptyButton");
+				}
 			}
 		});
 		Emc_eufar.rootLogger.log(Level.INFO, "Contact Met added.");
@@ -789,8 +877,6 @@ public class GuiModification {
 				return;
 			}
 		}
-		
-		
 		delButton.setPixelSize(25, 25);
 		delButton.setStyleName("infoButton");
 		if (row == 0) {

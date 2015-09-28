@@ -401,13 +401,22 @@ public class xmlSave {
 				Elements.addElement(doc, "gco:CharacterString", aircraftOperator, Emc_eufar.operatorMap.get(Emc_eufar.airOperatorInfo.getText()));
 				Elements.addElement(doc, "gco:CharacterString", aircraftRegistration, Emc_eufar.airRegistrationInfo.getText());
 			}
-			for (int i = 0; i < Emc_eufar.instrumentTabList.size(); i++) {
+			if (Emc_eufar.instrumentTabList.size() > 0) {
+				for (int i = 0; i < Emc_eufar.instrumentTabList.size(); i++) {
+					Element instrumentInfo = Elements.addElement(doc, "gmd:instrumentInfo", acquisitionInfo);
+					Element instrumentInfoAI = Elements.addElement(doc, "gmd:II_InstrumentInfo", instrumentInfo);
+					Element instrumentManufacturer = Elements.addElement(doc, "gmd:instrumentManufacturer", instrumentInfoAI);
+					Element instrumentType = Elements.addElement(doc, "gmd:instrumentType", instrumentInfoAI);
+					Elements.addElement(doc, "gco:CharacterString", instrumentManufacturer, Emc_eufar.manufacturerTabList.get(i));
+					Elements.addElement(doc, "gco:CharacterString", instrumentType, Emc_eufar.instrumentTabList.get(i));
+				}
+			} else {
 				Element instrumentInfo = Elements.addElement(doc, "gmd:instrumentInfo", acquisitionInfo);
 				Element instrumentInfoAI = Elements.addElement(doc, "gmd:II_InstrumentInfo", instrumentInfo);
 				Element instrumentManufacturer = Elements.addElement(doc, "gmd:instrumentManufacturer", instrumentInfoAI);
 				Element instrumentType = Elements.addElement(doc, "gmd:instrumentType", instrumentInfoAI);
-				Elements.addElement(doc, "gco:CharacterString", instrumentManufacturer, Emc_eufar.manufacturerTabList.get(i));
-				Elements.addElement(doc, "gco:CharacterString", instrumentType, Emc_eufar.instrumentTabList.get(i));
+				Elements.addElement(doc, "gco:CharacterString", instrumentManufacturer, "");
+				Elements.addElement(doc, "gco:CharacterString", instrumentType, "");
 			}
 			
 

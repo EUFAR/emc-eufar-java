@@ -95,10 +95,10 @@ public class Elements {
 					GuiModification.addRefPlus();
 					break;
 				case CONDITION:
-					GuiModification.addUsePlus(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst);
+					GuiModification.addUsePlus(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst, Emc_eufar.auDelButton1);
 					break;
 				case LIMITATION:
-					GuiModification.addUsePlus(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst);
+					GuiModification.addUsePlus(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst, Emc_eufar.auDelButton2);
 					break;
 				case RESPORG:
 					GuiModification.addOrgPlus();

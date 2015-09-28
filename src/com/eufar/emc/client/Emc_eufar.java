@@ -73,7 +73,7 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<TextBoxBase, String> correctField = Resources.correctField();
 	public static HashMap<DateBox, Label> correctDate = Resources.correctDate();
 	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private String emcVersion = new String("v0.9.7 (2015-08-31)");
+	private String emcVersion = new String("v1.0.0 (2015-09-28)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.5.0");
 	private String javaVersion = new String("1.7.0.79");
@@ -355,7 +355,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<DateBox> refEndLst = new ArrayList<DateBox>();
 	public static FlexTable refDateTab = new FlexTable();
 	public static FlexTable refPhaseTab = new FlexTable();
-	public static Image refEmptyImage = new Image("icons/empty_icon_small.png");
+	public static PushButton refDelButton = new PushButton(new Image("icons/empty_icon_small.png"));
 	public static ScrollPanel trScroll = new ScrollPanel(verticalPanel13);
 
 
@@ -541,6 +541,10 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<TextArea> useLimitationsLst = new ArrayList<TextArea>();
 	public static Image auEmptyImage1 = new Image("icons/empty_icon_small.png");
 	public static Image auEmptyImage2 = new Image("icons/empty_icon_small.png");
+	public static PushButton auDelButton1 = new PushButton(new Image("icons/empty_icon_small.png"));
+	public static PushButton auDelButton2 = new PushButton(new Image("icons/empty_icon_small.png"));
+	public static PushButton usePlusButton2 = Elements.plusButton("limitation");
+	public static PushButton usePlusButton1 = Elements.plusButton("condition");
 	public static ScrollPanel auScroll = new ScrollPanel(verticalPanel15);
 
 
@@ -562,7 +566,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<TextBox> orgEmailLst = new ArrayList<TextBox>();
 	public static FlexTable orgPartyTab = new FlexTable();
 	public static FlexTable orgAddTab = new FlexTable();
-	private Image orgEmptyImage = new Image("icons/empty_icon_small.png");
+	public static PushButton orgDelButton = new PushButton(new Image("icons/empty_icon_small.png"));
 	public static ScrollPanel roScroll = new ScrollPanel(orgAddTab);
 
 
@@ -570,13 +574,14 @@ public class Emc_eufar implements EntryPoint {
 	public static VerticalPanel verticalPanel16 = new VerticalPanel();
 	private HorizontalPanel horizontalPanel28 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel29 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel66 = new HorizontalPanel();
 	private PushButton metDateInfo = Elements.addInfoButton("mmDate");
 	private PushButton metLanguageInfo = Elements.addInfoButton("mmLanguage");
 	private PushButton metPlusButton = Elements.plusButton("metadata");
 	private PushButton metPartyInfo = Elements.addInfoButton("mmParty");
 	private Label metDateLab = new Label("Metadata date:");
 	private Label metLanguageLab = new Label("Metadata language:");
-	private Label metContactLab = new Label("Metadata point of contact:");
+	public static Label metContactLab = new Label("Metadata point of contact:");
 	public static Label metNameLab = new Label("Name:");
 	public static Label metEmailLab = new Label("E-mail:");
 	public static DateBox metDateDat = new DateBox();
@@ -589,7 +594,7 @@ public class Emc_eufar implements EntryPoint {
 	public static FlexTable metAddTab = new FlexTable();
 	public static ArrayList<TextBox> metNameLst = new ArrayList<TextBox>();
 	public static ArrayList<TextBox> metEmailLst = new ArrayList<TextBox>();
-	public static Image metEmptyImage = new Image("icons/empty_icon_small.png");
+	public static PushButton mmDelButton = new PushButton(new Image("icons/empty_icon_small.png"));
 	public static ScrollPanel mmScroll = new ScrollPanel(verticalPanel16);
 
 	
@@ -1114,11 +1119,7 @@ public class Emc_eufar implements EntryPoint {
 		refDateTab.setWidget(2, 1, refCreationDat);
 		refDateTab.setWidget(2, 2, refCreationInfo);
 		refDateTab.setCellSpacing(10);
-		refPublicationLab.setStyleName("refTextLabel");
-		refRevisionLab.setStyleName("refTextLabel");
-		refCreationLab.setStyleName("refTextLabel");
 		verticalPanel13.add(refDateTab);
-		verticalPanel13.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 10px !important;");
 		verticalPanel13.add(new HTML("<br>"));
 		verticalPanel13.add(new HTML("<hr>"));
 		verticalPanel13.add(new HTML("<br>"));
@@ -1126,7 +1127,8 @@ public class Emc_eufar implements EntryPoint {
 		refPhaseTab.setWidget(0, 0, refPhaseLab);
 		refPhaseTab.setWidget(0, 1, refStartDat);
 		refPhaseTab.setWidget(0, 2, refEndDat);
-		refPhaseTab.setWidget(0, 3, refEmptyImage);
+		refPhaseTab.setWidget(0, 3, refDelButton);
+		refDelButton.setEnabled(false);
 		refStartDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
 		refStartDat.setValue(new Date());
 		refEndDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
@@ -1137,11 +1139,32 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel21.add(refPlusButton);
 		horizontalPanel21.add(refPlusInfo);
 		refExtentLab.setStyleName("refTitleTextLabel");
-		refEmptyImage.setStyleName("emptyButton");
+		refDelButton.setStyleName("emptyButton");
+		refPhaseLab.setStyleName("refTextLabel");
+		refPublicationLab.setStyleName("refTextLabel");
+		refRevisionLab.setStyleName("refTextLabel");
+		refCreationLab.setStyleName("refTextLabel");
 		refPlusButton.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 5px !important;");
 		refPlusInfo.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 5px !important;");
+		verticalPanel13.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 10px !important;");
 		verticalPanel13.add(horizontalPanel21);
-		refPhaseLab.setStyleName("refTextLabel");
+		Emc_eufar.refDelButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				refStartDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(
+						DateTimeFormat.getFormat("yyyy-MM-dd").format(refStartLst.get(1).getValue())));
+				refEndDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(
+						DateTimeFormat.getFormat("yyyy-MM-dd").format(refEndLst.get(1).getValue())));
+				refPhaseTab.removeRow(1);
+				refStartLst.remove(1);
+				refEndLst.remove(1);
+				int row = refPhaseTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.refDelButton.setEnabled(false);
+					Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.refDelButton.setStyleName("emptyButton");
+				}
+			}
+		});
 		rootLogger.log(Level.INFO, "Temporal Reference panel initialized");
 
 
@@ -1167,36 +1190,80 @@ public class Emc_eufar implements EntryPoint {
 
 		// Access and Use Constraints panel
 		useConditionsAddTab.setWidget(0, 0, useConditionsBox);
-		useConditionsAddTab.setWidget(0, 1, auEmptyImage1);
+		useConditionsAddTab.setWidget(0, 1, auDelButton1);
+		auDelButton1.setEnabled(false);
 		useConditionsTab.setWidget(0, 0, useConditionsLab);
 		useConditionsTab.setWidget(0, 1, useConditionsAddTab);
-		PushButton usePlusButton1 = Elements.plusButton("condition");
+		PushButton useInfoButton1 = Elements.addInfoButton("auConditions");
 		useConditionsTab.setWidget(0, 2, usePlusButton1);
-		useConditionsTab.setWidget(0, 3, Elements.addInfoButton("auConditions"));
+		useConditionsTab.setWidget(0, 3, useInfoButton1);
+		FlexCellFormatter auCellFormatter1 = useConditionsTab.getFlexCellFormatter();
+		auCellFormatter1.setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_TOP);
+		auCellFormatter1.setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
+		auCellFormatter1.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
+		auCellFormatter1.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
 		verticalPanel15.add(useConditionsTab);
 		verticalPanel15.add(new HTML("<br />"));
 		verticalPanel15.add(new HTML("<hr />"));
 		verticalPanel15.add(new HTML("<br />"));
 		useLimitationsAddTab.setWidget(0, 0, useLimitationsBox);
-		useLimitationsAddTab.setWidget(0, 1, auEmptyImage2);
+		useLimitationsAddTab.setWidget(0, 1, auDelButton2);
+		auDelButton2.setEnabled(false);
 		useLimitationsTab.setWidget(0, 0, useLimitationsLab);
 		useLimitationsTab.setWidget(0, 1, useLimitationsAddTab);
-		PushButton usePlusButton2 = Elements.plusButton("limitation");
 		useLimitationsTab.setWidget(0, 2, usePlusButton2);
-		useLimitationsTab.setWidget(0, 3, Elements.addInfoButton("auLimitations")); 
+		PushButton useInfoButton2 = Elements.addInfoButton("auLimitations");
+		useLimitationsTab.setWidget(0, 3, useInfoButton2); 
+		FlexCellFormatter auCellFormatter2 = useLimitationsTab.getFlexCellFormatter();
+		auCellFormatter2.setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_TOP);
+		auCellFormatter2.setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
+		auCellFormatter2.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
+		auCellFormatter2.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
 		verticalPanel15.add(useLimitationsTab);
 		verticalPanel15.setStyleName("useVerticalPanel");
 		useConditionsLab.setStyleName("useTextLabel");
 		useLimitationsLab.setStyleName("useTextLabel");
 		useConditionsBox.setStyleName("useTextArea");
 		useLimitationsBox.setStyleName("useTextArea");
-		auEmptyImage1.setStyleName("emptyButton");
-		auEmptyImage2.setStyleName("emptyButton");
+		auDelButton1.setStyleName("emptyButton");
+		auDelButton2.setStyleName("emptyButton");
+		usePlusButton1.getElement().setAttribute("style", "margin-top: 43px !important;");
+		useInfoButton1.getElement().setAttribute("style", "margin-top: 43px !important;");
+		useConditionsLab.getElement().setAttribute("style", "margin-top: 43px !important;");
+		usePlusButton2.getElement().setAttribute("style", "margin-top: 42px !important;");
+		useInfoButton2.getElement().setAttribute("style", "margin-top: 42px !important;");
+		useLimitationsLab.getElement().setAttribute("style", "margin-top: 42px !important;");
 		useConditionsLst.add(useConditionsBox);
 		useLimitationsLst.add(useLimitationsBox);
 		useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");
 		useLimitationsBox.setText("No limitations");
+		Emc_eufar.auDelButton1.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				useConditionsBox.setText(useConditionsLst.get(1).getText());
+				useConditionsAddTab.removeRow(1);
+				useConditionsLst.remove(1);
+				int row = Emc_eufar.useConditionsAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.auDelButton1.setEnabled(false);
+					Emc_eufar.auDelButton1.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.auDelButton1.setStyleName("emptyButton");
+				}
+			}
+		});
+		Emc_eufar.auDelButton2.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				useLimitationsBox.setText(useLimitationsLst.get(1).getText());
+				useLimitationsAddTab.removeRow(1);
+				useLimitationsLst.remove(1);
+				int row = Emc_eufar.useLimitationsAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.auDelButton2.setEnabled(false);
+					Emc_eufar.auDelButton2.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.auDelButton2.setStyleName("emptyButton");
+				}
+			}
+		});
 		rootLogger.log(Level.INFO, "Access and Use Constraints panel initialized");
 
 
@@ -1215,8 +1282,9 @@ public class Emc_eufar implements EntryPoint {
 		orgPartyTab.setCellSpacing(10);
 		horizontalPanel27.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel27.add(orgPartyTab);
-		horizontalPanel27.add(orgEmptyImage);
+		horizontalPanel27.add(orgDelButton);
 		horizontalPanel27.add(orgPlusButton);
+		orgDelButton.setEnabled(false);
 		orgAddTab.setWidget(0, 0, horizontalPanel27);
 		orgAddTab.setStyleName("orgFlexTable");
 		orgPartyLab.setStyleName("orgTextLabel");
@@ -1225,10 +1293,32 @@ public class Emc_eufar implements EntryPoint {
 		orgPartyBox.setStyleName("orgTextBox");
 		orgEmailBox.setStyleName("orgTextBox");
 		orgRoleLst.setStyleName("orgTextList");
-		orgEmptyImage.setStyleName("emptyButton");
+		orgDelButton.setStyleName("emptyButton");
 		orgPartyLst.add(orgPartyBox);
 		orgRole2Lst.add(orgRoleLst);
 		orgEmailLst.add(orgEmailBox);
+		Emc_eufar.orgDelButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				orgPartyBox.setText(orgPartyLst.get(1).getText());
+				orgEmailBox.setText(orgEmailLst.get(1).getText());
+				for (int i = 0; i < orgRoleLst.getItemCount(); i++) {
+					if (orgRoleLst.getItemText(i) == orgRole2Lst.get(1).getSelectedItemText()) {
+						orgRoleLst.setSelectedIndex(i);
+						break;
+					}
+				}
+				Emc_eufar.orgAddTab.removeRow(1);
+				Emc_eufar.orgPartyLst.remove(1);
+				Emc_eufar.orgRole2Lst.remove(1);
+				Emc_eufar.orgEmailLst.remove(1);
+				int row = Emc_eufar.orgAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.orgDelButton.setEnabled(false);
+					Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.orgDelButton.setStyleName("emptyButton");
+				}
+			}
+		});
 		rootLogger.log(Level.INFO, "Responsible Organisations panel initialized");
 
 
@@ -1252,13 +1342,22 @@ public class Emc_eufar implements EntryPoint {
 		metPartyTab.setWidget(0, 1, metNameBox);
 		metPartyTab.setWidget(1, 0, metEmailLab);
 		metPartyTab.setWidget(1, 1, metEmailBox);
-		metAddTab.setWidget(0, 0, metPartyTab);
-		metAddTab.setWidget(0, 1, metEmptyImage);
+		horizontalPanel66.add(metPartyTab);
+		horizontalPanel66.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		horizontalPanel66.add(mmDelButton);
+		mmDelButton.setEnabled(false);
+		metAddTab.setWidget(0, 0, horizontalPanel66);
 		metContactTab.setWidget(0, 1, metAddTab);
 		metContactTab.setWidget(0, 2, metPlusButton);
 		metContactTab.setWidget(0, 3, metPartyInfo);
-		metPlusButton.getElement().setAttribute("style", "margin-top: -5px !important;");
-		metPartyInfo.getElement().setAttribute("style", "margin-top: -5px !important;");
+		FlexCellFormatter metCellFormatter = metContactTab.getFlexCellFormatter();
+		metCellFormatter.setVerticalAlignment(0, 0, HasVerticalAlignment.ALIGN_TOP);
+		metCellFormatter.setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
+		metCellFormatter.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
+		metCellFormatter.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
+		metPlusButton.getElement().setAttribute("style", "margin-top: 22px !important;");
+		metPartyInfo.getElement().setAttribute("style", "margin-top: 22px !important;");
+		metContactLab.getElement().setAttribute("style", "margin-top: 22px !important;");
 		verticalPanel16.add(metContactTab);
 		metDateLab.setStyleName("metTextLabel");
 		metLanguageLab.setStyleName("metTextLabel");
@@ -1271,9 +1370,24 @@ public class Emc_eufar implements EntryPoint {
 		metEmailLab.setStyleName("metTextLabel2");
 		metNameBox.setStyleName("metTextBox");
 		metEmailBox.setStyleName("metTextBox2");
-		metEmptyImage.setStyleName("emptyButton");
+		mmDelButton.setStyleName("emptyButton");
 		metNameLst.add(metNameBox);
 		metEmailLst.add(metEmailBox);
+		Emc_eufar.mmDelButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				metNameBox.setText(Emc_eufar.metNameLst.get(1).getText());
+				metEmailBox.setText(Emc_eufar.metEmailLst.get(1).getText());
+				Emc_eufar.metAddTab.removeRow(1);
+				Emc_eufar.metNameLst.remove(1);
+				Emc_eufar.metEmailLst.remove(1);
+				int row = Emc_eufar.metAddTab.getRowCount();
+				if (row == 1) {
+					Emc_eufar.mmDelButton.setEnabled(false);
+					Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+					Emc_eufar.mmDelButton.setStyleName("emptyButton");
+				}
+			}
+		});
 		rootLogger.log(Level.INFO, "Metadata on Metadata panel initialized");
 
 		

@@ -275,6 +275,9 @@ public class Utilities {
 		Emc_eufar.airCountryInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - countrySize + 20) 
 		+ "px !important;");
 		Emc_eufar.airRegistrationInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
+		
+		Emc_eufar.metContactLab.getElement().setAttribute("style", "margin-top: 22px !important;");
+		
 		for (int i = 0; i < allDateBox.size(); i++) {
 			allDateBox.get(i).getElement().setAttribute("style","border-color: #ccc !important;");
 		}
@@ -367,20 +370,34 @@ public class Utilities {
 		Emc_eufar.metLanguageLst.setSelectedIndex(4);
 		Emc_eufar.useConditionsAddTab.removeAllRows();
 		Emc_eufar.useConditionsAddTab.setWidget(0, 0, Emc_eufar.useConditionsBox);
-		Emc_eufar.useConditionsAddTab.setWidget(0, 1, Emc_eufar.auEmptyImage1);
+		Emc_eufar.useConditionsAddTab.setWidget(0, 1, Emc_eufar.auDelButton1);
 		Emc_eufar.useLimitationsAddTab.removeAllRows();
 		Emc_eufar.useLimitationsAddTab.setWidget(0, 0, Emc_eufar.useLimitationsBox);
-		Emc_eufar.useLimitationsAddTab.setWidget(0, 1, Emc_eufar.auEmptyImage2);
+		Emc_eufar.useLimitationsAddTab.setWidget(0, 1, Emc_eufar.auDelButton2);
 		Emc_eufar.refPhaseTab.removeAllRows();
 		Emc_eufar.refPhaseTab.setWidget(0, 0, Emc_eufar.refPhaseLab);
 		Emc_eufar.refPhaseTab.setWidget(0, 1, Emc_eufar.refStartDat);
 		Emc_eufar.refPhaseTab.setWidget(0, 2, Emc_eufar.refEndDat);
-		Emc_eufar.refPhaseTab.setWidget(0, 3, Emc_eufar.refEmptyImage);
+		Emc_eufar.refPhaseTab.setWidget(0, 3, Emc_eufar.refDelButton);
 		Emc_eufar.orgAddTab.removeAllRows();
 		Emc_eufar.orgAddTab.setWidget(0, 0, Emc_eufar.horizontalPanel27);
 		Emc_eufar.metAddTab.removeAllRows();
-		Emc_eufar.metAddTab.setWidget(0, 0, Emc_eufar.metPartyTab);
-		Emc_eufar.metAddTab.setWidget(0, 1, Emc_eufar.metEmptyImage);
+		Emc_eufar.metAddTab.setWidget(0, 0, Emc_eufar.horizontalPanel66);
+		Emc_eufar.mmDelButton.setEnabled(false);
+		Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+		Emc_eufar.mmDelButton.setStyleName("emptyButton");
+		Emc_eufar.orgDelButton.setEnabled(false);
+		Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+		Emc_eufar.orgDelButton.setStyleName("emptyButton");
+		Emc_eufar.auDelButton1.setEnabled(false);
+		Emc_eufar.auDelButton1.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+		Emc_eufar.auDelButton1.setStyleName("emptyButton");
+		Emc_eufar.auDelButton1.setEnabled(false);
+		Emc_eufar.auDelButton1.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+		Emc_eufar.auDelButton1.setStyleName("emptyButton");
+		Emc_eufar.refDelButton.setEnabled(false);
+		Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+		Emc_eufar.refDelButton.setStyleName("emptyButton");
 		Emc_eufar.airInstrumentTable.removeAllRows();
 		Emc_eufar.instrumentTabList.clear();
 		Emc_eufar.manufacturerTabList.clear();

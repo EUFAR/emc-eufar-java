@@ -180,7 +180,7 @@ public class xmlOpen {
 										catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'uselimitation' failed: " + ex.getMessage());}
 									} else {
 										GuiModification.addUseRead(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst, useConditions.item(gg).getFirstChild().getFirstChild().
-												getNodeValue());
+												getNodeValue(), Emc_eufar.auDelButton1);
 									}
 								}
 								if (useConditions.item(gg).getNodeName().startsWith("gmd:otherconstraints")) {
@@ -190,7 +190,7 @@ public class xmlOpen {
 										catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'otherconstraints' failed: " + ex.getMessage());}
 									} else {
 										GuiModification.addUseRead(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst, useConditions.item(gg).getFirstChild().
-												getFirstChild().getNodeValue());
+												getFirstChild().getNodeValue(), Emc_eufar.auDelButton2);
 									}
 								}
 							}
@@ -473,7 +473,9 @@ public class xmlOpen {
 										.getNodeValue();
 								String manufacturerName = acquisition.item(dd).getFirstChild().getFirstChild().getFirstChild().getFirstChild()
 										.getNodeValue();
-								GuiModification.addInstRead(instrumentName, manufacturerName);
+								if (instrumentName != "") {
+									GuiModification.addInstRead(instrumentName, manufacturerName);
+								}
 							} catch (Exception ex) {
 								Emc_eufar.rootLogger.log(Level.WARNING, "Element 'acquisitioninfo' failed: " + ex.getMessage());
 							}
