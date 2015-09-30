@@ -197,10 +197,10 @@ public class PopupMessages {
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final Image image = new Image("icons/warning_popup_icon.png");
-		final HTML label = new HTML("ASMM has detected that you are using Internet Explorer.<br><br>ASMM has been deeply tested on Firefox, "
+		final HTML label = new HTML("EMC has detected that you are using Internet Explorer.<br><br>EMC has been deeply tested on Firefox, "
 				+ "Internet Explorer, Chrome and Opera. However, it presents serious compatibility issues with Internet Explorer, which prevent "
-				+ "a proper use of the following functions: save or open a document, print a report, upload images.<br><br>We strongly recommend "
-				+ "that you use a different browser to ensure the proper functioning of ASMM.");
+				+ "a proper use of the following functions: save and open a document.<br><br>We strongly recommend "
+				+ "that you use a different browser to ensure the proper functioning of EMC.");
 		final Button button = new Button("Ok", new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -285,7 +285,9 @@ public class PopupMessages {
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
 		final Image image = new Image("icons/save_popup_icon.png");
 		final TextArea xmlTree = new TextArea();
-		final Label label = new Label("Please enter a name to save the XML file.");
+		final Label label = new HTML("Please enter a name to save the XML file. For a EUFAR project,"
+				+ " the name should start with <span style=\" font-weight:600; color:#c80000;\">flight-info_</span>, followed by the dataset filename"
+				+ " (<i>cf. Unique resource identifier</i>).");
 		final TextBox fileName = new TextBox();
 		final TextBox filebox = new TextBox();
 		final FormPanel myForm = new FormPanel();
@@ -615,10 +617,12 @@ public class PopupMessages {
 			break;
 		case IDIDENTIFIER:
 			infoLabel.setHTML("<p hyphens='auto'>This element uniquely identifying the resource and it is generally formed with mandatory and/or optional "
-					+ "string codes. In a EUFAR project, the file-naming convention is as follow <b>instrument_aircraft_YYYYMMDD[_e xtra]."
+					+ "string codes. In a EUFAR project, the file-naming convention is as follow <b>instrument_aircraft_YYYYMMDD [hh][mm][ss][_extra][_cor#]."
 					+ "ext</b>. <b>instrument</b> is the instrument which was used to produce the data set, <b>aircraft</b> is a merge between "
-					+ "the operator and the aircraft, <b>YYYYMMDD</b> (year month day) is the date on which measurements were taken, <b>[_extra]"
-					+ "</b> allow to add optional parameter. <b>.ext</b> is used for the file extension.</p><p><u>Example:</u> core_safire-atr42_"
+					+ "the operator and the aircraft, <b>YYYYMMDD</b> (year month day) and <b>[hh][mm][ss]</b> (hour minute second) are the date"
+					+ " and time at which measurements were taken (time is optional), <b>[_extra]"
+					+ "</b> allow to add optional parameter, and <b>[_cor#]</b> denotes that the file is a corrected version of a previously released "
+					+ "file. <b>.ext</b> is used for the file extension.</p><p><u>Example:</u> core_safire-atr42_"
 					+ "20100913_ as100051_r0_1hz.ext</p>");
 			break;
 		case IDLANGUAGE:
@@ -801,21 +805,26 @@ public class PopupMessages {
 		String string = new String(""
 				+ "<b><u>CHANGELOG</u></b><br><br>"
 				// known issues
-				+ "<u>KNOWN ISSUES:</u><br><ul><li>after building using Pyinstaller on Linux, the one file sofware generate an Gtk error when "
-				+ "used. This error doesn't induce issues with the software or the creation of xml files. -> no solution for now [OFFLINE]"
 				+ "</li><li>!!! IMPORTANT !!! in the [ONLINE] version, a line needs to be activated or commented to allow a proper operation "
 				+ "of the downloading and uploading servlets, based on the platform of devlopment or production: see in the "
 				+ "'Emc_eufar.java' file, find those lines at the beginning:<ul><li>String emcPath = new String(GWT.getHostPageBaseURL()); "
 				+ "// for Tomcat7/8 Server</li><li>String emcPath = new String(''); // for Eclipse Dev Mode</li></ul></li></ul>"
 				// to add
 				// changelog
+				+ "<b><u>September 30 2015, Release version 1.0.1 [ONLINE][OFFLINE]</u></b><br>Since the code is stable and no more bug has been "
+				+ "found, the software is released in the current state, and version number increases to 1.0.1.<br><br>"
+				+ "<b><u>September 30 2015, Release version 1.0.1b1 [ONLINE][OFFLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
+				+ "<li>few text mistakes in the panel to warn the user about the use of EMC and Internet Explorer [ONLINE].</li></ul></li><li>"
+				+ "MODIFIED:<ul><li>modified the infobutton concerning the 'Unique resource identifier' to display the official EUFAR filename "
+				+ "convention [ONLINE][OFFLINE].</li><li>modified the save panel to inform the user about the filename convention [ONLINE]"
+				+ "[OFFLINE].</li></ul></li></ul><br>"
 				+ "<b><u>September 28 2015, Release version 1.0.0 [ONLINE]</u></b><br>Since the code is stable and no more bug has been found,"
 				+ " the software is released in the current state, and version number increases to 1.0.0.<br><br>"
 				+ "<b><u>September 28 2015, Release version 1.0.0 [OFFLINE]</u></b><br>Since the code is stable and no more bug has been found,"
 				+ " the software is released in the current state, and version number increases to 1.0.0.<br><br>"
 				+ "<b><u>September 25-28 2015, Release version 1.0.0b1-2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>MODIFIED:<ul>"
 				+ "<li>few GUI adjustments [ONLINE].</li></ul></li><li>ADDED:<ul><li>a new layout has been added for computers with a screen "
-				+ "height below 1000 px [mainwindow.py][Ui_mainwindow.py][OFFLINE]</li></ul></li></ul><br>"
+				+ "height below 1000 px [mainwindow.py][Ui_mainwindow.py][OFFLINE].</li></ul></li></ul><br>"
 				+ "<b><u>September 25 2015, Release version 0.9.7 [OFFLINE]</u></b><br>Since the code is stable and no more bug has been found,"
 				+ " the software is released in the current state, and version number increases to 0.9.7.<br><br>"
 				+ "<b><u>September 23-25 2015, Release version 0.9.7b1-3 [OFFLINE]</u></b><br>New 'Quality and Validity' items have been "

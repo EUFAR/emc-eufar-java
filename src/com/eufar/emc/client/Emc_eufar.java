@@ -73,7 +73,7 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<TextBoxBase, String> correctField = Resources.correctField();
 	public static HashMap<DateBox, Label> correctDate = Resources.correctDate();
 	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private String emcVersion = new String("v1.0.0 (2015-09-28)");
+	private String emcVersion = new String("v1.0.1 (2015-09-30)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.5.0");
 	private String javaVersion = new String("1.7.0.79");
