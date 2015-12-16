@@ -82,7 +82,8 @@ public class GuiModification {
 			Emc_eufar.geoResolutionBox.setStyleName("geoTextBox3");
 			Emc_eufar.geoUnitLst.setStyleName("geoTextList");
 			Emc_eufar.geoUnitLab.setStyleName("geoTitleTextLabel");
-			Emc_eufar.geoUnitLab.getElement().setAttribute("style", "margin-left: 20px !important;");
+			Emc_eufar.geoUnitLab.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFontBold !important;"
+					+ " font-size: 14px !important;");
 			Emc_eufar.rootLogger.log(Level.INFO, "Changed to distance.");
 		}
 	}

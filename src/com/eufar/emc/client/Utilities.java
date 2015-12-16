@@ -245,7 +245,7 @@ public class Utilities {
 		List<DateBox> allDateBox = $("*", Emc_eufar.subDockPanel).widgets(DateBox.class);
 		for (int i = 0; i < allLabel.size(); i++) {
 			allLabel.get(i).getElement().setAttribute("style","color: black !important; font-family: "
-					+ "DroidSansFallback !important;");
+					+ "MyFont !important;");
 		}
 		for (int i = 0; i < allBox.size(); i++) {
 			allBox.get(i).getElement().setAttribute("style","border-color: #ccc !important;");
@@ -408,10 +408,4 @@ public class Utilities {
 		Emc_eufar.useLimitationsBox.setText("No limitations");
 		Emc_eufar.rootLogger.log(Level.INFO, "Cleaning all fields finished.");
 	}
-	
-	
-	
-	
-	
 }
-

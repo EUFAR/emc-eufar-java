@@ -4,20 +4,20 @@ body {
 
 
 @font-face {
-    font-family: DroidSans;
-    src: url(font/DroidSans.ttf);
+  font-family: MyFont;
+  src: url(font/SourceSansPro-Regular.ttf);
 }
 
 
 @font-face {
-    font-family: DroidSansFallback;
-    src: url(font/DroidSansFallbackFull.ttf);
+  font-family: MyFontBold;
+  src: url(font/SourceSansPro-Semibold.ttf);
 }
 
 
 @font-face {
-    font-family: FreeSans;
-    src: url(font/FreeSans.ttf);
+  font-family: MyFontBoldItalic;
+  src: url(font/SourceSansPro-SemiboldItalic.ttf);
 }
 
 
@@ -42,19 +42,19 @@ body {
 
 
 .identTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   text-align: justify;
 }
 
 
 .identTextBox {
   width: 300px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -62,9 +62,8 @@ body {
   width: 100px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -73,9 +72,8 @@ body {
   width: 100px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -83,9 +81,8 @@ body {
   width: 700px;
   height: 100px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -97,35 +94,37 @@ body {
 
 
 .classTitleTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
 }
 
 
 .classCheckBox {
   margin-left: 40px;
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
 }
 
 .gwt-CheckBox {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
 }
 
 
 .keyTitleTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   margin-left: 20px;
   margin-top: 10px;
   text-decoration: underline;
-  font-weight: bold;
 }
 
 
 .airTitleTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
   margin-top: 5px;
 }
 
@@ -145,9 +144,8 @@ body {
   width: 180px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   margin-bottom: 10px;
   background-color: #ffffff;
@@ -158,9 +156,8 @@ body {
   width: 300px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   margin-bottom: 10px;
   background-color: #ffffff;
@@ -171,9 +168,8 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   background-color: #ffffff;
 }
@@ -181,12 +177,11 @@ body {
 
 .airTextBox {
   width: 200px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   background-color: #ffffff;
 }
@@ -194,24 +189,22 @@ body {
 
 .airTextBox2 {
   width: 170px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 10px;
   background-color: #ffffff;
 }
 
 
 .airTitleTextLabel2 {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
   margin-left: 20px;
 }
-
 
 
 .airFlexTable {
@@ -227,24 +220,21 @@ body {
 
 .airFlexTableLabel1 {
   margin-left: 40px;
-  /* margin-top: 20px; */
-  font-family: DroidSansFallback;
-  
+  font-family: MyFont;
+  font-size: 14px;
 }
 
 
 .airFlexTableLabel2 {
-  font-family: FreeSans;
-  font-style: italic;
-  font-weight: bold;
-  
+  font-family: MyFontBoldItalic;
+  font-size: 14px;
 }
 
 
 .geoTitleTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
 }
 
 
@@ -252,9 +242,8 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   background-color: #ffffff;
 }
@@ -264,9 +253,8 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   background-color: #d6d6d6;
 }
@@ -280,24 +268,22 @@ body {
 
 .geoTextBox {
   width: 50px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
 
 .geoTextBox2 {
   width: 150px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
   margin-left: 20px;
 }
@@ -305,12 +291,11 @@ body {
 
 .geoTextBox3 {
   width: 100px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
   margin-left: 20px;
 }
@@ -318,27 +303,27 @@ body {
 
 .geoTextBox4 {
   width: 50px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 7px;
   background-color: #ffffff;
 }
 
 
 .geoTitleTextLabel2 {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
   margin-right: 40px;
 }
 
 
 .refTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
 }
 
 
@@ -349,9 +334,9 @@ body {
 
 
 .refTitleTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
   margin-top: 8px;
   margin-right: 60px;
 }
@@ -364,7 +349,8 @@ body {
 
 
 .useTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   margin-right: 40px;
   width: 150px;
   heigth: 30px;
@@ -377,9 +363,8 @@ body {
   height: 100px;
   border: 1px solid #ccc;
   margin-left: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -391,7 +376,8 @@ body {
 
 
 .orgTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   margin-right: 20px;
   text-align: justify;
 }
@@ -399,12 +385,11 @@ body {
 
 .orgTextBox {
   width: 200px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -413,9 +398,8 @@ body {
   width: 210px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -427,13 +411,15 @@ body {
 
 
 .metTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   text-align: justify;
 }
 
 
 .metTextLabel2 {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   text-align: justify;
 }
 
@@ -442,9 +428,8 @@ body {
   width: 100px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -456,9 +441,9 @@ body {
 
 
 .metTitleTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
-  font-weight: bold;
   margin-right: 40px;
   margin-top: -10px;
 }
@@ -466,36 +451,33 @@ body {
 
 .metTextBox {
   width: 200px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
 
 .metTextBox2 {
   width: 200px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
 
 .saveTextBox {
   width: 210px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -504,7 +486,8 @@ body {
 
 
 .saveTextLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   margin-right: 15px;
   text-align: justify;
@@ -523,10 +506,9 @@ body {
 .openTextBox {
   width: 210px;
   height: 30px;
-  padding: 5px 4px;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  padding: 3px 3px;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -537,9 +519,9 @@ body {
   background: #e5e5e5;
   padding: 4px 8px 4px 4px;
   cursor: default;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   border: 1px solid black;
-  
 }
 
 
@@ -560,8 +542,9 @@ body {
 
 .gwt-StackLayoutPanel .gwt-StackLayoutPanelHeader {
   cursor: hand !important;
-  font-size: 1.05em !important;
-  font-family: DroidSans !important;
+  font-size: 1.1em !important;
+  font-family: MyFont !important;
+  font-size: 14px !important;
   padding: 3px !important;
   border: 1px solid #bbbbbb !important;
   border-bottom: 0px !important;
@@ -601,7 +584,8 @@ body {
   font-size: 1.1em !important;
   text-align: middle !important;
   background: #d3def6 !important;
-  font-family: DroidSansFallback !important;
+  font-family: MyFont !important;
+  font-size: 14px !important;
 }
 
 
@@ -610,7 +594,8 @@ body {
   background: #e6e6e6 !important;
   font-size: 1.2em !important;
   color: #000000 !important;
-  font-family: DroidSansFallback !important;
+  font-family: MyFont !important;
+  font-size: 14px !important;
 }
 
 
@@ -625,8 +610,8 @@ body {
 
 
 .gwt-MenuBar .gwt-MenuItem {
-  font-family: DroidSans !important;
-  font-size: 15px !important;
+  font-family: MyFont !important;
+  font-size: 14px !important;
   vertical-align: middle !important;
 }
 
@@ -651,10 +636,10 @@ body {
   border: 1px solid #ccc !important;
   width: 80px !important;
   height: 15px !important;
-  font-size: 12px !important;
-  font-weight: bold !important;
-  font-family: FreeSans !important;
+  font-family: MyFont !important;
+  font-size: 14px !important;
   background-color: #ffffff !important;
+  text-align: center !important;
 }
 
 
@@ -662,27 +647,27 @@ body {
   background: #e5e5e5;
   padding: 4px 8px 4px 4px;
   cursor: default;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   border: 1px solid black; 
 }
 
 
 .popupText {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   text-align: justify;
-  font-size: 12px;
 }
 
 
 .gi_textBox {
   width: 100px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 10px;
   background-color: #ffffff;
 }
@@ -690,27 +675,29 @@ body {
 
 .qv_imageRad {
   margin-left: 100px;
-  font-family: DroidSansFallback;
-  font-weight: bold;
+  font-family: MyFontBold;
+  font-size: 14px;
 }
 
 
 .qv_insituRad {
   margin-left: 200px;
-  font-family: DroidSansFallback;
-  font-weight: bold;
+  font-family: MyFontBold;
+  font-size: 14px;
 }
 
 
 .qv_insituLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   text-align: justify;
   margin-left: 40px;
 }
 
 
 .qv_insituLabel2 {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   text-align: justify;
   width: 200px;
   margin-left: 40px;
@@ -719,12 +706,11 @@ body {
 
 .qv_insituBox {
   width: 700px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 20px;
   background-color: #ffffff;
 }
@@ -732,13 +718,14 @@ body {
 
 .qv_insituChk {
   margin-left: 0px;
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
 }
 
 
 .qv_insituLabelTitle {
-  font-family: DroidSansFallback;
-  font-weight: bold;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -746,16 +733,16 @@ body {
 
 
 .qv_insituLabelTitle2 {
-  font-family: DroidSansFallback;
-  font-weight: bold;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
   margin-top: 10px;
 }
 
 
 .qv_insituLabelTitle3 {
-  font-family: DroidSansFallback;
-  font-weight: bold;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
 }
 
@@ -764,17 +751,16 @@ body {
   width: 700px;
   height: 100px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
   margin-left: 40px;
 }
 
 
 .qv_imageLabelTitle {
-  font-family: DroidSansFallback;
-  font-weight: bold;
+  font-family: MyFontBold;
+  font-size: 14px;
   text-decoration: underline;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -782,7 +768,8 @@ body {
 
 
 .qv_imageLabelTitle2 {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   text-decoration: underline;
   margin-top: 10px;
   margin-left: 40px;
@@ -790,14 +777,16 @@ body {
 
 
 .qv_imageLabel {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 40px;
   margin-right: 20px;
 }
 
 
 .qv_imageLabel2 {
-  font-family: DroidSansFallback;
+  font-family: MyFont;
+  font-size: 14px;
   margin-left: 80px;
   margin-right: 20px;
 }
@@ -805,24 +794,22 @@ body {
 
 .qv_imageBox {
   width: 300px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
 
 .qv_imageBox2 {
   width: 50px;
-  height: 15px;
-  padding: 5px 4px;
+  height: 17px;
+  padding: 3px 3px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }
 
@@ -831,8 +818,7 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: FreeSans;
+  font-family: MyFont;
+  font-size: 14px;
   background-color: #ffffff;
 }

@@ -24,7 +24,7 @@ public class Elements {
 		final CheckBox box = new CheckBox();
 		box.setName(string);
 		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		inlineLabel.getElement().setAttribute("style","font-family: DroidSansFallback !important;");
+		inlineLabel.getElement().setAttribute("style","font-family: MyFont !important; font-size: 14px !important;");
 		horizontalPanel.add(box);
 		horizontalPanel.add(inlineLabel);
 		return horizontalPanel;
@@ -37,7 +37,7 @@ public class Elements {
 		final InlineLabel inlineLabel = new InlineLabel(text);
 		final RadioButton box = new RadioButton(group, "");
 		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		inlineLabel.getElement().setAttribute("style","font-family: DroidSansFallback !important;");
+		inlineLabel.getElement().setAttribute("style","font-family: MyFont !important; font-size: 14px !important;");
 		horizontalPanel.add(box);
 		horizontalPanel.add(inlineLabel);
 		box.addClickHandler(new ClickHandler() {
@@ -119,12 +119,5 @@ public class Elements {
 		});
 		return plusButton;
 	}
-	
-	
-	
-	
-	
-	
-	
 }
 

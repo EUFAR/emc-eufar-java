@@ -73,7 +73,7 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<TextBoxBase, String> correctField = Resources.correctField();
 	public static HashMap<DateBox, Label> correctDate = Resources.correctDate();
 	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private String emcVersion = new String("v1.0.1 (2015-09-30)");
+	private String emcVersion = new String("v1.0.2 (2015-12-16)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.5.0");
 	private String javaVersion = new String("1.7.0.79");
@@ -934,12 +934,11 @@ public class Emc_eufar implements EntryPoint {
 		keySpectralLab.setStyleName("keyTitleTextLabel");
 		keyInteractionsLab.setStyleName("keyTitleTextLabel");
 		keyHydrosphereLab.setStyleName("keyTitleTextLabel");
-		keyInfoButton.getElement().setAttribute("style", "margin-left: 40px !important;");
-		verticalPanel03.setSpacing(3);
-		verticalPanel04.setSpacing(3);
-		verticalPanel05.setSpacing(3);
-		verticalPanel06.setSpacing(3);
-		horizontalPanel08.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		keyInfoButton.getElement().setAttribute("style", "margin-left: 40px !important; margin-top: 200px !important;");
+		verticalPanel03.setSpacing(2);
+		verticalPanel04.setSpacing(2);
+		verticalPanel05.setSpacing(2);
+		verticalPanel06.setSpacing(2);
 		horizontalPanel08.add(verticalPanel03);
 		horizontalPanel08.add(verticalPanel04);
 		horizontalPanel08.add(verticalPanel05);
@@ -1355,9 +1354,9 @@ public class Emc_eufar implements EntryPoint {
 		metCellFormatter.setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
 		metCellFormatter.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
 		metCellFormatter.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
-		metPlusButton.getElement().setAttribute("style", "margin-top: 22px !important;");
-		metPartyInfo.getElement().setAttribute("style", "margin-top: 22px !important;");
-		metContactLab.getElement().setAttribute("style", "margin-top: 22px !important;");
+		metPlusButton.getElement().setAttribute("style", "margin-top: 20px !important;");
+		metPartyInfo.getElement().setAttribute("style", "margin-top: 20px !important;");
+		metContactLab.getElement().setAttribute("style", "margin-top: 20px !important;");
 		verticalPanel16.add(metContactTab);
 		metDateLab.setStyleName("metTextLabel");
 		metLanguageLab.setStyleName("metTextLabel");
@@ -1543,13 +1542,13 @@ public class Emc_eufar implements EntryPoint {
 			horizontalPanel02.add(cancelButton);
 			horizontalPanel02.add(createButton);
 			verticalPanel01.add(horizontalPanel02);
-			label.getElement().setAttribute("style", "margin-left: 10px !important;");
-			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: DroidSansFallback !important; font-weight: "
-					+ "bold !important; margin-top: 10px !important;");
-			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: DroidSansFallback !important;"
-					+ " font-weight: bold !important; margin-top: 10px !important;");
-			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: DroidSansFallback !important;"
-					+ " font-weight: bold !important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
+			label.getElement().setAttribute("style", "margin-left: 10px !important; font-family: MyFont !important; font-size: 14px !important;");
+			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFont !important; font-size: 14px "
+					+ "!important; margin-top: 10px !important;");
+			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: MyFont !important; font-size: 14px "
+					+ "!important; margin-top: 10px !important;");
+			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFont !important; font-size: 14px "
+					+ "!important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
 			infoDialog.add(verticalPanel01);
 			infoDialog.setSize( "400px", "150px" );
 			infoDialog.setModal(true);

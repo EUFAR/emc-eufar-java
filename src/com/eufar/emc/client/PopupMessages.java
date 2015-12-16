@@ -62,7 +62,7 @@ public class PopupMessages {
 		label.setStyleName("popupText");
 		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
 				+ "!important;");
-		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: DroidSansFallback !important; font-weight: bold "
+		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: MyFontBold !important; font-size: 14px "
 				+ "!important; margin-top: 10px !important; margin-bottom: 10px !important;");
 		infoDialog.add(verticalPanel01);
 		infoDialog.setSize( "500px", "200px" );
@@ -113,7 +113,7 @@ public class PopupMessages {
 		label.setStyleName("popupText");
 		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
 				+ "!important;");
-		button.getElement().setAttribute("style", "margin-left: 270px !important; font-family: DroidSansFallback !important; font-weight: bold "
+		button.getElement().setAttribute("style", "margin-left: 270px !important; font-family: MyFontBold !important; font-size: 14px "
 				+ "!important; margin-top: 10px !important; margin-bottom: 10px !important;");
 		infoDialog.add(verticalPanel01);
 		infoDialog.setSize( "600px", "200px" );
@@ -145,10 +145,10 @@ public class PopupMessages {
 		label.setStyleName("popupText");
 		verticalPanel01.getElement().setAttribute("style","margin-left: 10px !important; margin-right: 10px !important; margin-top: 10px"
 				+ " !important;");
-		button.getElement().setAttribute("style", "margin-left: 145px !important; font-family: DroidSansFallback !important; font-weight:"
-				+ " bold !important; margin-top: 20px !important; margin-bottom: 10px !important;");
+		button.getElement().setAttribute("style", "margin-left: 172px !important; font-family: MyFontBold !important; font-size: 14px"
+				+ " !important; margin-top: 20px !important; margin-bottom: 10px !important;");
 		infoDialog.add(verticalPanel01);
-		infoDialog.setSize( "350px", "50px" );
+		infoDialog.setSize( "400px", "50px" );
 		infoDialog.setModal(true);
 		infoDialog.center();
 		infoDialog.setStyleName("myInfoBox");
@@ -173,13 +173,14 @@ public class PopupMessages {
 		verticalPanel.add(horizontalPanel);
 		horizontalPanel.add(image);
 		horizontalPanel.add(scrollPanel);
-		okButton.getElement().setAttribute("style", "font-family: DroidSansFallback !important; "
-				+ "font-weight: bold !important; margin-top: 10px !important;");
+		okButton.getElement().setAttribute("style", "font-family: MyFontBold !important; "
+				+ "font-size: 14px !important; margin-top: 10px !important;");
 		myOpenDialog.add(verticalPanel);
 		myOpenDialog.setGlassEnabled(true);
 		scrollPanel.add(label);
 		scrollPanel.setHeight("500px");
 		scrollPanel.setWidth("700px");
+		label.setStyleName("popupText");
 		verticalPanel.getElement().setAttribute("style", "margin-left: 10px; margin-top: 10px; margin-bottom: 10px;");
 		image.getElement().setAttribute("style", "margin-right: 10px;");
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -215,7 +216,7 @@ public class PopupMessages {
 		label.setStyleName("popupText");
 		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
 				+ "!important;");
-		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: DroidSansFallback !important; font-weight: bold "
+		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: MyFontBold !important; font-size: 14px "
 				+ "!important; margin-top: 20px !important;");
 		aboutDialog.add(verticalPanel01);
 		aboutDialog.setSize( "500px", "180px" );
@@ -252,7 +253,6 @@ public class PopupMessages {
 		myOpenDialog.setGlassEnabled(true);
 		myOpenDialog.add(verticalPanel02);
 		verticalPanel02.add(horizontalPanel01);
-
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(verticalPanel01);
 		verticalPanel01.add(label);
@@ -261,10 +261,10 @@ public class PopupMessages {
 		label.setStyleName("popupText");
 		verticalPanel02.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
 				+ "!important;");
-		submitButton.getElement().setAttribute("style", "margin-left:20px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important;");
-		cancelButton.getElement().setAttribute("style", "margin-left:120px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important;");
+		submitButton.getElement().setAttribute("style", "margin-left:20px !important; font-family: MyFontBold !important; font-size: "
+				+ "14px !important;");
+		cancelButton.getElement().setAttribute("style", "margin-left:140px !important; font-family: MyFontBold !important; font-size: "
+				+ "14px !important;");
 		horizontalPanel02.getElement().setAttribute("style", "margin-top:30px !important; margin-bottom:20px !important;");
 		verticalPanel01.add(horizontalPanel02);
 		myOpenDialog.setSize("350px", "130px");
@@ -351,7 +351,7 @@ public class PopupMessages {
 		xmlTree.setName("xmltree");
 		verticalPanel01.add(xmlTree);
 		label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:20px !important; margin-bottom:30px !important; "
-				+ "margin-top:10px !important; font-family: DroidSansFallback !important; text-align: justify !important; font-size: 12px "
+				+ "margin-top:10px !important; font-family: MyFont !important; text-align: justify !important; font-size: 14px "
 				+ "!important;");
 		verticalPanel02.add(label);
 		fileName.setText(Emc_eufar.myFileName);
@@ -370,10 +370,10 @@ public class PopupMessages {
 		myForm.setVisible(false);
 		horizontalPanel01.add(submitButton);
 		horizontalPanel01.add(cancelButton);
-		submitButton.getElement().setAttribute("style", "margin-left:88px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important;");
-		cancelButton.getElement().setAttribute("style", "margin-left:70px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important;");
+		submitButton.getElement().setAttribute("style", "margin-left:88px !important; font-family: MyFontBold !important; font-size: "
+				+ "14px !important;");
+		cancelButton.getElement().setAttribute("style", "margin-left:90px !important; font-family: MyFontBold !important; font-size: "
+				+ "14px !important;");
 		horizontalPanel01.getElement().setAttribute("style", "margin-top:30px !important; margin-bottom:20px !important;");
 		verticalPanel02.add(myForm);	
 		verticalPanel03.add(horizontalPanel01);
@@ -430,17 +430,17 @@ public class PopupMessages {
 			horizontalPanel02.add(createButton);
 			verticalPanel01.add(horizontalPanel02);
 			label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:0px !important; margin-bottom:0px !important; "
-					+ "margin-top: 0px !important;  font-family: DroidSansFallback !important; text-align: justify !important; font-size: 12px "
+					+ "margin-top: 0px !important;  font-family: MyFont !important; text-align: justify !important; font-size: 14px "
 					+ "!important;");
 			label2.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 20px !important; margin-bottom: 20px !important; "
-					+ "text-decoration: underline !important; font-weight: bold !important; font-family: DroidSansFallback !important; "
-					+ "text-align: justify !important; font-size: 12px !important;");
-			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: DroidSansFallback !important; font-weight: "
-					+ "bold !important; margin-top: 10px !important;");
-			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: DroidSansFallback !important;"
-					+ " font-weight: bold !important; margin-top: 10px !important;");
-			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: DroidSansFallback !important;"
-					+ " font-weight: bold !important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
+					+ "text-decoration: underline !important; font-weight: bold !important; font-family: MyFont !important; "
+					+ "text-align: justify !important; font-size: 14px !important;");
+			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFontBold !important; font-Size: "
+					+ "14px !important; margin-top: 10px !important;");
+			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: MyFontBold !important; font-Size: "
+					+ "14px !important; margin-top: 10px !important;");
+			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFontBold !important; font-Size: "
+					+ "14px !important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
 			infoDialog.add(verticalPanel01);
 			infoDialog.setSize( "130px", "180px" );
 			infoDialog.setModal(true);
@@ -493,7 +493,7 @@ public class PopupMessages {
 		horizontalPanel01.add(verticalPanel01);
 		verticalPanel01.getElement().setAttribute("style", "margin-right:20px !important;");
 		label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:20px !important; margin-bottom:30px !important; "
-				+ "margin-top:10px !important;  font-family: DroidSansFallback !important; text-align: justify !important; font-size: 12px "
+				+ "margin-top:10px !important;  font-family: MyFont !important; text-align: justify !important; font-size: 14px "
 				+ "!important;");
 		verticalPanel01.add(label);
 		myFileUpload.setName("uploadFormElement");
@@ -527,10 +527,10 @@ public class PopupMessages {
 		myUploadForm.add(verticalPanel02);
 		horizontalPanel02.add(submitButton);
 		horizontalPanel02.add(cancelButton);
-		submitButton.getElement().setAttribute("style", "margin-left:20px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important;");
-		cancelButton.getElement().setAttribute("style", "margin-left:75px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important;");
+		submitButton.getElement().setAttribute("style", "margin-left:20px !important; font-family: MyFontBold !important; font-Size: "
+				+ "14px !important;");
+		cancelButton.getElement().setAttribute("style", "margin-left:75px !important; font-family: MyFontBold !important; font-Size: "
+				+ "14px!important;");
 		horizontalPanel02.getElement().setAttribute("style", "margin-top:30px !important; margin-bottom:20px !important;");
 		verticalPanel01.add(horizontalPanel02);
 		myOpenDialog.add(myUploadForm);
@@ -548,7 +548,8 @@ public class PopupMessages {
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-		final HTML label = new HTML("<p align=\"justify\">All mandatory fields have not been filled in, or have been incorrectly filled in. "
+		final HTML label = new HTML("<p align=\"justify\" style='font-family:MyFont; font-size: 14px;'>All mandatory fields have not been"
+				+ "filled in, or have been incorrectly filled in. "
 				+ "You can save your file if you want to complete/correct it later. All fields which have not been completely filled in are "
 				+ "indicated in <span style=\" font-weight:600; color:#c80000;\">red</span>, and in <span style=\" font-weight:600; "
 				+ "color:#0000c8;\">blue</span> for those incorrectly filled in. <span style=\" font-weight:600;\">Do not use an "
@@ -576,12 +577,13 @@ public class PopupMessages {
 		horizontalPanel02.add(buttonOk);
 		horizontalPanel02.add(buttonCancel);
 		verticalPanel01.add(horizontalPanel02);
+		label.getElement().setAttribute("style", "font-family: MyFont !important; font-size: 14px !important;");
 		image.getElement().setAttribute("style", "margin-top: 10px !important;");
 		label.getElement().setAttribute("style", "margin-left: 10px; margin-top: 10px; font-family: DroidSansFallback;");
-		buttonOk.getElement().setAttribute("style", "margin-left: 120px !important; font-family: DroidSansFallback !important; font-weight: "
-				+ "bold !important; margin-top: 10px !important;");
-		buttonCancel.getElement().setAttribute("style", "margin-left: 205px !important; font-family: DroidSansFallback !important;"
-				+ " font-weight: bold !important; margin-top: 10px !important; margin-bottom: 20px !important;");
+		buttonOk.getElement().setAttribute("style", "margin-left: 120px !important; font-family: MyFontBold !important; font-Size: "
+				+ "14px !important; margin-top: 10px !important;");
+		buttonCancel.getElement().setAttribute("style", "margin-left: 205px !important; font-family: MyFontBold !important; font-Size: "
+				+ "14px !important; margin-top: 10px !important; margin-bottom: 20px !important;");
 		infoDialog.add(verticalPanel01);
 		infoDialog.setSize( "500px", "150px" );
 		infoDialog.setModal(true);
@@ -811,18 +813,15 @@ public class PopupMessages {
 				+ "// for Tomcat7/8 Server</li><li>String emcPath = new String(''); // for Eclipse Dev Mode</li></ul></li></ul>"
 				// to add
 				// changelog
-				+ "<b><u>September 30 2015, Release version 1.0.1 [ONLINE][OFFLINE]</u></b><br>Since the code is stable and no more bug has been "
-				+ "found, the software is released in the current state, and version number increases to 1.0.1.<br><br>"
-				+ "<b><u>September 30 2015, Release version 1.0.1b1 [ONLINE][OFFLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
+				+ "<b><u>December 16 2015, Release version 1.0.2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
+				+ "<li>few mistakes have been corrected in the GUI</li>"
+				+ "</ul></li><li>MODIFIED:<ul><li>the current fonts have been replaced by the one from the EUFAR website.</li></ul></li></ul><br>"
+				+ "<b><u>September 30 2015, Release version 1.0.1 [ONLINE][OFFLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
 				+ "<li>few text mistakes in the panel to warn the user about the use of EMC and Internet Explorer [ONLINE].</li></ul></li><li>"
 				+ "MODIFIED:<ul><li>modified the infobutton concerning the 'Unique resource identifier' to display the official EUFAR filename "
 				+ "convention [ONLINE][OFFLINE].</li><li>modified the save panel to inform the user about the filename convention [ONLINE]"
 				+ "[OFFLINE].</li></ul></li></ul><br>"
-				+ "<b><u>September 28 2015, Release version 1.0.0 [ONLINE]</u></b><br>Since the code is stable and no more bug has been found,"
-				+ " the software is released in the current state, and version number increases to 1.0.0.<br><br>"
-				+ "<b><u>September 28 2015, Release version 1.0.0 [OFFLINE]</u></b><br>Since the code is stable and no more bug has been found,"
-				+ " the software is released in the current state, and version number increases to 1.0.0.<br><br>"
-				+ "<b><u>September 25-28 2015, Release version 1.0.0b1-2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>MODIFIED:<ul>"
+				+ "<b><u>September 28 2015, Release version 1.0.0 [ONLINE][OFFLINE]</u></b><br><ul style='list-style-type:none'><li>MODIFIED:<ul>"
 				+ "<li>few GUI adjustments [ONLINE].</li></ul></li><li>ADDED:<ul><li>a new layout has been added for computers with a screen "
 				+ "height below 1000 px [mainwindow.py][Ui_mainwindow.py][OFFLINE].</li></ul></li></ul><br>"
 				+ "<b><u>September 25 2015, Release version 0.9.7 [OFFLINE]</u></b><br>Since the code is stable and no more bug has been found,"
@@ -1297,17 +1296,6 @@ public class PopupMessages {
 				+ "list-style-type:none'><li>FIXED:<ul><li>few mistakes in the GUI</li></ul></li><li>MODIFIED:<ul><li>few adjustments in the "
 				+ "GUI</li></ul></li></ul><br>"
 				+ "<b><u>October 28 2014, Release version 0.1.0b1</u></b><br>First code of EUFAR Metadata Creator");
-		
-				// <br><ul style='list-style-type:none'><li>
-				// <ul><li>
-				// </li><li>
-				// </li></ul></li><li>
-				// </li></ul></li></ul><br><b><u>
-				// <b><u>
-				// </u></b><br><ul style='list-style-type:none'><li>
-				// <br><br><b><u>
-		
 		return string;
 	}
 }
-
