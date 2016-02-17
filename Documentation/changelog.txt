@@ -19,6 +19,11 @@ KNOWN ISSUES:
         //String emcPath = new String(GWT.getHostPageBaseURL()); // for Tomcat7/8 Server
         String emcPath = new String(""); // for Eclipse Dev Mode
 
+February 16 2016, Release version 1.0.3 [ONLINE]
+================================================
+  FIXED:
+    - the link to the Standards and Protocols webpage on the EUFAR website was the old one and gave a 404 error. It has been updated.
+
 
 December 16 2015, Release version 1.0.2 [ONLINE]
 ======================================

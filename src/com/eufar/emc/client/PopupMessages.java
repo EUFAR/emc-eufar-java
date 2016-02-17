@@ -813,6 +813,9 @@ public class PopupMessages {
 				+ "// for Tomcat7/8 Server</li><li>String emcPath = new String(''); // for Eclipse Dev Mode</li></ul></li></ul>"
 				// to add
 				// changelog
+				+ "<b><u>February 16 2016, Release version 1.0.4 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
+				+ "<li>the link to the Standards and Protocols webpage on the EUFAR website was the old one and gave a 404 error. It has been "
+				+ "updated.</li></ul></li></ul><br>"
 				+ "<b><u>December 16 2015, Release version 1.0.2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
 				+ "<li>few mistakes have been corrected in the GUI</li>"
 				+ "</ul></li><li>MODIFIED:<ul><li>the current fonts have been replaced by the one from the EUFAR website.</li></ul></li></ul><br>"

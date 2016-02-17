@@ -73,7 +73,7 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<TextBoxBase, String> correctField = Resources.correctField();
 	public static HashMap<DateBox, Label> correctDate = Resources.correctDate();
 	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private String emcVersion = new String("v1.0.2 (2015-12-16)");
+	private String emcVersion = new String("v1.0.3 (2016-02-16)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.5.0");
 	private String javaVersion = new String("1.7.0.79");
@@ -643,7 +643,7 @@ public class Emc_eufar implements EntryPoint {
 		}};
 		
 		Command launchN7SPPage = new Command()  {public void execute() {
-			Window.open("http://www.eufar.net/N6SP", "_blank", "");
+			Window.open("http://www.eufar.net/cms/standards-and-protocols/", "_blank", "");
 		}};
 		
 		Command exitFile = new Command()  {public void execute() {
