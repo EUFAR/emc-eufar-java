@@ -12,7 +12,7 @@ import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.XMLParser;
 
-public class xmlSave {
+public class XmlSave {
 	
 	/// create the string containing all xml code
 	public static String createXml() {
@@ -209,7 +209,7 @@ public class xmlSave {
 			Element identLegalAccess = Elements.addElement(doc, "gmd:accessConstraints", identLegalConstraintMD);
 			Element identLegalAccessMD = Elements.addElement(doc, "gmd:MD_RestrictionCode", identLegalAccess, "otherRestrictions");
 			identLegalAccessMD.setAttribute("codeList","http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/"
-					+ "Codelist/gmxCodelists.xml#MD_RestrictionCode");
+					+ "codelist/gmxCodelists.xml#MD_RestrictionCode");
 			identLegalAccessMD.setAttribute("codeListValue","otherRestrictions");
 			for (int i = 0; i < Emc_eufar.useLimitationsLst.size(); i++) {
 				if (i > 0) {
@@ -243,8 +243,8 @@ public class xmlSave {
 						Elements.addElement(doc, "gco:CharacterString", identContactEmail, Emc_eufar.orgEmailLst.get(i).getText());
 						Element identContactRole = Elements.addElement(doc, "gmd:role",identContactCI);
 						Element identContactRoleCode = Elements.addElement(doc, "gmd:CI_RoleCode", identContactRole, roleCode);
-						identContactRoleCode.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/"
-								+ "resources/Codelist/gmxCodelists.xml#CI_RoleCode");
+						identContactRoleCode.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas"
+								+ "/resources/codelist/gmxCodelists.xml#CI_RoleCode");
 						identContactRoleCode.setAttribute("codeListValue", roleCode);
 					}
 				} else {
@@ -261,8 +261,8 @@ public class xmlSave {
 					Elements.addElement(doc, "gco:CharacterString", identContactEmail, Emc_eufar.orgEmailLst.get(i).getText());
 					Element identContactRole = Elements.addElement(doc, "gmd:role",identContactCI);
 					Element identContactRoleCode = Elements.addElement(doc, "gmd:CI_RoleCode", identContactRole, roleCode);
-					identContactRoleCode.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/"
-							+ "resources/Codelist/gmxCodelists.xml#CI_RoleCode");
+					identContactRoleCode.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas"
+								+ "/resources/codelist/gmxCodelists.xml#CI_RoleCode");
 					identContactRoleCode.setAttribute("codeListValue", roleCode);
 				}
 			}
@@ -273,7 +273,7 @@ public class xmlSave {
 			///////////////////////
 			Element hierarchyLevel = Elements.addElement(doc, "gmd:hierarchyLevel", rootElement);
 			Element scopeLevelMD = Elements.addElement(doc, "gmd:MD_ScopeCode", hierarchyLevel, Emc_eufar.identTypeLst.getSelectedItemText().toLowerCase());
-			scopeLevelMD.setAttribute("codeList","http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/"
+			scopeLevelMD.setAttribute("codeList","http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/"
 					+ "gmxCodelists.xml#MD_ScopeCode");
 			scopeLevelMD.setAttribute("codeListValue", Emc_eufar.identTypeLst.getSelectedItemText().toLowerCase());
 
@@ -387,18 +387,19 @@ public class xmlSave {
 			Element aircraftManufacturer = Elements.addElement(doc, "gmd:platformManufacturer", aircraftInfoAI);
 			Element aircraftType = Elements.addElement(doc, "gmd:platformType", aircraftInfoAI);
 			Element aircraftOperator = Elements.addElement(doc, "gmd:platformOperator", aircraftInfoAI);
+			Element aircraftCountry = Elements.addElement(doc, "gmd:platformCountry", aircraftInfoAI);
 			Element aircraftRegistration = Elements.addElement(doc, "gmd:platformRegistration", aircraftInfoAI);
 			if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
 				Elements.addElement(doc, "gco:CharacterString", aircraftManufacturer, Emc_eufar.airManufacturerBox.getText());
 				Elements.addElement(doc, "gco:CharacterString", aircraftType, Emc_eufar.airTypeBox.getText());
 				Elements.addElement(doc, "gco:CharacterString", aircraftOperator, Emc_eufar.airOperatorBox.getText());
-				Element aircraftCountry = Elements.addElement(doc, "gmd:platformCountry", aircraftInfoAI);
 				Elements.addElement(doc, "gco:CharacterString", aircraftCountry, Emc_eufar.airCountryLst.getSelectedItemText());
 				Elements.addElement(doc, "gco:CharacterString", aircraftRegistration, Emc_eufar.airRegistrationBox.getText());
 			} else if (Emc_eufar.airAircraftLst.getSelectedItemText() != "Do your choice...") {
 				Elements.addElement(doc, "gco:CharacterString", aircraftManufacturer, Emc_eufar.airManufacturerInfo.getText());
 				Elements.addElement(doc, "gco:CharacterString", aircraftType, Emc_eufar.airTypeInfo.getText());
 				Elements.addElement(doc, "gco:CharacterString", aircraftOperator, Emc_eufar.operatorMap.get(Emc_eufar.airOperatorInfo.getText()));
+				Elements.addElement(doc, "gco:CharacterString", aircraftCountry, Emc_eufar.airCountryInfo.getText());
 				Elements.addElement(doc, "gco:CharacterString", aircraftRegistration, Emc_eufar.airRegistrationInfo.getText());
 			}
 			if (Emc_eufar.instrumentTabList.size() > 0) {
@@ -439,7 +440,7 @@ public class xmlSave {
 						Element roleContact = Elements.addElement(doc, "gmd:role", responsiblePartyInfoCI);
 						Element roleCodeContact = Elements.addElement(doc, "gmd:CI_RoleCode", roleContact, "pointOfContact");
 						roleCodeContact.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/"
-								+ "resources/Codelist/gmxCodelists.xml#CI_RoleCode");
+								+ "resources/codelist/gmxCodelists.xml#CI_RoleCode");
 						roleCodeContact.setAttribute("codeListValue", "pointOfContact");
 					}
 				} else {
@@ -455,8 +456,8 @@ public class xmlSave {
 					Elements.addElement(doc, "gco:CharacterString", emailContact, Emc_eufar.metEmailLst.get(i).getText());
 					Element roleContact = Elements.addElement(doc, "gmd:role", responsiblePartyInfoCI);
 					Element roleCodeContact = Elements.addElement(doc, "gmd:CI_RoleCode", roleContact, "pointOfContact");
-					roleCodeContact.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/"
-							+ "Codelist/gmxCodelists.xml#CI_RoleCode");
+					roleCodeContact.setAttribute("codeList", "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/"
+							+ "resources/codelist/gmxCodelists.xml#CI_RoleCode");
 					roleCodeContact.setAttribute("codeListValue", "pointOfContact");
 				}
 			}
@@ -471,12 +472,9 @@ public class xmlSave {
 
 			doc.appendChild(rootElement);
 			xmlString = "<?xml version='1.0' encoding='UTF-8'?>" + doc.toString();
-		} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.SEVERE, "A problem occured: ", ex);}
+		} catch (Exception ex) {
+			Emc_eufar.rootLogger.log(Level.SEVERE, "A problem occured: ", ex);
+		}
 		return xmlString;
 	}
-	
-	
-	
-	
 }
-

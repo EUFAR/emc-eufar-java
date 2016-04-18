@@ -2,22 +2,38 @@
 CHANGELOG
 =========
 
-
 ONLINE VERSION TESTED ON:
 ========================
-    - Firefox 31.5.3, 38.0.1, 39, 40 (succeeded)
+    - Firefox 31.5.3, 38.0.1, 39, 40, 45.0.1 (succeeded)
     - Chrome 44 (succeeded)
     - Internet Explorer 11 (failed on one computer and succeeded on others)
     - Safari 5.1.7, 8.0.5 (succeeded)
     - Opera 30 (succeeded)
 
 
-KNOWN ISSUES:
-=============
-    - !!! IMPORTANT !!! in the [ONLINE] version, a line need to be activated or commented to allow a proper operation of the downloading, uploading and printing servlets, based on the platform of devlopment or production: see in the "Emc_eufar.java" file, find those lines at the beginning:
-      
-        //String emcPath = new String(GWT.getHostPageBaseURL()); // for Tomcat7/8 Server
-        String emcPath = new String(""); // for Eclipse Dev Mode
+April 15 2016, Release version 1.0.4 [ONLINE]
+=============================================
+  As the issue reported in Release 0.9.10 couldn't be reproduced so far and as it can lead to problem with the new EUFAR server, the copy of the uploaded image in /tmp directory to feed the pdf report has been canceled until further notice. All images will be stored in the "tmp" directory of the ASMM package.
+  Few java libraries have been removed as they were finally useless in ASMM.
+  
+  FIXED:
+    - few typos in the GUI were corrected.
+    - fixed the aircraft selection panel if "Other..." or "Make a choice..." is selected after an aircraft had been selected.
+    - if a user create few new temporal periods, and decide to remove one, the number of the period is not well updated.
+    - few labels weren't well styled if the runCheckDefault function was invoked.
+    - fixed an issue with the function checking the content of each textbox.
+    - fixed an issue with the function checking the date of each datebox.
+    - corrected fex dead links in the xml code.
+    - corrected few styles linked to textarea.
+    - aircraft information weren't well read if the aircraft wasn't found in the EMC database.
+    
+  MODIFIED:
+    - few comments were added for a better understanding in the back-end functions.
+    - EMC can now dedect if the server is the dev one or the production one.
+    - Source Sans Pro is now used in the pdf report template. All other fonts have been removed.
+    - CSS styles for few elements were modified.
+    - the function to read xml code has been rewritten for a better readability and performance.
+
 
 February 16 2016, Release version 1.0.3 [ONLINE]
 ================================================

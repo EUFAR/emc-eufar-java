@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
@@ -20,7 +19,6 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 public class Utilities {
@@ -141,145 +139,32 @@ public class Utilities {
 	}
 	
 	
-	// check if all TextBoxes have been correctly filled in before saving it
-	public static boolean runCorrect(final TextBoxBase textBox) {
-		Emc_eufar.rootLogger.log(Level.INFO, "Check of text in all fields in progress...");
-		boolean result = true;
-		for (Map.Entry<TextBoxBase, String> entry : Emc_eufar.correctField.entrySet()) {
-			String string = entry.getValue();
-			TextBoxBase textBoxE = entry.getKey();
-			if (textBoxE == textBox) {
-				switch (string) {
-				case "number":
-					try { 
-						Double.parseDouble(textBox.getText());
-					} 
-					catch (NumberFormatException e) {
-						textBox.getElement().setAttribute("style","border-color: blue !important;");
-						result = false;
-					}
-					break;
-				case "string":
-					try {
-						Double.parseDouble(textBox.getText());
-						textBox.getElement().setAttribute("style","border-color: blue !important;");
-						result = false;
-					} catch (NumberFormatException e) {}
-					break;
-				case "email":
-					boolean isEmail = false;
-					for (char ch: textBox.getText().toCharArray()) {
-						if (ch == '@') {
-							isEmail = true;
-						}
-					}
-					if (!isEmail) {
-						textBox.getElement().setAttribute("style","border-color: blue !important;");
-						result = false;
-					}
-					break;
-				}
-			}
-		}
-		Emc_eufar.rootLogger.log(Level.INFO, "Check of text in all fields finished.");
-		return result;
-		}
-	
-		
-	/// check if all DateBoxes have been correctly set before saving it
-	public static boolean runCorrect(final DateBox dateBox) {
-		Emc_eufar.rootLogger.log(Level.INFO, "Check of a datebox in progress...");
-		boolean result = true;		
-		Date actualDate = new Date();
-		Date boxDate = dateBox.getValue();
-		Widget parent;
-		int widgetIndex = -1;
-		if (boxDate.after(actualDate)) {
-			result = false;
-			dateBox.getElement().setAttribute("style","border-color: blue !important;");
-			parent = dateBox.getParent();
-			while (!(parent instanceof ScrollPanel)) {
-				parent = parent.getParent();
-			}
-			if (!Emc_eufar.tabLayout) {
-				widgetIndex = Emc_eufar.stackPanel.getWidgetIndex(parent);
-				Emc_eufar.stackPanel.getHeaderWidget(widgetIndex).asWidget().setStylePrimaryName("textuncorrect");
-			} else {
-				widgetIndex = Emc_eufar.tabPanel.getWidgetIndex(parent);
-				Emc_eufar.tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
-			}
-			if (Emc_eufar.refStartLst.contains(dateBox) || Emc_eufar.refEndLst.contains(dateBox)) {
-				for (int row = 0; row < Emc_eufar.refPhaseTab.getRowCount(); row++) {
-					for (int col = 0; col < Emc_eufar.refPhaseTab.getCellCount(row); col++) {
-						Widget w = Emc_eufar.refPhaseTab.getWidget(row, col);
-						if (w == dateBox) {Emc_eufar.refPhaseTab.getWidget(row, 0).getElement().setAttribute("style","color: rgb(0,0,200) "
-								+ "!important;");}
-					}
-				}
-			} else {
-				for (Map.Entry<DateBox, Label> entry : Emc_eufar.correctDate.entrySet()) {
-					Label label = entry.getValue();
-					DateBox dateBoxE = entry.getKey();
-					if (dateBoxE == dateBox) {label.getElement().setAttribute("style","color: rgb(0,0,200) !important;");}
-				}
-			}
-		}
-		Emc_eufar.rootLogger.log(Level.INFO, "Check of a datebox finished.");
-		return result;
-	}
-	
-	
 	/// put all labels and text to default color and position
 	public static void runCheckDefault() {
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display before check in progress...");
-		Emc_eufar.imageLevLst.getElement().setAttribute("style","border-color: #ccc !important;");
-		Emc_eufar.airAircraftLst.getElement().setAttribute("style","border-color: #ccc !important;");
-		Emc_eufar.geoLocationLst.getElement().setAttribute("style","border-color: #ccc !important;");
-		Emc_eufar.geoDetailLst.getElement().setAttribute("style","border-color: #ccc !important;");
-		Emc_eufar.geoResolutionLst.getElement().setAttribute("style","border-color: #ccc !important;");
-		Emc_eufar.airInstrumentLst.getElement().setAttribute("style","border-color: #ccc !important;");
-		Emc_eufar.geoUnitLab.getElement().setAttribute("style", "margin-left: 20px !important;");
-		Emc_eufar.geoWestBox.getElement().setAttribute("style", "margin-left: 40px !important;");
 		List<Label> allLabel = $("*", Emc_eufar.subDockPanel).widgets(Label.class);
 		List<TextBoxBase> allBox = $("*", Emc_eufar.subDockPanel).widgets(TextBoxBase.class);
 		List<DateBox> allDateBox = $("*", Emc_eufar.subDockPanel).widgets(DateBox.class);
+		List<ListBox> allListBox = $("*", Emc_eufar.subDockPanel).widgets(ListBox.class);
 		for (int i = 0; i < allLabel.size(); i++) {
-			allLabel.get(i).getElement().setAttribute("style","color: black !important; font-family: "
-					+ "MyFont !important;");
+			String style = allLabel.get(i).getStylePrimaryName();
+			allLabel.get(i).getElement().setAttribute("style","");
+			allLabel.get(i).setStyleName(style);
 		}
 		for (int i = 0; i < allBox.size(); i++) {
-			allBox.get(i).getElement().setAttribute("style","border-color: #ccc !important;");
+			String style = allBox.get(i).getStylePrimaryName();
+			allBox.get(i).getElement().setAttribute("style","");
+			allBox.get(i).setStyleName(style);
 		}
-		Emc_eufar.insituOtherBox.getElement().setAttribute("style","margin-left: 24px !important; margin-top: -5px !important; margin-bottom: "
-				+ "-0px !important;");
-		int manufacturerSize = Emc_eufar.airManufacturerLab.getElement().getClientWidth();
-		int typeSize = Emc_eufar.airTypeLab.getElement().getClientWidth();
-		int operatorSize = Emc_eufar.airOperatorLab.getElement().getClientWidth();
-		int countrySize = Emc_eufar.airCountryLab.getElement().getClientWidth();
-		int registrationSize = Emc_eufar.airRegistrationLab.getElement().getClientWidth();
-		Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - 
-				manufacturerSize + 20) + "px !important;");
-		Emc_eufar.airTypeBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - typeSize + 20) 
-		+ "px !important;");
-		Emc_eufar.airOperatorBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - operatorSize + 20) 
-		+ "px !important; height: 15px; !important;");
-		Emc_eufar.airCountryLst.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - countrySize + 20) 
-		+ "px !important;");
-		Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "margin-left: 20px !important;");
-		Emc_eufar.airManufacturerInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - 
-				manufacturerSize + 20) + "px !important;");
-		Emc_eufar.airTypeInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - typeSize + 20) 
-		+ "px !important;");
-		Emc_eufar.airOperatorInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - operatorSize + 20) 
-		+ "px !important; height: 15px; !important;");
-		Emc_eufar.airCountryInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - countrySize + 20) 
-		+ "px !important;");
-		Emc_eufar.airRegistrationInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
-		
-		Emc_eufar.metContactLab.getElement().setAttribute("style", "margin-top: 22px !important;");
-		
 		for (int i = 0; i < allDateBox.size(); i++) {
-			allDateBox.get(i).getElement().setAttribute("style","border-color: #ccc !important;");
+			String style = allDateBox.get(i).getStylePrimaryName();
+			allDateBox.get(i).getElement().setAttribute("style","");
+			allDateBox.get(i).setStyleName(style);
+		}
+		for (int i = 0; i < allListBox.size(); i++) {
+			String style = allListBox.get(i).getStylePrimaryName();
+			allListBox.get(i).getElement().setAttribute("style","");
+			allListBox.get(i).setStyleName(style);
 		}
 		if (!Emc_eufar.tabLayout) {
 			for (int i = 0; i < 10; i++) {
@@ -290,7 +175,6 @@ public class Utilities {
 				Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: Black !important;");
 			}
 		}
-		
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display set.");
 	}
 	

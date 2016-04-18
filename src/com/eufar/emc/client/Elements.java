@@ -24,7 +24,7 @@ public class Elements {
 		final CheckBox box = new CheckBox();
 		box.setName(string);
 		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		inlineLabel.getElement().setAttribute("style","font-family: MyFont !important; font-size: 14px !important;");
+		inlineLabel.setStyleName("checkBoxLabel");
 		horizontalPanel.add(box);
 		horizontalPanel.add(inlineLabel);
 		return horizontalPanel;
@@ -37,7 +37,7 @@ public class Elements {
 		final InlineLabel inlineLabel = new InlineLabel(text);
 		final RadioButton box = new RadioButton(group, "");
 		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		inlineLabel.getElement().setAttribute("style","font-family: MyFont !important; font-size: 14px !important;");
+		inlineLabel.setStyleName("checkBoxLabel");
 		horizontalPanel.add(box);
 		horizontalPanel.add(inlineLabel);
 		box.addClickHandler(new ClickHandler() {
@@ -82,7 +82,7 @@ public class Elements {
 	}
 	
 	
-	// add a new period in the Temporal Reference panel
+	// add a new widget in the GUI based on user demand
 	public static PushButton plusButton(final String string) {
 		final Image image = new Image("icons/plus_icon.png");
 		final PushButton plusButton = new PushButton(image);
@@ -120,4 +120,3 @@ public class Elements {
 		return plusButton;
 	}
 }
-

@@ -37,7 +37,7 @@ import org.apache.commons.io.FilenameUtils;
 
 @SuppressWarnings("hiding")
 public class UploadFunction<FileItem> extends HttpServlet implements Servlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 421599653255875652L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("UploadFunction - the function started");
 		response.setContentType("text/html;charset=UTF-8");
@@ -51,17 +51,21 @@ public class UploadFunction<FileItem> extends HttpServlet implements Servlet {
 			Iterator<?> iter = items.iterator();
 			while(iter.hasNext()){
 				Object obj = iter.next();
-				if(obj == null) continue;
+				if (obj == null) {
+					continue;
+				}
 				org.apache.commons.fileupload.FileItem item = (org.apache.commons.fileupload.FileItem)obj;
 				if (FilenameUtils.getExtension(item.getName()).matches("(xml|XML)")) {
-					if(item.isFormField()){
+					if (item.isFormField()) {
 						String name = item.getName();
 						String value = "";
-						if(name.compareTo("textBoxFormElement")==0){value = item.getString();} 
-						else {value = item.getString();}
+						if (name.compareTo("textBoxFormElement") == 0) {
+							value = item.getString();
+						} else {
+							value = item.getString();
+						}
 						response.getWriter().write(name + "=" + value + "\n");
-					} 
-					else {
+					} else {
 						byte[] fileContents = item.get();
 						String message = new String(fileContents);
 						response.setCharacterEncoding("UTF-8");

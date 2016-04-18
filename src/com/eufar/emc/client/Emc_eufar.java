@@ -70,20 +70,18 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<String, String> instrumentMap = Resources.instrumentMap();
 	public static HashMap<String, String> unitMap = Resources.unitMap();
 	private HashMap<TextBoxBase, Label> requiredField = Resources.requiredField();
-	public static HashMap<TextBoxBase, String> correctField = Resources.correctField();
-	public static HashMap<DateBox, Label> correctDate = Resources.correctDate();
+	private HashMap<TextBoxBase, String> correctField = Resources.correctField();
+	private HashMap<DateBox, Label> correctDate = Resources.correctDate();
 	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private String emcVersion = new String("v1.0.3 (2016-02-16)");
+	private String emcVersion = new String("v1.0.4 (2016-04-15)");
 	private String gwtVersion = new String("2.7.0");
-	private String eclipseVersion = new String("4.5.0");
+	private String eclipseVersion = new String("4.5.2");
 	private String javaVersion = new String("1.7.0.79");
 	private String inspireVersion = new String("v1.3");
 	public static Boolean tabLayout = new Boolean(false);
 	public static Boolean isModified = new Boolean(false);
 	public static String titleString = new String("EUFAR Metadata Creator");
-
-	public static String emcPath = new String(GWT.getHostPageBaseURL()); // for Tomcat7 Server
-	//public static String emcPath = new String(""); // for Eclipse Dev Mode
+	public static String emcPath = new String("");
 	
 
 	// Main window items initialization
@@ -140,11 +138,11 @@ public class Emc_eufar implements EntryPoint {
 
 
 	// Classification items
-	private VerticalPanel verticalPanel01 = new VerticalPanel();
-	private VerticalPanel verticalPanel02 = new VerticalPanel();
+	public static VerticalPanel verticalPanel01 = new VerticalPanel();
+	public static VerticalPanel verticalPanel02 = new VerticalPanel();
 	public static HorizontalPanel horizontalPanel07 = new HorizontalPanel();
 	private PushButton classCategoriesInfo = Elements.addInfoButton("Categories");
-	private Label classCategoriesLab = new Label("Topic Categories:");
+	public static Label classCategoriesLab = new Label("Topic Categories:");
 	private HorizontalPanel classBiotaCheck = Elements.checkBox("Biota");
 	private HorizontalPanel classBoundariesCheck = Elements.checkBox("Boundaries");
 	private HorizontalPanel classClimatologyCheck = Elements.checkBox("Climatology / Meteorology / Atmosphere");
@@ -174,12 +172,12 @@ public class Emc_eufar implements EntryPoint {
 	private VerticalPanel verticalPanel05 = new VerticalPanel();
 	private VerticalPanel verticalPanel06 = new VerticalPanel();
 	private PushButton keyInfoButton = Elements.addInfoButton("Keywords");
-	private Label keyAgricultureLab = new Label("Agriculture:");
+	public static Label keyAgricultureLab = new Label("Agriculture:");
 	private Label keyAtmosphereLab = new Label("Atmosphere:");
 	private Label keyBiosphereLab = new Label("Biosphere:");
 	private Label keyCryosphereLab = new Label("Cryosphere:");
 	private Label keySurfaceLab = new Label("Land Surface:");
-	private Label keyOceanLab = new Label("Ocean:");
+	public static Label keyOceanLab = new Label("Ocean:");
 	private Label keyEarthLab = new Label("Solid Earth:");
 	private Label keySpectralLab = new Label("Spectral / Engineering:");
 	private Label keyInteractionsLab = new Label("Sun-Earth Interactions:");
@@ -266,7 +264,7 @@ public class Emc_eufar implements EntryPoint {
 	private PushButton airPlatformInfo = Elements.addInfoButton("aiAircraft");
 	private PushButton airInstrumentInfo = Elements.addInfoButton("aiInstrument");
 	private PushButton airPlusButton = Elements.plusButton("airInstrument");
-	private static Label airAircraftLab = new Label("Aircraft:");
+	public static Label airAircraftLab = new Label("Aircraft:");
 	public static Label airManufacturerLab = new Label("Manufacturer:");
 	public static Label airManufacturerInfo = new Label("");
 	public static Label airTypeLab = new Label("Aircraft type:");
@@ -280,7 +278,7 @@ public class Emc_eufar implements EntryPoint {
 	public static Label airCopyrightInfo = new Label("EUFAR");
 	public static Label airInstNameLab = new Label("Name:");
 	public static Label airInstManufacturerLab = new Label("Manufacturer:");
-	private static Label airInstrumentLab = new Label("Instrument:");
+	public static Label airInstrumentLab = new Label("Instrument:");
 	public static TextBox airManufacturerBox = new TextBox();
 	public static TextBox airTypeBox = new TextBox();
 	public static TextBox airOperatorBox = new TextBox();
@@ -307,7 +305,7 @@ public class Emc_eufar implements EntryPoint {
 	private PushButton geoLocationInfo = Elements.addInfoButton("giLocation");
 	private PushButton geoCoordInfo = Elements.addInfoButton("giBox"); 
 	private PushButton geoUnitInfo = Elements.addInfoButton("giUnit");
-	private static Label geoLocationLab = new Label("Location:");
+	public static Label geoLocationLab = new Label("Location:");
 	public static Label geoBoundingLab = new Label("Geographic bounding box:");
 	public static Label geoResolutionLab = new Label("Spatial resolution:");
 	public static Label geoUnitLab = new Label("Unit:");
@@ -615,57 +613,81 @@ public class Emc_eufar implements EntryPoint {
 	
 
 	public void onModuleLoad2() {
-		
+		rootLogger.log(Level.INFO, "***************************************************************");
 		rootLogger.log(Level.INFO, "EMC has started on: " + Navigator.getUserAgent());
+		if (GWT.getHostPageBaseURL() != "http://127.0.0.1:8888/") {
+			emcPath = GWT.getHostPageBaseURL();
+		}
 		rootLogger.log(Level.INFO, "PATH: " + emcPath);
 
+		
 		// Commands in the menu bar
-		Command aboutWindow = new Command() {public void execute() {
-			rootLogger.log(Level.INFO, "About ASMM invoked...");
-			PopupMessages.aboutEmc(emcVersion, eclipseVersion, gwtVersion, javaVersion, inspireVersion);
-		}};
-		
-		Command aboutStandard = new Command() {public void execute() {
-			rootLogger.log(Level.INFO, "About INSPIRE invoked...");
-			PopupMessages.aboutInspire();
-		}};
-		
-		Command newFile = new Command() {public void execute() {
-			newFile();
-		}};
-		
-		Command openFile = new Command() {public void execute() {
-			PopupMessages.openFile();
-		}};
-		
-		Command saveFile = new Command() {public void execute() {
-			runCheck("");
-		}};
-		
-		Command launchN7SPPage = new Command()  {public void execute() {
-			Window.open("http://www.eufar.net/cms/standards-and-protocols/", "_blank", "");
-		}};
-		
-		Command exitFile = new Command()  {public void execute() {
-			Window.open("http://www.eufar.net", "_self", "");
-		}};
-		
-		Command confLayout = new Command() {public void execute() {
-			if (!tabLayout) {
-				PopupMessages.layoutPanel();
-			} else {
-				rootLogger.log(Level.INFO, "Layout already changed");
+		Command aboutWindow = new Command() {
+			public void execute() {
+				rootLogger.log(Level.INFO, "About ASMM invoked...");
+				PopupMessages.aboutEmc(emcVersion, eclipseVersion, gwtVersion, javaVersion, inspireVersion);
 			}
-		}};
+		};
 		
-		Command displayLog = new Command() {public void execute() {
-			rootLogger.log(Level.INFO, "Changelog invoked...");
-			PopupMessages.changelogPanel();
-		}};
+		Command aboutStandard = new Command() {
+			public void execute() {
+				rootLogger.log(Level.INFO, "About INSPIRE invoked...");
+				PopupMessages.aboutInspire();
+			}
+		};
 		
-		Command reload = new Command() {public void execute() {
-			Utilities.reloadGUI();
-		}};
+		Command newFile = new Command() {
+			public void execute() {
+				newFile();
+			}
+		};
+		
+		Command openFile = new Command() {
+			public void execute() {
+				PopupMessages.openFile();
+			}
+		};
+		
+		Command saveFile = new Command() {
+			public void execute() {
+				runCheck("");
+			}
+		};
+		
+		Command launchN7SPPage = new Command() {
+			public void execute() {
+				Window.open("http://www.eufar.net/cms/standards-and-protocols/", "_blank", "");
+			}
+		};
+		
+		Command exitFile = new Command() {
+			public void execute() {
+				Window.open("http://www.eufar.net", "_self", "");
+			}
+		};
+		
+		Command confLayout = new Command() {
+			public void execute() {
+				if (!tabLayout) {
+					PopupMessages.layoutPanel();
+				} else {
+					rootLogger.log(Level.INFO, "Layout already changed");
+				}
+			}
+		};
+		
+		Command displayLog = new Command() {
+			public void execute() {
+				rootLogger.log(Level.INFO, "Changelog invoked...");
+				PopupMessages.changelogPanel();
+			}
+		};
+		
+		Command reload = new Command() {
+			public void execute() {
+				Utilities.reloadGUI();
+			}
+		};
 
 
 		// Assemble the Menu panel
@@ -922,14 +944,12 @@ public class Emc_eufar implements EntryPoint {
 		classThGroundCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
 		classThSurfaceCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
 		classThChemistryCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		keyAgricultureLab.setStyleName("keyTitleTextLabel");
-		keyAgricultureLab.getElement().setAttribute("style", "margin-top: 0px !important;");
+		keyAgricultureLab.setStyleName("keyTitleTextLabel2");
 		keyAtmosphereLab.setStyleName("keyTitleTextLabel");
 		keyBiosphereLab.setStyleName("keyTitleTextLabel");
 		keyCryosphereLab.setStyleName("keyTitleTextLabel");
 		keySurfaceLab.setStyleName("keyTitleTextLabel");
-		keyOceanLab.setStyleName("keyTitleTextLabel");
-		keyOceanLab.getElement().setAttribute("style", "margin-top: 0px !important;");
+		keyOceanLab.setStyleName("keyTitleTextLabel2");
 		keyEarthLab.setStyleName("keyTitleTextLabel");
 		keySpectralLab.setStyleName("keyTitleTextLabel");
 		keyInteractionsLab.setStyleName("keyTitleTextLabel");
@@ -1004,20 +1024,14 @@ public class Emc_eufar implements EntryPoint {
 		airCountryLab.setStyleName("airFlexTableLabel1");
 		airRegistrationLab.setStyleName("airFlexTableLabel1");
 		airManufacturerInfo.setStyleName("airFlexTableLabel2");
-		airTypeInfo.setStyleName("airFlexTableLabel2");
-		airOperatorInfo.setStyleName("airFlexTableLabel2");
-		airCountryInfo.setStyleName("airFlexTableLabel2");
-		airRegistrationInfo.setStyleName("airFlexTableLabel2");
+		airTypeInfo.setStyleName("airFlexTableLabel3");
+		airOperatorInfo.setStyleName("airFlexTableLabel4");
+		airCountryInfo.setStyleName("airFlexTableLabel5");
+		airRegistrationInfo.setStyleName("airFlexTableLabel6");
 		airAircraftLst.setName("airAircraftList");
 		airInstrumentTable.getElement().setAttribute("style","margin-left: 40px;");
 		airInstrumentLst.setStyleName("airTextList2");
 		airInstrumentLab.setStyleName("airTitleTextLabel");
-		airManufacturerInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
-		airTypeInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
-		airOperatorInfo.getElement().setAttribute("style", "margin-left: 20px !important; height: 15px; !important;");
-		airCountryInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
-		airCountryInfo.getElement().setAttribute("style", "margin-left: 20 px !important;");
-		airRegistrationInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
 		airAircraftLst.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
@@ -1030,9 +1044,6 @@ public class Emc_eufar implements EntryPoint {
 				GuiModification.otherInstrument();
 			}
 		});
-		
-		
-		
 		rootLogger.log(Level.INFO, "Aircraft and instruments panel initialized");
 
 
@@ -1226,12 +1237,10 @@ public class Emc_eufar implements EntryPoint {
 		useLimitationsBox.setStyleName("useTextArea");
 		auDelButton1.setStyleName("emptyButton");
 		auDelButton2.setStyleName("emptyButton");
-		usePlusButton1.getElement().setAttribute("style", "margin-top: 43px !important;");
-		useInfoButton1.getElement().setAttribute("style", "margin-top: 43px !important;");
-		useConditionsLab.getElement().setAttribute("style", "margin-top: 43px !important;");
-		usePlusButton2.getElement().setAttribute("style", "margin-top: 42px !important;");
-		useInfoButton2.getElement().setAttribute("style", "margin-top: 42px !important;");
-		useLimitationsLab.getElement().setAttribute("style", "margin-top: 42px !important;");
+		usePlusButton1.getElement().setAttribute("style", "margin-top: 46px !important;");
+		useInfoButton1.getElement().setAttribute("style", "margin-top: 46px !important;");
+		usePlusButton2.getElement().setAttribute("style", "margin-top: 46px !important;");
+		useInfoButton2.getElement().setAttribute("style", "margin-top: 46px !important;");
 		useConditionsLst.add(useConditionsBox);
 		useLimitationsLst.add(useLimitationsBox);
 		useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
@@ -1356,7 +1365,6 @@ public class Emc_eufar implements EntryPoint {
 		metCellFormatter.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
 		metPlusButton.getElement().setAttribute("style", "margin-top: 20px !important;");
 		metPartyInfo.getElement().setAttribute("style", "margin-top: 20px !important;");
-		metContactLab.getElement().setAttribute("style", "margin-top: 20px !important;");
 		verticalPanel16.add(metContactTab);
 		metDateLab.setStyleName("metTextLabel");
 		metLanguageLab.setStyleName("metTextLabel");
@@ -1364,7 +1372,7 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel28.setStyleName("metHorizontalPanel");
 		horizontalPanel29.setStyleName("metHorizontalPanel");
 		verticalPanel16.setStyleName("metVerticalPanel");
-		metContactLab.setStyleName("metTitleTextLabel");
+		metContactLab.setStyleName("metTitleTextLabel2");
 		metNameLab.setStyleName("metTextLabel");
 		metEmailLab.setStyleName("metTextLabel2");
 		metNameBox.setStyleName("metTextBox");
@@ -1415,7 +1423,6 @@ public class Emc_eufar implements EntryPoint {
 				public void onSelection(SelectionEvent<Integer> event) {
 					int selectedWidgetIndex = stackPanel.getVisibleIndex();
 					rootLogger.log(Level.INFO, "Selected tab index: " + Integer.toString(selectedWidgetIndex));
-					
 				}
 			});
 	
@@ -1425,7 +1432,9 @@ public class Emc_eufar implements EntryPoint {
 			int screen_height = Window.getClientHeight();
 			int expandPanel = 0;
 			expandPanel = (screen_width - 1166)/2;
-			if (expandPanel < 0) {expandPanel = 0;}
+			if (expandPanel < 0) {
+				expandPanel = 0;
+			}
 			subDockPanel.addNorth(new HTML("<img src='icons/emc_top.jpg' alt='EUFAR Metadata Creator' height='80px' width='1166px'>"), 80);
 			subDockPanel.addNorth(mainMenu, 30);
 			dockPanel.addEast(new HTML("<img src='icons/emc_shadowr.png' alt='EUFAR Metadata Creator' width='30px' height='" + screen_height + "' align='left'"
@@ -1571,7 +1580,7 @@ public class Emc_eufar implements EntryPoint {
 		Utilities.runCheckDefault();
 		List<DateBox> allDateBox = $("*", subDockPanel).widgets(DateBox.class);
 		for (int i = 0; i < allDateBox.size(); i++) {
-			if (!Utilities.runCorrect(allDateBox.get(i))) {
+			if (!runCorrect(allDateBox.get(i))) {
 				notCompleted++;
 			}
 		}
@@ -1608,7 +1617,7 @@ public class Emc_eufar implements EntryPoint {
 						}
 					}
 				} else {
-					if (!Utilities.runCorrect(textBox)) {
+					if (!runCorrect(textBox)) {
 						notCompleted++;
 						label.getElement().setAttribute("style","color: rgb(0,0,200) !important;");
 						if (!tabLayout) {
@@ -1620,7 +1629,9 @@ public class Emc_eufar implements EntryPoint {
 						}
 					}
 				}
-			} catch (Exception ex) {rootLogger.log(Level.WARNING, "the widget has no parent: " + ex.getMessage());}
+			} catch (Exception ex) {
+				rootLogger.log(Level.WARNING, "the widget has no parent: " + ex.getMessage());
+			}
 		}
 		List<CheckBox> allClaCheck = $("*", clScroll).widgets(CheckBox.class);
 		for (int i = 0; i < allClaCheck.size(); i++) {
@@ -1660,31 +1671,21 @@ public class Emc_eufar implements EntryPoint {
 			airAircraftLab.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
 			airAircraftLst.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
 		} else if (airAircraftLst.getSelectedIndex() == 1) {
-			int manufacturerSize = Emc_eufar.airManufacturerLab.getElement().getClientWidth();
-			int typeSize = Emc_eufar.airTypeLab.getElement().getClientWidth();
-			int operatorSize = Emc_eufar.airOperatorLab.getElement().getClientWidth();
-			int countrySize = Emc_eufar.airCountryLab.getElement().getClientWidth();
-			int registrationSize = Emc_eufar.airRegistrationLab.getElement().getClientWidth();
 			if (Emc_eufar.airManufacturerBox.getText() == "") {
-				Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - 
-						manufacturerSize + 20) + "px !important; border-color: rgb(200,0,0) !important;");
+				Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
 			}
 			if (Emc_eufar.airTypeBox.getText() == "") {
-			Emc_eufar.airTypeBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - typeSize + 20) + "px "
-					+ "!important; border-color: rgb(200,0,0) !important;");
+				Emc_eufar.airTypeBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
 			}
 			if (Emc_eufar.airOperatorBox.getText() == "") {
-			Emc_eufar.airOperatorBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - operatorSize + 20) 
-						+ "px !important; height: 15px important!; !important; border-color: rgb(200,0,0) !important;");
+				Emc_eufar.airOperatorBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
 			}
 			if (Emc_eufar.airCountryLst.getSelectedItemText() == "Make a choice...") {
-				Emc_eufar.airCountryLst.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - countrySize + 
-						20) + "px !important; border-color: rgb(200,0,0) !important;");
+				Emc_eufar.airCountryLst.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
 				Emc_eufar.airCountryLab.getElement().setAttribute("style", "color: rgb(200,0,0) !important;");
 			}
 			if (Emc_eufar.airRegistrationBox.getText() == "") {
-				Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "margin-left: 20px !important; border-color: rgb(200,0,0) "
-						+ "!important;");
+				Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
 			}
 		}
 		if (instrumentTabList.size() == 0) {
@@ -1736,8 +1737,7 @@ public class Emc_eufar implements EntryPoint {
 					Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
 				}
 				insituOutLab.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
-				insituOtherBox.getElement().setAttribute("style","border-color: rgb(200,0,0) !important; margin-left: 24px !important; "
-						+ "margin-top: -5px !important; margin-bottom: -0px !important;");
+				insituOtherBox.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
 				notCompleted++;
 			}
 			if (((CheckBox) insituChk01Y.getWidget(0)).getValue() == false && ((CheckBox) insituChk01N.getWidget(0)).getValue() == false) {
@@ -1751,8 +1751,7 @@ public class Emc_eufar implements EntryPoint {
 			}
 		} else if (((CheckBox) insituRad.getWidget(0)).getValue() == false && ((CheckBox) imageRad.getWidget(0)).getValue() == true) {
 			if (imageLevLst.getSelectedValue() == "Make a choice...") {
-				imageLevLab.getElement().setAttribute("style","color: rgb(200,0,0) !important; font-family: DroidSansFallback "
-						+ "!important;");
+				imageLevLab.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
 				imageLevLst.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
 			}
 			if (((CheckBox) imageChk10Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk10N.getWidget(0)).getValue() == false) {
@@ -1900,7 +1899,6 @@ public class Emc_eufar implements EntryPoint {
 				notCompleted++;
 			}
 		}
-
 		rootLogger.log(Level.INFO, "Check of all fields finished.");
 		if (notCompleted > 0) {
 			PopupMessages.notcompletePanel(string);
@@ -1908,7 +1906,98 @@ public class Emc_eufar implements EntryPoint {
 			PopupMessages.saveFile(string);
 		}
 	}
-		
+	
+	
+	// check if all TextBoxes have been correctly filled in before saving it
+	private boolean runCorrect(final TextBoxBase textBox) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Check of text in all fields in progress...");
+		boolean result = true;
+		for (Map.Entry<TextBoxBase, String> entry : correctField.entrySet()) {
+			String string = entry.getValue();
+			TextBoxBase textBoxE = entry.getKey();
+			if (textBoxE == textBox) {
+				switch (string) {
+				case "number":
+					try { 
+						Double.parseDouble(textBox.getText());
+					} 
+					catch (NumberFormatException e) {
+						textBox.getElement().setAttribute("style","border-color: blue !important;");
+						result = false;
+					}
+					break;
+				case "string":
+					try {
+						Double.parseDouble(textBox.getText());
+						textBox.getElement().setAttribute("style","border-color: blue !important;");
+						result = false;
+					} catch (NumberFormatException e) {}
+					break;
+				case "email":
+					boolean isEmail = false;
+					for (char ch: textBox.getText().toCharArray()) {
+						if (ch == '@') {
+							isEmail = true;
+						}
+					}
+					if (!isEmail) {
+						textBox.getElement().setAttribute("style","border-color: blue !important;");
+						result = false;
+					}
+					break;
+				}
+			}
+		}
+		rootLogger.log(Level.INFO, "Check of text in all fields finished.");
+		return result;
+	}
+	
+	
+	// check if all DateBoxes have been correctly set before saving it
+	private boolean runCorrect(final DateBox dateBox) {
+		rootLogger.log(Level.INFO, "Check of a datebox in progress...");
+		boolean result = true;		
+		Date actualDate = new Date();
+		Date boxDate = dateBox.getValue();
+		Widget parent;
+		int widgetIndex = -1;
+		if (boxDate.after(actualDate)) {
+			result = false;
+			dateBox.getElement().setAttribute("style","border-color: blue !important;");
+			parent = dateBox.getParent();
+			while (!(parent instanceof ScrollPanel)) {
+				parent = parent.getParent();
+			}
+			if (!tabLayout) {
+				widgetIndex = stackPanel.getWidgetIndex(parent);
+				stackPanel.getHeaderWidget(widgetIndex).asWidget().setStylePrimaryName("textuncorrect");
+			} else {
+				widgetIndex = tabPanel.getWidgetIndex(parent);
+				tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+			}
+			if (refStartLst.contains(dateBox) || refEndLst.contains(dateBox)) {
+				for (int row = 0; row < refPhaseTab.getRowCount(); row++) {
+					for (int col = 0; col < refPhaseTab.getCellCount(row); col++) {
+						Widget w = refPhaseTab.getWidget(row, col);
+						if (w == dateBox) {
+							refPhaseTab.getWidget(row, 0).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+						}
+					}
+				}
+			} else {
+				for (Map.Entry<DateBox, Label> entry : correctDate.entrySet()) {
+					Label label = entry.getValue();
+					DateBox dateBoxE = entry.getKey();
+					if (dateBoxE == dateBox) {
+						label.getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+					}
+				}
+			}
+		}
+		rootLogger.log(Level.INFO, "Check of a datebox finished.");
+		return result;
+	}
+	
 	
 	// capture all uncaught exceptions
 	public Throwable unwrap(Throwable e) {

@@ -25,58 +25,71 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.apache.commons.io.FileUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 
 
 public class DownloadFunction extends HttpServlet {
-	private static final long serialVersionUID = -4356636877078339046L;
+	private static final long serialVersionUID = 4356636853168339046L;
 	byte[] bbuf = new byte[1024];
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-			System.out.println("DownloadFunction - the function started");
-			String filename = "";
-			ServletContext context = getServletConfig().getServletContext();
-			request.setCharacterEncoding("UTF-8");
-			String dir = "";
-			if (context.getRealPath("tmp")==null) {dir = context.getRealPath("/tmp");}
-			else {dir = context.getRealPath("tmp");}
-			File fileDir = new File(dir);
-			try {
-				String[] attrArray = request.getParameterValues("filename");			
-				if(attrArray != null) {filename = attrArray[0];}
-				String xmltree = "";
-				attrArray = request.getParameterValues("xmltree");
-				if(attrArray != null) {xmltree = attrArray[0];}
-				Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "/" + filename), "UTF-8"));
-				out.append(xmltree);
-				out.flush();
-				out.close();
-			} catch (IOException ex) {
-				System.out.println("ERROR during rendering: " + ex);
+			throws ServletException, IOException {
+		System.out.println("DownloadFunction - the function started");
+		ServletContext context = getServletConfig().getServletContext();
+		request.setCharacterEncoding("UTF-8");
+		String dir = context.getRealPath("/tmp");;
+		String filename = "";
+		File fileDir = new File(dir);
+		try {
+			System.out.println("DownloadFunction - create the file on server");
+			filename = request.getParameterValues("filename")[0];
+			String xmltree =request.getParameterValues("xmltree")[0];
+				
+			// format xml code to pretty xml code
+			Document doc = DocumentHelper.parseText(xmltree);  
+	        StringWriter sw = new StringWriter();  
+	        OutputFormat format = OutputFormat.createPrettyPrint();  
+	        format.setIndent(true);
+	        format.setIndentSize(4); 
+	        XMLWriter xw = new XMLWriter(sw, format);  
+	        xw.write(doc); 
+				
+	        Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "/" + filename), "UTF-8"));
+			out.append(sw.toString());
+			out.flush();
+			out.close();
+		} catch (Exception ex) {
+			System.out.println("ERROR during rendering: " + ex);
+		}
+		try {
+			System.out.println("DownloadFunction - send file to user");
+			ServletOutputStream out = response.getOutputStream();
+			File file = new File(dir + "/" + filename);
+			String mimetype = context.getMimeType(filename);
+			response.setContentType((mimetype != null) ? mimetype : "application/octet-stream");
+			response.setContentLength((int) file.length());
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");			
+			response.setHeader("Pragma", "private");
+			response.setHeader("Cache-Control", "private, must-revalidate");
+			DataInputStream in = new DataInputStream(new FileInputStream(file));
+			int length;
+			while ((in != null) && ((length = in.read(bbuf)) != -1)) {
+				out.write(bbuf, 0, length);
 			}
-			try {	    	
-				ServletOutputStream out = response.getOutputStream();
-				File file = new File(dir + "/" + filename);
-				String mimetype = context.getMimeType(filename);
-				response.setContentType((mimetype != null) ? mimetype : "application/octet-stream");
-				response.setContentLength((int) file.length());
-				response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");			
-				response.setHeader("Pragma", "private");
-				response.setHeader("Cache-Control", "private, must-revalidate");
-				DataInputStream in = new DataInputStream(new FileInputStream(file));
-				int length;
-				while ((in != null) && ((length = in.read(bbuf)) != -1)) {out.write(bbuf, 0, length);}
-				in.close();
-				out.flush();
-				out.close();
-				FileUtils.cleanDirectory(fileDir);
-			} catch (Exception ex) {
-				System.out.println("ERROR during downloading: " + ex);
-			}
-			System.out.println("DownloadFunction - file ready to be donwloaded");
+			in.close();
+			out.flush();
+			out.close();
+			FileUtils.cleanDirectory(fileDir);
+		} catch (Exception ex) {
+			System.out.println("ERROR during downloading: " + ex);
+		}
+		System.out.println("DownloadFunction - file ready to be donwloaded");
 	}	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-			doPost(request, response);
+		doPost(request, response);
 	}
 }

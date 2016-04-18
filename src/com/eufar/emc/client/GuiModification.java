@@ -1,7 +1,10 @@
 package com.eufar.emc.client;
 
+import static com.google.gwt.query.client.GQuery.$;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -81,9 +84,7 @@ public class GuiModification {
 			Emc_eufar.horizontalPanel17.add(Emc_eufar.geoUnitLst);
 			Emc_eufar.geoResolutionBox.setStyleName("geoTextBox3");
 			Emc_eufar.geoUnitLst.setStyleName("geoTextList");
-			Emc_eufar.geoUnitLab.setStyleName("geoTitleTextLabel");
-			Emc_eufar.geoUnitLab.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFontBold !important;"
-					+ " font-size: 14px !important;");
+			Emc_eufar.geoUnitLab.setStyleName("geoTitleTextLabel3");
 			Emc_eufar.rootLogger.log(Level.INFO, "Changed to distance.");
 		}
 	}
@@ -95,9 +96,7 @@ public class GuiModification {
 			Emc_eufar.horizontalPanel33.add(Emc_eufar.insituImage);
 			Emc_eufar.horizontalPanel33.add(Emc_eufar.insituOtherBox);
 			Emc_eufar.insituImage.getElement().setAttribute("style", "margin-left: 23px; margin-top: -5px;");
-			Emc_eufar.insituOtherBox.setStyleName("identTextBox");
-			Emc_eufar.insituOtherBox.getElement().setAttribute("style", "margin-left: 24px !important; margin-top: -5px !important; "
-					+ "margin-bottom: -0px !important;");
+			Emc_eufar.insituOtherBox.setStyleName("qv_otherBox");
 		} else {
 			Emc_eufar.horizontalPanel33.clear();
 		}
@@ -406,6 +405,13 @@ public class GuiModification {
 				Emc_eufar.refStartLst.remove(rowIndex);
 				Emc_eufar.refEndLst.remove(rowIndex);
 				int row = Emc_eufar.refPhaseTab.getRowCount();
+				List<Label> allLabel = $("*", Emc_eufar.refPhaseTab).widgets(Label.class);
+				int id = 0;
+				for (Object o : allLabel) {
+					((Label) o).setText("Phase " + Integer.toString(id + 1) + ":");
+					id++;
+					
+				}
 				if (row == 1) {
 					Emc_eufar.refDelButton.setEnabled(false);
 					Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
@@ -855,6 +861,7 @@ public class GuiModification {
 	}
 	
 	
+	// add an instrument
 	public static void addInstPlus() {
 		Emc_eufar.rootLogger.log(Level.INFO, "Instrument add in progress...");
 		Utilities.docIsModified();
@@ -919,6 +926,7 @@ public class GuiModification {
 	}
 	
 	
+	// same as above but dedicated to the read function
 	public static void addInstRead(final String nameStr, final String manufacturerStr) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Instrument add in progress...");
 		int row = Emc_eufar.airInstrumentTable.getRowCount();
@@ -969,13 +977,34 @@ public class GuiModification {
 	// update all Aircraft information when a particular aircraft is selected in the Aircraft and Instruments tab
 	public static void aircraftInformation(final int index) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Aircraft information function invoked...");
-		if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
+		if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Make a choice...") {
+			Emc_eufar.horizontalPanel60.remove(1);
+			Emc_eufar.horizontalPanel61.remove(1);
+			Emc_eufar.horizontalPanel62.remove(1);
+			Emc_eufar.horizontalPanel63.remove(1);
+			Emc_eufar.horizontalPanel64.remove(1);
+			Emc_eufar.horizontalPanel60.add(Emc_eufar.airManufacturerInfo);
+			Emc_eufar.horizontalPanel61.add(Emc_eufar.airTypeInfo);
+			Emc_eufar.horizontalPanel62.add(Emc_eufar.airOperatorInfo);
+			Emc_eufar.horizontalPanel63.add(Emc_eufar.airCountryInfo);
+			Emc_eufar.horizontalPanel64.add(Emc_eufar.airRegistrationInfo);
+			Emc_eufar.airManufacturerInfo.setText("");
+			Emc_eufar.airTypeInfo.setText("");
+			Emc_eufar.airOperatorInfo.setText("");
+			Emc_eufar.airCountryInfo.setText("");
+			Emc_eufar.airRegistrationInfo.setText("");
+			Emc_eufar.airAircraftImg.setUrl("eufar_aircraft/logo_eufar_emc.png");
+			Emc_eufar.airCopyrightInfo.setText("EUFAR");
+			Emc_eufar.rootLogger.log(Level.INFO, "Make a choice... loaded.");
+		} else if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
 			Utilities.populateListBox(Emc_eufar.airCountryLst, Emc_eufar.countryList, 0);
-			int manufacturerSize = Emc_eufar.airManufacturerLab.getElement().getClientWidth();
-			int typeSize = Emc_eufar.airTypeLab.getElement().getClientWidth();
-			int operatorSize = Emc_eufar.airOperatorLab.getElement().getClientWidth();
-			int countrySize = Emc_eufar.airCountryLab.getElement().getClientWidth();
-			int registrationSize = Emc_eufar.airRegistrationLab.getElement().getClientWidth();
+			Emc_eufar.airAircraftImg.setUrl("eufar_aircraft/logo_eufar_emc.png");
+			Emc_eufar.airCopyrightInfo.setText("EUFAR");
+			Emc_eufar.airManufacturerInfo.setText("");
+			Emc_eufar.airTypeInfo.setText("");
+			Emc_eufar.airOperatorInfo.setText("");
+			Emc_eufar.airCountryInfo.setText("");
+			Emc_eufar.airRegistrationInfo.setText("");
 			Emc_eufar.horizontalPanel60.remove(1);
 			Emc_eufar.horizontalPanel61.remove(1);
 			Emc_eufar.horizontalPanel62.remove(1);
@@ -986,35 +1015,12 @@ public class GuiModification {
 			Emc_eufar.horizontalPanel62.add(Emc_eufar.airOperatorBox);
 			Emc_eufar.horizontalPanel63.add(Emc_eufar.airCountryLst);
 			Emc_eufar.horizontalPanel64.add(Emc_eufar.airRegistrationBox);
-			Emc_eufar.airManufacturerBox.setStyleName("airTextBox");
-			Emc_eufar.airTypeBox.setStyleName("airTextBox");
-			Emc_eufar.airOperatorBox.setStyleName("airTextBox");
+			Emc_eufar.airManufacturerBox.setStyleName("airTextBox3");
+			Emc_eufar.airTypeBox.setStyleName("airTextBox4");
+			Emc_eufar.airOperatorBox.setStyleName("airTextBox5");
 			Emc_eufar.airCountryLst.setStyleName("airTextList3");
 			Emc_eufar.airRegistrationBox.setStyleName("airTextBox");
-			Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - 
-					manufacturerSize + 20) + "px !important;");
-			Emc_eufar.airTypeBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - typeSize + 20) 
-			+ "px !important;");
-			Emc_eufar.airOperatorBox.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - operatorSize + 20) 
-			+ "px !important; height: 15px; !important;");
-			Emc_eufar.airCountryLst.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - countrySize + 20) 
-			+ "px !important;");
-			Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "margin-left: 20px !important;");
 		} else {
-			int manufacturerSize = Emc_eufar.airManufacturerLab.getElement().getClientWidth();
-			int typeSize = Emc_eufar.airTypeLab.getElement().getClientWidth();
-			int operatorSize = Emc_eufar.airOperatorLab.getElement().getClientWidth();
-			int countrySize = Emc_eufar.airCountryLab.getElement().getClientWidth();
-			int registrationSize = Emc_eufar.airRegistrationLab.getElement().getClientWidth();
-			Emc_eufar.airManufacturerInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - 
-					manufacturerSize + 20) + "px !important;");
-			Emc_eufar.airTypeInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - typeSize + 20) 
-			+ "px !important;");
-			Emc_eufar.airOperatorInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - operatorSize + 20) 
-			+ "px !important; height: 15px; !important;");
-			Emc_eufar.airCountryInfo.getElement().setAttribute("style", "margin-left: " + Integer.toString(registrationSize - countrySize + 20) 
-			+ "px !important;");
-			Emc_eufar.airRegistrationInfo.getElement().setAttribute("style", "margin-left: 20px !important;");
 			Emc_eufar.horizontalPanel60.remove(1);
 			Emc_eufar.horizontalPanel61.remove(1);
 			Emc_eufar.horizontalPanel62.remove(1);
@@ -1034,15 +1040,11 @@ public class GuiModification {
 			String aircraftImage = Emc_eufar.airAircraftInfo[index-1][6];
 			Emc_eufar.airAircraftImg.setUrl("eufar_aircraft/" + aircraftImage);
 			Emc_eufar.rootLogger.log(Level.INFO, "Aircraft information loaded.");
-			Emc_eufar.airManufacturerInfo.setStyleName("airFlexTableLabel2");
-			Emc_eufar.airTypeInfo.setStyleName("airFlexTableLabel2");
-			Emc_eufar.airOperatorInfo.setStyleName("airFlexTableLabel2");
-			Emc_eufar.airCountryInfo.setStyleName("airFlexTableLabel2");
-			Emc_eufar.airRegistrationInfo.setStyleName("airFlexTableLabel2");
 		}
 	}
 	
 	
+	// add textbox if the user selected "Other..." in the instrument panel
 	public static void otherInstrument() {
 		if (Emc_eufar.airInstrumentLst.getSelectedItemText() == "Other...") {
 			Emc_eufar.horizontalPanel65.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -1061,6 +1063,4 @@ public class GuiModification {
 			}
 		}
 	}
-	
 }
-

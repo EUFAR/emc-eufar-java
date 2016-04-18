@@ -347,7 +347,7 @@ public class PopupMessages {
 				+ "!important;");
 		horizontalPanel02.add(image);
 		horizontalPanel02.add(verticalPanel02);
-		xmlTree.setText(xmlSave.createXml());
+		xmlTree.setText(XmlSave.createXml());
 		xmlTree.setName("xmltree");
 		verticalPanel01.add(xmlTree);
 		label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:20px !important; margin-bottom:30px !important; "
@@ -517,11 +517,13 @@ public class PopupMessages {
 						return;
 					}
 					ret = event.getResults();
-					ret = ret.replaceAll("\t", "").replace("\n", "");
+					ret = ret.replaceAll("\t", "");
+					ret = ret.replaceAll("\n", "");
+					ret = ret.replaceAll(">\\s+<", "><");
 				} catch (Exception ex) {
 					Emc_eufar.rootLogger.log(Level.SEVERE, "a problem occured after submission completed: ", ex);
 				}
-				xmlOpen.readXml(ret);
+				XmlOpen.readXml(ret);
 			}			
 		});		
 		myUploadForm.add(verticalPanel02);
@@ -806,14 +808,25 @@ public class PopupMessages {
 	private static String logText() {
 		String string = new String(""
 				+ "<b><u>CHANGELOG</u></b><br><br>"
-				// known issues
-				+ "</li><li>!!! IMPORTANT !!! in the [ONLINE] version, a line needs to be activated or commented to allow a proper operation "
-				+ "of the downloading and uploading servlets, based on the platform of devlopment or production: see in the "
-				+ "'Emc_eufar.java' file, find those lines at the beginning:<ul><li>String emcPath = new String(GWT.getHostPageBaseURL()); "
-				+ "// for Tomcat7/8 Server</li><li>String emcPath = new String(''); // for Eclipse Dev Mode</li></ul></li></ul>"
-				// to add
-				// changelog
-				+ "<b><u>February 16 2016, Release version 1.0.4 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
+				+ "<u>TESTED ON:</u><ul><li>Firefox 31.5.3, 38.0.1, 39, 40, 45.0.1 (succeeded)</li><li>Chrome 44 "
+				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
+				+ "(succeeded)</li><li>Opera 30 (succeeded)</li></ul><br>"
+
+				+ "<b><u>April 15 2016, Release version 1.0.4 [ONLINE]</u></b><br>As the issue reported in Release 0.9.10 couldn't be reproduced so "
+				+ "far and as it can lead to problem with the new EUFAR server, the copy of the uploaded image in /tmp directory to feed the pdf "
+				+ "report has been canceled until further notice. All images will be stored in the 'tmp' directory of the ASMM package. Few java "
+				+ "libraries have been removed as they were finally useless in ASMM.<ul style='list-style-type:none'><li>FIXED:<ul><li>few typos "
+				+ "in the GUI were corrected.</li><li>fixed the aircraft selection panel if 'Other...' or 'Make a choice...' is selected after "
+				+ "an aircraft had been selected.</li><li>if a user create few new temporal periods, and decide to remove one, the number of the"
+				+ " period is not well updated.</li><li>few labels weren't well styled if the runCheckDefault function was invoked.</li><li>"
+				+ "fixed an issue with the function checking the content of each textbox.</li><li>fixed an issue with the function checking the "
+				+ "date of each datebox.</li><li>corrected fex dead links in the xml code.</li><li>corrected few styles linked to textarea.</li>"
+				+ "<li>aircraft information weren't well read if the aircraft wasn't found in the EMC database.</li>"
+				+ "</ul></li></ul><ul style='list-style-type:none'><li>MODIFIED:<ul><li>few comments were added for a better understanding in the "
+				+ "back-end functions.</li><li>EMC can now dedect if the server is the dev one or the production one.</li><li>Source Sans Pro "
+				+ "is now used in the pdf report template. All other fonts have been removed.</li><li>CSS styles for few elements were modified."
+				+ "</li><li>the function to read xml code has been rewritten for a better readability and performance.</li></ul></li></ul><br>"
+				+ "<b><u>February 16 2016, Release version 1.0.3 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
 				+ "<li>the link to the Standards and Protocols webpage on the EUFAR website was the old one and gave a 404 error. It has been "
 				+ "updated.</li></ul></li></ul><br>"
 				+ "<b><u>December 16 2015, Release version 1.0.2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul>"
