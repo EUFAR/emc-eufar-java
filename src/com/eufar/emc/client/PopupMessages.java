@@ -227,53 +227,6 @@ public class PopupMessages {
 	}
 	
 	
-	// display a warning to change the layout 
-	public static void layoutPanel() {
-		final DialogBox myOpenDialog = new DialogBox();
-		final VerticalPanel verticalPanel01 = new VerticalPanel();
-		final VerticalPanel verticalPanel02 = new VerticalPanel();
-		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
-		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-		final Image image = new Image("icons/preferences_popup_icon.png");
-		final Label label = new Label("You have the possibility to change the global layout to a browser-like horizontal layout. Once the new "
-				+ "layout is selected, you have to reload EMC to revert back to the original layout.");
-		final Button submitButton = new Button("Ok", new ClickHandler() {			
-			@Override
-			public void onClick(ClickEvent event) {
-				myOpenDialog.hide();
-				GuiModification.changeLayout();
-			}
-		});
-		final Button cancelButton = new Button("Cancel", new ClickHandler() {			
-			@Override
-			public void onClick(ClickEvent event) {
-				myOpenDialog.hide();
-			}
-		});
-		myOpenDialog.setGlassEnabled(true);
-		myOpenDialog.add(verticalPanel02);
-		verticalPanel02.add(horizontalPanel01);
-		horizontalPanel01.add(image);
-		horizontalPanel01.add(verticalPanel01);
-		verticalPanel01.add(label);
-		horizontalPanel02.add(submitButton);
-		horizontalPanel02.add(cancelButton);
-		label.setStyleName("popupText");
-		verticalPanel02.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
-		submitButton.getElement().setAttribute("style", "margin-left:20px !important; font-family: MyFontBold !important; font-size: "
-				+ "14px !important;");
-		cancelButton.getElement().setAttribute("style", "margin-left:140px !important; font-family: MyFontBold !important; font-size: "
-				+ "14px !important;");
-		horizontalPanel02.getElement().setAttribute("style", "margin-top:30px !important; margin-bottom:20px !important;");
-		verticalPanel01.add(horizontalPanel02);
-		myOpenDialog.setSize("350px", "130px");
-		myOpenDialog.setModal(true);
-		myOpenDialog.center();
-		myOpenDialog.setStyleName("myUploadBox");
-	}
-	
-	
 	// save the current work in an xml file (a new or existing one)
 	public static void saveFile(final String string) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Saving function invoked...");
@@ -812,10 +765,9 @@ public class PopupMessages {
 				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
 				+ "(succeeded)</li><li>Opera 30 (succeeded)</li></ul><br>"
 
-				+ "<b><u>April 15 2016, Release version 1.0.4 [ONLINE]</u></b><br>As the issue reported in Release 0.9.10 couldn't be reproduced so "
-				+ "far and as it can lead to problem with the new EUFAR server, the copy of the uploaded image in /tmp directory to feed the pdf "
-				+ "report has been canceled until further notice. All images will be stored in the 'tmp' directory of the ASMM package. Few java "
-				+ "libraries have been removed as they were finally useless in ASMM.<ul style='list-style-type:none'><li>FIXED:<ul><li>few typos "
+				+ "<b><u>May 27 2016, Release version 1.0.5 [ONLINE]</u></b><br>The style used in ASMM has been modified and harmonized to "
+				+ "comply with the EUFAR website style.<br><br>"
+				+ "<b><u>April 15 2016, Release version 1.0.4 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul><li>few typos "
 				+ "in the GUI were corrected.</li><li>fixed the aircraft selection panel if 'Other...' or 'Make a choice...' is selected after "
 				+ "an aircraft had been selected.</li><li>if a user create few new temporal periods, and decide to remove one, the number of the"
 				+ " period is not well updated.</li><li>few labels weren't well styled if the runCheckDefault function was invoked.</li><li>"

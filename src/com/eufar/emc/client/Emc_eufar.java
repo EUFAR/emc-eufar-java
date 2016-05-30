@@ -20,8 +20,6 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.UmbrellaException;
@@ -73,7 +71,7 @@ public class Emc_eufar implements EntryPoint {
 	private HashMap<TextBoxBase, String> correctField = Resources.correctField();
 	private HashMap<DateBox, Label> correctDate = Resources.correctDate();
 	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private String emcVersion = new String("v1.0.4 (2016-04-15)");
+	private String emcVersion = new String("v1.1.0 (2016-05-30)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.5.2");
 	private String javaVersion = new String("1.7.0.79");
@@ -86,24 +84,14 @@ public class Emc_eufar implements EntryPoint {
 
 	// Main window items initialization
 	public static MenuBar mainMenu = new MenuBar();
+	private MenuBar emcMenu = new MenuBar(true);
 	private MenuBar aboutMenu = new MenuBar(true);
 	private MenuBar fileMenu = new MenuBar(true);
-	private DockLayoutPanel dockPanel = new DockLayoutPanel(Unit.PX);
 	public static DockLayoutPanel subDockPanel = new DockLayoutPanel(Unit.PX);
 	public static StackLayoutPanel stackPanel = new StackLayoutPanel(Unit.PX);
-	public static ScrollableTabLayoutPanel tabPanel = new ScrollableTabLayoutPanel(30, Unit.PX);
+	public static ScrollableTabLayoutPanel tabPanel = new ScrollableTabLayoutPanel(33, Unit.PX);
 	public static String myFileName = new String("");
-	private String imageNew = "<img src='icons/new_menu_icon.png'/>";
-	private String imageOpen = "<img src='icons/open_menu_icon.png'/>";
-	private String imageSave = "<img src='icons/save_menu_icon.png'/>";
-	private String imageAbout = "<img src='icons/about_emc_menu_icon.png'/>";
-	private String imageStandard = "<img src='icons/inspire_menu_icon.png'/>";
-	private String imageEufar = "<img src='icons/eufar_menu_icon.png'/>";
-	private String imageExit = "<img src='icons/exit_menu_icon.png'/>";
-	private String imageConf = "<img src='icons/preferences_menu_icon.png'/>";
-	private String imageLog = "<img src='icons/changelog_menu_icon.png'/>";
-	private String imageReload = "<img src='icons/reload_menu_icon.png'/>";
-	private MenuBar confMenu = new MenuBar(true);
+	private String imageEMC = "<img src='icons/emc_menu_item.png' height='20' width='210'/>";
 
 
 	// Identification items
@@ -113,6 +101,12 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel horizontalPanel04 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel05 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel06 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel67 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel68 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel21 = new VerticalPanel();
+	private Label identMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label identPathLab = new Label(">");
+	private Label identPathLab2 = new Label("Identification");
 	public static Label identTitleLab = new Label("Project acronym:");
 	public static Label identAbstractLab = new Label("Project abstract:");
 	private Label identTypeLab = new Label("Resource type:");
@@ -134,13 +128,19 @@ public class Emc_eufar implements EntryPoint {
 	private PushButton idLocatorInfo = Elements.addInfoButton("idLocator");
 	private PushButton idIdentifierInfo = Elements.addInfoButton("idIdentifier");
 	private PushButton idLanguageInfo = Elements.addInfoButton("idLanguage");
-	public static ScrollPanel idScroll = new ScrollPanel(idGrid);
+	public static ScrollPanel idScroll = new ScrollPanel(verticalPanel21);
 
 
 	// Classification items
 	public static VerticalPanel verticalPanel01 = new VerticalPanel();
 	public static VerticalPanel verticalPanel02 = new VerticalPanel();
 	public static HorizontalPanel horizontalPanel07 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel69 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel70 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel22 = new VerticalPanel();
+	private Label classMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label classPathLab = new Label(">");
+	private Label classPathLab2 = new Label("Classification");
 	private PushButton classCategoriesInfo = Elements.addInfoButton("Categories");
 	public static Label classCategoriesLab = new Label("Topic Categories:");
 	private HorizontalPanel classBiotaCheck = Elements.checkBox("Biota");
@@ -162,7 +162,7 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel classStructureCheck = Elements.checkBox("Structure");
 	private HorizontalPanel classTransportationCheck = Elements.checkBox("Transportation");
 	private HorizontalPanel classCommunicationCheck = Elements.checkBox("Utilities / Communication");
-	public static ScrollPanel clScroll = new ScrollPanel(horizontalPanel07);
+	public static ScrollPanel clScroll = new ScrollPanel(verticalPanel22);
 
 
 	// Keywords items
@@ -171,6 +171,12 @@ public class Emc_eufar implements EntryPoint {
 	private VerticalPanel verticalPanel04 = new VerticalPanel();
 	private VerticalPanel verticalPanel05 = new VerticalPanel();
 	private VerticalPanel verticalPanel06 = new VerticalPanel();
+	private HorizontalPanel horizontalPanel71 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel72 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel23 = new VerticalPanel();
+	private Label keyMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label keyPathLab = new Label(">");
+	private Label keyPathLab2 = new Label("Keywords");
 	private PushButton keyInfoButton = Elements.addInfoButton("Keywords");
 	public static Label keyAgricultureLab = new Label("Agriculture:");
 	private Label keyAtmosphereLab = new Label("Atmosphere:");
@@ -242,7 +248,7 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel classThGroundCheck = Elements.checkBox("Ground water");
 	private HorizontalPanel classThSurfaceCheck = Elements.checkBox("Surface water");
 	private HorizontalPanel classThChemistryCheck = Elements.checkBox("Water quality / chemistry");
-	public static ScrollPanel kwScroll = new ScrollPanel(horizontalPanel08);
+	public static ScrollPanel kwScroll = new ScrollPanel(verticalPanel23);
 
 
 	// Aircraft and insutruments items
@@ -260,6 +266,12 @@ public class Emc_eufar implements EntryPoint {
 	public static HorizontalPanel horizontalPanel63 = new HorizontalPanel();
 	public static HorizontalPanel horizontalPanel64 = new HorizontalPanel();
 	public static HorizontalPanel horizontalPanel65 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel73 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel74 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel24 = new VerticalPanel();
+	private Label aiMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label aiPathLab = new Label(">");
+	private Label aiPathLab2 = new Label("Aircraft & Instruments");
 	public static FlexTable airInstrumentTable = new FlexTable();
 	private PushButton airPlatformInfo = Elements.addInfoButton("aiAircraft");
 	private PushButton airInstrumentInfo = Elements.addInfoButton("aiInstrument");
@@ -294,7 +306,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<String> manufacturerTabList = new ArrayList<String>();
 	public static Image airAircraftImg = new Image("eufar_aircraft/logo_eufar_emc.png");
 	public static String[][] airAircraftInfo = Resources.aircraftInfo();
-	public static ScrollPanel aiScroll = new ScrollPanel(verticalPanel10);
+	public static ScrollPanel aiScroll = new ScrollPanel(verticalPanel24);
 
 
 	// Geographic information items
@@ -302,6 +314,12 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel horizontalPanel13 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel16 = new HorizontalPanel();
 	public static HorizontalPanel horizontalPanel17 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel75 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel76 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel25 = new VerticalPanel();
+	private Label geoMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label geoPathLab = new Label(">");
+	private Label geoPathLab2 = new Label("Geographic Information");
 	private PushButton geoLocationInfo = Elements.addInfoButton("giLocation");
 	private PushButton geoCoordInfo = Elements.addInfoButton("giBox"); 
 	private PushButton geoUnitInfo = Elements.addInfoButton("giUnit");
@@ -328,12 +346,18 @@ public class Emc_eufar implements EntryPoint {
 	private Image geoFollowImage = new Image("icons/fwd_arrow_small.png");
 	private Image geoCoordImage = new Image("icons/EMC_globe_terrestre.png");
 	private FlexTable geoCoordTab = new FlexTable();
-	public static ScrollPanel giScroll = new ScrollPanel(verticalPanel11);
+	public static ScrollPanel giScroll = new ScrollPanel(verticalPanel25);
 
 
 	// Temporal Reference items
 	public static VerticalPanel verticalPanel13 = new VerticalPanel();
 	private HorizontalPanel horizontalPanel21 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel77 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel78 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel26 = new VerticalPanel();
+	private Label refMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label refPathLab = new Label(">");
+	private Label refPathLab2 = new Label("Temporal Reference");
 	private PushButton refPublicationInfo = Elements.addInfoButton("trPublication");
 	private PushButton refRevisionInfo = Elements.addInfoButton("trRevision");
 	private PushButton refCreationInfo = Elements.addInfoButton("trCreation");
@@ -354,7 +378,7 @@ public class Emc_eufar implements EntryPoint {
 	public static FlexTable refDateTab = new FlexTable();
 	public static FlexTable refPhaseTab = new FlexTable();
 	public static PushButton refDelButton = new PushButton(new Image("icons/empty_icon_small.png"));
-	public static ScrollPanel trScroll = new ScrollPanel(verticalPanel13);
+	public static ScrollPanel trScroll = new ScrollPanel(verticalPanel26);
 
 
 	// Quality and Validity items
@@ -392,6 +416,12 @@ public class Emc_eufar implements EntryPoint {
 	public static HorizontalPanel horizontalPanel57 = new HorizontalPanel();
 	public static HorizontalPanel horizontalPanel58 = new HorizontalPanel();
 	public static HorizontalPanel horizontalPanel59 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel79 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel80 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel27 = new VerticalPanel();
+	private Label qvMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label qvPathLab = new Label(">");
+	private Label qvPathLab2 = new Label("Quality and Validity");
 	public static HorizontalPanel imageRad = Elements.radioButton("radioGrp1","Earth observation/Remote sensing data");
 	public static HorizontalPanel insituRad  = Elements.radioButton("radioGrp1","Atmospheric/In-situ data");
 	public static HorizontalPanel insituChk01Y = Elements.radioButton("radioGrp19","Yes");
@@ -522,11 +552,17 @@ public class Emc_eufar implements EntryPoint {
 	public static TextArea insituAssumptionAre = new TextArea();
 	public static FlexTable insituCalTab = new FlexTable();
 	public static FlexTable insituFlagTab = new FlexTable();
-	public static ScrollPanel qvScroll = new ScrollPanel(verticalPanel14);
+	public static ScrollPanel qvScroll = new ScrollPanel(verticalPanel27);
 
 
 	// Access and Use Constraints items
 	public static VerticalPanel verticalPanel15 = new VerticalPanel();
+	private HorizontalPanel horizontalPanel81 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel82 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel28 = new VerticalPanel();
+	private Label useMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label usePathLab = new Label(">");
+	private Label usePathLab2 = new Label("Access and Use Constraints");
 	public static Label useConditionsLab = new Label("Conditions applying to access and use:");
 	public static Label useLimitationsLab = new Label("Limitations on public access:");
 	public static TextArea useConditionsBox = new TextArea();
@@ -543,11 +579,17 @@ public class Emc_eufar implements EntryPoint {
 	public static PushButton auDelButton2 = new PushButton(new Image("icons/empty_icon_small.png"));
 	public static PushButton usePlusButton2 = Elements.plusButton("limitation");
 	public static PushButton usePlusButton1 = Elements.plusButton("condition");
-	public static ScrollPanel auScroll = new ScrollPanel(verticalPanel15);
+	public static ScrollPanel auScroll = new ScrollPanel(verticalPanel28);
 
 
 	// Responsible Organisations items
 	public static HorizontalPanel horizontalPanel27 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel83 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel84 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel29 = new VerticalPanel();
+	private Label orgMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label orgPathLab = new Label(">");
+	private Label orgPathLab2 = new Label("Access and Use Constraints");
 	private PushButton roPartyInfo = Elements.addInfoButton("roParty");
 	private PushButton roEmailInfo = Elements.addInfoButton("roEmail");
 	private PushButton roRoleInfo = Elements.addInfoButton("roRole");
@@ -565,7 +607,7 @@ public class Emc_eufar implements EntryPoint {
 	public static FlexTable orgPartyTab = new FlexTable();
 	public static FlexTable orgAddTab = new FlexTable();
 	public static PushButton orgDelButton = new PushButton(new Image("icons/empty_icon_small.png"));
-	public static ScrollPanel roScroll = new ScrollPanel(orgAddTab);
+	public static ScrollPanel roScroll = new ScrollPanel(verticalPanel29);
 
 
 	// Metadata on Metadata items
@@ -573,6 +615,12 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel horizontalPanel28 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel29 = new HorizontalPanel();
 	public static HorizontalPanel horizontalPanel66 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel85 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel86 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel30 = new VerticalPanel();
+	private Label metMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label metPathLab = new Label(">");
+	private Label metPathLab2 = new Label("Access and Use Constraints");
 	private PushButton metDateInfo = Elements.addInfoButton("mmDate");
 	private PushButton metLanguageInfo = Elements.addInfoButton("mmLanguage");
 	private PushButton metPlusButton = Elements.plusButton("metadata");
@@ -593,9 +641,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<TextBox> metNameLst = new ArrayList<TextBox>();
 	public static ArrayList<TextBox> metEmailLst = new ArrayList<TextBox>();
 	public static PushButton mmDelButton = new PushButton(new Image("icons/empty_icon_small.png"));
-	public static ScrollPanel mmScroll = new ScrollPanel(verticalPanel16);
-
-	
+	public static ScrollPanel mmScroll = new ScrollPanel(verticalPanel30);
 	public void onModuleLoad() {
 		GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
 			public void onUncaughtException(Throwable e) {
@@ -666,15 +712,6 @@ public class Emc_eufar implements EntryPoint {
 			}
 		};
 		
-		Command confLayout = new Command() {
-			public void execute() {
-				if (!tabLayout) {
-					PopupMessages.layoutPanel();
-				} else {
-					rootLogger.log(Level.INFO, "Layout already changed");
-				}
-			}
-		};
 		
 		Command displayLog = new Command() {
 			public void execute() {
@@ -682,29 +719,21 @@ public class Emc_eufar implements EntryPoint {
 				PopupMessages.changelogPanel();
 			}
 		};
-		
-		Command reload = new Command() {
-			public void execute() {
-				Utilities.reloadGUI();
-			}
-		};
 
 
 		// Assemble the Menu panel
-		aboutMenu.addItem(new MenuItem(imageAbout,true,aboutWindow));
-		aboutMenu.addItem(new MenuItem(imageStandard,true,aboutStandard));
-		aboutMenu.addItem(new MenuItem(imageEufar,true,launchN7SPPage));
+		mainMenu.addItem(new MenuItem(imageEMC,true,emcMenu));
+		emcMenu.addItem("File", fileMenu);
+		emcMenu.addItem("About", aboutMenu);
+		aboutMenu.addItem("EUFAR Metadata Creator",aboutWindow);
+		aboutMenu.addItem("INSPIRE XML standard",aboutStandard);
+		aboutMenu.addItem("EUFAR N7SP",launchN7SPPage);
 		aboutMenu.addSeparator();
-		aboutMenu.addItem(new MenuItem(imageLog,true,displayLog));
-		fileMenu.addItem(new MenuItem(imageNew,true,newFile));
-		fileMenu.addItem(new MenuItem(imageOpen,true,openFile));
-		fileMenu.addItem(new MenuItem(imageSave,true,saveFile));
-		fileMenu.addItem(new MenuItem(imageExit,true,exitFile));
-		confMenu.addItem(new MenuItem(imageConf,true,confLayout));
-		confMenu.addItem(new MenuItem(imageReload,true,reload));
-		mainMenu.addItem("File", fileMenu);
-		mainMenu.addItem("GUI", confMenu);
-		mainMenu.addItem("About", aboutMenu);
+		aboutMenu.addItem("Changelog",displayLog);
+		fileMenu.addItem("New",newFile);
+		fileMenu.addItem("Open",openFile);
+		fileMenu.addItem("Save",saveFile);
+		fileMenu.addItem("Exit",exitFile);
 		rootLogger.log(Level.INFO, "Menu initialized");
 		
 		
@@ -727,6 +756,13 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel05.add(idIdentifierInfo);
 		horizontalPanel06.add(identLanguageLst);
 		horizontalPanel06.add(idLanguageInfo);
+		horizontalPanel67.add(identMainLab);
+		horizontalPanel67.add(identPathLab);
+		horizontalPanel67.add(identPathLab2);
+		horizontalPanel68.add(new HTML("<hr  style=\"width:950px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel21.add(horizontalPanel67);
+		verticalPanel21.add(horizontalPanel68);
+		verticalPanel21.add(idGrid);
 		idGrid.setWidget(0, 0, identTitleLab);
 		idGrid.setWidget(0, 1, horizontalPanel01);
 		idGrid.setWidget(1, 0, identAbstractLab);
@@ -755,13 +791,26 @@ public class Emc_eufar implements EntryPoint {
 		identIdentifierLab.setStyleName("identTextLabel");
 		identLanguageLab.setStyleName("identTextLabel");
 		idGrid.setStyleName("identGrid");
+		identMainLab.setStyleName("identMainText");
+		identPathLab.setStyleName("identPathText");
+		identPathLab2.setStyleName("identPathText2");
+		horizontalPanel68.setStyleName("identLine");
 		identLanguageLst.setName("identLanguageList");
 		identTypeLst.setName("identTypeList");
 		identLocatorBox.setText("http://browse.ceda.ac.uk/browse/badc/eufar/docs/00eufararchivecontents.html");
+		idGrid.getElement().setAttribute("style", "background: white !important;");
 		rootLogger.log(Level.INFO, "Identification panel initialized");
 
 
 		// Assemble Classification panel
+		
+		horizontalPanel69.add(classMainLab);
+		horizontalPanel69.add(classPathLab);
+		horizontalPanel69.add(classPathLab2);
+		horizontalPanel70.add(new HTML("<hr  style=\"width:950px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel22.add(horizontalPanel69);
+		verticalPanel22.add(horizontalPanel70);
+		verticalPanel22.add(horizontalPanel07);
 		horizontalPanel07.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel07.setSpacing(20);
 		horizontalPanel07.add(classCategoriesLab);
@@ -809,11 +858,24 @@ public class Emc_eufar implements EntryPoint {
 		classPlanningCheck.setStyleName("classCheckBox");
 		verticalPanel01.setSpacing(10);
 		verticalPanel02.setSpacing(10);
+		horizontalPanel07.setStyleName("classHorizontalPanel");
 		classCategoriesInfo.getElement().setAttribute("style", "margin-left: 40px !important;");
+		classMainLab.setStyleName("identMainText");
+		classPathLab.setStyleName("identPathText");
+		classPathLab2.setStyleName("identPathText2");
+		horizontalPanel70.setStyleName("identLine");
 		rootLogger.log(Level.INFO, "Classification panel initialized");
 
 
 		// Assemble Keywords panel
+		
+		horizontalPanel71.add(keyMainLab);
+		horizontalPanel71.add(keyPathLab);
+		horizontalPanel71.add(keyPathLab2);
+		horizontalPanel72.add(new HTML("<hr  style=\"width:1100px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel23.add(horizontalPanel71);
+		verticalPanel23.add(horizontalPanel72);
+		verticalPanel23.add(horizontalPanel08);
 		verticalPanel03.add(keyAgricultureLab);
 		verticalPanel03.add(classAgEngineeringCheck);
 		verticalPanel03.add(classAgPlantCheck);
@@ -884,66 +946,66 @@ public class Emc_eufar implements EntryPoint {
 		verticalPanel06.add(classThGroundCheck);
 		verticalPanel06.add(classThSurfaceCheck);
 		verticalPanel06.add(classThChemistryCheck);
-		classAgEngineeringCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAgPlantCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAgFoodCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAgForestCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAgSoilsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtAerosolsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtAirCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtAltitudeCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtChemistryCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtElectricityCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtPhenomenaCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtPressureCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtRadiationCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtTemperatureCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtVapourCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtWindsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtCloudsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classAtPrecipitationCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classBiDynamicsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classBiEcosystemsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classBiVegetationCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classCrGroundCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classCrGlaciersCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classCrIceCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classCrSnowCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsErosionCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsGeomorphologyCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsTemperatureCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsCoverCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsLandscapeCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsSurfaceCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classLsTopographyCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcBathymetryCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcProcessesCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcEnvironmentCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcGeophysicsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcWavesCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcWindsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcTopographyCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcTidesCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classOcQualityCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSeGeodeticsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSeGeomagnetismCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSeLandformsCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSeGravityCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpGammaCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpInfraredCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpLidarCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpMicrowaveCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpRadarCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpRadioCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpUltravioletCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpVisibleCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classSpXrayCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classInIonosphereCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classInActivityCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classInParticleCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classThGroundCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classThSurfaceCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
-		classThChemistryCheck.getElement().setAttribute("style", "margin-left: 40px !important;");
+		classAgEngineeringCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAgPlantCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAgFoodCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAgForestCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAgSoilsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtAerosolsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtAirCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtAltitudeCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtChemistryCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtElectricityCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtPhenomenaCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtPressureCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtRadiationCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtTemperatureCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtVapourCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtWindsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtCloudsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classAtPrecipitationCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classBiDynamicsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classBiEcosystemsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classBiVegetationCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classCrGroundCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classCrGlaciersCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classCrIceCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classCrSnowCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsErosionCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsGeomorphologyCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsTemperatureCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsCoverCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsLandscapeCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsSurfaceCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classLsTopographyCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcBathymetryCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcProcessesCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcEnvironmentCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcGeophysicsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcWavesCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcWindsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcTopographyCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcTidesCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classOcQualityCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSeGeodeticsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSeGeomagnetismCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSeLandformsCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSeGravityCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpGammaCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpInfraredCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpLidarCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpMicrowaveCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpRadarCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpRadioCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpUltravioletCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpVisibleCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classSpXrayCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classInIonosphereCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classInActivityCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classInParticleCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classThGroundCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classThSurfaceCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
+		classThChemistryCheck.getElement().setAttribute("style", "margin-left: 40px !important; color: #4f4f4f !important;");
 		keyAgricultureLab.setStyleName("keyTitleTextLabel2");
 		keyAtmosphereLab.setStyleName("keyTitleTextLabel");
 		keyBiosphereLab.setStyleName("keyTitleTextLabel");
@@ -965,10 +1027,23 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel08.add(verticalPanel06);
 		horizontalPanel08.add(keyInfoButton);
 		horizontalPanel08.setSpacing(20);
+		horizontalPanel08.setStyleName("keyHorizontalPanel");
+		keyMainLab.setStyleName("identMainText");
+		keyPathLab.setStyleName("identPathText");
+		keyPathLab2.setStyleName("identPathText2");
+		horizontalPanel72.setStyleName("identLine");
 		rootLogger.log(Level.INFO, "Keywords panel initialized");
 
 
 		// Assemble Aircraft and instruments panel
+		
+		horizontalPanel73.add(aiMainLab);
+		horizontalPanel73.add(aiPathLab);
+		horizontalPanel73.add(aiPathLab2);
+		horizontalPanel74.add(new HTML("<hr  style=\"width:1100px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel24.add(horizontalPanel73);
+		verticalPanel24.add(horizontalPanel74);
+		verticalPanel24.add(verticalPanel10);
 		Utilities.populateListBox(airAircraftLst, aircraftList, 0);
 		Utilities.populateListBox(airInstrumentLst, instrumentMap, 0);
 		horizontalPanel09.add(airAircraftLab);
@@ -1006,7 +1081,8 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel11.add(verticalPanel08);
 		horizontalPanel11.add(verticalPanel09);
 		verticalPanel10.add(horizontalPanel11);
-		verticalPanel10.add(new HTML("<hr>"));
+		verticalPanel10.add(new HTML("<hr  style=\"width:1050px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:20px;\" />"));
 		horizontalPanel12.add(airInstrumentLab);
 		horizontalPanel12.add(airInstrumentLst);
 		horizontalPanel12.add(airPlusButton);
@@ -1015,6 +1091,7 @@ public class Emc_eufar implements EntryPoint {
 		verticalPanel10.add(airInstrumentTable);
 		airInstrumentTable.setCellSpacing(10);
 		verticalPanel10.setStyleName("airVerticalPanel");
+		verticalPanel24.setStyleName("airVerticalPanel2");
 		airAircraftLab.setStyleName("airTitleTextLabel");
 		airAircraftLst.setStyleName("airTextList");
 		horizontalPanel10.setStyleName("airHorizontalPanel");
@@ -1032,6 +1109,14 @@ public class Emc_eufar implements EntryPoint {
 		airInstrumentTable.getElement().setAttribute("style","margin-left: 40px;");
 		airInstrumentLst.setStyleName("airTextList2");
 		airInstrumentLab.setStyleName("airTitleTextLabel");
+		aiMainLab.setStyleName("identMainText");
+		aiPathLab.setStyleName("identPathText");
+		aiPathLab2.setStyleName("identPathText2");
+		horizontalPanel74.setStyleName("identLine");
+		airCopyrightInfo.setStyleName("airCopyrightInfo");
+		airPlatformInfo.getElement().setAttribute("style","margin-top: 13px;");
+		airPlusButton.getElement().setAttribute("style","margin-top: 13px;");
+		airInstrumentInfo.getElement().setAttribute("style","margin-top: 13px;");
 		airAircraftLst.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
@@ -1048,6 +1133,13 @@ public class Emc_eufar implements EntryPoint {
 
 
 		// Assemble Geographic Information panel
+		horizontalPanel75.add(geoMainLab);
+		horizontalPanel75.add(geoPathLab);
+		horizontalPanel75.add(geoPathLab2);
+		horizontalPanel76.add(new HTML("<hr style=\"width:800px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel25.add(horizontalPanel75);
+		verticalPanel25.add(horizontalPanel76);
+		verticalPanel25.add(verticalPanel11);
 		Utilities.populateListBox(geoUnitLst, unitList, 0);
 		geoCoordTab.setWidget(1,0,geoBoundingLab);
 		geoCoordTab.setWidget(0,2,geoNorthBox);
@@ -1097,6 +1189,10 @@ public class Emc_eufar implements EntryPoint {
 		geoCoordImage.getElement().setAttribute("style", "margin-top: 5px !important; height: 300px !important; width: 298 px !important;");
 		geoCoordTab.getElement().setAttribute("style", "margin-top: 20px !important; margin-bottom: 30px !important;");
 		geoUnitInfo.getElement().setAttribute("style", "margin-top: 1px !important;");
+		horizontalPanel76.setStyleName("identLine");
+		geoMainLab.setStyleName("identMainText");
+		geoPathLab.setStyleName("identPathText");
+		geoPathLab2.setStyleName("identPathText2");
 		geoResolutionLst.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
@@ -1113,6 +1209,13 @@ public class Emc_eufar implements EntryPoint {
 
 
 		// Assemble Temporal Reference panel
+		horizontalPanel77.add(refMainLab);
+		horizontalPanel77.add(refPathLab);
+		horizontalPanel77.add(refPathLab2);
+		horizontalPanel78.add(new HTML("<hr style=\"width:650px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel26.add(horizontalPanel77);
+		verticalPanel26.add(horizontalPanel78);
+		verticalPanel26.add(verticalPanel13);
 		refPublicationDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
 		refPublicationDat.setValue(new Date());
 		refRevisionDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
@@ -1130,9 +1233,8 @@ public class Emc_eufar implements EntryPoint {
 		refDateTab.setWidget(2, 2, refCreationInfo);
 		refDateTab.setCellSpacing(10);
 		verticalPanel13.add(refDateTab);
-		verticalPanel13.add(new HTML("<br>"));
-		verticalPanel13.add(new HTML("<hr>"));
-		verticalPanel13.add(new HTML("<br>"));
+		verticalPanel13.add(new HTML("<hr  style=\"width:600px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		horizontalPanel21.add(refExtentLab);
 		refPhaseTab.setWidget(0, 0, refPhaseLab);
 		refPhaseTab.setWidget(0, 1, refStartDat);
@@ -1156,8 +1258,12 @@ public class Emc_eufar implements EntryPoint {
 		refCreationLab.setStyleName("refTextLabel");
 		refPlusButton.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 5px !important;");
 		refPlusInfo.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 5px !important;");
-		verticalPanel13.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 10px !important;");
+		verticalPanel13.setStyleName("refVerticalPanel");
 		verticalPanel13.add(horizontalPanel21);
+		horizontalPanel78.setStyleName("identLine");
+		refMainLab.setStyleName("identMainText");
+		refPathLab.setStyleName("identPathText");
+		refPathLab2.setStyleName("identPathText2");
 		Emc_eufar.refDelButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				refStartDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(
@@ -1179,6 +1285,13 @@ public class Emc_eufar implements EntryPoint {
 
 
 		// Quality and Validity panel
+		horizontalPanel79.add(qvMainLab);
+		horizontalPanel79.add(qvPathLab);
+		horizontalPanel79.add(qvPathLab2);
+		horizontalPanel80.add(new HTML("<hr style=\"width:1100px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel27.add(horizontalPanel79);
+		verticalPanel27.add(horizontalPanel80);
+		verticalPanel27.add(verticalPanel14);
 		Utilities.populateListBox(imageLevLst, levelList, 0);
 		Utilities.populateListBox(imageDCLst, DCList, 0);
 		imageRadDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
@@ -1194,11 +1307,22 @@ public class Emc_eufar implements EntryPoint {
 		verticalPanel14.add(verticalPanel17);
 		imageRad.setStyleName("qv_imageRad");
 		insituRad.setStyleName("qv_insituRad");
-		verticalPanel14.getElement().setAttribute("style", "margin: 20px 20px 20px 20px;");
+		verticalPanel14.setStyleName("qvVerticalPanel");
+		horizontalPanel80.setStyleName("identLine");
+		qvMainLab.setStyleName("identMainText");
+		qvPathLab.setStyleName("identPathText");
+		qvPathLab2.setStyleName("identPathText2");
 		rootLogger.log(Level.INFO, "Quality and Validity panel initialized");
 
 
 		// Access and Use Constraints panel
+		horizontalPanel81.add(useMainLab);
+		horizontalPanel81.add(usePathLab);
+		horizontalPanel81.add(usePathLab2);
+		horizontalPanel82.add(new HTML("<hr style=\"width:1200px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel28.add(horizontalPanel81);
+		verticalPanel28.add(horizontalPanel82);
+		verticalPanel28.add(verticalPanel15);
 		useConditionsAddTab.setWidget(0, 0, useConditionsBox);
 		useConditionsAddTab.setWidget(0, 1, auDelButton1);
 		auDelButton1.setEnabled(false);
@@ -1213,9 +1337,8 @@ public class Emc_eufar implements EntryPoint {
 		auCellFormatter1.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
 		auCellFormatter1.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
 		verticalPanel15.add(useConditionsTab);
-		verticalPanel15.add(new HTML("<br />"));
-		verticalPanel15.add(new HTML("<hr />"));
-		verticalPanel15.add(new HTML("<br />"));
+		verticalPanel15.add(new HTML("<hr  style=\"width:1150px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		useLimitationsAddTab.setWidget(0, 0, useLimitationsBox);
 		useLimitationsAddTab.setWidget(0, 1, auDelButton2);
 		auDelButton2.setEnabled(false);
@@ -1246,6 +1369,10 @@ public class Emc_eufar implements EntryPoint {
 		useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");
 		useLimitationsBox.setText("No limitations");
+		horizontalPanel82.setStyleName("identLine");
+		useMainLab.setStyleName("identMainText");
+		usePathLab.setStyleName("identPathText");
+		usePathLab2.setStyleName("identPathText2");
 		Emc_eufar.auDelButton1.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				useConditionsBox.setText(useConditionsLst.get(1).getText());
@@ -1276,6 +1403,13 @@ public class Emc_eufar implements EntryPoint {
 
 
 		// Assemble Responsible Organisations panel
+		horizontalPanel83.add(orgMainLab);
+		horizontalPanel83.add(orgPathLab);
+		horizontalPanel83.add(orgPathLab2);
+		horizontalPanel84.add(new HTML("<hr  style=\"width:600px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel29.add(horizontalPanel83);
+		verticalPanel29.add(horizontalPanel84);
+		verticalPanel29.add(orgAddTab);
 		Utilities.populateListBox(orgRoleLst, roleList, 5);
 		orgRoleLst.setName("orgRoleList");
 		orgPartyTab.setWidget(0, 0, orgPartyLab);
@@ -1305,6 +1439,10 @@ public class Emc_eufar implements EntryPoint {
 		orgPartyLst.add(orgPartyBox);
 		orgRole2Lst.add(orgRoleLst);
 		orgEmailLst.add(orgEmailBox);
+		horizontalPanel84.setStyleName("identLine");
+		orgMainLab.setStyleName("identMainText");
+		orgPathLab.setStyleName("identPathText");
+		orgPathLab2.setStyleName("identPathText2");
 		Emc_eufar.orgDelButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				orgPartyBox.setText(orgPartyLst.get(1).getText());
@@ -1331,6 +1469,13 @@ public class Emc_eufar implements EntryPoint {
 
 
 		// Assemble Metadata on Metadata panel
+		horizontalPanel85.add(metMainLab);
+		horizontalPanel85.add(metPathLab);
+		horizontalPanel85.add(metPathLab2);
+		horizontalPanel86.add(new HTML("<hr  style=\"width:700px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel30.add(horizontalPanel85);
+		verticalPanel30.add(horizontalPanel86);
+		verticalPanel30.add(verticalPanel16);
 		metDateDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
 		metDateDat.setValue(new Date());
 		Utilities.populateListBox(metLanguageLst, languageList, 4);
@@ -1343,8 +1488,8 @@ public class Emc_eufar implements EntryPoint {
 		metMetadataTab.setWidget(1, 2, metLanguageInfo);
 		metMetadataTab.setCellSpacing(10);
 		verticalPanel16.add(metMetadataTab);
-		verticalPanel16.add(new HTML("<hr />"));
-		verticalPanel16.add(new HTML("<br />"));
+		verticalPanel16.add(new HTML("<hr  style=\"width:650px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		metContactTab.setWidget(0, 0, metContactLab);
 		metPartyTab.setWidget(0, 0, metNameLab);
 		metPartyTab.setWidget(0, 1, metNameBox);
@@ -1363,8 +1508,8 @@ public class Emc_eufar implements EntryPoint {
 		metCellFormatter.setVerticalAlignment(0, 1, HasVerticalAlignment.ALIGN_TOP);
 		metCellFormatter.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
 		metCellFormatter.setVerticalAlignment(0, 3, HasVerticalAlignment.ALIGN_TOP);
-		metPlusButton.getElement().setAttribute("style", "margin-top: 20px !important;");
-		metPartyInfo.getElement().setAttribute("style", "margin-top: 20px !important;");
+		metPlusButton.getElement().setAttribute("style", "margin-top: 21px !important;");
+		metPartyInfo.getElement().setAttribute("style", "margin-top: 21px !important;");
 		verticalPanel16.add(metContactTab);
 		metDateLab.setStyleName("metTextLabel");
 		metLanguageLab.setStyleName("metTextLabel");
@@ -1380,6 +1525,10 @@ public class Emc_eufar implements EntryPoint {
 		mmDelButton.setStyleName("emptyButton");
 		metNameLst.add(metNameBox);
 		metEmailLst.add(metEmailBox);
+		horizontalPanel86.setStyleName("identLine");
+		metMainLab.setStyleName("identMainText");
+		metPathLab.setStyleName("identPathText");
+		metPathLab2.setStyleName("identPathText2");
 		Emc_eufar.mmDelButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				metNameBox.setText(Emc_eufar.metNameLst.get(1).getText());
@@ -1398,56 +1547,33 @@ public class Emc_eufar implements EntryPoint {
 		rootLogger.log(Level.INFO, "Metadata on Metadata panel initialized");
 
 		
-		// Screen size detection
-		int screenHeight = Utilities.getScreenHeight();
-		int screenWidth = Utilities.getScreenWidth();
-		float ratio = (float) screenWidth / screenHeight;
-		if (screenHeight < 1050 & ratio > 1.5 & ratio < 1.8) {
-			GuiModification.changeLayout();
-		} 
-		else {
-
-			// Associate to stack panel
-			stackPanel.add(idScroll,"Identification", 25);
-			stackPanel.add(clScroll,"Classification", 25);
-			stackPanel.add(kwScroll,"Keywords", 25);
-			stackPanel.add(aiScroll,"Aircraft and Instruments", 25);
-			stackPanel.add(giScroll,"Geographic Information", 25);
-			stackPanel.add(trScroll,"Temporal Reference", 25);
-			stackPanel.add(qvScroll,"Quality and Validity", 25);
-			stackPanel.add(auScroll,"Access and Use Constraints", 25);
-			stackPanel.add(roScroll,"Responsible Organisations", 25);
-			stackPanel.add(mmScroll,"Metadata on Metadata", 25);
-			stackPanel.addSelectionHandler(new SelectionHandler<Integer>() {
-				@Override
-				public void onSelection(SelectionEvent<Integer> event) {
-					int selectedWidgetIndex = stackPanel.getVisibleIndex();
-					rootLogger.log(Level.INFO, "Selected tab index: " + Integer.toString(selectedWidgetIndex));
-				}
-			});
-	
-	
-			// Associate the Main panel with the HTML host page.
-			int screen_width = Window.getClientWidth();
-			int screen_height = Window.getClientHeight();
-			int expandPanel = 0;
-			expandPanel = (screen_width - 1166)/2;
-			if (expandPanel < 0) {
-				expandPanel = 0;
-			}
-			subDockPanel.addNorth(new HTML("<img src='icons/emc_top.jpg' alt='EUFAR Metadata Creator' height='80px' width='1166px'>"), 80);
-			subDockPanel.addNorth(mainMenu, 30);
-			dockPanel.addEast(new HTML("<img src='icons/emc_shadowr.png' alt='EUFAR Metadata Creator' width='30px' height='" + screen_height + "' align='left'"
-					+ ">"), expandPanel);
-			dockPanel.addWest(new HTML("<img src='icons/emc_shadowl.png' alt='EUFAR Metadata Creator' width='30px' height='" + screen_height + "' align='right'"
-					+ ">"), expandPanel);
-			dockPanel.setStyleName("dockPanel");
-			subDockPanel.add(stackPanel);
-			dockPanel.add(subDockPanel);
-			RootLayoutPanel rp=RootLayoutPanel.get();
-			rp.add(dockPanel);
-			Window.setTitle(titleString);
-		}
+		// Assemble
+		tabPanel.add(Emc_eufar.idScroll,"Identification");
+		tabPanel.add(Emc_eufar.clScroll,"Classification");
+		tabPanel.add(Emc_eufar.kwScroll,"Keywords");
+		tabPanel.add(Emc_eufar.aiScroll,"Aircraft and Instruments");
+		tabPanel.add(Emc_eufar.giScroll,"Geographic Information");
+		tabPanel.add(Emc_eufar.trScroll,"Temporal Reference");
+		tabPanel.add(Emc_eufar.qvScroll,"Quality and Validity");
+		tabPanel.add(Emc_eufar.auScroll,"Access and Use Constraints");
+		tabPanel.add(Emc_eufar.roScroll,"Responsible Organisations");
+		tabPanel.add(Emc_eufar.mmScroll,"Metadata on Metadata");
+		float ratio = 1920/77;
+		int screen_width = Window.getClientWidth();
+		float band_height = (float) screen_width/ratio;
+		float ratio2 = 1920/99;
+		float band_height2 = (float) screen_width/ratio2;
+		subDockPanel.addNorth(new HTML("<img src='icons/eufar_heading_1.jpg' alt='EUFAR Metadata Creator' height='" + 
+				Float.toString(band_height+1) + "px' width='" + Integer.toString(screen_width) + "px'>"), band_height);
+		subDockPanel.addNorth(Emc_eufar.mainMenu, 40);
+		subDockPanel.addNorth(new HTML("<img src='icons/eufar_heading_2.jpg' alt='EUFAR Metadata Creator' height='" + 
+				Float.toString(band_height2+1) + "px' width='" + Integer.toString(screen_width) + "px'>"), band_height2);
+		subDockPanel.add(Emc_eufar.tabPanel);
+		RootLayoutPanel rp=RootLayoutPanel.get();
+		rp.clear();
+		rp.add(subDockPanel);
+		tabLayout = true;
+		Window.setTitle(titleString);
 		rootLogger.log(Level.INFO, "Main panel initialized");
 
 

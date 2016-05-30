@@ -26,7 +26,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PushButton;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -34,39 +33,6 @@ import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 public class GuiModification {
-	
-	
-	// change layout
-	public static void changeLayout() {
-		if (!Emc_eufar.tabLayout) {		
-			Emc_eufar.tabPanel.clear();
-			Emc_eufar.tabPanel.add(Emc_eufar.idScroll,"Identification");
-			Emc_eufar.tabPanel.add(Emc_eufar.clScroll,"Classification");
-			Emc_eufar.tabPanel.add(Emc_eufar.kwScroll,"Keywords");
-			Emc_eufar.tabPanel.add(Emc_eufar.aiScroll,"Aircraft and Instruments");
-			Emc_eufar.tabPanel.add(Emc_eufar.giScroll,"Geographic Information");
-			Emc_eufar.tabPanel.add(Emc_eufar.trScroll,"Temporal Reference");
-			Emc_eufar.tabPanel.add(Emc_eufar.qvScroll,"Quality and Validity");
-			Emc_eufar.tabPanel.add(Emc_eufar.auScroll,"Access and Use Constraints");
-			Emc_eufar.tabPanel.add(Emc_eufar.roScroll,"Responsible Organisations");
-			Emc_eufar.tabPanel.add(Emc_eufar.mmScroll,"Metadata on Metadata");
-			float ratio = 1166/80;
-			int screen_width = Window.getClientWidth();
-			float band_height = (float) screen_width/ratio;
-			Emc_eufar.subDockPanel.clear();
-			Emc_eufar.subDockPanel.addNorth(new HTML("<img src='icons/emc_top.jpg' alt='EUFAR Metadata Creator' height='" + 
-					Float.toString(band_height) + "px' width='" + Integer.toString(screen_width) + "px'>"), band_height);
-			Emc_eufar.subDockPanel.addNorth(Emc_eufar.mainMenu, 30);
-			Emc_eufar.subDockPanel.add(Emc_eufar.tabPanel);
-			RootLayoutPanel rp=RootLayoutPanel.get();
-			rp.clear();
-			rp.add(Emc_eufar.subDockPanel);
-			Emc_eufar.tabLayout = true;
-			Emc_eufar.rootLogger.log(Level.INFO, "Layout changed");
-		} else {
-			Emc_eufar.rootLogger.log(Level.INFO, "Layout already changed");
-		}
-	}
 	
 	
 	// change the resolution type, scale or distance, in theGeographic Information tab
@@ -587,8 +553,8 @@ public class GuiModification {
 			@Override
 			public void onChange(ChangeEvent event) {Utilities.docIsModified();}
 		});
-		verticalPanel01.add(new HTML("<hr />"));
-		verticalPanel01.add(new HTML("<br />"));	
+		verticalPanel01.add(new HTML("<hr  style=\"width:475px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		Utilities.populateListBox(orgRoleLst, Emc_eufar.roleList, 5);
 		orgPartyTab.setWidget(0, 0, orgPartyLab);
 		orgPartyTab.setWidget(0, 1, orgPartyBox);
@@ -673,8 +639,8 @@ public class GuiModification {
 		});
 		orgPartyBox.setText(partyName);
 		orgEmailBox.setText(partyEmail);
-		verticalPanel01.add(new HTML("<hr />"));
-		verticalPanel01.add(new HTML("<br />"));	
+		verticalPanel01.add(new HTML("<hr  style=\"width:475px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		Utilities.populateListBox(orgRoleLst, Emc_eufar.roleList, 5);
 		Utilities.checkList(Emc_eufar.roleMap, partyRole, orgRoleLst);
 		orgPartyTab.setWidget(0, 0, orgPartyLab);
@@ -741,9 +707,8 @@ public class GuiModification {
 		final FlexTable metPartyTab = new FlexTable();
 		final Image image = new Image("icons/del_icon.png");
 		final PushButton delButton = new PushButton(image);
-		verticalPanel01.add(new HTML("<br />"));
-		verticalPanel01.add(new HTML("<hr />"));
-		verticalPanel01.add(new HTML("<br />"));
+		verticalPanel01.add(new HTML("<hr  style=\"width:300px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		metNameBox.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {Utilities.docIsModified();}
@@ -806,9 +771,8 @@ public class GuiModification {
 		final FlexTable metPartyTab = new FlexTable();
 		final Image image = new Image("icons/del_icon.png");
 		final PushButton delButton = new PushButton(image);
-		verticalPanel01.add(new HTML("<br />"));
-		verticalPanel01.add(new HTML("<hr />"));
-		verticalPanel01.add(new HTML("<br />"));
+		verticalPanel01.add(new HTML("<hr  style=\"width:300px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+				+ "margin-bottom:30px;\" />"));
 		metNameBox.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {Utilities.docIsModified();}
@@ -1053,10 +1017,11 @@ public class GuiModification {
 			Emc_eufar.horizontalPanel65.add(Emc_eufar.airInstManufacturerLab);
 			Emc_eufar.horizontalPanel65.add(Emc_eufar.airInstManufacturerBox);
 			Emc_eufar.horizontalPanel12.insert(Emc_eufar.horizontalPanel65, 2);
-			Emc_eufar.airInstNameBox.setStyleName("airTextBox2");
-			Emc_eufar.airInstManufacturerBox.setStyleName("airTextBox2");
+			Emc_eufar.airInstNameBox.setStyleName("airTextBox6");
+			Emc_eufar.airInstManufacturerBox.setStyleName("airTextBox6");
 			Emc_eufar.airInstNameLab.setStyleName("airTitleTextLabel2");
 			Emc_eufar.airInstManufacturerLab.setStyleName("airTitleTextLabel2");
+			Emc_eufar.horizontalPanel65.getElement().setAttribute("style","margin-top: 13px;");
 		} else {
 			if (Emc_eufar.horizontalPanel12.getWidgetCount() == 5) {
 				Emc_eufar.horizontalPanel12.remove(2);

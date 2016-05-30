@@ -172,9 +172,10 @@ public class Utilities {
 			}
 		} else {
 			for (int i = 0; i < 10; i++) {
-				Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: Black !important;");
+				Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: white !important;");
 			}
 		}
+		
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display set.");
 	}
 	
@@ -290,6 +291,7 @@ public class Utilities {
 		Emc_eufar.useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");
 		Emc_eufar.useLimitationsBox.setText("No limitations");
+		Emc_eufar.identLocatorBox.setText("http://browse.ceda.ac.uk/browse/badc/eufar/docs/00eufararchivecontents.html");
 		Emc_eufar.rootLogger.log(Level.INFO, "Cleaning all fields finished.");
 	}
 }
