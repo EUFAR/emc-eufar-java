@@ -4,6 +4,12 @@ body {
 
 
 @font-face {
+  font-family: MyFontHeader;
+  src: url(font/Cinzel-Regular.otf);
+}
+
+
+@font-face {
   font-family: MyFont;
   src: url(font/SourceSansPro-Regular.ttf);
 }
@@ -26,6 +32,7 @@ body {
   src: url(font/SourceSansPro-ExtraLight.ttf);
 }
 
+
 .emptyButton {
   width: 25px;
   height: 25px;
@@ -40,27 +47,90 @@ body {
 }
 
 
-.infoButton:hover {
-  background-color: rgb(238,238,238);
+.infoButton:active {
+  transform: translateX(1px) translateY(1px);
 }
 
 
+.headerTextLabel {
+  font-family: MyFontHeader;
+  color: #616265;
+  font-size: 28px;
+  margin-top: 26px;
+  font-weight: 400;
+  text-align: center
+}
+
+
+.headerHorizontalPanel {
+  height: 80px;
+  width: 100%;
+  background: white;
+  background-image: url(icons/logo_small_header.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+
+.menuMainImage {
+  width: 150px;
+  height: 150px;
+  background-image: url(icons/eufar_heading_clouds.jpg);
+  background-repeat: no-repeat;
+  background-size: auto 150px;
+  background-position: left top;
+}
+
+
+.identMainText2 {
+  margin-left: 30px;
+  font-family: MyFontHeader;
+  font-weight: 400;
+  font-size: 26px;
+  color: white;
+  background: #616264;
+  width: 400px;
+  height: 42px;
+  padding-left: 0px;
+  padding-top: 8px;
+  text-align: center;
+}
+
+
+.identMainImage {
+  height: 171px;
+  background-image: url(icons/eufar_heading_clouds.jpg);
+  background-repeat: no-repeat;
+  background-size: auto 150px;
+  background-position: right top;
+}
+
+
+.identStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
 .identTextLabel {
-  font-family: MyFont;
+  font-family: MyFontBold;
   color: #4f4f4f;
   font-size: 14px;
-  text-align: justify;
+  text-align: right;
+  width: 120px;
 }
 
 
 .identTextBox {
-  width: 300px;
+  width: 500px;
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
   font-family: MyFont;
   font-size: 14px;
   background-color: rgb(238,238,238);
+  margin-left: 15px;
 }
 
 
@@ -76,15 +146,11 @@ body {
   font-family: MyFont;
   font-size: 14px;
   background: rgb(238,238,238);
+  margin-left: 15px;
 }
 
 
 .identTextList:disabled {
-  width: 100px;
-  height: 25px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
   background: #ffffff;
 }
 
@@ -95,13 +161,14 @@ body {
 
 
 .identTextArea {
-  width: 700px;
+  width: 500px;
   height: 100px;
   border: 1px solid #ccc;
   font-family: MyFont;
   font-size: 14px;
   background: rgb(238,238,238);
   padding: 3px 3px 3px 3px;
+  margin-left: 15px;
 }
 
 
@@ -112,9 +179,11 @@ body {
 
 .identGrid {
   margin-left: 30px; 
-  margin-top: -6px;
-  width: 950px;
+  width: 1200px;
+  margin-top: -7px;
+  background: white;
 }
+
 
 
 .identLine {
@@ -123,7 +192,7 @@ body {
 
 
 .identMainText {
-  margin-top: 6px;
+  margin-top: 10px;
   margin-bottom: 6px;
   margin-left: 55px;
   font-family: MyFont;
@@ -134,7 +203,7 @@ body {
 
 
 .identPathText {
-  margin-top: 6px;
+  margin-top: 10px;
   margin-bottom: 6px;
   margin-left: 6px;
   margin-right: 6px;
@@ -146,7 +215,7 @@ body {
 
 
 .identPathText2 {
-  margin-top: 6px;
+  margin-top: 10px;
   margin-bottom: 6px;
   font-family: MyFont;
   font-weight: 500;
@@ -160,7 +229,7 @@ body {
   font-family: MyFontBold;
   font-size: 14px;
   text-decoration: underline;
-  margin-left: -10px;
+  margin-left: 10px;
 }
 
 
@@ -175,8 +244,8 @@ body {
 .classHorizontalPanel {
   margin-left: 30px;
   background: white;
-  margin-top: -6px;
-  width: 950px;
+  margin-top: -7px;
+  width: 1200px;
 }
 
 
@@ -187,11 +256,25 @@ body {
 }
 
 
-.keyHorizontalPanel {
-  margin-left: 30px;
+.keyMainPanel {
+  margin-left: 30px; 
+  width: 1200px;
+  margin-top: -7px;
   background: white;
-  margin-top: -5px;
-  width: 1100px;
+}
+
+
+.keyHorizontalPanel {
+  margin-left: 10px;
+  margin-top: 200px;
+}
+
+
+.keyTitleTextLabel3 {
+  color: #4f4f4f;
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 
@@ -202,7 +285,6 @@ body {
   margin-left: 20px;
   margin-top: 10px;
   text-decoration: underline;
-  
 }
 
 
@@ -216,6 +298,23 @@ body {
 }
 
 
+.airStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-top: 13px;
+}
+
+
+.airStarLabel2 {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+
 .airTitleTextLabel {
   color: #4f4f4f;
   font-family: MyFontBold;
@@ -226,10 +325,19 @@ body {
 }
 
 
+.airTitleTextLabel3 {
+  color: #4f4f4f;
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+
 .airVerticalPanel {
   margin-left: 30px;
-  margin-top: -6px;
+  margin-top: -7px;
   background: white;
+  width: 1200px;
 }
 
 
@@ -426,7 +534,7 @@ body {
 .airFlexTableLabel1 {
   color: #4f4f4f;
   margin-left: 65px;
-  font-family: MyFont;
+  font-family: MyFontBold;
   font-size: 14px;
 }
 
@@ -471,6 +579,12 @@ body {
 }
 
 
+.airFlexTableLabel7 {
+  color: #4f4f4f;
+  font-family: MyFont;
+  font-size: 14px;
+}
+
 
 .geoTitleTextLabel {
   color: #4f4f4f;
@@ -509,9 +623,9 @@ body {
 
 
 .geoVerticalPanel {
-  margin-top: -6px;
+  margin-top: -7px;
   margin-left: 30px;
-  width: 800px;
+  width: 1200px;
   background: white;
   padding-bottom: 10px;
   padding-top: 8px;
@@ -606,8 +720,16 @@ body {
   font-family: MyFontBold;
   font-size: 14px;
   text-decoration: underline;
-  margin-right: 40px;
   margin-left: 10px;
+}
+
+
+.geoStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-right: 40px;
 }
 
 
@@ -623,16 +745,17 @@ body {
 .refVerticalPanel {
   background: white;
   margin-left: 30px;
-  margin-top: -6px;
+  margin-top: -7px;
   padding-bottom: 8px;
-  width: 650px;
+  width: 1200px;
+  padding-top: 9px;
 }
 
 
 
 .refTextLabel {
   color: #4f4f4f;
-  font-family: MyFont;
+  font-family: MyFontBold;
   font-size: 14px;
 }
 
@@ -648,239 +771,32 @@ body {
   font-size: 14px;
   text-decoration: underline;
   margin-top: 8px;
+  margin-left: 10px;
+  color: #4f4f4f;
+}
+
+
+.refStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-top: 7px;
   margin-right: 60px;
-  margin-left: 10px;
-  color: #4f4f4f;
 }
 
 
-.qvVerticalPanel {
-  width: 1100px;
-  background: white;
-  margin-left: 30px;
-  margin-top: -6px;
-  padding-top: 10px;
-  color: #4f4f4f;
-  padding-bottom: 10px;
-}
-
-
-.qv_imageRad {
-  margin-left: 100px;
+.refStarLabel2 {
   font-family: MyFontBold;
-  font-weight: 600;
-  font-size: 14px;
-  color: #4f4f4f;
-}
-
-
-.qv_insituRad {
-  margin-left: 200px;
-  font-family: MyFontBold;
-  font-weight: 600;
-  font-size: 14px;
-  color: #4f4f4f;
-}
-
-
-.qv_insituLabel {
-  font-family: MyFont;
-  font-size: 14px;
-  text-align: justify;
-  margin-left: 40px;
-  color: #4f4f4f;
-}
-
-
-.qv_insituLabel2 {
-  font-family: MyFont;
-  font-size: 14px;
-  text-align: justify;
-  width: 200px;
-  margin-left: 40px;
-  color: #4f4f4f;
-}
-
-
-.qv_insituBox {
-  width: 700px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 20px;
-  background: rgb(238,238,238);
-}
-
-
-.qv_insituBox:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.qv_insituChk {
-  margin-left: 0px;
-  font-family: MyFont;
-  font-size: 14px;
-  color: #4f4f4f;
-}
-
-
-.qv_insituLabelTitle {
-  font-family: MyFontBold;
-  font-size: 14px;
-  text-decoration: underline;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  color: #4f4f4f;
-  margin-left: 10px;
-}
-
-
-.qv_insituLabelTitle2 {
-  font-family: MyFontBold;
-  font-size: 14px;
-  text-decoration: underline;
-  margin-top: 10px;
-  color: #4f4f4f;
-  margin-left: 10px;
-}
-
-
-.qv_insituLabelTitle3 {
-  font-family: MyFontBold;
-  font-size: 14px;
-  text-decoration: underline;
-  color: #4f4f4f;
-  margin-left: 10px;
-}
-
-
-.qv_insituTextAre {
-  width: 700px;
-  height: 100px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  background: rgb(238,238,238);
-  margin-left: 40px;
-  padding: 3px 3px 3px 3px;
-}
-
-
-.qv_insituTextAre:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.qv_imageLabelTitle {
-  font-family: MyFontBold;
-  font-size: 14px;
-  text-decoration: underline;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  color: #4f4f4f;
-  margin-left: 10px;
-}
-
-
-.qv_imageLabelTitle2 {
-  font-family: MyFont;
-  font-size: 14px;
-  text-decoration: underline;
-  margin-top: 10px;
-  margin-left: 40px;
-  color: #4f4f4f;
-}
-
-
-.qv_imageLabel {
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 40px;
-  margin-right: 20px;
-  color: #4f4f4f;
-}
-
-
-.qv_imageLabel2 {
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 80px;
-  margin-right: 20px;
-  color: #4f4f4f;
-}
-
-
-.qv_imageBox {
-  width: 300px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  background: rgb(238,238,238);
-}
-
-
-.qv_imageBox:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.qv_imageBox2 {
-  width: 50px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  background: rgb(238,238,238);
-}
-
-
-.qv_imageBox2:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.qv_imageList {
-  width: 150px;
-  height: 25px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  background: rgb(238,238,238);
-}
-
-
-.qv_imageList:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.qv_otherBox {
-  width: 300px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  background: rgb(238,238,238);
-  margin-left: 24px; 
-  margin-top: -5px;
-}
-
-
-.qv_otherBox:focus {
-  border: 1px solid #ffa126;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
 }
 
 
 .useVerticalPanel {
   margin-left: 30px;
-  margin-top: -6px;
+  margin-top: -7px;
   background: white;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -889,15 +805,24 @@ body {
 
 
 .useTextLabel {
-  font-family: MyFont;
+  font-family: MyFontBold;
   font-size: 14px;
-  margin-right: 40px;
   margin-left: 10px;
   width: 150px;
   heigth: 30px;
-  text-align: justify;
+  text-align: right;
   margin-top: 43px;
   color: #4f4f4f;
+}
+
+
+.useStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-top: 43px;
+  margin-right: 40px;
 }
 
 
@@ -918,18 +843,26 @@ body {
 }
 
 
-.orgFlexTable {
-  margin-left: 30px;
-  margin-top: -6px;
+.orgVerticalPanel {
+  width: 1200px;
   background: white;
-  width: 600px;
+  margin-left: 30px;
+  margin-top: -7px;
+}
+
+
+.orgStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-right: 20px;
 }
 
 
 .orgTextLabel {
-  font-family: MyFont;
+  font-family: MyFontBold;
   font-size: 14px;
-  margin-right: 20px;
   text-align: justify;
   color: #4f4f4f;
 }
@@ -966,28 +899,30 @@ body {
 }
 
 
+.metStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+
 .metVerticalPanel {
   margin-left: 30px;
-  margin-top: -6px;
+  margin-top: -7px;
   background: white;
-  width: 700px;
+  width: 1200px;
 }
 
 
 .metTextLabel {
-  font-family: MyFont;
+  font-family: MyFontBold;
   font-size: 14px;
   text-align: justify;
   color: #4f4f4f;
 }
 
-
-.metTextLabel2 {
-  font-family: MyFont;
-  font-size: 14px;
-  text-align: justify;
-  color: #4f4f4f;
-}
 
 
 .metTextList {
@@ -1024,7 +959,6 @@ body {
 .metTitleTextLabel2 {
   font-family: MyFontBold;
   font-size: 14px;
-  text-decoration: underline;
   margin-right: 40px;
   margin-top: 20px;
   color: #4f4f4f;
@@ -1132,7 +1066,7 @@ body {
 
 
 .gwt-TabLayoutPanel {
-  
+   background: #616266 !important;
 }
 
 
@@ -1142,6 +1076,7 @@ body {
 
 
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelContentContainer {
+  border: 0px solid !important;
 }
 
 
@@ -1155,14 +1090,15 @@ body {
   font-family: MyFont !important;
   font-size: 14px !important;
   margin-left: 4px !important;
-  padding: 0px 10px 4px 10px !important;
+  padding: 0px 10px 6px 10px !important;
   cursor: pointer !important;
   cursor: hand !important;
   color: white !important;
-  font-weight: normal !important;
+  font-weight: 300 !important;
   text-align: center !important;
   background: #616266 !important;
   border-radius: 3px 3px 0px 0px !important;
+  text-transform: uppercase;
 }
 
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelTab-selected {
@@ -1173,32 +1109,37 @@ body {
 
 
 .gwt-MenuBar {
-  cursor: default !important;  
+  cursor: default !important;
 }
 
 
 .gwt-MenuBar-horizontal {
-  margin-top: 0px !important;
-  margin-left: 30px !important;
-  background: white !important;
-  border: 0px solid !important;
+  border: 1px solid #616266 !important;
+  height: 38px! important;
+  background: #616266 !important;
+  padding-top: 2px !important;
 }
 
 
 .gwt-MenuBar-horizontal .gwt-MenuItem {
-  border: 5px Solid #616266 !important;
-  font-family: MyFontLight !important;
-  color: #ffa126 !important;
-  font-size: 16px !important;
-  vertical-align: middle !important;
-  padding: 5px 10px 5px 10px !important;
+  height: 21px !important;
+  border: 1px solid #616266 !important;
+  border-radius: 3px !important;
   background: #616266 !important;
 }
 
 
+.gwt-MenuBar-horizontal .gwt-MenuItem:hover {
+  border: 1px solid black !important;
+  border-radius: 3px !important;
+  background: black !important;
+}
+
+
 .gwt-MenuBar-horizontal .gwt-MenuItem-selected {
-	border-bottom: 5px Solid #616266 !important;
-	background: #616266 !important;
+  border: 1px solid black !important;
+  border-radius: 3px !important;
+  background: black !important;
 }
 
 
@@ -1206,11 +1147,13 @@ body {
   margin-top: 0px !important;
   margin-left: 0px !important;
   background: white !important;
+  
 }
 
 
 .gwt-MenuBar-vertical table {
   border-collapse: collapse !important;
+  
 }
 
 
@@ -1222,7 +1165,7 @@ body {
 
 
 .gwt-MenuBar-vertical .gwt-MenuItem-selected {
-	background: rgb(240,240,240) !important;
+  background: rgb(240,240,240) !important;
 }
 
 
@@ -1263,7 +1206,7 @@ body {
 
 
 .gwt-MenuBarPopup .menuPopupBottomCenter {
- border-bottom: 1px solid rgb(180,180,180) !important;
+  border-bottom: 1px solid rgb(180,180,180) !important;
   background: white !important;
 }
 
@@ -1337,17 +1280,17 @@ body {
 
 
 .textrequired {
-	color: rgb(200,0,0) !important;
+  color: rgb(200,0,0) !important;
 }
 
 
 .textuncorrect {
-	color: rgb(0,0,200) !important;
+  color: rgb(0,0,200) !important;
 }
 
 
 .textcompleted {
-	color: Black !important;
+  color: Black !important;
 }
 
 
@@ -1375,7 +1318,7 @@ body {
   cursor: default;
   font-family: MyFont;
   font-size: 14px;
-  border: 1px solid black; 
+  border: 1px solid black;
 }
 
 
@@ -1402,4 +1345,74 @@ body {
 .checkBoxLabel {
   font-family: MyFont;
   font-size: 14px;
+}
+
+
+.gwt-TabLayoutPanelScrollButton {
+  padding-top: 2px;
+  padding-bottom: -2px;
+}
+
+
+.gwt-TabLayoutPanelScrollButton:active {
+  transform: translateX(1px) translateY(1px);
+}
+
+
+.footerLeft {
+  width: 102px;
+  height: 30px;
+  background: rgb(239,238,237);
+  border: 1px solid #D2D5D8;
+}
+
+
+.footerRight {
+  width: 78px;
+  height: 30px;
+  background: rgb(239,238,237);
+  border: 1px solid #D2D5D8;
+}
+
+
+.footerCenter {
+  width: 137px;
+  height: 30px;
+  background: rgb(239,238,237);
+  border: 1px solid #D2D5D8;
+}
+
+
+.footerCenter:hover {
+  color: #F9A12A;
+}
+
+
+.footerLeftLabel {
+  font-family: MyFont;
+  font-weight: 700;
+  font-size : 12px;
+  color: #616265;
+  padding: 8px;
+  border-left: 1px solid #D2D5D8;
+}
+
+
+.footerRightLabel {
+  font-family: MyFont;
+  font-weight: 700;
+  font-size : 12px;
+  color: #616265;
+  padding: 8px;
+  border-left: 1px solid #D2D5D8;
+}
+
+
+.footerCenterLabel {
+  font-family: MyFont;
+  font-weight: 700;
+  font-size : 12px;
+  color: #616265;
+  padding: 8px;
+  border-left: 1px solid #D2D5D8;
 }

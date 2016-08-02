@@ -1,5 +1,6 @@
 package com.eufar.emc.client;
 
+
 import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.ArrayList;
@@ -166,16 +167,9 @@ public class Utilities {
 			allListBox.get(i).getElement().setAttribute("style","");
 			allListBox.get(i).setStyleName(style);
 		}
-		if (!Emc_eufar.tabLayout) {
-			for (int i = 0; i < 10; i++) {
-				Emc_eufar.stackPanel.getHeaderWidget(i).asWidget().setStylePrimaryName("textcompleted");
-			}
-		} else {
-			for (int i = 0; i < 10; i++) {
-				Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: white !important;");
-			}
+		for (int i = 0; i < 9; i++) {
+			Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: white !important;");
 		}
-		
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display set.");
 	}
 	
@@ -209,12 +203,6 @@ public class Utilities {
 	// obtain screen height
 	public static native int getScreenHeight()/*-{
 		return screen.height;
-	}-*/;
-	
-	
-	// function to reload the page
-	public static native void reloadGUI() /*-{
-		$wnd.location.reload();
 	}-*/;
 	
 	
@@ -264,30 +252,20 @@ public class Utilities {
 		Emc_eufar.refPhaseTab.setWidget(0, 1, Emc_eufar.refStartDat);
 		Emc_eufar.refPhaseTab.setWidget(0, 2, Emc_eufar.refEndDat);
 		Emc_eufar.refPhaseTab.setWidget(0, 3, Emc_eufar.refDelButton);
+		Emc_eufar.refDelImage.setVisible(false);
 		Emc_eufar.orgAddTab.removeAllRows();
 		Emc_eufar.orgAddTab.setWidget(0, 0, Emc_eufar.horizontalPanel27);
 		Emc_eufar.metAddTab.removeAllRows();
 		Emc_eufar.metAddTab.setWidget(0, 0, Emc_eufar.horizontalPanel66);
-		Emc_eufar.mmDelButton.setEnabled(false);
-		Emc_eufar.mmDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
-		Emc_eufar.mmDelButton.setStyleName("emptyButton");
-		Emc_eufar.orgDelButton.setEnabled(false);
-		Emc_eufar.orgDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
-		Emc_eufar.orgDelButton.setStyleName("emptyButton");
-		Emc_eufar.auDelButton1.setEnabled(false);
-		Emc_eufar.auDelButton1.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
-		Emc_eufar.auDelButton1.setStyleName("emptyButton");
-		Emc_eufar.auDelButton1.setEnabled(false);
-		Emc_eufar.auDelButton1.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
-		Emc_eufar.auDelButton1.setStyleName("emptyButton");
-		Emc_eufar.refDelButton.setEnabled(false);
-		Emc_eufar.refDelButton.setHTML("<img border='0' src='icons/empty_icon_small.png' />");
+		Emc_eufar.metDelImage.setVisible(false);
+		Emc_eufar.orgDelImage.setVisible(false);
+		Emc_eufar.useDelImage1.setVisible(false);
+		Emc_eufar.useDelImage2.setVisible(false);
 		Emc_eufar.refDelButton.setStyleName("emptyButton");
 		Emc_eufar.airInstrumentTable.removeAllRows();
 		Emc_eufar.instrumentTabList.clear();
 		Emc_eufar.manufacturerTabList.clear();
 		Utilities.runCheckDefault();
-		Emc_eufar.verticalPanel17.clear();
 		Emc_eufar.useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");
 		Emc_eufar.useLimitationsBox.setText("No limitations");

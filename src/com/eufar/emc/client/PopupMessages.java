@@ -1,5 +1,6 @@
 package com.eufar.emc.client;
 
+
 import java.util.logging.Level;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,8 +18,8 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -65,6 +66,7 @@ public class PopupMessages {
 		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: MyFontBold !important; font-size: 14px "
 				+ "!important; margin-top: 10px !important; margin-bottom: 10px !important;");
 		infoDialog.add(verticalPanel01);
+		//infoDialog.setGlassEnabled(false);
 		infoDialog.setSize( "500px", "200px" );
 		infoDialog.setModal(true);
 		infoDialog.center();
@@ -125,7 +127,7 @@ public class PopupMessages {
 	
 	
 	// create a popup panel displaying an informative message
-	public static void infoPanel(final String context, final PushButton infoButton) {
+	public static void infoPanel(final String context, final SimplePanel infoButton) {
 		final DialogBox infoDialog = new DialogBox();
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
@@ -548,8 +550,6 @@ public class PopupMessages {
 	}
 	
 	
-	
-	
 	// return the text asked for a particular Info button
 	private static Label addInfoText(final String context) {
 		HTML infoLabel = new HTML();
@@ -597,7 +597,8 @@ public class PopupMessages {
 			break;
 		case AIAIRCRAFT:
 			infoLabel.setHTML("<p>The selection of an aircraft can help to improve storage and queries in a database. Please select here the "
-					+ "aircraft used to acquire and prepare the actual data and metadata.</p><p><u>Example:</u> AWI - POLAR 5.</p>");
+					+ "aircraft used to acquire and prepare the actual data and metadata. If multiple aircraft were used during the campaign, "
+					+ "click on the '+' button once an aircraft has been selected to add it to the list.</p><p><u>Example:</u> AWI - POLAR 5.</p>");
 			break;
 		case AIINSTRUMENT:
 			infoLabel.setHTML("<p>The selection of an instrument, or multiple instruments, can help to improve storage and queries in a database. "
@@ -627,8 +628,7 @@ public class PopupMessages {
 					+ "(N8-DB) should be used and set <b>before</b> the current date.</p><p><u>Example:</u> 2015/07/12.</p>");
 			break;
 		case TRREVISION:
-			infoLabel.setHTML("<p>This is the date of last revision of the resource if available. In a EUFAR project, it is automatically "
-					+ "created by the EUFAR database (date stamp).</p>");
+			infoLabel.setHTML("<p>This is the date of last revision of the resource if available.</p>");
 			break;
 		case TRCREATION:
 			infoLabel.setHTML("<p>This is the date of creation of the resource. In a EUFAR project, the date should be set to the date of data "
@@ -750,7 +750,6 @@ public class PopupMessages {
 		default:
 			infoLabel.setHTML("No information for this item");
 			break;
-
 		}
 		infoLabel.setWordWrap(true);
 		return infoLabel;
@@ -765,7 +764,12 @@ public class PopupMessages {
 				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
 				+ "(succeeded)</li><li>Opera 30 (succeeded)</li></ul><br>"
 
-				+ "<b><u>May 27 2016, Release version 1.0.5 [ONLINE]</u></b><br>The style used in ASMM has been modified and harmonized to "
+				+ "<b><u>August 02 2016, Release version 1.2.0 [ONLINE]</u></b><br>The style used in ASMM has been modified and harmonized "
+				+ "to comply with the EUFAR website style. Few changes in the GUI have been made to comply with the recommandations of the "
+				+ "last meeting between N7SP and N8DB.<br><ul style='list-style-type:none'><li>ADDED:<ul><li>it is now possible to save "
+				+ "multiple aircraft in the xml File.</li></ul></li></ul><ul style='list-style-type:none'><li>MODIFIED:<ul><li>the 'Quality "
+				+ "and Validity' section has been removed and will be available in ASMM.</li></ul></li></ul><br>"
+				+ "<b><u>May 30 2016, Release version 1.1.0 [ONLINE]</u></b><br>The style used in ASMM has been modified and harmonized to "
 				+ "comply with the EUFAR website style.<br><br>"
 				+ "<b><u>April 15 2016, Release version 1.0.4 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul><li>few typos "
 				+ "in the GUI were corrected.</li><li>fixed the aircraft selection panel if 'Other...' or 'Make a choice...' is selected after "

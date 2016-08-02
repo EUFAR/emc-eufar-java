@@ -7,7 +7,6 @@ import java.util.logging.Level;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.XMLParser;
@@ -304,58 +303,12 @@ public class XmlSave {
 			////////////////////
 			/// Data Quality ///
 			////////////////////
-			String lineageString = new String("");
-			if (((RadioButton) Emc_eufar.imageRad.getWidget(0)).getValue() == true) {
-				lineageString = lineageString + "Earth observation/Remote sensing data|";
-				lineageString = lineageString + "Name of calibration laboratory: " + Emc_eufar.imageCalBox.getText() + "|Date of radiometric calibration: "
-						+ DateTimeFormat.getFormat("yyyy-MM-dd").format(Emc_eufar.imageRadDat.getValue()) + "|Date of spectral calibration: " + 
-						DateTimeFormat.getFormat("yyyy-MM-dd").format(Emc_eufar.imageSpeDat.getValue()) + "|Number of spectral bands: " + 
-						Emc_eufar.imageBanBox.getText() + "|Overall heading / fligh direction (dd): " + Emc_eufar.imageDirBox.getText() + "|Overall altitude / "
-						+ "average height ASL (m): " + Emc_eufar.imageAltBox.getText() + "|Solar zenith (dd): " + Emc_eufar.imageZenBox.getText() + "|Solar azimuth "
-						+ "(dd): " + Emc_eufar.imageAziBox.getText() + "|Report anomalies in data acquisition: " + Emc_eufar.imageAnoBox.getText();
-				String imageLstAnswer = new String("");
-				if (Emc_eufar.imageLevLst.getSelectedValue() != "Make a choice...") {
-					imageLstAnswer = Emc_eufar.imageLevLst.getSelectedValue();
-				}
-				lineageString = lineageString + "|Processing level: " + imageLstAnswer;
-				lineageString = lineageString + "|Dark current (DC) correction: " + Utilities.getAnswer(Emc_eufar.imageChk10Y, Emc_eufar.imageChk10N) + "|Aggregated "
-						+ "interpolated pixel mask: " + Utilities.getAnswer(Emc_eufar.imageChk11Y, Emc_eufar.imageChk11N) + "|Aggregated bad pixel mask: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk12Y, Emc_eufar.imageChk12N) + "|Saturated pixels / overflow: " + Utilities.getAnswer(Emc_eufar.imageChk13Y, Emc_eufar.imageChk13N) + "|Pixels "
-						+ "affected by saturation in spatial/spectral neighbourhood: " + Utilities.getAnswer(Emc_eufar.imageChk14Y, Emc_eufar.imageChk14N) + "|Problems with "
-						+ "position information / Interpolated position information: " + Utilities.getAnswer(Emc_eufar.imageChk15Y, Emc_eufar.imageChk15N) + "|Problems with "
-						+ "attitude information / Interpolated attitude information: " + Utilities.getAnswer(Emc_eufar.imageChk16Y, Emc_eufar.imageChk16N) + "|Synchronization "
-						+ "problems: " + Utilities.getAnswer(Emc_eufar.imageChk17Y, Emc_eufar.imageChk17N) + "|Interpolated pixels during geocoding: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk18Y, Emc_eufar.imageChk18N) + "|Failure of atmospheric correction: " + Utilities.getAnswer(Emc_eufar.imageChk19Y, Emc_eufar.imageChk19N) + 
-						"|Cloud mask: " + Utilities.getAnswer(Emc_eufar.imageChk20Y, Emc_eufar.imageChk20N) + "|Cloud shadow mask: " + Utilities.getAnswer(Emc_eufar.imageChk21Y, Emc_eufar.imageChk21N) + 
-						"|Haze mask: " + Utilities.getAnswer(Emc_eufar.imageChk22Y, Emc_eufar.imageChk22N) + "|Critical terrain correction based on DEM roughness measure: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk23Y, Emc_eufar.imageChk23N) + "|Critical terrain correction based on slope/local illumination angle: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk24Y, Emc_eufar.imageChk24N) + "|Critical BRDF geometry based on sun-sensor-terrain geometry: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk25Y, Emc_eufar.imageChk25N) + "|";
-			} else if (((RadioButton) Emc_eufar.insituRad.getWidget(0)).getValue() == true) {
-				lineageString = lineageString + "Atmospheric/In-situ measurements|";
-				lineageString = lineageString + "Link to the procedure's description: " + Emc_eufar.insituLinkBox.getText()+ "|Source of calibration " + 
-						"constants: " + Emc_eufar.insituConstBox.getText()+ "|Source of calibration materials: " + Emc_eufar.insituMatBox.getText()+ "|";
-				lineageString = lineageString + "Data converted to geophysical units: " + Utilities.getAnswer(Emc_eufar.insituChk01Y, Emc_eufar.insituChk01N) + "|";
-				String insituChk03Answer = new String("");
-				if (((CheckBox) Emc_eufar.insituChk04.getWidget(0)).getValue() == true) {
-					insituChk03Answer = "NetCDF";
-				} else if (((CheckBox) Emc_eufar.insituChk05.getWidget(0)).getValue() == true) {
-					insituChk03Answer = "HDF";
-				} else if (((CheckBox) Emc_eufar.insituChk06.getWidget(0)).getValue() == true) {
-					insituChk03Answer = "NASA/Ames";
-				} else if (((CheckBox) Emc_eufar.insituChk07.getWidget(0)).getValue() == true) {
-					insituChk03Answer = "Other/" + Emc_eufar.insituOtherBox.getText();
-				}
-				lineageString = lineageString + "Output format: " + insituChk03Answer + "|";
-				lineageString = lineageString + "Quality-control flagging applied to individual data points: " + Emc_eufar.insituFlagAre.getText() + "|";
-				lineageString = lineageString + "Assumption: " + Emc_eufar.insituAssumptionAre.getText() + "|";
-			}
 			Element dataQualityInfo1 = Elements.addElement(doc, "gmd:dataQualityInfo", rootElement);
 			Element dataQualityDQ = Elements.addElement(doc, "gmd:DQ_DataQuality", dataQualityInfo1);
 			Element lineageQuality = Elements.addElement(doc, "gmd:lineage", dataQualityDQ);
 			Element lineageQualityLI = Elements.addElement(doc, "gmd:LI_Lineage", lineageQuality);
 			Element statementQuality1 = Elements.addElement(doc, "gmd:statement", lineageQualityLI);
-			Elements.addElement(doc, "gco:CharacterString", statementQuality1, lineageString);
+			Elements.addElement(doc, "gco:CharacterString", statementQuality1, "For data quality and validity, please see the dataset description");
 			Element reportQuality = Elements.addElement(doc, "gmd:report", dataQualityDQ);
 			Element domainConsistencyDQ = Elements.addElement(doc, "gmd:DQ_DomainConsistency", reportQuality);
 			Element resultQuality = Elements.addElement(doc, "gmd:result", domainConsistencyDQ);
@@ -382,25 +335,21 @@ public class XmlSave {
 			/// Aircraft and Instruments ///
 			////////////////////////////////
 			Element acquisitionInfo = Elements.addElement(doc, "gmd:acquisitionInfo", rootElement);
-			Element aircraftInfo = Elements.addElement(doc, "gmd:platformInfo", acquisitionInfo);
-			Element aircraftInfoAI = Elements.addElement(doc, "gmd:PI_PlatformInfo", aircraftInfo);
-			Element aircraftManufacturer = Elements.addElement(doc, "gmd:platformManufacturer", aircraftInfoAI);
-			Element aircraftType = Elements.addElement(doc, "gmd:platformType", aircraftInfoAI);
-			Element aircraftOperator = Elements.addElement(doc, "gmd:platformOperator", aircraftInfoAI);
-			Element aircraftCountry = Elements.addElement(doc, "gmd:platformCountry", aircraftInfoAI);
-			Element aircraftRegistration = Elements.addElement(doc, "gmd:platformRegistration", aircraftInfoAI);
-			if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
-				Elements.addElement(doc, "gco:CharacterString", aircraftManufacturer, Emc_eufar.airManufacturerBox.getText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftType, Emc_eufar.airTypeBox.getText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftOperator, Emc_eufar.airOperatorBox.getText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftCountry, Emc_eufar.airCountryLst.getSelectedItemText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftRegistration, Emc_eufar.airRegistrationBox.getText());
-			} else if (Emc_eufar.airAircraftLst.getSelectedItemText() != "Do your choice...") {
-				Elements.addElement(doc, "gco:CharacterString", aircraftManufacturer, Emc_eufar.airManufacturerInfo.getText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftType, Emc_eufar.airTypeInfo.getText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftOperator, Emc_eufar.operatorMap.get(Emc_eufar.airOperatorInfo.getText()));
-				Elements.addElement(doc, "gco:CharacterString", aircraftCountry, Emc_eufar.airCountryInfo.getText());
-				Elements.addElement(doc, "gco:CharacterString", aircraftRegistration, Emc_eufar.airRegistrationInfo.getText());
+			if (Emc_eufar.aircraftTabList.size() > 0) {
+				for (int i = 0; i < Emc_eufar.aircraftTabList.size(); i++) {
+					Element aircraftInfo = Elements.addElement(doc, "gmd:platformInfo", acquisitionInfo);
+					Element aircraftInfoAI = Elements.addElement(doc, "gmd:PI_PlatformInfo", aircraftInfo);
+					Element aircraftManufacturer = Elements.addElement(doc, "gmd:platformManufacturer", aircraftInfoAI);
+					Element aircraftType = Elements.addElement(doc, "gmd:platformType", aircraftInfoAI);
+					Element aircraftOperator = Elements.addElement(doc, "gmd:platformOperator", aircraftInfoAI);
+					Element aircraftCountry = Elements.addElement(doc, "gmd:platformCountry", aircraftInfoAI);
+					Element aircraftRegistration = Elements.addElement(doc, "gmd:platformRegistration", aircraftInfoAI);
+					Elements.addElement(doc, "gco:CharacterString", aircraftManufacturer, Emc_eufar.manufacturairTabList.get(i));
+					Elements.addElement(doc, "gco:CharacterString", aircraftType, Emc_eufar.aircraftTabList.get(i));
+					Elements.addElement(doc, "gco:CharacterString", aircraftOperator, Emc_eufar.operatorTabList.get(i));
+					Elements.addElement(doc, "gco:CharacterString", aircraftCountry, Emc_eufar.countryTabList.get(i));
+					Elements.addElement(doc, "gco:CharacterString", aircraftRegistration, Emc_eufar.identificationTabList.get(i));
+				}
 			}
 			if (Emc_eufar.instrumentTabList.size() > 0) {
 				for (int i = 0; i < Emc_eufar.instrumentTabList.size(); i++) {
@@ -411,13 +360,6 @@ public class XmlSave {
 					Elements.addElement(doc, "gco:CharacterString", instrumentManufacturer, Emc_eufar.manufacturerTabList.get(i));
 					Elements.addElement(doc, "gco:CharacterString", instrumentType, Emc_eufar.instrumentTabList.get(i));
 				}
-			} else {
-				Element instrumentInfo = Elements.addElement(doc, "gmd:instrumentInfo", acquisitionInfo);
-				Element instrumentInfoAI = Elements.addElement(doc, "gmd:II_InstrumentInfo", instrumentInfo);
-				Element instrumentManufacturer = Elements.addElement(doc, "gmd:instrumentManufacturer", instrumentInfoAI);
-				Element instrumentType = Elements.addElement(doc, "gmd:instrumentType", instrumentInfoAI);
-				Elements.addElement(doc, "gco:CharacterString", instrumentManufacturer, "");
-				Elements.addElement(doc, "gco:CharacterString", instrumentType, "");
 			}
 			
 

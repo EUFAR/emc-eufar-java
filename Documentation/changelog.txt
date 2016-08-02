@@ -11,6 +11,18 @@ ONLINE VERSION TESTED ON:
     - Opera 30 (succeeded)
 
 
+August 02 2016, Release version 1.2.0 [ONLINE]
+=============================================
+  The style used in ASMM has been modified and harmonized to comply with the EUFAR website style.
+  Few changes in the GUI have been made to comply with the recommandations of the last meeting between N7SP and N8DB.
+  
+  ADDED:
+    - it is now possible to save multiple aircraft in the xml file
+    
+  MODIFIED:
+    - the "Quality and Validity" section has been removed and will be available in ASMM.
+
+
 May 30 2016, Release version 1.1.0 [ONLINE]
 =============================================
   The style used in ASMM has been modified and harmonized to comply with the EUFAR website style.

@@ -153,16 +153,14 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
         Image menuButtonImage = new Image(resources.menu());
         int leftArrowWidth = scrollLeftButtonImage.getWidth();
         int rightArrowWidth = scrollRightButtonImage.getWidth();
-        int menuWidth = menuButtonImage.getWidth();
-        //panel for scroll buttons
         scrollPanel = new HorizontalPanel();
         panel.insert(scrollPanel, 0);
         panel.setWidgetTopHeight(scrollPanel, 0, Unit.PX, barHeight, barUnit);
-        //placing scroll panel in the top right corner
-        panel.setWidgetRightWidth(scrollPanel, 0, Unit.PX, leftArrowWidth + rightArrowWidth + menuWidth, Unit.PX);
+        panel.setWidgetRightWidth(scrollPanel, 0, Unit.PX, 10 + leftArrowWidth + rightArrowWidth, Unit.PX);
         scrollPanel.setHeight("100%");
         scrollPanel.setWidth("100%");
         scrollPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+        scrollPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
         scrollPanel.setStyleName(SCROLL_PANEL_STYLE);
 
         SimplePanel scrollLeftButton = new SimplePanel(scrollLeftButtonImage);
@@ -182,7 +180,6 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
 
         scrollPanel.add(scrollLeftButton);
         scrollPanel.add(scrollRightButton);
-        scrollPanel.add(menuButton);
         scrollPanel.setVisible(false);
     }
 
@@ -427,14 +424,13 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
 
     
     public static interface Resources extends ClientBundle {
-        @Source("images/bwd_tab_arrow2.png")
+        @Source("images/bwd_tab_arrow_v3.png")
         ImageResource back();
 
-        @Source("images/fwd_tab_arrow2.png")
+        @Source("images/fwd_tab_arrow_v3.png")
         ImageResource next();
 
-        @Source("images/menu_tab_arrow2.png")
+        @Source("images/menu_tab_arrow_v3.png")
         ImageResource menu();
     }
 }
-
