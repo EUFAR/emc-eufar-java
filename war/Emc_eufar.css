@@ -33,6 +33,12 @@ body {
 }
 
 
+@font-face {
+  font-family: MyFontItalic;
+  src: url(font/SourceSansPro-Italic.ttf);
+}
+
+
 .emptyButton {
   width: 25px;
   height: 25px;
@@ -127,10 +133,11 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
   background-color: rgb(238,238,238);
   margin-left: 15px;
+  color: #4f4f4f;
 }
 
 
@@ -143,10 +150,11 @@ body {
   width: 100px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
   background: rgb(238,238,238);
   margin-left: 15px;
+  color: #4f4f4f;
 }
 
 
@@ -164,11 +172,12 @@ body {
   width: 500px;
   height: 100px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
   background: rgb(238,238,238);
   padding: 3px 3px 3px 3px;
   margin-left: 15px;
+  color: #4f4f4f;
 }
 
 
@@ -250,7 +259,7 @@ body {
 
 
 .gwt-CheckBox {
-  color: #4f4f4f !important;
+  color: #4f4f4f;
   font-family: MyFont;
   font-size: 14px;
 }
@@ -303,15 +312,6 @@ body {
   color: #ED1C24;
   font-size: 16px;
   margin-left: 5px;
-  margin-top: 13px;
-}
-
-
-.airStarLabel2 {
-  font-family: MyFontBold;
-  color: #ED1C24;
-  font-size: 16px;
-  margin-left: 5px;
 }
 
 
@@ -320,8 +320,6 @@ body {
   font-family: MyFontBold;
   font-size: 14px;
   text-decoration: underline;
-  margin-top: 15px;
-  margin-left: 10px;
 }
 
 
@@ -351,16 +349,29 @@ body {
   margin-top: -10px;
 }
 
+
+.airHorizontalPanel2 {
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+
+.airHorizontalPanel3 {
+  margin-left: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+
 .airTextList {
   width: 180px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
-  margin-top: 13px;
   margin-left: 20px;
-  margin-bottom: 10px;
   background-color: rgb(238,238,238);
+  color: #4f4f4f;
 }
 
 
@@ -373,12 +384,11 @@ body {
   width: 300px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
-  margin-top: 13px;
   margin-left: 20px;
-  margin-bottom: 10px;
   background-color: rgb(238,238,238);
+  color: #4f4f4f;
 }
 
 
@@ -391,10 +401,11 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
   margin-left: 94px;
   background-color: rgb(238,238,238);
+  color: #4f4f4f;
 }
 
 
@@ -408,10 +419,11 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
   margin-left: 20px;
   background-color: rgb(238,238,238);
+  color: #4f4f4f;
 }
 
 
@@ -425,10 +437,11 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
   font-size: 14px;
   margin-left: 10px;
   background-color: rgb(238,238,238);
+  color: #4f4f4f;
 }
 
 
@@ -442,7 +455,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 63px;
   background-color: rgb(238,238,238);
@@ -459,7 +473,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 71px;
   background-color: rgb(238,238,238);
@@ -476,7 +491,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 89px;
   background-color: rgb(238,238,238);
@@ -493,7 +509,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 10px;
   background-color: rgb(238,238,238);
@@ -599,7 +616,8 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 20px;
   background: rgb(238,238,238);
@@ -610,7 +628,8 @@ body {
   width: 150px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 20px;
   background: #d6d6d6;
@@ -637,7 +656,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
@@ -653,7 +673,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
   margin-left: 20px;
@@ -670,7 +691,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
   margin-left: 20px;
@@ -687,7 +709,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   margin-left: 7px;
   background: rgb(238,238,238);
@@ -704,7 +727,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
@@ -794,6 +818,332 @@ body {
 }
 
 
+ .refDatebox {
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  width: 80px;
+  height: 15px;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  text-align: center;
+  margin-left: 10px;
+  color: #4f4f4f;
+}
+
+
+.refDatebox:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qvStarLabel {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+
+.qvStarLabel2 {
+  font-family: MyFontBold;
+  color: #ED1C24;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+
+.qvHorizontalPanel1 {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+
+.qvHorizontalPanel2 {
+  margin-left: 40px;
+  padding-right: 4px;
+  border: 1px solid white;
+}
+
+
+.qvHorizontalPanel3 {
+  margin-left: 40px;
+  padding-right: 4px;
+  border: 1px solid white;
+}
+
+
+.qvHorizontalPanel4 {
+  margin-left: 20px;
+  padding-right: 4px;
+  border: 1px solid white;
+}
+
+
+.qvVerticalPanel {
+  width: 1200px;
+  background: white;
+  margin-left: 30px;
+  margin-top: -6px;
+  padding-top: 10px;
+  color: #4f4f4f;
+  padding-bottom: 10px;
+}
+
+
+.qv_imageRad {
+  margin-left: 100px;
+  font-family: MyFontBold;
+  font-size: 14px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituRad {
+  margin-left: 200px;
+  font-family: MyFontBold;
+  font-size: 14px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituLabel {
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-align: right;
+  margin-left: 40px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituLabel2 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-align: right;
+  width: 200px;
+  margin-left: 40px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituBox {
+  width: 700px;
+  height: 17px;
+  padding: 3px 3px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  margin-left: 20px;
+  background: rgb(238,238,238);
+  color: #4f4f4f;
+}
+
+
+.qv_insituBox:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_insituChk {
+  margin-left: 0px;
+  font-family: MyFontBold;
+  font-size: 14px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituLabelTitle {
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #4f4f4f;
+  margin-left: 10px;
+}
+
+
+.qv_insituLabelTitle2 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-decoration: underline;
+  color: #4f4f4f;
+}
+
+
+.qv_insituLabelTitle3 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-decoration: underline;
+  color: #4f4f4f;
+  margin-left: 10px;
+}
+
+
+.qv_insituTextAre {
+  width: 700px;
+  height: 100px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  margin-left: 40px;
+  padding: 3px 3px 3px 3px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituTextAre:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_insituTextAre2 {
+  width: 700px;
+  height: 100px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  margin-left: 20px;
+  padding: 3px 3px 3px 3px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituTextAre2:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_imageDatebox {
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  width: 80px;
+  height: 15px;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  text-align: center;
+  margin-left: 20px;
+  color: #4f4f4f;
+}
+
+
+.qv_imageDatebox:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_imageLabelTitle {
+  font-family: MyFontBold;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #4f4f4f;
+  margin-left: 10px;
+}
+
+
+.qv_imageLabelTitle2 {
+  font-family: MyFont;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-top: 10px;
+  margin-left: 40px;
+  color: #4f4f4f;
+}
+
+
+.qv_imageLabel {
+  font-family: MyFontBold;
+  font-size: 14px;
+  margin-left: 40px;
+  color: #4f4f4f;
+}
+
+
+.qv_imageLabel2 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  margin-left: 80px;
+  color: #4f4f4f;
+}
+
+
+.qv_imageBox {
+  width: 300px;
+  height: 17px;
+  padding: 3px 3px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  color: #4f4f4f;
+  margin-left: 20px;
+}
+
+
+.qv_imageBox:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_imageBox2 {
+  width: 50px;
+  height: 17px;
+  padding: 3px 3px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  color: #4f4f4f;
+  margin-left: 20px;
+}
+
+
+.qv_imageBox2:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_imageList {
+  width: 150px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  color: #4f4f4f;
+  margin-left: 20px;
+}
+
+
+.qv_imageList:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_otherBox {
+  width: 300px;
+  height: 17px;
+  padding: 3px 3px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  margin-left: 24px; 
+  margin-top: -1px;
+  color: #4f4f4f;
+}
+
+
+.qv_otherBox:focus {
+  border: 1px solid #ffa126;
+}
+
+
 .useVerticalPanel {
   margin-left: 30px;
   margin-top: -7px;
@@ -831,7 +1181,8 @@ body {
   height: 100px;
   border: 1px solid #ccc;
   margin-left: 20px;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
   padding: 3px 3px 3px 3px;
@@ -873,7 +1224,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
@@ -888,13 +1240,32 @@ body {
   width: 210px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
 
 
 .orgTextList:focus {
+  border: 1px solid #ffa126;
+}
+
+
+ .metDatebox {
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  width: 80px;
+  height: 15px;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  text-align: center;
+  color: #4f4f4f;
+}
+
+
+.metDatebox:focus {
   border: 1px solid #ffa126;
 }
 
@@ -929,7 +1300,8 @@ body {
   width: 100px;
   height: 25px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
@@ -971,7 +1343,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
@@ -987,7 +1360,8 @@ body {
   height: 17px;
   padding: 3px 3px;
   border: 1px solid #ccc;
-  font-family: MyFont;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
   font-size: 14px;
   background: rgb(238,238,238);
 }
@@ -995,60 +1369,6 @@ body {
 
 .metTextBox2:focus {
   border: 1px solid #ffa126;
-}
-
-
-.saveTextBox {
-  width: 210px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 20px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  background-color: #ffffff;
-}
-
-
-.saveTextLabel {
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 20px;
-  margin-right: 15px;
-  text-align: justify;
-}
-
-
-.saveVerticalPanel {
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  
-}
-
-
-.openTextBox {
-  width: 210px;
-  height: 30px;
-  padding: 3px 3px;
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-
-.myInfoBox {
-  background: #e5e5e5;
-  padding: 4px 8px 4px 4px;
-  cursor: default;
-  font-family: MyFont;
-  font-size: 14px;
-  border: 1px solid black;
 }
 
 
@@ -1294,7 +1614,7 @@ body {
 }
 
 
-.gwt-DateBox {
+/* .gwt-DateBox {
   padding: 5px 4px !important;
   border: 1px solid #ccc !important;
   width: 80px !important;
@@ -1309,25 +1629,7 @@ body {
 
 .gwt-DateBox:focus {
   border: 1px solid #ffa126 !important;
-}
-
-
-.myUploadBox {
-  background: #e5e5e5;
-  padding: 4px 8px 4px 4px;
-  cursor: default;
-  font-family: MyFont;
-  font-size: 14px;
-  border: 1px solid black;
-}
-
-
-.popupText {
-  font-family: MyFont;
-  font-size: 14px;
-  margin-left: 20px;
-  text-align: justify;
-}
+} */
 
 
 .gi_textBox {
@@ -1343,8 +1645,9 @@ body {
 
 
 .checkBoxLabel {
-  font-family: MyFont;
+  font-family: MyFontBold;
   font-size: 14px;
+  color: #4f4f4f
 }
 
 
@@ -1415,4 +1718,369 @@ body {
   color: #616265;
   padding: 8px;
   border-left: 1px solid #D2D5D8;
+}
+
+
+.infoButtonPanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.infoButtonButton {
+  font-family: MyFontBold !important;
+  margin-top: 0px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+}
+
+
+.infoButtonText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+
+.aboutEmcPanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.aboutEmcButton {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+}
+
+
+.aboutEmcText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+
+.aboutInspirePanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.aboutInspireButton {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+}
+
+
+.aboutInspireText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+
+.changelogPanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.changelogButton {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-top: 20px !important;
+}
+
+
+.changelogText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+
+.infoExplorerPanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.infoExplorerButton {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-top: 20px !important;
+}
+
+
+.infoExplorerText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+
+.savePanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.saveButton1 {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-top: 20px !important;
+  margin-left: 76px !important;
+}
+
+
+.saveButton2 {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-top: 20px !important;
+  margin-left: 140px !important;
+}
+
+
+.saveText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+
+.saveBox {
+  width: 280px;
+  height: 17px;
+  padding: 3px 3px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  font-family: MyFontItalic;
+  color: #4f4f4f;
+  background: white;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+
+.saveBox:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.newPanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.newButton {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 15px! important;
+}
+
+
+.newButton2 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+}
+
+
+.newButton3 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+}
+
+
+.newText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+
+.newText2 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.openPanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.openButton1 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 10px !important;
+}
+
+
+.openButton2 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 100px !important;
+}
+
+
+.openText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+  margin-bottom: 30px;
+}
+
+
+.openUpload {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+
+.notCompletePanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.notCompleteButton1 {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 75px !important;
+}
+
+
+.notCompleteButton2 {
+  font-family: MyFontBold !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 165px !important;
+}
+
+
+.notCompleteText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+
+.newFilePanel {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+
+.newFileButton {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+}
+
+
+.newFileButton2 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+}
+
+
+.newFileButton3 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+}
+
+
+.newFileText {
+  font-family: MyFont;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+
+.newFileText2 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  color: #4f4f4f;
+  text-align: center;
+  margin-top: 10px;
 }

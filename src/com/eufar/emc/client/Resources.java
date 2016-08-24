@@ -4,6 +4,7 @@ package com.eufar.emc.client;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBoxBase;
@@ -681,20 +682,51 @@ public class Resources {
 		map.put(Emc_eufar.geoWestBox, Emc_eufar.geoBoundingLab);
 		map.put(Emc_eufar.geoEastBox, Emc_eufar.geoBoundingLab);
 		map.put(Emc_eufar.geoSouthBox, Emc_eufar.geoBoundingLab);
-		map.put(Emc_eufar.geoResolutionBox, Emc_eufar.geoResolutionLab);
 		map.put(Emc_eufar.useConditionsBox, Emc_eufar.useConditionsLab);
 		map.put(Emc_eufar.useLimitationsBox, Emc_eufar.useLimitationsLab);
 		map.put(Emc_eufar.orgPartyBox, Emc_eufar.orgPartyLab);
 		map.put(Emc_eufar.orgEmailBox, Emc_eufar.orgEmailLab);
 		map.put(Emc_eufar.metNameBox, Emc_eufar.metNameLab);
 		map.put(Emc_eufar.metEmailBox, Emc_eufar.metEmailLab);
-		map.put(Emc_eufar.airManufacturerBox, Emc_eufar.airManufacturerLab);
-		map.put(Emc_eufar.airTypeBox, Emc_eufar.airTypeLab);
-		map.put(Emc_eufar.airOperatorBox, Emc_eufar.airOperatorLab);
-		map.put(Emc_eufar.airRegistrationBox, Emc_eufar.airRegistrationLab);
+		map.put(Emc_eufar.imageCalBox, Emc_eufar.imageNameLab);
+		map.put(Emc_eufar.insituLinkBox, Emc_eufar.insituLinkLab);
+		map.put(Emc_eufar.insituConstBox, Emc_eufar.insituConstLab);
+		map.put(Emc_eufar.insituMatBox, Emc_eufar.insituMatLab);
+		map.put(Emc_eufar.insituFlagAre, Emc_eufar.insituFlaLab);
+		map.put(Emc_eufar.insituAssumptionAre, Emc_eufar.insituAssLab);
+		map.put(Emc_eufar.imageBanBox, Emc_eufar.imageBanLab);
+		map.put(Emc_eufar.imageDirBox, Emc_eufar.imageDirLab);
+		map.put(Emc_eufar.imageAltBox, Emc_eufar.imageAltLab);
+		map.put(Emc_eufar.imageZenBox, Emc_eufar.imageZenLab);
+		map.put(Emc_eufar.imageAziBox, Emc_eufar.imageAziLab);
+		map.put(Emc_eufar.imageAnoBox, Emc_eufar.imageAnoLab);
 		return map;
 	}
 
+	
+	public static HashMap<HorizontalPanel, Label> requiredCheck() {
+		HashMap<HorizontalPanel, Label> map = new HashMap<HorizontalPanel, Label>();
+		map.put(Emc_eufar.insituChk04, Emc_eufar.insituOutLab);
+		map.put(Emc_eufar.insituChk01Y, Emc_eufar.insituGeoLab);
+		map.put(Emc_eufar.imageChk10Y, Emc_eufar.imageDCLab);
+		map.put(Emc_eufar.imageChk11Y, Emc_eufar.imageIntPixel);
+		map.put(Emc_eufar.imageChk12Y, Emc_eufar.imageBadPixel);
+		map.put(Emc_eufar.imageChk13Y, Emc_eufar.imageSatPixel);
+		map.put(Emc_eufar.imageChk14Y, Emc_eufar.imageAffPixel);
+		map.put(Emc_eufar.imageChk15Y, Emc_eufar.imagePosInfo);
+		map.put(Emc_eufar.imageChk16Y, Emc_eufar.imageAttInfo);
+		map.put(Emc_eufar.imageChk17Y, Emc_eufar.imageSyncProblem);
+		map.put(Emc_eufar.imageChk18Y, Emc_eufar.imageIntGeocoding);
+		map.put(Emc_eufar.imageChk19Y, Emc_eufar.imageAtmCorrection);
+		map.put(Emc_eufar.imageChk20Y, Emc_eufar.imageCloudMask);
+		map.put(Emc_eufar.imageChk21Y, Emc_eufar.imageShadMask);
+		map.put(Emc_eufar.imageChk22Y, Emc_eufar.imageHazeMask);
+		map.put(Emc_eufar.imageChk23Y, Emc_eufar.imageRouMeasure);
+		map.put(Emc_eufar.imageChk24Y, Emc_eufar.imageIllAngle);
+		map.put(Emc_eufar.imageChk25Y, Emc_eufar.imageBRDFGeometry);
+		return map;
+	}
+	
 	
 	public static HashMap<TextBoxBase, String> correctField() {
 		HashMap<TextBoxBase, String> map = new HashMap<TextBoxBase, String>();
@@ -713,6 +745,18 @@ public class Resources {
 		map.put(Emc_eufar.orgEmailBox, "email");
 		map.put(Emc_eufar.metNameBox, "string");
 		map.put(Emc_eufar.metEmailBox, "email");
+		map.put(Emc_eufar.imageCalBox, "string");
+		map.put(Emc_eufar.imageBanBox, "number");
+		map.put(Emc_eufar.imageDirBox, "number");
+		map.put(Emc_eufar.imageAltBox, "number");
+		map.put(Emc_eufar.imageZenBox, "number");
+		map.put(Emc_eufar.imageAziBox, "number");
+		map.put(Emc_eufar.imageAnoBox, "string");
+		map.put(Emc_eufar.insituLinkBox, "string");
+		map.put(Emc_eufar.insituConstBox, "string");
+		map.put(Emc_eufar.insituMatBox, "string");
+		map.put(Emc_eufar.insituFlagAre, "string");
+		map.put(Emc_eufar.insituAssumptionAre, "string");
 		return map;
 	}
 
@@ -724,6 +768,8 @@ public class Resources {
 		map.put(Emc_eufar.refCreationDat, Emc_eufar.refCreationLab);
 		map.put(Emc_eufar.refStartDat, Emc_eufar.refPhaseLab);
 		map.put(Emc_eufar.refEndDat, Emc_eufar.refPhaseLab);
+		map.put(Emc_eufar.imageRadDat, Emc_eufar.imageRadLab);
+		map.put(Emc_eufar.imageSpeDat, Emc_eufar.imageSpeLab);
 		return map;
 	}
 	

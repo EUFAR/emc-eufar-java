@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
@@ -30,6 +32,25 @@ public class Elements {
 		return horizontalPanel;
 	}
 
+	
+	// radiobutton hack to align vertically text
+	public static HorizontalPanel radioButton(final String group, final String text) {
+		final HorizontalPanel horizontalPanel = new HorizontalPanel();
+		final InlineLabel inlineLabel = new InlineLabel(text);
+		final RadioButton box = new RadioButton(group, "");
+		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		inlineLabel.setStyleName("checkBoxLabel");
+		horizontalPanel.add(box);
+		horizontalPanel.add(inlineLabel);
+		box.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				GuiModification.changeTarget(inlineLabel.getText());
+			}
+		});
+		return horizontalPanel;
+	}
+	
 	
 	// add easily an element in an xml file
 	public static Element addElement(Document doc, String string, Element parent, String value) {

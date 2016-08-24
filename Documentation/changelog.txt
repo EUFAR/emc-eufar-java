@@ -11,9 +11,24 @@ ONLINE VERSION TESTED ON:
     - Opera 30 (succeeded)
 
 
+August 24 2016, Release version 1.2.1 [ONLINE]
+=============================================
+  The "Quality and Validity" section is finally present in EMC, few textboxes have been modified to handle a full dataset.
+  The style used in EMC has been corrected to be in accordance with ASMM.
+  
+  ADDED:
+    - a help page has been introduced (first draft).
+    
+  FIXED:
+    - few mistakes in CSS style have been corrected.
+    - if an aircraft has been added to the list, and if the rolebox displays "Make a choice...", the checking function will think that no aircraft has been added to the list. It has been fixed.
+    - if "Other" is selected in the "Instrument" section, the textboxes appear at the wrong place. It has been fixed.
+    - the filename wasn't set correctly before saving a file.
+
+
 August 02 2016, Release version 1.2.0 [ONLINE]
 =============================================
-  The style used in ASMM has been modified and harmonized to comply with the EUFAR website style.
+  The style used in EMC has been modified and harmonized to comply with the EUFAR website style.
   Few changes in the GUI have been made to comply with the recommandations of the last meeting between N7SP and N8DB.
   
   ADDED:

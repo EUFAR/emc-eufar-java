@@ -143,6 +143,8 @@ public class Utilities {
 	/// put all labels and text to default color and position
 	public static void runCheckDefault() {
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display before check in progress...");
+		boolean otherFormatState = Emc_eufar.insituOtherBox.isVisible();
+		boolean otherInstrumentState = Emc_eufar.airInstNameLab.isVisible();
 		List<Label> allLabel = $("*", Emc_eufar.subDockPanel).widgets(Label.class);
 		List<TextBoxBase> allBox = $("*", Emc_eufar.subDockPanel).widgets(TextBoxBase.class);
 		List<DateBox> allDateBox = $("*", Emc_eufar.subDockPanel).widgets(DateBox.class);
@@ -170,6 +172,31 @@ public class Utilities {
 		for (int i = 0; i < 9; i++) {
 			Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: white !important;");
 		}
+		Emc_eufar.insituOtherBox.setVisible(otherFormatState);
+		Emc_eufar.insituImage.setVisible(otherFormatState);
+		Emc_eufar.airInstNameLab.setVisible(otherInstrumentState);
+		Emc_eufar.airInstNameBox.setVisible(otherInstrumentState);
+		Emc_eufar.airInstManufacturerLab.setVisible(otherInstrumentState);
+		Emc_eufar.airInstManufacturerBox.setVisible(otherInstrumentState);
+		Emc_eufar.horizontalPanel34.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel121.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel148.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel149.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel150.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel151.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel152.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel153.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel154.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel155.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel156.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel48.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel49.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel50.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel51.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel52.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel53.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel54.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.horizontalPanel55.getElement().setAttribute("style","border: 1px solid white !important;");
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display set.");
 	}
 	
@@ -265,6 +292,7 @@ public class Utilities {
 		Emc_eufar.airInstrumentTable.removeAllRows();
 		Emc_eufar.instrumentTabList.clear();
 		Emc_eufar.manufacturerTabList.clear();
+		Emc_eufar.verticalPanel17.clear();
 		Utilities.runCheckDefault();
 		Emc_eufar.useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");

@@ -76,8 +76,9 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<String, String> unitMap = Resources.unitMap();
 	private HashMap<TextBoxBase, Label> requiredField = Resources.requiredField();
 	private HashMap<TextBoxBase, String> correctField = Resources.correctField();
+	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
 	private HashMap<DateBox, Label> correctDate = Resources.correctDate();
-	private String emcVersion = new String("v1.2.0 (2016-08-02)");
+	private String emcVersion = new String("v1.2.1 (2016-08-24)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.6");
 	private String javaVersion = new String("1.7.0.79");
@@ -101,7 +102,6 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel horizontalPanel90 = new HorizontalPanel();
 	private int clouds_heading_width = 3840;
 	private int clouds_heading_height = 322;
-	//private int screen_width = Window.getClientWidth();
 	private int screen_width = Utilities.getScreenWidth();
 	private int menu_width = screen_width / 10;
 	private float ratio = (float) clouds_heading_height / clouds_heading_width;
@@ -479,6 +479,256 @@ public class Emc_eufar implements EntryPoint {
 	public static SimplePanel refDelButton = new SimplePanel(refDelImage);
 	public static ScrollPanel trScroll = new ScrollPanel(verticalPanel26);
 
+	
+	// Quality and Validity items
+	public static VerticalPanel verticalPanel14 = new VerticalPanel();
+	public static VerticalPanel verticalPanel17 = new VerticalPanel();
+	public static VerticalPanel verticalPanel18 = new VerticalPanel();
+	public static VerticalPanel verticalPanel19 = new VerticalPanel();
+	public static HorizontalPanel horizontalPanel30 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel31 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel32 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel33 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel34 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel35 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel36 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel37 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel38 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel39 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel40 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel41 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel42 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel43 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel44 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel45 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel46 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel47 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel48 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel49 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel50 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel51 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel52 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel53 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel54 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel55 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel56 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel57 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel58 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel59 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel79 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel80 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel116 = new HorizontalPanel();
+	private HorizontalPanel horizontalPanel117 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel118 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel119 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel120 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel121 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel122 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel123 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel124 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel125 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel126 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel127 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel128 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel129 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel130 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel131 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel132 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel133 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel134 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel135 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel136 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel137 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel138 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel139 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel140 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel141 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel142 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel143 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel144 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel145 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel146 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel147 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel148 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel149 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel150 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel151 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel152 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel153 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel154 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel155 = new HorizontalPanel();
+	public static HorizontalPanel horizontalPanel156 = new HorizontalPanel();
+	public static VerticalPanel verticalPanel27 = new VerticalPanel();
+	private Label qvMainLab2 = new Label("EUFAR METADATA CREATOR");
+	private Label qvMainLab = new Label("EUFAR METADATA CREATOR");
+	private Label qvPathLab = new Label(">");
+	private Label qvPathLab2 = new Label("Quality and Validity");
+	public static HorizontalPanel imageRad = Elements.radioButton("radioGrp1","Earth observation/Remote sensing data");
+	public static HorizontalPanel insituRad  = Elements.radioButton("radioGrp1","Atmospheric/In-situ data");
+	public static HorizontalPanel insituChk01Y = Elements.radioButton("radioGrp19","Yes");
+	public static HorizontalPanel insituChk01N = Elements.radioButton("radioGrp19","No");
+	public static HorizontalPanel insituChk04 = Elements.checkBox("NetCDF");
+	public static HorizontalPanel insituChk05 = Elements.checkBox("HDF");
+	public static HorizontalPanel insituChk06 = Elements.checkBox("NASA/Ames");
+	public static HorizontalPanel insituChk07 = Elements.checkBox("Other");
+	public static HorizontalPanel imageChk10Y = Elements.radioButton("radioGrp3","Yes");
+	public static HorizontalPanel imageChk10N = Elements.radioButton("radioGrp3","No");
+	public static HorizontalPanel imageChk11Y = Elements.radioButton("radioGrp4","Yes");
+	public static HorizontalPanel imageChk11N = Elements.radioButton("radioGrp4","No");
+	public static HorizontalPanel imageChk12Y = Elements.radioButton("radioGrp5","Yes");
+	public static HorizontalPanel imageChk12N = Elements.radioButton("radioGrp5","No");
+	public static HorizontalPanel imageChk13Y = Elements.radioButton("radioGrp6","Yes");
+	public static HorizontalPanel imageChk13N = Elements.radioButton("radioGrp6","No");
+	public static HorizontalPanel imageChk14Y = Elements.radioButton("radioGrp7","Yes");
+	public static HorizontalPanel imageChk14N = Elements.radioButton("radioGrp7","No");
+	public static HorizontalPanel imageChk15Y = Elements.radioButton("radioGrp8","Yes");
+	public static HorizontalPanel imageChk15N = Elements.radioButton("radioGrp8","No");
+	public static HorizontalPanel imageChk16Y = Elements.radioButton("radioGrp9","Yes");
+	public static HorizontalPanel imageChk16N = Elements.radioButton("radioGrp9","No");
+	public static HorizontalPanel imageChk17Y = Elements.radioButton("radioGrp10","Yes");
+	public static HorizontalPanel imageChk17N = Elements.radioButton("radioGrp10","No");
+	public static HorizontalPanel imageChk18Y = Elements.radioButton("radioGrp11","Yes");
+	public static HorizontalPanel imageChk18N = Elements.radioButton("radioGrp11","No");
+	public static HorizontalPanel imageChk19Y = Elements.radioButton("radioGrp12","Yes");
+	public static HorizontalPanel imageChk19N = Elements.radioButton("radioGrp12","No");
+	public static HorizontalPanel imageChk20Y = Elements.radioButton("radioGrp13","Yes");
+	public static HorizontalPanel imageChk20N = Elements.radioButton("radioGrp13","No");
+	public static HorizontalPanel imageChk21Y = Elements.radioButton("radioGrp14","Yes");
+	public static HorizontalPanel imageChk21N = Elements.radioButton("radioGrp14","No");
+	public static HorizontalPanel imageChk22Y = Elements.radioButton("radioGrp15","Yes");
+	public static HorizontalPanel imageChk22N = Elements.radioButton("radioGrp15","No");
+	public static HorizontalPanel imageChk23Y = Elements.radioButton("radioGrp16","Yes");
+	public static HorizontalPanel imageChk23N = Elements.radioButton("radioGrp16","No");
+	public static HorizontalPanel imageChk24Y = Elements.radioButton("radioGrp17","Yes");
+	public static HorizontalPanel imageChk24N = Elements.radioButton("radioGrp17","No");
+	public static HorizontalPanel imageChk25Y = Elements.radioButton("radioGrp18","Yes");
+	public static HorizontalPanel imageChk25N = Elements.radioButton("radioGrp18","No");
+	public static SimplePanel qvInfoButton01 = Elements.addInfoButton("qvLineage1");
+	public static SimplePanel qvInfoButton02 = Elements.addInfoButton("qvLineage2");
+	public static SimplePanel qvInfoButton03 = Elements.addInfoButton("qvLineage3");
+	public static SimplePanel qvInfoButton04 = Elements.addInfoButton("qvLineage4");
+	public static SimplePanel qvInfoButton05 = Elements.addInfoButton("qvLineage5");
+	public static SimplePanel qvInfoButton06 = Elements.addInfoButton("qvLineage6");
+	public static SimplePanel qvInfoButton07 = Elements.addInfoButton("qvLineage7");
+	public static SimplePanel qvInfoButton08 = Elements.addInfoButton("qvLineage8");
+	public static SimplePanel qvInfoButton09 = Elements.addInfoButton("qvLineage9");
+	public static SimplePanel qvInfoButton10 = Elements.addInfoButton("qvLineage10");
+	public static SimplePanel qvInfoButton11 = Elements.addInfoButton("qvLineage11");
+	public static SimplePanel qvInfoButton12 = Elements.addInfoButton("qvLineage12");
+	public static SimplePanel qvInfoButton13 = Elements.addInfoButton("qvLineage13");
+	public static SimplePanel qvInfoButton14 = Elements.addInfoButton("qvLineage14");
+	public static SimplePanel qvInfoButton15 = Elements.addInfoButton("qvLineage15");
+	public static SimplePanel qvInfoButton16 = Elements.addInfoButton("qvLineage16");
+	public static SimplePanel qvInfoButton17 = Elements.addInfoButton("qvLineage17");
+	public static SimplePanel qvInfoButton18 = Elements.addInfoButton("qvLineage18");
+	private Label insituStarLab01 = new Label("*");
+	public static Label insituStarLab02 = new Label("*");
+	public static Label insituStarLab03 = new Label("*");
+	public static Label insituStarLab04 = new Label("*");
+	public static Label insituStarLab05 = new Label("*");
+	public static Label insituStarLab06 = new Label("*");
+	public static Label insituStarLab07 = new Label("*");
+	public static Label insituStarLab08 = new Label("*");
+	private Label imageStarLab01 = new Label("*");
+	public static Label imageStarLab02 = new Label("*");
+	public static Label imageStarLab03 = new Label("*");
+	public static Label imageStarLab04 = new Label("*");
+	public static Label imageStarLab05 = new Label("*");
+	public static Label imageStarLab06 = new Label("*");
+	public static Label imageStarLab07 = new Label("*");
+	public static Label imageStarLab08 = new Label("*");
+	public static Label imageStarLab09 = new Label("*");
+	public static Label imageStarLab10 = new Label("*");
+	public static Label imageStarLab11 = new Label("*");
+	public static Label imageStarLab12 = new Label("*");
+	public static Label imageStarLab13 = new Label("*");
+	public static Label imageStarLab14 = new Label("*");
+	public static Label imageStarLab15 = new Label("*");
+	public static Label imageStarLab16 = new Label("*");
+	public static Label imageStarLab17 = new Label("*");
+	public static Label imageStarLab18 = new Label("*");
+	public static Label imageStarLab19 = new Label("*");
+	public static Label imageStarLab20 = new Label("*");
+	public static Label imageStarLab21 = new Label("*");
+	public static Label imageStarLab22 = new Label("*");
+	public static Label imageStarLab23 = new Label("*");
+	public static Label imageStarLab24 = new Label("*");
+	public static Label imageStarLab25 = new Label("*");
+	public static Label imageStarLab26 = new Label("*");
+	public static Label imageStarLab27 = new Label("*");
+	public static Label insituCalLab = new Label("Operator's standard calibration procedures applied to raw digital data");
+	public static Label insituGeoLab = new Label("Conversion to geophysical units");
+	public static Label insituOutLab = new Label("Output in standardized format");
+	public static Label insituFlaLab = new Label("Quality-control flagging applied to individual data points");
+	public static Label insituAssLab = new Label("Assumption");
+	public static Label insituLinkLab = new Label("Link to the procedure's description");
+	public static Label insituConstLab = new Label("Source of calibration constants");
+	public static Label insituMatLab = new Label("Source of calibration materials");
+	public static Label insituFlagLab = new Label("Description or link to the operator's standard procedure");
+	public static Label imageCalLab = new Label("Calibration information");
+	public static Label imageAcqLab = new Label("Acquisition information");
+	public static Label imageProLab = new Label("Processing information");
+	public static Label imageLayLab = new Label("Data Quality Layers");
+	public static Label imageNameLab = new Label("Name of calibration laboratory");
+	public static Label imageRadLab = new Label("Date of radiometric calibration");
+	public static Label imageSpeLab = new Label("Date of spectral calibration");
+	public static Label imageBanLab = new Label("Number of spectral bands (spectral mode)");
+	public static Label imageDirLab = new Label("Overall heading / fligh direction (dd)");
+	public static Label imageAltLab = new Label("Overall altitude / average height ASL (m)");
+	public static Label imageZenLab = new Label("Solar zenith (dd)");
+	public static Label imageAziLab = new Label("Solar azimuth (dd)");
+	public static Label imageAnoLab = new Label("Report anomalies in data acquisition");
+	public static Label imageLevLab = new Label("Processing level");
+	public static Label imageDCLab = new Label("Dark current (DC) correction ?");
+	public static Label imageCalcorrLab = new Label("Sensor calibration and system correction");
+	public static Label imageErrLab = new Label("Image data artefacts and processing errors");
+	public static Label imageErrcorrLab = new Label("GPS/IMU related errors, geometric correction");
+	public static Label imageCorrconLab = new Label("Atmospheric correction and atmospheric conditions");
+	public static Label imageIntPixel = new Label("Aggregated interpolated pixel mask ('corrected pixels') ?");
+	public static Label imageBadPixel = new Label("Aggregated bad pixel mask ('not corrected pixels') ?");
+	public static Label imageSatPixel = new Label("Saturated pixels / overflow ?");
+	public static Label imageAffPixel = new Label("Pixels affected by saturation in spatial/spectral neighbourhood ?");
+	public static Label imagePosInfo = new Label("Problems with position information / Interpolated position information ?");
+	public static Label imageAttInfo = new Label("Problems with attitude information / Interpolated attitude information ?");
+	public static Label imageSyncProblem = new Label("Synchronization problems ?");
+	public static Label imageIntGeocoding = new Label("Interpolated pixels during geocoding ?");
+	public static Label imageAtmCorrection = new Label("Failure of atmospheric correction ?");
+	public static Label imageCloudMask = new Label("Cloud mask ?");
+	public static Label imageShadMask = new Label("Cloud shadow mask ?");
+	public static Label imageHazeMask = new Label("Haze mask ?");
+	public static Label imageRouMeasure = new Label("Critical terrain correction based on DEM roughness measure ?");
+	public static Label imageIllAngle = new Label("Critical terrain correction based on slope/local illumination angle ?");
+	public static Label imageBRDFGeometry = new Label("Critical BRDF geometry based on sun-sensor-terrain geometry ?");
+	public static TextArea insituLinkBox = new TextArea();
+	public static TextArea insituConstBox = new TextArea();
+	public static TextArea insituMatBox = new TextArea();
+	public static TextBox insituOtherBox = new TextBox();
+	public static TextBox imageCalBox = new TextBox();
+	public static TextBox imageBanBox = new TextBox();
+	public static TextBox imageDirBox = new TextBox();
+	public static TextBox imageAltBox = new TextBox();
+	public static TextBox imageZenBox = new TextBox();
+	public static TextBox imageAziBox = new TextBox();
+	public static TextBox imageAnoBox = new TextBox();
+	public static DateBox imageRadDat = new DateBox();
+	public static DateBox imageSpeDat = new DateBox();
+	public static ListBox imageLevLst = new ListBox();
+	public static ListBox imageDCLst = new ListBox();
+	public static ArrayList<String> levelList = Resources.levelList();
+	public static ArrayList<String> DCList = Resources.DCList();
+	public static FlexTable imageCalAcqProTab = new FlexTable();
+	public static FlexTable imageQuaLayTab = new FlexTable();
+	public static FlexTable imageCalcorrTab = new FlexTable();
+	public static FlexTable imageErrTab = new FlexTable();
+	public static FlexTable imageErrcorrTab = new FlexTable();
+	public static FlexTable imageCorrconTab = new FlexTable();
+	public static Image insituImage = new Image("icons/fwd_arrow_small.png");
+	public static TextArea insituFlagAre = new TextArea();
+	public static TextArea insituAssumptionAre = new TextArea();
+	public static FlexTable insituCalTab = new FlexTable();
+	public static FlexTable insituFlagTab = new FlexTable();
+	public static ScrollPanel qvScroll = new ScrollPanel(verticalPanel27);
+	
 
 	// Access and Use Constraints items
 	public static VerticalPanel verticalPanel15 = new VerticalPanel();
@@ -652,6 +902,12 @@ public class Emc_eufar implements EntryPoint {
 		Command launchN7SPPage = new Command() {
 			public void execute() {
 				Window.open("http://www.eufar.net/cms/standards-and-protocols/", "_blank", "");
+			}
+		};
+		
+		Command launchHelpPage = new Command()  {
+			public void execute() {
+				Window.open("http://www.eufar.net/cms/eufar-metadata-creator-help/", "_blank", "");
 			}
 		};
 		
@@ -845,6 +1101,7 @@ public class Emc_eufar implements EntryPoint {
 		emcMenu.addSeparator();
 		emcMenu.addItem("File", fileMenu);
 		emcMenu.addItem("About", aboutMenu);
+		emcMenu.addItem("Help", launchHelpPage);
 		aboutMenu.addItem("EUFAR Metadata Creator",aboutWindow);
 		aboutMenu.addItem("INSPIRE XML standard",aboutStandard);
 		aboutMenu.addItem("EUFAR N7SP",launchN7SPPage);
@@ -1265,15 +1522,26 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel12.add(airInstrumentLab);
 		horizontalPanel12.add(aiStarLab02);
 		horizontalPanel12.add(airInstrumentLst);
+		horizontalPanel12.add(Emc_eufar.airInstNameLab);
+		horizontalPanel12.add(Emc_eufar.airInstNameBox);
+		horizontalPanel12.add(Emc_eufar.airInstManufacturerLab);
+		horizontalPanel12.add(Emc_eufar.airInstManufacturerBox);
 		horizontalPanel12.add(airPlusButton02);
 		horizontalPanel12.add(airInstrumentInfo);
 		verticalPanel10.add(horizontalPanel12);
 		verticalPanel10.add(airInstrumentTable);
 		airInstrumentTable.setCellSpacing(10);
+		Emc_eufar.airInstNameBox.setStyleName("airTextBox6");
+		Emc_eufar.airInstManufacturerBox.setStyleName("airTextBox6");
+		Emc_eufar.airInstNameLab.setStyleName("airTitleTextLabel2");
+		Emc_eufar.airInstManufacturerLab.setStyleName("airTitleTextLabel2");
+		Emc_eufar.horizontalPanel65.getElement().setAttribute("style","margin-top: 13px;");
 		verticalPanel10.setStyleName("airVerticalPanel");
 		airAircraftLab.setStyleName("airTitleTextLabel");
 		airAircraftLst.setStyleName("airTextList");
+		horizontalPanel09.setStyleName("airHorizontalPanel2");
 		horizontalPanel10.setStyleName("airHorizontalPanel");
+		horizontalPanel12.setStyleName("airHorizontalPanel3");
 		airManufacturerLab.setStyleName("airFlexTableLabel1");
 		airTypeLab.setStyleName("airFlexTableLabel1");
 		airOperatorLab.setStyleName("airFlexTableLabel1");
@@ -1284,10 +1552,9 @@ public class Emc_eufar implements EntryPoint {
 		airOperatorInfo.setStyleName("airFlexTableLabel4");
 		airCountryInfo.setStyleName("airFlexTableLabel5");
 		airRegistrationInfo.setStyleName("airFlexTableLabel6");
-		airAircraftLst.setName("airAircraftList");
 		airInstrumentTable.getElement().setAttribute("style","margin-left: 40px;");
 		airInstrumentLst.setStyleName("airTextList2");
-		airInstrumentLab.setStyleName("airTitleTextLabel");
+		airInstrumentLab.setStyleName("airTitleTextLabel3");
 		aiStarLab01.setStyleName("airStarLabel");
 		aiStarLab02.setStyleName("airStarLabel");
 		aiMainLab2.setStyleName("identMainText2");
@@ -1296,10 +1563,6 @@ public class Emc_eufar implements EntryPoint {
 		aiPathLab2.setStyleName("identPathText2");
 		horizontalPanel74.setStyleName("identLine");
 		airCopyrightInfo.setStyleName("airCopyrightInfo");
-		airPlatformInfo.getElement().setAttribute("style","margin-top: 13px;");
-		airPlusButton01.getElement().setAttribute("style","margin-top: 13px;");
-		airPlusButton02.getElement().setAttribute("style","margin-top: 13px;");
-		airInstrumentInfo.getElement().setAttribute("style","margin-top: 13px;");
 		verticalPanel24.getElement().setAttribute("style", 
 				"margin-top: " + (new_clouds_heading_height - 31) + "px !important;");
 		aiScroll.getElement().setAttribute("style", 
@@ -1320,6 +1583,10 @@ public class Emc_eufar implements EntryPoint {
 				GuiModification.otherInstrument();
 			}
 		});
+		Emc_eufar.airInstNameLab.setVisible(false);
+		Emc_eufar.airInstNameBox.setVisible(false);
+		Emc_eufar.airInstManufacturerLab.setVisible(false);
+		Emc_eufar.airInstManufacturerBox.setVisible(false);
 		rootLogger.log(Level.INFO, "Aircraft and instruments panel initialized");
 
 
@@ -1458,6 +1725,10 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel21.add(refPhaseTab);
 		horizontalPanel21.add(refPlusButton);
 		horizontalPanel21.add(refPlusInfo);
+		refStartDat.setStyleName("refDatebox");
+		refEndDat.setStyleName("refDatebox");
+		refRevisionDat.setStyleName("refDatebox");
+		refCreationDat.setStyleName("refDatebox");
 		refExtentLab.setStyleName("refTitleTextLabel");
 		refDelButton.setStyleName("infoButton");
 		refPhaseLab.setStyleName("refTextLabel");
@@ -1511,6 +1782,52 @@ public class Emc_eufar implements EntryPoint {
 		});
 		rootLogger.log(Level.INFO, "Temporal Reference panel initialized");
 
+		
+		// Quality and Validity panel
+		horizontalPanel79.add(qvMainLab);
+		horizontalPanel79.add(qvPathLab);
+		horizontalPanel79.add(qvPathLab2);
+		horizontalPanel80.add(new HTML("<hr style=\"width:1200px;height:10px;background:#c0c0c0;border:0px;\" />"));
+		verticalPanel27.add(qvMainLab2);
+		verticalPanel27.add(horizontalPanel79);
+		verticalPanel27.add(horizontalPanel80);
+		verticalPanel27.add(verticalPanel14);
+		Utilities.populateListBox(imageLevLst, levelList, 0);
+		Utilities.populateListBox(imageDCLst, DCList, 0);
+		imageRadDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
+		imageRadDat.setValue(new Date());
+		imageSpeDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
+		imageSpeDat.setValue(new Date());
+		horizontalPanel117.add(imageRad);
+		horizontalPanel117.add(imageStarLab01);
+		horizontalPanel30.add(horizontalPanel117);
+		horizontalPanel116.add(insituRad);
+		horizontalPanel116.add(insituStarLab01);
+		horizontalPanel30.add(horizontalPanel116);
+		horizontalPanel30.add(qvInfoButton01);
+		qvInfoButton01.getElement().setAttribute("style","margin-left: 200px !important;");
+		horizontalPanel30.getElement().setAttribute("style", "margin-bottom: 20px;");
+		verticalPanel14.add(horizontalPanel30);
+		verticalPanel14.add(verticalPanel17);
+		insituStarLab01.setStyleName("qvStarLabel");
+		imageStarLab01.setStyleName("qvStarLabel");
+		imageRad.setStyleName("qv_imageRad");
+		insituRad.setStyleName("qv_insituRad");
+		verticalPanel14.setStyleName("qvVerticalPanel");
+		horizontalPanel80.setStyleName("identLine");
+		qvMainLab.setStyleName("identMainText");
+		qvPathLab.setStyleName("identPathText");
+		qvPathLab2.setStyleName("identPathText2");
+		qvMainLab2.setStyleName("identMainText2");
+		verticalPanel27.getElement().setAttribute("style", 
+				"margin-top: " + (new_clouds_heading_height - 31) + "px !important;");
+		qvScroll.getElement().setAttribute("style", 
+				"background-image: url(icons/eufar_heading_clouds.jpg) !important; "
+				+ "background-repeat: no-repeat !important;" 
+				+ "background-size: " + screen_width + "px " + new_clouds_heading_height + "px !important;"
+				+ "background-position: -" + menu_width + "px 0px !important;");
+		rootLogger.log(Level.INFO, "Quality and Validity panel initialized");
+		
 
 		// Access and Use Constraints panel
 		horizontalPanel81.add(useMainLab);
@@ -1782,6 +2099,7 @@ public class Emc_eufar implements EntryPoint {
 		metStarLab02.setStyleName("metStarLabel");
 		metStarLab03.setStyleName("metStarLabel");
 		metStarLab04.setStyleName("metStarLabel");
+		metDateDat.setStyleName("metDatebox");
 		FlexCellFormatter metCellFormatter2 = metPartyTab.getFlexCellFormatter();
 		metCellFormatter2.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		metCellFormatter2.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
@@ -1811,6 +2129,7 @@ public class Emc_eufar implements EntryPoint {
 		tabPanel.add(Emc_eufar.aiScroll,"Aircraft and Instruments");
 		tabPanel.add(Emc_eufar.giScroll,"Geographic Information");
 		tabPanel.add(Emc_eufar.trScroll,"Temporal Reference");
+		tabPanel.add(Emc_eufar.qvScroll,"Quality and Validity");
 		tabPanel.add(Emc_eufar.auScroll,"Access and Use Constraints");
 		tabPanel.add(Emc_eufar.roScroll,"Responsible Organisations");
 		tabPanel.add(Emc_eufar.mmScroll,"Metadata on Metadata");
@@ -1897,11 +2216,12 @@ public class Emc_eufar implements EntryPoint {
 		if (Emc_eufar.isModified) {
 			final DialogBox infoDialog = new DialogBox();
 			final VerticalPanel verticalPanel01 = new VerticalPanel();
+			final VerticalPanel verticalPanel02 = new VerticalPanel();
 			final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 			final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
 			final Image image = new Image("icons/warning_popup_icon.png");
-			final HTML label = new HTML("<p align=justify>The actual document has been modified. Changes will be lost if the document is not "
-					+ "saved.<br/></p><p><span style=\" font-weight:600;\">Do you want to save your changes ?</span></p>");
+			final Label label = new Label("The actual document has been modified. Changes will be lost if the document is not saved.");
+			final Label label2 = new Label("Do you want to save your changes?");
 			final Button saveButton = new Button("Save", new ClickHandler() {			
 				@Override
 				public void onClick(ClickEvent event) {
@@ -1924,26 +2244,26 @@ public class Emc_eufar implements EntryPoint {
 				}
 			});
 			infoDialog.setGlassEnabled(true);
-			verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px !important;");
 			horizontalPanel01.add(image);
-			horizontalPanel01.add(label);
+			verticalPanel02.add(label);
+			verticalPanel02.add(label2);
+			horizontalPanel01.add(verticalPanel02);
 			verticalPanel01.add(horizontalPanel01);
 			horizontalPanel02.add(saveButton);
 			horizontalPanel02.add(cancelButton);
 			horizontalPanel02.add(createButton);
+			verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 			verticalPanel01.add(horizontalPanel02);
-			label.getElement().setAttribute("style", "margin-left: 10px !important; font-family: MyFont !important; font-size: 14px !important;");
-			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFont !important; font-size: 14px "
-					+ "!important; margin-top: 10px !important;");
-			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: MyFont !important; font-size: 14px "
-					+ "!important; margin-top: 10px !important;");
-			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFont !important; font-size: 14px "
-					+ "!important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
 			infoDialog.add(verticalPanel01);
-			infoDialog.setSize( "400px", "150px" );
+			infoDialog.setStyleName("newFilePanel");
+			label.setStyleName("newFileText");
+			label2.setStyleName("newFileText2");
+			saveButton.addStyleName("newFileButton");
+			cancelButton.addStyleName("newFileButton2");
+			createButton.addStyleName("newFileButton3");
+			infoDialog.setSize("350px","50px");
 			infoDialog.setModal(true);
 			infoDialog.center();
-			infoDialog.setStyleName("myUploadBox");
 			infoDialog.show();
 		} else {
 			Utilities.clearFields();
@@ -1976,24 +2296,22 @@ public class Emc_eufar implements EntryPoint {
 				}
 				if (textBox.getText() == "") {
 					if (label == null) {
-						textBox.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
+						textBox.getElement().setAttribute("style","border-color: #ED1C24 !important;");
 						
 						widgetIndex = tabPanel.getWidgetIndex(parent);
-						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
+						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
 					} else if (label.getText() == "Spatial resolution:") {} 
 					else {
 						notCompleted++;
-						label.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
-						textBox.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
+						textBox.getElement().setAttribute("style","border-color: #ED1C24 !important;");
 						widgetIndex = tabPanel.getWidgetIndex(parent);
-						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
+						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
 					}
 				} else {
 					if (!runCorrect(textBox)) {
 						notCompleted++;
-						label.getElement().setAttribute("style","color: rgb(0,0,200) !important;");
 						widgetIndex = tabPanel.getWidgetIndex(parent);
-						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
 					}
 				}
 			} catch (Exception ex) {
@@ -2008,7 +2326,7 @@ public class Emc_eufar implements EntryPoint {
 		}
 		if (allClaCheckNumber == 0) {
 			notCompleted++;
-			tabPanel.getTabWidget(1).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
+			tabPanel.getTabWidget(1).getElement().setAttribute("style","color: #ED1C24 !important;");
 		}
 		List<CheckBox> allKeyCheck = $("*", kwScroll).widgets(CheckBox.class);
 		for (int i = 0; i < allKeyCheck.size(); i++) {
@@ -2018,47 +2336,148 @@ public class Emc_eufar implements EntryPoint {
 		}
 		if (allKeyCheckNumber == 0) {
 			notCompleted++;
-			tabPanel.getTabWidget(2).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
+			tabPanel.getTabWidget(2).getElement().setAttribute("style","color: #ED1C24 !important;");
 		}
-		if (airAircraftLst.getSelectedIndex() == 0) {
+		if (aircraftTabList.size() == 0) {
 			notCompleted++;
-			tabPanel.getTabWidget(3).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
-			airAircraftLab.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
-			airAircraftLst.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
-		} else if (airAircraftLst.getSelectedIndex() == 1) {
-			if (Emc_eufar.airManufacturerBox.getText() == "") {
-				Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
-			}
-			if (Emc_eufar.airTypeBox.getText() == "") {
-				Emc_eufar.airTypeBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
-			}
-			if (Emc_eufar.airOperatorBox.getText() == "") {
-				Emc_eufar.airOperatorBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
-			}
-			if (Emc_eufar.airCountryLst.getSelectedItemText() == "Make a choice...") {
-				Emc_eufar.airCountryLst.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
-				Emc_eufar.airCountryLab.getElement().setAttribute("style", "color: rgb(200,0,0) !important;");
-			}
-			if (Emc_eufar.airRegistrationBox.getText() == "") {
-				Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "border-color: rgb(200,0,0) !important;");
+			tabPanel.getTabWidget(3).getElement().setAttribute("style","color: #ED1C24 !important;");
+			airAircraftLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
+			if (airAircraftLst.getSelectedIndex() == 1) {
+				if (Emc_eufar.airManufacturerBox.getText() == "") {
+					Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
+				}
+				if (Emc_eufar.airTypeBox.getText() == "") {
+					Emc_eufar.airTypeBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
+				}
+				if (Emc_eufar.airOperatorBox.getText() == "") {
+					Emc_eufar.airOperatorBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
+				}
+				if (Emc_eufar.airCountryLst.getSelectedItemText() == "Make a choice...") {
+					Emc_eufar.airCountryLst.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
+				}
+				if (Emc_eufar.airRegistrationBox.getText() == "") {
+					Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
+				}
 			}
 		}
 		if (instrumentTabList.size() == 0) {
 			notCompleted++;
-			tabPanel.getTabWidget(3).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
-			airInstrumentLab.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
-			airInstrumentLst.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
+			tabPanel.getTabWidget(3).getElement().setAttribute("style","color: #ED1C24 !important;");
+			airInstrumentLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
 		}
 		if (geoLocationLst.getSelectedIndex() == 0 || geoDetailLst.getSelectedIndex() == 0 || geoDetailLst.isEnabled() == false) {
-			geoLocationLab.getElement().setAttribute("style","color: rgb(200,0,0) !important;");
 			if (geoLocationLst.getSelectedIndex() == 0) {
-				geoLocationLst.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
+				geoLocationLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
 			}
 			if (geoDetailLst.getSelectedIndex() == 0 || geoDetailLst.isEnabled() == false) {
-				geoDetailLst.getElement().setAttribute("style","border-color: rgb(200,0,0) !important;");
+				geoDetailLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
 			}
 			notCompleted++;
-			tabPanel.getTabWidget(4).getElement().setAttribute("style","color: rgb(200,0,0) !important;");
+			tabPanel.getTabWidget(4).getElement().setAttribute("style","color: #ED1C24 !important;");
+		}
+		if (((CheckBox) insituRad.getWidget(0)).getValue() == false && ((CheckBox) imageRad.getWidget(0)).getValue() == false) {
+			notCompleted++;
+			tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+		} else if (((CheckBox) insituRad.getWidget(0)).getValue() == true && ((CheckBox) imageRad.getWidget(0)).getValue() == false) {
+			if (((CheckBox) insituChk04.getWidget(0)).getValue() == false && ((CheckBox) insituChk05.getWidget(0)).getValue() == false && 
+					((CheckBox) insituChk06.getWidget(0)).getValue() == false && ((CheckBox) insituChk07.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel34.getElement().setAttribute("style","border: 1px solid #ED1C24;");
+				notCompleted++;
+			} else if (((CheckBox) insituChk07.getWidget(0)).getValue() == true && insituOtherBox.getText() == "") {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				insituOtherBox.getElement().setAttribute("style","border-color: #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) insituChk01Y.getWidget(0)).getValue() == false && ((CheckBox) insituChk01N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel121.getElement().setAttribute("style","border: 1px solid #ED1C24;");
+				notCompleted++;
+			}
+		} else if (((CheckBox) insituRad.getWidget(0)).getValue() == false && ((CheckBox) imageRad.getWidget(0)).getValue() == true) {
+			if (imageLevLst.getSelectedValue() == "Make a choice...") {
+				imageLevLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
+			}
+			if (((CheckBox) imageChk10Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk10N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel148.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk11Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk11N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel149.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk12Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk12N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel150.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk13Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk13N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel151.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk14Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk14N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel152.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk15Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk15N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel48.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk16Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk16N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel49.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk17Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk17N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel50.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk18Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk18N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel51.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk19Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk19N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel153.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk20Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk20N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel53.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk21Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk21N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel54.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk22Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk22N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel55.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk23Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk23N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel154.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk24Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk24N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel155.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
+			if (((CheckBox) imageChk25Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk25N.getWidget(0)).getValue() == false) {
+				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+				Emc_eufar.horizontalPanel156.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+				notCompleted++;
+			}
 		}
 		rootLogger.log(Level.INFO, "Check of all fields finished.");
 		if (notCompleted > 0) {

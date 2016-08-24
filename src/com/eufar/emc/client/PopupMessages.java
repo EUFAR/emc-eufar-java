@@ -59,18 +59,15 @@ public class PopupMessages {
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(label);
 		verticalPanel01.add(horizontalPanel01);
+		verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel01.add(button);
-		label.setStyleName("popupText");
-		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
-		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: MyFontBold !important; font-size: 14px "
-				+ "!important; margin-top: 10px !important; margin-bottom: 10px !important;");
+		infoDialog.setStyleName("aboutEmcPanel");
+		label.setStyleName("aboutEmcText");
+		button.addStyleName("aboutEmcButton");
 		infoDialog.add(verticalPanel01);
-		//infoDialog.setGlassEnabled(false);
-		infoDialog.setSize( "500px", "200px" );
+		infoDialog.setSize("500px","200px");
 		infoDialog.setModal(true);
 		infoDialog.center();
-		infoDialog.setStyleName("myUploadBox");
 	}
 	
 	
@@ -80,9 +77,9 @@ public class PopupMessages {
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final Image image = new Image("icons/inspire_popup_icon.png");
-		final HTML label = new HTML("<p>INSPIRE is 'an European Union initiative to establish an infrastructure for spatial information in "
+		final HTML label = new HTML("INSPIRE is 'an European Union initiative to establish an infrastructure for spatial information in "
 				+ "Europe that is geared to help to make spatial or geographical information more accessible and interoperable for a wide "
-				+ "range of purposes supporting sustainable development.'</p><p>The INSPIRE directive lays down a general framework for a "
+				+ "range of purposes supporting sustainable development.'<p>The INSPIRE directive lays down a general framework for a "
 				+ "Spatial Data Infrastructure (SDI) for the purposes of European Community environmental policies and policies or "
 				+ "activities which may have an impact on the environment. The INSPIRE Directive entered into force on 15 May 2007.</p><p>"
 				+ "INSPIRE is based on the infrastructures for spatial information established and operated by the member states of the "
@@ -111,17 +108,15 @@ public class PopupMessages {
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(label);
 		verticalPanel01.add(horizontalPanel01);
+		verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel01.add(button);
-		label.setStyleName("popupText");
-		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
-		button.getElement().setAttribute("style", "margin-left: 270px !important; font-family: MyFontBold !important; font-size: 14px "
-				+ "!important; margin-top: 10px !important; margin-bottom: 10px !important;");
+		infoDialog.setStyleName("aboutInspirePanel");
+		label.setStyleName("aboutInspireText");
+		button.addStyleName("aboutInspireButton");
 		infoDialog.add(verticalPanel01);
-		infoDialog.setSize( "600px", "200px" );
+		infoDialog.setSize("700px","200px");
 		infoDialog.setModal(true);
 		infoDialog.center();
-		infoDialog.setStyleName("myUploadBox");
 		infoDialog.show();
 	}
 	
@@ -143,17 +138,15 @@ public class PopupMessages {
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(label);
 		verticalPanel01.add(horizontalPanel01);
+		verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel01.add(button);
-		label.setStyleName("popupText");
-		verticalPanel01.getElement().setAttribute("style","margin-left: 10px !important; margin-right: 10px !important; margin-top: 10px"
-				+ " !important;");
-		button.getElement().setAttribute("style", "margin-left: 172px !important; font-family: MyFontBold !important; font-size: 14px"
-				+ " !important; margin-top: 20px !important; margin-bottom: 10px !important;");
+		infoDialog.setStyleName("infoButtonPanel");
+		label.setStyleName("infoButtonText");
+		button.addStyleName("infoButtonButton");
 		infoDialog.add(verticalPanel01);
-		infoDialog.setSize( "400px", "50px" );
+		infoDialog.setSize("400px","50px");
 		infoDialog.setModal(true);
 		infoDialog.center();
-		infoDialog.setStyleName("myInfoBox");
 		infoDialog.showRelativeTo(infoButton);
 	}
 	
@@ -172,25 +165,22 @@ public class PopupMessages {
 				myOpenDialog.hide();
 			}
 		});
+		myOpenDialog.setGlassEnabled(true);
 		verticalPanel.add(horizontalPanel);
 		horizontalPanel.add(image);
 		horizontalPanel.add(scrollPanel);
-		okButton.getElement().setAttribute("style", "font-family: MyFontBold !important; "
-				+ "font-size: 14px !important; margin-top: 10px !important;");
+		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		verticalPanel.add(okButton);
 		myOpenDialog.add(verticalPanel);
-		myOpenDialog.setGlassEnabled(true);
 		scrollPanel.add(label);
 		scrollPanel.setHeight("500px");
 		scrollPanel.setWidth("700px");
-		label.setStyleName("popupText");
-		verticalPanel.getElement().setAttribute("style", "margin-left: 10px; margin-top: 10px; margin-bottom: 10px;");
-		image.getElement().setAttribute("style", "margin-right: 10px;");
-		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		verticalPanel.add(okButton);
-		myOpenDialog.setSize("700px", "500px");
+		label.setStyleName("changelogText");
+		okButton.addStyleName("changelogButton");
+		myOpenDialog.setStyleName("changelogPanel");
+		myOpenDialog.setSize("700px","500px");
 		myOpenDialog.setModal(true);
 		myOpenDialog.center();
-		myOpenDialog.setStyleName("myUploadBox");
 	}
 	
 	
@@ -214,17 +204,15 @@ public class PopupMessages {
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(label);
 		verticalPanel01.add(horizontalPanel01);
+		verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel01.add(button);
-		label.setStyleName("popupText");
-		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
-		button.getElement().setAttribute("style", "margin-left: 220px !important; font-family: MyFontBold !important; font-size: 14px "
-				+ "!important; margin-top: 20px !important;");
+		label.setStyleName("infoExplorerText");
+		button.addStyleName("infoExplorerButton");
+		aboutDialog.setStyleName("infoExplorerPanel");
 		aboutDialog.add(verticalPanel01);
-		aboutDialog.setSize( "500px", "180px" );
+		aboutDialog.setSize("500px","180px");
 		aboutDialog.setModal(true);
 		aboutDialog.center();
-		aboutDialog.setStyleName("myUploadBox");
 		aboutDialog.show();
 	}
 	
@@ -240,9 +228,8 @@ public class PopupMessages {
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
 		final Image image = new Image("icons/save_popup_icon.png");
 		final TextArea xmlTree = new TextArea();
-		final Label label = new HTML("Please enter a name to save the XML file. For a EUFAR project,"
-				+ " the name should start with <span style=\" font-weight:600; color:#c80000;\">flight-info_</span>, followed by the dataset filename"
-				+ " (<i>cf. Unique resource identifier</i>).");
+		final Label label = new HTML("Please enter a name to save the XML file. For a EUFAR project, the name should start with "
+				+ "<span style=\" font-weight:600; color:#c80000;\">Project-acronym_</span>.");
 		final TextBox fileName = new TextBox();
 		final TextBox filebox = new TextBox();
 		final FormPanel myForm = new FormPanel();
@@ -262,8 +249,7 @@ public class PopupMessages {
 					Emc_eufar.rootLogger.log(Level.INFO, "No filename entered...");
 					return;
 				} else {
-					Emc_eufar.myFileName = fileName.getText();
-					if (!Emc_eufar.myFileName.toLowerCase().endsWith(".xml")) {
+					if (!fileName.getText().toLowerCase().endsWith(".xml")) {
 						Emc_eufar.myFileName = Emc_eufar.myFileName + ".xml";
 					}
 					filebox.setText(Emc_eufar.myFileName);
@@ -282,8 +268,7 @@ public class PopupMessages {
 						Emc_eufar.rootLogger.log(Level.INFO, "No filename entered...");
 						return;
 					} else {
-						Emc_eufar.myFileName = fileName.getText();
-						if (!Emc_eufar.myFileName.toLowerCase().endsWith(".xml")) {
+						if (!fileName.getText().toLowerCase().endsWith(".xml")) {
 							Emc_eufar.myFileName = Emc_eufar.myFileName + ".xml";
 						}
 						filebox.setText(Emc_eufar.myFileName);
@@ -298,24 +283,18 @@ public class PopupMessages {
 		});
 		mySaveDialog.setGlassEnabled(true);
 		verticalPanel03.add(horizontalPanel02);
-		verticalPanel03.getElement().setAttribute("style", "margin-left: 5px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
 		horizontalPanel02.add(image);
 		horizontalPanel02.add(verticalPanel02);
 		xmlTree.setText(XmlSave.createXml());
 		xmlTree.setName("xmltree");
 		verticalPanel01.add(xmlTree);
-		label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:20px !important; margin-bottom:30px !important; "
-				+ "margin-top:10px !important; font-family: MyFont !important; text-align: justify !important; font-size: 14px "
-				+ "!important;");
 		verticalPanel02.add(label);
 		fileName.setText(Emc_eufar.myFileName);
-		fileName.setStyleName("gi_textBox");
-		fileName.getElement().setAttribute("style", "width:230px !important; margin-left: 20px !important;");
 		verticalPanel02.add(fileName);
-		Emc_eufar.myFileName = fileName.getText();
-		if (!Emc_eufar.myFileName.toLowerCase().endsWith(".xml")) {
-			Emc_eufar.myFileName = Emc_eufar.myFileName + ".xml";
+		if (Emc_eufar.myFileName == "" || Emc_eufar.myFileName == ".xml") {
+			fileName.setText(Emc_eufar.identIdentifierBox.getText());
+		} else {
+			fileName.setText(Emc_eufar.myFileName);
 		}
 		filebox.setName("filename");
 		verticalPanel01.add(filebox);
@@ -325,19 +304,19 @@ public class PopupMessages {
 		myForm.setVisible(false);
 		horizontalPanel01.add(submitButton);
 		horizontalPanel01.add(cancelButton);
-		submitButton.getElement().setAttribute("style", "margin-left:88px !important; font-family: MyFontBold !important; font-size: "
-				+ "14px !important;");
-		cancelButton.getElement().setAttribute("style", "margin-left:90px !important; font-family: MyFontBold !important; font-size: "
-				+ "14px !important;");
-		horizontalPanel01.getElement().setAttribute("style", "margin-top:30px !important; margin-bottom:20px !important;");
-		verticalPanel02.add(myForm);	
+		label.setStyleName("saveText");
+		fileName.setStyleName("saveBox");
+		submitButton.addStyleName("saveButton1");
+		cancelButton.addStyleName("saveButton2");
+		mySaveDialog.setStyleName("savePanel");
+		verticalPanel02.add(myForm);
 		verticalPanel03.add(horizontalPanel01);
 		mySaveDialog.add(verticalPanel03);	
-		mySaveDialog.setSize( "370px", "180px" );
+		mySaveDialog.setSize("360px","50px");
 		mySaveDialog.setModal(true);
 		mySaveDialog.center();
-		mySaveDialog.setStyleName("myUploadBox");	
 		fileName.setFocus(true);
+		
 	}
 	
 	
@@ -374,7 +353,6 @@ public class PopupMessages {
 				}
 			});
 			infoDialog.setGlassEnabled(true);
-			verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px !important;");
 			horizontalPanel01.add(image);
 			verticalPanel02.add(label);
 			verticalPanel02.add(label2);
@@ -384,23 +362,16 @@ public class PopupMessages {
 			horizontalPanel02.add(cancelButton);
 			horizontalPanel02.add(createButton);
 			verticalPanel01.add(horizontalPanel02);
-			label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:0px !important; margin-bottom:0px !important; "
-					+ "margin-top: 0px !important;  font-family: MyFont !important; text-align: justify !important; font-size: 14px "
-					+ "!important;");
-			label2.getElement().setAttribute("style", "margin-left: 20px !important; margin-top: 20px !important; margin-bottom: 20px !important; "
-					+ "text-decoration: underline !important; font-weight: bold !important; font-family: MyFont !important; "
-					+ "text-align: justify !important; font-size: 14px !important;");
-			saveButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFontBold !important; font-Size: "
-					+ "14px !important; margin-top: 10px !important;");
-			cancelButton.getElement().setAttribute("style", "margin-left: 40px !important; font-family: MyFontBold !important; font-Size: "
-					+ "14px !important; margin-top: 10px !important;");
-			createButton.getElement().setAttribute("style", "margin-left: 20px !important; font-family: MyFontBold !important; font-Size: "
-					+ "14px !important; margin-top: 10px !important; height: 30px !important; width: 180px !important");
+			infoDialog.setStyleName("newPanel");
+			label.setStyleName("newText");
+			label2.setStyleName("newText2");
+			saveButton.addStyleName("newButton");
+			cancelButton.addStyleName("newButton2");
+			createButton.addStyleName("newButton3");
 			infoDialog.add(verticalPanel01);
-			infoDialog.setSize( "130px", "180px" );
+			infoDialog.setSize("350px","50px");
 			infoDialog.setModal(true);
 			infoDialog.center();
-			infoDialog.setStyleName("myUploadBox");
 			infoDialog.show();
 		} else {
 			openAction();
@@ -442,19 +413,12 @@ public class PopupMessages {
 		myOpenDialog.setGlassEnabled(true);
 		myOpenDialog.add(verticalPanel02);
 		verticalPanel02.add(horizontalPanel01);
-		verticalPanel02.getElement().setAttribute("style", "margin-left: 5px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(verticalPanel01);
-		verticalPanel01.getElement().setAttribute("style", "margin-right:20px !important;");
-		label.getElement().setAttribute("style", "margin-left: 20px !important; margin-right:20px !important; margin-bottom:30px !important; "
-				+ "margin-top:10px !important;  font-family: MyFont !important; text-align: justify !important; font-size: 14px "
-				+ "!important;");
 		verticalPanel01.add(label);
 		myFileUpload.setName("uploadFormElement");
 		myFileUpload.getElement().setId("uploadFormElement");
 		myFileUpload.getElement().setId("myFile");
-		myFileUpload.getElement().setAttribute("style", "margin-left:20px !important;");
 		myFileUpload.getElement().setAttribute("accept", "xml");
 		verticalPanel01.add(myFileUpload);
 		myUploadForm.setAction(Emc_eufar.emcPath + "/upload");
@@ -484,17 +448,16 @@ public class PopupMessages {
 		myUploadForm.add(verticalPanel02);
 		horizontalPanel02.add(submitButton);
 		horizontalPanel02.add(cancelButton);
-		submitButton.getElement().setAttribute("style", "margin-left:20px !important; font-family: MyFontBold !important; font-Size: "
-				+ "14px !important;");
-		cancelButton.getElement().setAttribute("style", "margin-left:75px !important; font-family: MyFontBold !important; font-Size: "
-				+ "14px!important;");
-		horizontalPanel02.getElement().setAttribute("style", "margin-top:30px !important; margin-bottom:20px !important;");
+		myOpenDialog.setStyleName("openPanel");
+		label.setStyleName("openText");
+		myFileUpload.setStyleName("openUpload");
+		submitButton.addStyleName("openButton1");
+		cancelButton.addStyleName("openButton2");
 		verticalPanel01.add(horizontalPanel02);
 		myOpenDialog.add(myUploadForm);
-		myOpenDialog.setSize( "130px", "180px" );
+		myOpenDialog.setSize("130px","150px");
 		myOpenDialog.setModal(true);
 		myOpenDialog.center();
-		myOpenDialog.setStyleName("myUploadBox");
 	}
 	
 	
@@ -505,12 +468,11 @@ public class PopupMessages {
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-		final HTML label = new HTML("<p align=\"justify\" style='font-family:MyFont; font-size: 14px;'>All mandatory fields have not been"
-				+ "filled in, or have been incorrectly filled in. "
+		final HTML label = new HTML("All mandatory fields have not been filled in, or have been incorrectly filled in. "
 				+ "You can save your file if you want to complete/correct it later. All fields which have not been completely filled in are "
 				+ "indicated in <span style=\" font-weight:600; color:#c80000;\">red</span>, and in <span style=\" font-weight:600; "
 				+ "color:#0000c8;\">blue</span> for those incorrectly filled in. <span style=\" font-weight:600;\">Do not use an "
-				+ "incomplete/incorrect xml file for storage and/or sql queries.</span></p>");
+				+ "incomplete/incorrect xml file for storage and/or sql queries.</span>");
 		final Image image = new Image("icons/warning_popup_icon.png");
 		final Button buttonOk = new Button("Save", new ClickHandler() {			
 			@Override
@@ -526,26 +488,20 @@ public class PopupMessages {
 			}
 		});
 		infoDialog.setGlassEnabled(true);
-		verticalPanel01.getElement().setAttribute("style", "margin-left: 10px !important; margin-top: 10px !important; margin-right: 10px "
-				+ "!important;");
 		horizontalPanel01.add(image);
 		horizontalPanel01.add(label);
 		verticalPanel01.add(horizontalPanel01);
 		horizontalPanel02.add(buttonOk);
 		horizontalPanel02.add(buttonCancel);
 		verticalPanel01.add(horizontalPanel02);
-		label.getElement().setAttribute("style", "font-family: MyFont !important; font-size: 14px !important;");
-		image.getElement().setAttribute("style", "margin-top: 10px !important;");
-		label.getElement().setAttribute("style", "margin-left: 10px; margin-top: 10px; font-family: DroidSansFallback;");
-		buttonOk.getElement().setAttribute("style", "margin-left: 120px !important; font-family: MyFontBold !important; font-Size: "
-				+ "14px !important; margin-top: 10px !important;");
-		buttonCancel.getElement().setAttribute("style", "margin-left: 205px !important; font-family: MyFontBold !important; font-Size: "
-				+ "14px !important; margin-top: 10px !important; margin-bottom: 20px !important;");
+		infoDialog.setStyleName("notCompletePanel");
+		buttonOk.addStyleName("notCompleteButton1");
+		buttonCancel.addStyleName("notCompleteButton2");
+		label.addStyleName("notCompleteText");
 		infoDialog.add(verticalPanel01);
-		infoDialog.setSize( "500px", "150px" );
+		infoDialog.setSize("350px","150px");
 		infoDialog.setModal(true);
 		infoDialog.center();
-		infoDialog.setStyleName("myUploadBox");
 		infoDialog.show();
 	}
 	
@@ -555,84 +511,79 @@ public class PopupMessages {
 		HTML infoLabel = new HTML();
 		switch (infoEnum.valueOf(context.toUpperCase())) {
 		case IDTITLE:
-			infoLabel.setHTML("<p>Available in the EUFAR TA application form (<b>Project acronym</b>), this is a characteristic and often unique "
-					+ "name identifying the resource.</p><p><u>Example:</u> SMALLPROJECT.</p>");
+			infoLabel.setHTML("Available in the EUFAR TA application form (<b>Project title</b>), this is a characteristic and often unique "
+					+ "name identifying the resource.<p><u>Example:</u> Our small project.</p>");
 			break;
 		case IDABSTRACT:
-			infoLabel.setHTML("<p>This is a brief narrative summary of the content of the resource. It is available in the EUFAR TA application "
-					+ "form (<b>Scientific problems being addressed by the experiments to be performed</b>).</p><p><u>Example:</u> SMALLPROJECT is a small "
+			infoLabel.setHTML("This is a brief narrative summary of the content of the resource. It is available in the EUFAR TA application "
+					+ "form (<b>Scientific problems being addressed by the experiments to be performed</b>).<p><u>Example:</u> SMALLPROJECT is a small "
 					+ "project. Its goal is to explain what to do and what to write.</p>");
 			break;
 		case IDTYPE:
-			infoLabel.setHTML("<p>This is the type of resource being described by the metadata, and can be either dataset or series.</p><p>"
+			infoLabel.setHTML("This is the type of resource being described by the metadata, and can be either dataset or series.<p>"
 					+ "<u>Example:</u> Dataset.</p>");
 			break;
 		case IDLOCATOR:
-			infoLabel.setHTML("<p>The resource locator defines the link(s) to the resource and/or the link to additional information about the "
-					+ "resource. For EUFAR projects, it is automatically filled in with the link to the EUFAR database.</p><p><u>Example:</u> "
-					+ "http://browse.ceda.ac.uk/br owse/badc/eufar/docs/00eufararchive contents.html</p>");
+			infoLabel.setHTML("The resource locator defines the link(s) to the resource and/or the link to additional information about the "
+					+ "resource. For EUFAR projects, it is automatically filled in with the link to the EUFAR database.<p><u>Example:</u> "
+					+ "http://browse.ceda.ac.uk/browse/badc/eufa r/docs/00eufararchive contents.html</p>");
 			break;
 		case IDIDENTIFIER:
-			infoLabel.setHTML("<p hyphens='auto'>This element uniquely identifying the resource and it is generally formed with mandatory and/or optional "
-					+ "string codes. In a EUFAR project, the file-naming convention is as follow <b>instrument_aircraft_YYYYMMDD [hh][mm][ss][_extra][_cor#]."
-					+ "ext</b>. <b>instrument</b> is the instrument which was used to produce the data set, <b>aircraft</b> is a merge between "
-					+ "the operator and the aircraft, <b>YYYYMMDD</b> (year month day) and <b>[hh][mm][ss]</b> (hour minute second) are the date"
-					+ " and time at which measurements were taken (time is optional), <b>[_extra]"
-					+ "</b> allow to add optional parameter, and <b>[_cor#]</b> denotes that the file is a corrected version of a previously released "
-					+ "file. <b>.ext</b> is used for the file extension.</p><p><u>Example:</u> core_safire-atr42_"
-					+ "20100913_ as100051_r0_1hz.ext</p>");
+			infoLabel.setHTML("This element uniquely identifying the project and it is generally formed with mandatory and/or optional "
+					+ "string codes. In a EUFAR project, it is available in the EUFAR TA application form (<b>Project acronym</b>).</p><p><u>"
+					+ "Example:</u> SMALLPROJECT");
 			break;
 		case IDLANGUAGE:
-			infoLabel.setHTML("<p>The language(s) used within the resource. In a EUFAR project, English is always selected and should not be "
-					+ "changed. </p><p><u>Example:</u> English.</p>");
+			infoLabel.setHTML("The language(s) used within the resource. In a EUFAR project, English is always selected and should not be "
+					+ "changed.<p><u>Example:</u> English.</p>");
 			break;
 		case CATEGORIES:
-			infoLabel.setHTML("<p>The topic category is a high-level classification scheme to facilitate the grouping and topic-based search of "
+			infoLabel.setHTML("The topic category is a high-level classification scheme to facilitate the grouping and topic-based search of "
 					+ "available spatial data resources. This item corresponds to the Main <b>Scientific Field / specific discipline</b> in the "
-					+ "EUFAR Ta application form.</p><p><u>Example:</u> Environment.</p>");
+					+ "EUFAR Ta application form.<p><u>Example:</u> Environment.</p>");
 			break;
 		case KEYWORDS:
-			infoLabel.setHTML("<p>The keyword value is a commonly used word to describe the subject. The keyword scheme is from NASA/Global "
-					+ "Change Master Directory (GCMD) Earth Science Keywords.</p><p><u>Example:</u> Forest science, Aerosols, Clouds.</p>");
+			infoLabel.setHTML("The keyword value is a commonly used word to describe the subject. The keyword scheme is from NASA/Global "
+					+ "Change Master Directory (GCMD) Earth Science Keywords.<p><u>Example:</u> Forest science, Aerosols, Clouds.</p>");
 			break;
 		case AIAIRCRAFT:
-			infoLabel.setHTML("<p>The selection of an aircraft can help to improve storage and queries in a database. Please select here the "
+			infoLabel.setHTML("The selection of an aircraft can help to improve storage and queries in a database. Please select here the "
 					+ "aircraft used to acquire and prepare the actual data and metadata. If multiple aircraft were used during the campaign, "
-					+ "click on the '+' button once an aircraft has been selected to add it to the list.</p><p><u>Example:</u> AWI - POLAR 5.</p>");
+					+ "click on the '+' button once an aircraft has been selected to add it to the list.<p><u>Example:</u> AWI - POLAR 5.</p>");
 			break;
 		case AIINSTRUMENT:
-			infoLabel.setHTML("<p>The selection of an instrument, or multiple instruments, can help to improve storage and queries in a database. "
+			infoLabel.setHTML("The selection of an instrument, or multiple instruments, can help to improve storage and queries in a database. "
 					+ "Please select here the instrument(s) used to acquire and prepare the actual data and metadata, and click on the '+' icon "
-					+ "to add it into the list.</p><p><u>Example:</u> APEX."
+					+ "to add it into the list.<p><u>Example:</u> APEX."
 					+ "</p>");
 			break;
 		case GILOCATION:
-			infoLabel.setHTML("<p>This is the name of the formal location covered by the dataset. It is available in the EUFAR TA application "
-					+ "form.</p><p><u>Example:</u> Countries / France.</p>");
+			infoLabel.setHTML("This is the name of the formal location covered by the dataset. It is available in the EUFAR TA application "
+					+ "form.<p><u>Example:</u> Countries / France.</p>");
 			break;
 		case GIBOX:
-			infoLabel.setHTML("<p>This is the extent of the resource in the geographic space, given as a bounding box. The bounding box shall "
+			infoLabel.setHTML("This is the extent of the resource in the geographic space, given as a bounding box. The bounding box shall "
 					+ "be expressed with westbound and eastbound longitudes in decimal degree (-180.00 to 180.00) and southbound and northbound "
-					+ "latitudes in decimal degree (-90.00 to 90.00), with a precision of two decimals.</p><p><u>Example:</u> for a bounding box "
+					+ "latitudes in decimal degree (-90.00 to 90.00), with a precision of two decimals.<p><u>Example:</u> for a bounding box "
 					+ "above United Kingdom (58.65°N / -11.80°W and 50.69°N / 2.32°E)</p><p align='center'> &nbsp 58.65</p><p align='center'>"
 					+ "-11.80 &nbsp &nbsp &nbsp &nbsp &nbsp 2.32</p><p align='center'> &nbsp 50.69</p>");
 			break;
 		case GIUNIT:
-			infoLabel.setHTML("<p>Each spatial resolution is either an equivalent scale OR a ground sample distance. When two equivalent scales "
+			infoLabel.setHTML("Each spatial resolution is either an equivalent scale OR a ground sample distance. When two equivalent scales "
 					+ "or two ground sample distances are expressed, the spatial resolution is an interval bounded by these two values. It is "
-					+ "only mandatory if an equivalent scale or a resolution distance can be specified.</p><p><u>Example:</u> a dataset with a "
+					+ "only mandatory if an equivalent scale or a resolution distance can be specified.<p><u>Example:</u> a dataset with a "
 					+ "spatial resolution of 0.25°x0.25° &#10145 0.25 / Decimal degree (dd).</p>");
 			break;
 		case TRPUBLICATION:
-			infoLabel.setHTML("<p>This is the date of publication of the resource. In a EUFAR project, the date of entry into EUFAR database "
-					+ "(N8-DB) should be used and set <b>before</b> the current date.</p><p><u>Example:</u> 2015/07/12.</p>");
+			infoLabel.setHTML("This is the date of publication of the resource. In a EUFAR project, the date of entry into EUFAR database "
+					+ "(N8-DB) should be used and set <b>before</b> the current date.<p><u>Example:</u> 2015/07/12.</p>");
 			break;
 		case TRREVISION:
-			infoLabel.setHTML("<p>This is the date of last revision of the resource if available.</p>");
+			infoLabel.setHTML("This is the date of last revision of the resource if available.");
 			break;
 		case TRCREATION:
-			infoLabel.setHTML("<p>This is the date of creation of the resource. In a EUFAR project, the date should be set to the date of data "
-					+ "processing.</p><p><u>Example:</u> 2015/07/11.</p>");
+			infoLabel.setHTML("This is the date of creation of the resource. In a EUFAR project, the date should be set to the date of data "
+					+ "processing.<p><u>Example:</u> 2015/07/11.</p>");
 			break;
 		case TRPHASE:
 			infoLabel.setHTML("<p>The temporal extent defines the time period covered by the data acquisition. It can be composed of multiple "
@@ -680,7 +631,8 @@ public class PopupMessages {
 					+ "calibrate the instrument / The calibration constants come from this book and this publication</b>.</p>");
 			break;
 		case QVLINEAGE3:
-			infoLabel.setHTML("<p>Once the data has been processed, the final output format.</p><p><u>Example:</u> NetCDF.</p>");
+			infoLabel.setHTML("<p>Once the data has been processed, the final output format. Multiple entries are possible. If 'Other' is"
+					+ "selected for free text, the characters ';', '|' and '/' are prohibited.</p><p><u>Example:</u> NetCDF.</p>");
 			break;
 		case QVLINEAGE4:
 			infoLabel.setHTML("<p>The Quality and Validity section needs a brief description, or a link to the document, of the operator's "
@@ -764,6 +716,14 @@ public class PopupMessages {
 				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
 				+ "(succeeded)</li><li>Opera 30 (succeeded)</li></ul><br>"
 
+				+ "<b><u>August 24 2016, Release version 1.2.1 [ONLINE]</u></b><br>The 'Quality and Validity' section is finally present in "
+				+ "EMC, few textboxes have been modified to handle a full dataset. The style used in EMC has been corrected to be in accorda"
+				+ "nce with ASMM.<br><ul style='list-style-type:none'><li>ADDED:<ul><li>a help page has been introduced (first draft).</li>"
+				+ "</ul></li></ul><ul style='list-style-type:none'><li>FIXED:<ul><li>few mistakes in CSS style have been corrected.</li><li>"
+				+ "if an aircraft has been added to the list, and if the rolebox displays 'Make a choice...', the checking function will think"
+				+ " that no aircraft has been added to the list. It has been fixed.</li><li>if 'Other' is selected in the 'Instrument' section,"
+				+ " the textboxes appear at the wrong place. It has been fixed.</li><li>the filename wasn't set correctly before saving a file."
+				+ "</li></ul></li></ul><br>"
 				+ "<b><u>August 02 2016, Release version 1.2.0 [ONLINE]</u></b><br>The style used in ASMM has been modified and harmonized "
 				+ "to comply with the EUFAR website style. Few changes in the GUI have been made to comply with the recommandations of the "
 				+ "last meeting between N7SP and N8DB.<br><ul style='list-style-type:none'><li>ADDED:<ul><li>it is now possible to save "
