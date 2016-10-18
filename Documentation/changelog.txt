@@ -4,11 +4,45 @@ CHANGELOG
 
 ONLINE VERSION TESTED ON:
 ========================
-    - Firefox 31.5.3, 38.0.1, 39, 40, 45.0.1 (succeeded)
-    - Chrome 44 (succeeded)
+    - Firefox 38+
+    - Chrome 44+
     - Internet Explorer 11 (failed on one computer and succeeded on others)
-    - Safari 5.1.7, 8.0.5 (succeeded)
-    - Opera 30 (succeeded)
+    - Safari 5+
+    - Opera 30+
+    - Vivaldi 1.4+
+
+
+October 06 2016, Release version 1.3.0 [ONLINE]
+=============================================
+  A new "Quality and Validity" section has been introduced to take into account multiple instruments and multiple data. Each QV form has to be linked to one instrument. Old QV xml code can still be read but EMC will ask the user to save again his/her document.
+  
+  FIXED:
+    - few style problems.
+    - if a user try to add the same aircraft twice, the function crashes. It has been fixed.
+    - a user could enter a personal aircraft or instrument even if one of the corresponding textboxes was empty. It has been fixed.
+    - few mistakes in QV xml code have been fixed.
+    - if a file is opened more than one time, one just after the other, and then saved, EMC crashes during saving. It has been fixed.
+    - because of differences between Tomcat and Jetty for exception handling, few exception handlings have been doubled to catch Tomcat and Jetty exceptions.
+    - an issue has been corrected in the function to read QV data for insitu data.
+    - if a textbox is empty, the tab number 6 is always in red. It has been fixed.
+    - if "Other" is selected in the Aircraft list, during checking, textboxes for "Other" instrument appear. It has been fixed.
+    - once checked, and if text is present, textboxes for aircraft and instrument weren't displayed properly.
+    - an issue with the navigation between tabs has been fixed.
+    - because of security policy of few browsers, a "fakepath" string is present in the filename when opening a file. It has been fixed.
+    - fixed an issue with the size of the Earth globe in the "Geographic Information" section.
+    
+  MODIFIED:
+    - the "Aircraft & Instrument" section has been modified to make the presentation less heavy.
+    - the checking function has been re-designed to simplify the process to check each element, it has lowered the time needed to check each element.
+    - info text for output format in the Insitu QV section has been modified for better readability.
+    - almost all icons have been moved to a Resources file for better performance.
+    - almost all icons have been converted to SVG format for better rendering with high-resolution screens.
+    - all aircraft pictures have been moved to a Resources file for better performance.
+    
+  ADDED:
+    - functions have been added to read Atmospheric and Remote sensing Quality layers from xml code.
+    - functions have been added to format inputs in Quality and Validity section to xml code.
+    - new listbox has been added to each QV form to help the user, if necessary, to copy/paste inputs from one form to a new one or an existing one.
 
 
 August 24 2016, Release version 1.2.1 [ONLINE]

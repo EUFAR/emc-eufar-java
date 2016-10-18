@@ -5,6 +5,7 @@ import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -12,11 +13,13 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -25,10 +28,14 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PushButton;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.TextBoxBase;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -38,20 +45,16 @@ public class GuiModification {
 	
 	// change the resolution type, scale or distance, in theGeographic Information tab
 	protected static void geoResolutionSet(final int index) {
-		Emc_eufar.rootLogger.log(Level.INFO, "Resolution change invoked...");
-		Emc_eufar.horizontalPanel17.clear();
+		Emc_eufar.rootLogger.log(Level.INFO, "Resolution change invoked.");
 		if (index == 0) {
-			Emc_eufar.horizontalPanel17.add(Emc_eufar.geoResolutionBox);
+			Emc_eufar.geoUnitLab.setVisible(false);
+			Emc_eufar.geoUnitLst.setVisible(false);
 			Emc_eufar.geoResolutionBox.setStyleName("geoTextBox2");
 			Emc_eufar.rootLogger.log(Level.INFO, "Changed to scale.");
 		} else {
-			Emc_eufar.horizontalPanel17.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-			Emc_eufar.horizontalPanel17.add(Emc_eufar.geoResolutionBox);
-			Emc_eufar.horizontalPanel17.add(Emc_eufar.geoUnitLab);
-			Emc_eufar.horizontalPanel17.add(Emc_eufar.geoUnitLst);
+			Emc_eufar.geoUnitLab.setVisible(true);
+			Emc_eufar.geoUnitLst.setVisible(true);
 			Emc_eufar.geoResolutionBox.setStyleName("geoTextBox3");
-			Emc_eufar.geoUnitLst.setStyleName("geoTextList");
-			Emc_eufar.geoUnitLab.setStyleName("geoTitleTextLabel3");
 			Emc_eufar.rootLogger.log(Level.INFO, "Changed to distance.");
 		}
 	}
@@ -61,7 +64,9 @@ public class GuiModification {
 	public static void addRefPlus() {
 		Emc_eufar.rootLogger.log(Level.INFO, "Temporal ref add in progress...");
 		int row = Emc_eufar.refPhaseTab.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final Label label = new Label("Phase " + Integer.toString(row + 1));
 		DateBox dateBox1 = new DateBox();
@@ -123,7 +128,9 @@ public class GuiModification {
 	public static void addRefRead(final String dateStart, final String dateEnd) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Temporal ref add in progress...");
 		int row = Emc_eufar.refPhaseTab.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final Label label = new Label("Phase " + Integer.toString(row + 1));
 		DateBox dateBox1 = new DateBox();
@@ -176,10 +183,13 @@ public class GuiModification {
 
 
 	// add new text areas in the Access and Use Constraints tabs
-	public static void addUsePlus(final FlexTable table, final ArrayList<TextArea> arrayList, final Image firstImage) {
+	public static void addUsePlus(final FlexTable table, final ArrayList<TextArea> arrayList01, 
+			final ArrayList<String> arrayList02, final Image firstImage) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Constraints A/L add in progress...");
 		int row = table.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final TextArea textArea = new TextArea();
 		textArea.setStyleName("useTextArea");
@@ -197,12 +207,14 @@ public class GuiModification {
 		table.insertRow(row);
 		table.setWidget(row, 0, textArea);
 		table.setWidget(row, 1, delButton);
-		arrayList.add(textArea);
+		arrayList01.add(textArea);
+		arrayList02.add("string");
 		image.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				int rowIndex = table.getCellForEvent(event).getRowIndex();
 				table.removeRow(rowIndex);
-				arrayList.remove(rowIndex);
+				arrayList01.remove(rowIndex);
+				arrayList02.remove(rowIndex);
 				int row = table.getRowCount();
 				if (row == 1) {
 					firstImage.setVisible(false);
@@ -214,10 +226,13 @@ public class GuiModification {
 
 
 	// allow the program to create new text areas based on the reading of an xml file
-	public static void addUseRead(final FlexTable table, final ArrayList<TextArea> arrayList, final String string, final Image firstImage) {
+	public static void addUseRead(final FlexTable table, final ArrayList<TextArea> arrayList01, 
+			final ArrayList<String> arrayList02, final String string, final Image firstImage) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Constraints A/L add in progress...");
 		int row = table.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final TextArea textArea = new TextArea();
 		textArea.setText(string);
@@ -236,12 +251,13 @@ public class GuiModification {
 		table.insertRow(row);
 		table.setWidget(row, 0, textArea);
 		table.setWidget(row, 1, delButton);
-		arrayList.add(textArea);
+		arrayList01.add(textArea);
+		arrayList02.add("string");
 		image.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				int rowIndex = table.getCellForEvent(event).getRowIndex();
 				table.removeRow(rowIndex);
-				arrayList.remove(rowIndex);
+				arrayList01.remove(rowIndex);
 				int row = table.getRowCount();
 				if (row == 1) {
 					firstImage.setVisible(false);
@@ -270,7 +286,9 @@ public class GuiModification {
 		final TextBox orgEmailBox = new TextBox();
 		final ListBox orgRoleLst = new ListBox();
 		final FlexTable orgPartyTab = new FlexTable();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel roPartyInfo = Elements.addInfoButton("roParty");
 		final SimplePanel roEmailInfo = Elements.addInfoButton("roEmail");
 		final SimplePanel roRoleInfo = Elements.addInfoButton("roRole");
@@ -326,6 +344,8 @@ public class GuiModification {
 		Emc_eufar.orgPartyLst.add(orgPartyBox);
 		Emc_eufar.orgRole2Lst.add(orgRoleLst);
 		Emc_eufar.orgEmailLst.add(orgEmailBox);
+		Emc_eufar.orgPartyCorrectLst.add("string");
+		Emc_eufar.orgEmailCorrectLst.add("email");
 		delButton.setPixelSize(25, 25);
 		delButton.setStyleName("infoButton");
 		horizontalPanel04.add(delButton);
@@ -347,6 +367,8 @@ public class GuiModification {
 				Emc_eufar.orgPartyLst.remove(rowIndex);
 				Emc_eufar.orgRole2Lst.remove(rowIndex);
 				Emc_eufar.orgEmailLst.remove(rowIndex);
+				Emc_eufar.orgPartyCorrectLst.remove(rowIndex);
+				Emc_eufar.orgEmailCorrectLst.remove(rowIndex);
 				int row = Emc_eufar.orgAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.orgDelImage.setVisible(false);
@@ -375,7 +397,9 @@ public class GuiModification {
 		final TextBox orgEmailBox = new TextBox();
 		final ListBox orgRoleLst = new ListBox();
 		final FlexTable orgPartyTab = new FlexTable();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final SimplePanel roPartyInfo = Elements.addInfoButton("roParty");
 		final SimplePanel roEmailInfo = Elements.addInfoButton("roEmail");
@@ -400,7 +424,7 @@ public class GuiModification {
 		});
 		orgPartyBox.setText(partyName);
 		orgEmailBox.setText(partyEmail);
-		verticalPanel01.add(new HTML("<hr  style=\"width:482px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+		verticalPanel01.add(new HTML("<hr style=\"width:482px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
 				+ "margin-bottom:30px;\" />"));
 		Utilities.populateListBox(orgRoleLst, Emc_eufar.roleList, 5);
 		Utilities.checkList(Emc_eufar.roleMap, partyRole, orgRoleLst);
@@ -433,6 +457,8 @@ public class GuiModification {
 		Emc_eufar.orgPartyLst.add(orgPartyBox);
 		Emc_eufar.orgRole2Lst.add(orgRoleLst);
 		Emc_eufar.orgEmailLst.add(orgEmailBox);
+		Emc_eufar.orgPartyCorrectLst.add("string");
+		Emc_eufar.orgEmailCorrectLst.add("email");
 		delButton.setPixelSize(25, 25);
 		delButton.setStyleName("infoButton");
 		delButton.getElement().setAttribute("style","margin-top: 45px !important;");
@@ -455,6 +481,8 @@ public class GuiModification {
 				Emc_eufar.orgPartyLst.remove(rowIndex);
 				Emc_eufar.orgRole2Lst.remove(rowIndex);
 				Emc_eufar.orgEmailLst.remove(rowIndex);
+				Emc_eufar.orgPartyCorrectLst.remove(rowIndex);
+				Emc_eufar.orgEmailCorrectLst.remove(rowIndex);
 				int row = Emc_eufar.orgAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.orgDelImage.setVisible(false);
@@ -479,7 +507,9 @@ public class GuiModification {
 		final TextBox metNameBox = new TextBox();
 		final TextBox metEmailBox = new TextBox();
 		final FlexTable metPartyTab = new FlexTable();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		verticalPanel01.add(new HTML("<hr  style=\"width:310px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
 				+ "margin-bottom:30px;\" />"));
@@ -507,6 +537,8 @@ public class GuiModification {
 		metPartyTab.setWidget(1, 1, metEmailBox);
 		Emc_eufar.metNameLst.add(metNameBox);
 		Emc_eufar.metEmailLst.add(metEmailBox);
+		Emc_eufar.metNameCorrectLst.add("string");
+		Emc_eufar.metEmailCorrectLst.add("email");
 		horizontalPanel01.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel01.add(metPartyTab);
 		horizontalPanel01.add(delButton);
@@ -532,6 +564,8 @@ public class GuiModification {
 				Emc_eufar.metAddTab.removeRow(rowIndex);
 				Emc_eufar.metNameLst.remove(rowIndex);
 				Emc_eufar.metEmailLst.remove(rowIndex);
+				Emc_eufar.metNameCorrectLst.remove(rowIndex);
+				Emc_eufar.metEmailCorrectLst.remove(rowIndex);
 				int row = Emc_eufar.metAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.metDelImage.setVisible(false);
@@ -556,9 +590,11 @@ public class GuiModification {
 		final TextBox metNameBox = new TextBox();
 		final TextBox metEmailBox = new TextBox();
 		final FlexTable metPartyTab = new FlexTable();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
-		verticalPanel01.add(new HTML("<hr  style=\"width:310px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
+		verticalPanel01.add(new HTML("<hr style=\"width:310px;height:10px;background:#0098d9;border:0px;margin-top:30px;"
 				+ "margin-bottom:30px;\" />"));
 		metNameBox.addChangeHandler(new ChangeHandler() {
 			@Override
@@ -586,6 +622,8 @@ public class GuiModification {
 		metPartyTab.setWidget(1, 1, metEmailBox);
 		Emc_eufar.metNameLst.add(metNameBox);
 		Emc_eufar.metEmailLst.add(metEmailBox);
+		Emc_eufar.metNameCorrectLst.add("string");
+		Emc_eufar.metEmailCorrectLst.add("email");
 		horizontalPanel01.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel01.add(metPartyTab);
 		horizontalPanel01.add(delButton);
@@ -611,6 +649,8 @@ public class GuiModification {
 				Emc_eufar.metAddTab.removeRow(rowIndex);
 				Emc_eufar.metNameLst.remove(rowIndex);
 				Emc_eufar.metEmailLst.remove(rowIndex);
+				Emc_eufar.metNameCorrectLst.remove(rowIndex);
+				Emc_eufar.metEmailCorrectLst.remove(rowIndex);
 				int row = Emc_eufar.metAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.metDelImage.setVisible(false);
@@ -626,67 +666,81 @@ public class GuiModification {
 		Emc_eufar.rootLogger.log(Level.INFO, "Instrument add in progress...");
 		Utilities.docIsModified();
 		int row = Emc_eufar.airInstrumentTable.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final Label name = new Label();
 		final Label manufacturer = new Label();
+		int instrumentBoxMissing = 0;
 		if (Emc_eufar.airInstrumentLst.getSelectedItemText() == "Other...") {
 			name.setText(Emc_eufar.airInstNameBox.getText());
 			manufacturer.setText(Emc_eufar.airInstManufacturerBox.getText());
+			if (manufacturer.getText() == "" || name.getText() == "") {
+				instrumentBoxMissing = 1;
+			}
 		} else {
 			final String string = Emc_eufar.airInstrumentLst.getSelectedItemText();
 			final int offset = string.lastIndexOf(" - ");
 			manufacturer.setText(string.substring(0, offset));
 			name.setText(string.substring(offset + 3));
 		}
+		int instrumentAlreadyEntered = 0;
 		for (int i = 0; i < Emc_eufar.instrumentTabList.size(); i++) {
 			if (name.getText() == Emc_eufar.instrumentTabList.get(i) && manufacturer.getText() == Emc_eufar.manufacturerTabList.get(i)) {
-				Window.alert("It is not possible to add more than once the same instrument.");
-				return;
+				instrumentAlreadyEntered = 1;
 			}
 		}
-		delButton.setPixelSize(25, 25);
-		delButton.setStyleName("infoButton");
-		if (row == 0) {
-			final Label nameTitle = new Label("Instrument:");
-			final Label manufacturerTitle = new Label("Manufacturer:");
+		if (instrumentAlreadyEntered == 0 && instrumentBoxMissing == 0) {
+			delButton.setPixelSize(25, 25);
+			delButton.setStyleName("infoButton");
+			if (row == 0) {
+				final Label nameTitle = new Label("Instrument:");
+				final Label manufacturerTitle = new Label("Manufacturer:");
+				Emc_eufar.airInstrumentTable.insertRow(row);
+				Emc_eufar.airInstrumentTable.setWidget(row, 0, nameTitle);
+				Emc_eufar.airInstrumentTable.setWidget(row, 1, manufacturerTitle);
+				row++;
+				nameTitle.setStyleName("airTitleTextLabel3");
+				manufacturerTitle.setStyleName("airTitleTextLabel3");
+			}
 			Emc_eufar.airInstrumentTable.insertRow(row);
-			Emc_eufar.airInstrumentTable.setWidget(row, 0, nameTitle);
-			Emc_eufar.airInstrumentTable.setWidget(row, 1, manufacturerTitle);
-			row++;
-			nameTitle.setStyleName("airTitleTextLabel3");
-			manufacturerTitle.setStyleName("airTitleTextLabel3");
-		}
-		Emc_eufar.airInstrumentTable.insertRow(row);
-		Emc_eufar.airInstrumentTable.setWidget(row, 0, name);
-		Emc_eufar.airInstrumentTable.setWidget(row, 1, manufacturer);
-		Emc_eufar.airInstrumentTable.setWidget(row, 2, delButton);
-		FlexCellFormatter cellFormatter = Emc_eufar.airInstrumentTable.getFlexCellFormatter();
-		cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		cellFormatter.setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_CENTER);
-		cellFormatter.setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		cellFormatter.setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
-		name.setStyleName("airFlexTableLabel7");
-		manufacturer.setStyleName("airFlexTableLabel7");
-		Emc_eufar.instrumentTabList.add(name.getText());
-		Emc_eufar.manufacturerTabList.add(manufacturer.getText());
-		Emc_eufar.airInstrumentTable.getElement().setAttribute("style", ""
-				+ "margin-left: 65px;"
-				+ "margin-top: 10px;"
-				+ "width: 700px;");
-		image.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				int rowIndex = Emc_eufar.airInstrumentTable.getCellForEvent(event).getRowIndex();
-				Emc_eufar.airInstrumentTable.removeRow(rowIndex);
-				Emc_eufar.instrumentTabList.remove(rowIndex-1);
-				Emc_eufar.manufacturerTabList.remove(rowIndex-1);
-				int row = Emc_eufar.airInstrumentTable.getRowCount();
-				if (row == 1) {
-					Emc_eufar.airInstrumentTable.removeRow(row-1);
+			Emc_eufar.airInstrumentTable.setWidget(row, 0, name);
+			Emc_eufar.airInstrumentTable.setWidget(row, 1, manufacturer);
+			Emc_eufar.airInstrumentTable.setWidget(row, 2, delButton);
+			FlexCellFormatter cellFormatter = Emc_eufar.airInstrumentTable.getFlexCellFormatter();
+			cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			name.setStyleName("airFlexTableLabel7");
+			manufacturer.setStyleName("airFlexTableLabel7");
+			Emc_eufar.instrumentTabList.add(name.getText());
+			Emc_eufar.manufacturerTabList.add(manufacturer.getText());
+			Emc_eufar.airInstrumentTable.getElement().setAttribute("style", ""
+					+ "margin-left: 65px;"
+					+ "margin-top: 10px;"
+					+ "width: 700px;");
+			image.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					int rowIndex = Emc_eufar.airInstrumentTable.getCellForEvent(event).getRowIndex();
+					Emc_eufar.airInstrumentTable.removeRow(rowIndex);
+					Emc_eufar.instrumentTabList.remove(rowIndex-1);
+					Emc_eufar.manufacturerTabList.remove(rowIndex-1);
+					int row = Emc_eufar.airInstrumentTable.getRowCount();
+					if (row == 1) {
+						Emc_eufar.airInstrumentTable.removeRow(row-1);
+					}
+					if (Emc_eufar.qvTabPanel.getWidgetCount() >= 1) {
+						updateInstrumentListbox();
+					}
 				}
+			});
+			if (Emc_eufar.qvTabPanel.getWidgetCount() >= 1) {
+				updateInstrumentListbox();
 			}
-		});
-		Emc_eufar.rootLogger.log(Level.INFO, "Instrument added.");
+			Emc_eufar.rootLogger.log(Level.INFO, "Instrument added.");
+		}
 	}
 	
 	
@@ -694,7 +748,9 @@ public class GuiModification {
 	public static void addInstRead(final String nameStr, final String manufacturerStr) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Instrument add in progress...");
 		int row = Emc_eufar.airInstrumentTable.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final Label name = new Label(nameStr);
 		final Label manufacturer = new Label(manufacturerStr);
@@ -738,8 +794,14 @@ public class GuiModification {
 				if (row == 1) {
 					Emc_eufar.airInstrumentTable.removeRow(row-1);
 				}
+				if (Emc_eufar.qvTabPanel.getWidgetCount() >= 1) {
+					updateInstrumentListbox();
+				}
 			}
 		});
+		if (Emc_eufar.qvTabPanel.getWidgetCount() >= 1) {
+			updateInstrumentListbox();
+		}
 		Emc_eufar.rootLogger.log(Level.INFO, "Instrument added.");
 	}
 	
@@ -749,19 +811,26 @@ public class GuiModification {
 		Emc_eufar.rootLogger.log(Level.INFO, "Aircraft add in progress...");
 		Utilities.docIsModified();
 		int row = Emc_eufar.airAircraftTable.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final Label name = new Label();
 		final Label operator = new Label();
 		final Label manufacturer = new Label();
 		final Label country = new Label();
 		final Label identification = new Label();
+		int aircraftBoxMissing = 0;
 		if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
 			manufacturer.setText(Emc_eufar.airManufacturerBox.getText());
 			name.setText(Emc_eufar.airTypeBox.getText());
 			operator.setText(Emc_eufar.airOperatorBox.getText());
 			country.setText(Emc_eufar.airCountryLst.getSelectedItemText());
 			identification.setText(Emc_eufar.airRegistrationBox.getText());
+			if (manufacturer.getText() == "" || name.getText() == "" || operator.getText() == "" || country.getText() == "" || 
+					identification.getText() == "") {
+				aircraftBoxMissing = 1;
+			}
 		} else {
 			name.setText(Emc_eufar.airTypeInfo.getText());
 			operator.setText(Emc_eufar.airOperatorInfo.getText());
@@ -769,57 +838,59 @@ public class GuiModification {
 			country.setText(Emc_eufar.airCountryInfo.getText());
 			identification.setText(Emc_eufar.airRegistrationInfo.getText());
 		}
+		int aircraftAlreadyEntered = 0;
 		for (int i = 0; i < Emc_eufar.aircraftTabList.size(); i++) {
 			if (name.getText() == Emc_eufar.aircraftTabList.get(i) && operator.getText() == Emc_eufar.operatorTabList.get(i)) {
-				Window.alert("It is not possible to add more than once the same aircraft.");
-				return;
+				aircraftAlreadyEntered = 1;
 			}
 		}
-		delButton.setPixelSize(25, 25);
-		delButton.setStyleName("infoButton");
-		if (row == 0) {
-			final Label nameTitle = new Label("Aircraft");
-			final Label manufacturerTitle = new Label("Operator");
+		if (aircraftAlreadyEntered == 0 && aircraftBoxMissing == 0) {
+			delButton.setPixelSize(25, 25);
+			delButton.setStyleName("infoButton");
+			if (row == 0) {
+				final Label nameTitle = new Label("Aircraft");
+				final Label manufacturerTitle = new Label("Operator");
+				Emc_eufar.airAircraftTable.insertRow(row);
+				Emc_eufar.airAircraftTable.setWidget(row, 0, nameTitle);
+				Emc_eufar.airAircraftTable.setWidget(row, 1, manufacturerTitle);
+				row++;
+				nameTitle.setStyleName("airTitleTextLabel3");
+				manufacturerTitle.setStyleName("airTitleTextLabel3");
+			}
 			Emc_eufar.airAircraftTable.insertRow(row);
-			Emc_eufar.airAircraftTable.setWidget(row, 0, nameTitle);
-			Emc_eufar.airAircraftTable.setWidget(row, 1, manufacturerTitle);
-			row++;
-			nameTitle.setStyleName("airTitleTextLabel3");
-			manufacturerTitle.setStyleName("airTitleTextLabel3");
-		}
-		Emc_eufar.airAircraftTable.insertRow(row);
-		Emc_eufar.airAircraftTable.setWidget(row, 0, name);
-		Emc_eufar.airAircraftTable.setWidget(row, 1, operator);
-		Emc_eufar.airAircraftTable.setWidget(row, 2, delButton);
-		FlexCellFormatter cellFormatter = Emc_eufar.airAircraftTable.getFlexCellFormatter();
-		cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		cellFormatter.setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_CENTER);
-		cellFormatter.setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
-		cellFormatter.setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
-		name.setStyleName("airFlexTableLabel7");
-		operator.setStyleName("airFlexTableLabel7");
-		Emc_eufar.aircraftTabList.add(name.getText());
-		Emc_eufar.operatorTabList.add(operator.getText());
-		Emc_eufar.manufacturairTabList.add(manufacturer.getText());
-		Emc_eufar.countryTabList.add(country.getText());
-		Emc_eufar.identificationTabList.add(identification.getText());
-		Emc_eufar.airAircraftTable.getElement().setAttribute("style", ""
-				+ "margin-left: 65px;"
-				+ "margin-top: 10px;"
-				+ "width: 700px;");
-		image.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				int rowIndex = Emc_eufar.airAircraftTable.getCellForEvent(event).getRowIndex();
-				Emc_eufar.airAircraftTable.removeRow(rowIndex);
-				Emc_eufar.aircraftTabList.remove(rowIndex-1);
-				Emc_eufar.operatorTabList.remove(rowIndex-1);
-				int row = Emc_eufar.airAircraftTable.getRowCount();
-				if (row == 1) {
-					Emc_eufar.airAircraftTable.removeRow(row-1);
+			Emc_eufar.airAircraftTable.setWidget(row, 0, name);
+			Emc_eufar.airAircraftTable.setWidget(row, 1, operator);
+			Emc_eufar.airAircraftTable.setWidget(row, 2, delButton);
+			FlexCellFormatter cellFormatter = Emc_eufar.airAircraftTable.getFlexCellFormatter();
+			cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			name.setStyleName("airFlexTableLabel7");
+			operator.setStyleName("airFlexTableLabel7");
+			Emc_eufar.aircraftTabList.add(name.getText());
+			Emc_eufar.operatorTabList.add(operator.getText());
+			Emc_eufar.manufacturairTabList.add(manufacturer.getText());
+			Emc_eufar.countryTabList.add(country.getText());
+			Emc_eufar.identificationTabList.add(identification.getText());
+			Emc_eufar.airAircraftTable.getElement().setAttribute("style", ""
+					+ "margin-left: 65px;"
+					+ "margin-top: 10px;"
+					+ "width: 700px;");
+			image.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					int rowIndex = Emc_eufar.airAircraftTable.getCellForEvent(event).getRowIndex();
+					Emc_eufar.airAircraftTable.removeRow(rowIndex);
+					Emc_eufar.aircraftTabList.remove(rowIndex-1);
+					Emc_eufar.operatorTabList.remove(rowIndex-1);
+					int row = Emc_eufar.airAircraftTable.getRowCount();
+					if (row == 1) {
+						Emc_eufar.airAircraftTable.removeRow(row-1);
+					}
 				}
-			}
-		});
-		Emc_eufar.rootLogger.log(Level.INFO, "Aircraft added.");
+			});
+			Emc_eufar.rootLogger.log(Level.INFO, "Aircraft added.");
+		}
 	}
 	
 	
@@ -828,7 +899,9 @@ public class GuiModification {
 			final String countryStr, final String registrationStr) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Aircraft add in progress...");
 		int row = Emc_eufar.airAircraftTable.getRowCount();
-		final Image image = new Image("icons/del_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.delete().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel delButton = new SimplePanel(image);
 		final Label name = new Label(nameStr);
 		final Label operator = new Label(operatorStr);
@@ -887,98 +960,71 @@ public class GuiModification {
 	public static void aircraftInformation(final int index) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Aircraft information function invoked...");
 		if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Make a choice...") {
-			if (Emc_eufar.horizontalPanel60.getWidgetCount() > 2) {
-				Emc_eufar.horizontalPanel60.remove(2);
-				Emc_eufar.horizontalPanel61.remove(2);
-				Emc_eufar.horizontalPanel62.remove(2);
-				Emc_eufar.horizontalPanel63.remove(2);
-				Emc_eufar.horizontalPanel64.remove(2);
-			}
-			Emc_eufar.horizontalPanel60.remove(1);
-			Emc_eufar.horizontalPanel61.remove(1);
-			Emc_eufar.horizontalPanel62.remove(1);
-			Emc_eufar.horizontalPanel63.remove(1);
-			Emc_eufar.horizontalPanel64.remove(1);
-			Emc_eufar.horizontalPanel60.add(Emc_eufar.airManufacturerInfo);
-			Emc_eufar.horizontalPanel61.add(Emc_eufar.airTypeInfo);
-			Emc_eufar.horizontalPanel62.add(Emc_eufar.airOperatorInfo);
-			Emc_eufar.horizontalPanel63.add(Emc_eufar.airCountryInfo);
-			Emc_eufar.horizontalPanel64.add(Emc_eufar.airRegistrationInfo);
+			Emc_eufar.airManufacturerInfo.setVisible(true);
+			Emc_eufar.airTypeInfo.setVisible(true);
+			Emc_eufar.airOperatorInfo.setVisible(true);
+			Emc_eufar.airCountryInfo.setVisible(true);
+			Emc_eufar.airRegistrationInfo.setVisible(true);
+			Emc_eufar.airManufacturerBox.setVisible(false);
+			Emc_eufar.airTypeBox.setVisible(false);
+			Emc_eufar.airOperatorBox.setVisible(false);
+			Emc_eufar.airCountryLst.setVisible(false);
+			Emc_eufar.airRegistrationBox.setVisible(false);
 			Emc_eufar.airManufacturerInfo.setText("");
 			Emc_eufar.airTypeInfo.setText("");
 			Emc_eufar.airOperatorInfo.setText("");
 			Emc_eufar.airCountryInfo.setText("");
 			Emc_eufar.airRegistrationInfo.setText("");
-			Emc_eufar.airAircraftImg.setUrl("eufar_aircraft/logo_eufar_emc_v2.png");
+			Emc_eufar.airAircraftImg.setResource(Emc_eufar.airAircraftImages.get(0));
 			Emc_eufar.airCopyrightInfo.setText("EUFAR");
 			Emc_eufar.rootLogger.log(Level.INFO, "Make a choice... loaded.");
 		} else if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
+			Emc_eufar.airManufacturerInfo.setVisible(false);
+			Emc_eufar.airTypeInfo.setVisible(false);
+			Emc_eufar.airOperatorInfo.setVisible(false);
+			Emc_eufar.airCountryInfo.setVisible(false);
+			Emc_eufar.airRegistrationInfo.setVisible(false);
+			Emc_eufar.airManufacturerBox.setText("");
+			Emc_eufar.airTypeBox.setText("");
+			Emc_eufar.airOperatorBox.setText("");
+			Emc_eufar.airCountryLst.setSelectedIndex(0);
+			Emc_eufar.airRegistrationBox.setText("");
 			Utilities.populateListBox(Emc_eufar.airCountryLst, Emc_eufar.countryList, 0);
-			Emc_eufar.airAircraftImg.setUrl("eufar_aircraft/logo_eufar_emc_v2.png");
+			Emc_eufar.airAircraftImg.setResource(Emc_eufar.airAircraftImages.get(0));
 			Emc_eufar.airCopyrightInfo.setText("EUFAR");
 			Emc_eufar.airManufacturerInfo.setText("");
 			Emc_eufar.airTypeInfo.setText("");
 			Emc_eufar.airOperatorInfo.setText("");
 			Emc_eufar.airCountryInfo.setText("");
 			Emc_eufar.airRegistrationInfo.setText("");
-			if (Emc_eufar.horizontalPanel60.getWidgetCount() > 2) {
-				Emc_eufar.horizontalPanel60.remove(2);
-				Emc_eufar.horizontalPanel61.remove(2);
-				Emc_eufar.horizontalPanel62.remove(2);
-				Emc_eufar.horizontalPanel63.remove(2);
-				Emc_eufar.horizontalPanel64.remove(2);
-			}
-			Emc_eufar.horizontalPanel60.remove(1);
-			Emc_eufar.horizontalPanel61.remove(1);
-			Emc_eufar.horizontalPanel62.remove(1);
-			Emc_eufar.horizontalPanel63.remove(1);
-			Emc_eufar.horizontalPanel64.remove(1);
-			Emc_eufar.horizontalPanel60.add(Emc_eufar.aiStarLab03);
-			Emc_eufar.horizontalPanel61.add(Emc_eufar.aiStarLab04);
-			Emc_eufar.horizontalPanel62.add(Emc_eufar.aiStarLab05);
-			Emc_eufar.horizontalPanel63.add(Emc_eufar.aiStarLab06);
-			Emc_eufar.horizontalPanel64.add(Emc_eufar.aiStarLab07);
-			Emc_eufar.horizontalPanel60.add(Emc_eufar.airManufacturerBox);
-			Emc_eufar.horizontalPanel61.add(Emc_eufar.airTypeBox);
-			Emc_eufar.horizontalPanel62.add(Emc_eufar.airOperatorBox);
-			Emc_eufar.horizontalPanel63.add(Emc_eufar.airCountryLst);
-			Emc_eufar.horizontalPanel64.add(Emc_eufar.airRegistrationBox);
-			Emc_eufar.airManufacturerBox.setStyleName("airTextBox3");
-			Emc_eufar.airTypeBox.setStyleName("airTextBox4");
-			Emc_eufar.airOperatorBox.setStyleName("airTextBox5");
+			Emc_eufar.airManufacturerBox.setVisible(true);
+			Emc_eufar.airTypeBox.setVisible(true);
+			Emc_eufar.airOperatorBox.setVisible(true);
+			Emc_eufar.airCountryLst.setVisible(true);
+			Emc_eufar.airRegistrationBox.setVisible(true);
+			Emc_eufar.airManufacturerBox.setStyleName("airTextBox");
+			Emc_eufar.airTypeBox.setStyleName("airTextBox");
+			Emc_eufar.airOperatorBox.setStyleName("airTextBox");
 			Emc_eufar.airCountryLst.setStyleName("airTextList3");
 			Emc_eufar.airRegistrationBox.setStyleName("airTextBox");
-			Emc_eufar.aiStarLab03.setStyleName("airStarLabel2");
-			Emc_eufar.aiStarLab04.setStyleName("airStarLabel2");
-			Emc_eufar.aiStarLab05.setStyleName("airStarLabel2");
-			Emc_eufar.aiStarLab06.setStyleName("airStarLabel2");
-			Emc_eufar.aiStarLab07.setStyleName("airStarLabel2");
 		} else {
-			if (Emc_eufar.horizontalPanel60.getWidgetCount() > 2) {
-				Emc_eufar.horizontalPanel60.remove(2);
-				Emc_eufar.horizontalPanel61.remove(2);
-				Emc_eufar.horizontalPanel62.remove(2);
-				Emc_eufar.horizontalPanel63.remove(2);
-				Emc_eufar.horizontalPanel64.remove(2);
-			}
-			Emc_eufar.horizontalPanel60.remove(1);
-			Emc_eufar.horizontalPanel61.remove(1);
-			Emc_eufar.horizontalPanel62.remove(1);
-			Emc_eufar.horizontalPanel63.remove(1);
-			Emc_eufar.horizontalPanel64.remove(1);
-			Emc_eufar.horizontalPanel60.add(Emc_eufar.airManufacturerInfo);
-			Emc_eufar.horizontalPanel61.add(Emc_eufar.airTypeInfo);
-			Emc_eufar.horizontalPanel62.add(Emc_eufar.airOperatorInfo);
-			Emc_eufar.horizontalPanel63.add(Emc_eufar.airCountryInfo);
-			Emc_eufar.horizontalPanel64.add(Emc_eufar.airRegistrationInfo);
+			Emc_eufar.airManufacturerInfo.setVisible(true);
+			Emc_eufar.airTypeInfo.setVisible(true);
+			Emc_eufar.airOperatorInfo.setVisible(true);
+			Emc_eufar.airCountryInfo.setVisible(true);
+			Emc_eufar.airRegistrationInfo.setVisible(true);
+			Emc_eufar.airManufacturerBox.setVisible(false);
+			Emc_eufar.airTypeBox.setVisible(false);
+			Emc_eufar.airOperatorBox.setVisible(false);
+			Emc_eufar.airCountryLst.setVisible(false);
+			Emc_eufar.airRegistrationBox.setVisible(false);
 			Emc_eufar.airManufacturerInfo.setText(Emc_eufar.airAircraftInfo[index-1][1]);
 			Emc_eufar.airTypeInfo.setText(Emc_eufar.airAircraftInfo[index-1][2]);
 			Emc_eufar.airOperatorInfo.setText(Emc_eufar.airAircraftInfo[index-1][3]);
 			Emc_eufar.airCountryInfo.setText(Emc_eufar.airAircraftInfo[index-1][4]);
 			Emc_eufar.airRegistrationInfo.setText(Emc_eufar.airAircraftInfo[index-1][5]);
-			Emc_eufar.airCopyrightInfo.setText(Emc_eufar.airAircraftInfo[index-1][7]);
-			String aircraftImage = Emc_eufar.airAircraftInfo[index-1][6];
-			Emc_eufar.airAircraftImg.setUrl("eufar_aircraft/" + aircraftImage);
+			Emc_eufar.airCopyrightInfo.setText(Emc_eufar.airAircraftInfo[index-1][6]);
+			Emc_eufar.airAircraftImg.setResource(Emc_eufar.airAircraftImages.get(index - 1));
 			Emc_eufar.rootLogger.log(Level.INFO, "Aircraft information loaded.");
 		}
 	}
@@ -1000,406 +1046,1213 @@ public class GuiModification {
 	}
 	
 	
-	// change quality and validity target
-	public static void changeTarget(final String string) {
-		if (string == "Earth observation/Remote sensing data") {
-			Emc_eufar.verticalPanel17.clear();
-			Emc_eufar.horizontalPanel39.add(Emc_eufar.imageCalLab);
-			Emc_eufar.horizontalPanel39.add(Emc_eufar.qvInfoButton06);
-			Emc_eufar.horizontalPanel40.add(Emc_eufar.imageBanBox);
-			Emc_eufar.horizontalPanel40.add(Emc_eufar.qvInfoButton07);
-			Emc_eufar.horizontalPanel148.add(Emc_eufar.imageChk10Y);
-			Emc_eufar.horizontalPanel148.add(Emc_eufar.imageChk10N);
-			Emc_eufar.horizontalPanel41.add(Emc_eufar.horizontalPanel148);
-			Emc_eufar.horizontalPanel41.add(Emc_eufar.qvInfoButton08);
-			Emc_eufar.horizontalPanel42.add(Emc_eufar.imageLayLab);
-			Emc_eufar.horizontalPanel42.add(Emc_eufar.qvInfoButton09);
-			Emc_eufar.horizontalPanel43.add(Emc_eufar.imageErrcorrLab);
-			Emc_eufar.horizontalPanel43.add(Emc_eufar.qvInfoButton14);
-			Emc_eufar.horizontalPanel149.add(Emc_eufar.imageChk11Y);
-			Emc_eufar.horizontalPanel149.add(Emc_eufar.imageChk11N);
-			Emc_eufar.horizontalPanel44.add(Emc_eufar.horizontalPanel149);
-			Emc_eufar.horizontalPanel44.add(Emc_eufar.qvInfoButton10);
-			Emc_eufar.horizontalPanel150.add(Emc_eufar.imageChk12Y);
-			Emc_eufar.horizontalPanel150.add(Emc_eufar.imageChk12N);
-			Emc_eufar.horizontalPanel45.add(Emc_eufar.horizontalPanel150);
-			Emc_eufar.horizontalPanel45.add(Emc_eufar.qvInfoButton11);
-			Emc_eufar.horizontalPanel151.add(Emc_eufar.imageChk13Y);
-			Emc_eufar.horizontalPanel151.add(Emc_eufar.imageChk13N);
-			Emc_eufar.horizontalPanel46.add(Emc_eufar.horizontalPanel151);
-			Emc_eufar.horizontalPanel46.add(Emc_eufar.qvInfoButton12);
-			Emc_eufar.horizontalPanel152.add(Emc_eufar.imageChk14Y);
-			Emc_eufar.horizontalPanel152.add(Emc_eufar.imageChk14N);
-			Emc_eufar.horizontalPanel47.add(Emc_eufar.horizontalPanel152);
-			Emc_eufar.horizontalPanel47.add(Emc_eufar.qvInfoButton13);
-			Emc_eufar.horizontalPanel48.add(Emc_eufar.imageChk15Y);
-			Emc_eufar.horizontalPanel48.add(Emc_eufar.imageChk15N);
-			Emc_eufar.horizontalPanel49.add(Emc_eufar.imageChk16Y);
-			Emc_eufar.horizontalPanel49.add(Emc_eufar.imageChk16N);
-			Emc_eufar.horizontalPanel50.add(Emc_eufar.imageChk17Y);
-			Emc_eufar.horizontalPanel50.add(Emc_eufar.imageChk17N);
-			Emc_eufar.horizontalPanel51.add(Emc_eufar.imageChk18Y);
-			Emc_eufar.horizontalPanel51.add(Emc_eufar.imageChk18N);
-			Emc_eufar.horizontalPanel153.add(Emc_eufar.imageChk19Y);
-			Emc_eufar.horizontalPanel153.add(Emc_eufar.imageChk19N);
-			Emc_eufar.horizontalPanel52.add(Emc_eufar.horizontalPanel153);
-			Emc_eufar.horizontalPanel52.add(Emc_eufar.qvInfoButton15);
-			Emc_eufar.horizontalPanel53.add(Emc_eufar.imageChk20Y);
-			Emc_eufar.horizontalPanel53.add(Emc_eufar.imageChk20N);
-			Emc_eufar.horizontalPanel54.add(Emc_eufar.imageChk21Y);
-			Emc_eufar.horizontalPanel54.add(Emc_eufar.imageChk21N);
-			Emc_eufar.horizontalPanel55.add(Emc_eufar.imageChk22Y);
-			Emc_eufar.horizontalPanel55.add(Emc_eufar.imageChk22N);
-			Emc_eufar.horizontalPanel154.add(Emc_eufar.imageChk23Y);
-			Emc_eufar.horizontalPanel154.add(Emc_eufar.imageChk23N);
-			Emc_eufar.horizontalPanel56.add(Emc_eufar.horizontalPanel154);
-			Emc_eufar.horizontalPanel56.add(Emc_eufar.qvInfoButton16);
-			Emc_eufar.horizontalPanel155.add(Emc_eufar.imageChk24Y);
-			Emc_eufar.horizontalPanel155.add(Emc_eufar.imageChk24N);
-			Emc_eufar.horizontalPanel57.add(Emc_eufar.horizontalPanel155);
-			Emc_eufar.horizontalPanel57.add(Emc_eufar.qvInfoButton17);
-			Emc_eufar.horizontalPanel156.add(Emc_eufar.imageChk25Y);
-			Emc_eufar.horizontalPanel156.add(Emc_eufar.imageChk25N);
-			Emc_eufar.horizontalPanel58.add(Emc_eufar.horizontalPanel156);
-			Emc_eufar.horizontalPanel58.add(Emc_eufar.qvInfoButton18);
-			Emc_eufar.horizontalPanel122.add(Emc_eufar.imageNameLab);
-			Emc_eufar.horizontalPanel122.add(Emc_eufar.imageStarLab02);
-			Emc_eufar.horizontalPanel123.add(Emc_eufar.imageRadLab);
-			Emc_eufar.horizontalPanel123.add(Emc_eufar.imageStarLab03);
-			Emc_eufar.horizontalPanel124.add(Emc_eufar.imageSpeLab);
-			Emc_eufar.horizontalPanel124.add(Emc_eufar.imageStarLab04);
-			Emc_eufar.horizontalPanel125.add(Emc_eufar.imageBanLab);
-			Emc_eufar.horizontalPanel125.add(Emc_eufar.imageStarLab05);
-			Emc_eufar.horizontalPanel126.add(Emc_eufar.imageDirLab);
-			Emc_eufar.horizontalPanel126.add(Emc_eufar.imageStarLab06);
-			Emc_eufar.horizontalPanel127.add(Emc_eufar.imageAltLab);
-			Emc_eufar.horizontalPanel127.add(Emc_eufar.imageStarLab07);
-			Emc_eufar.horizontalPanel128.add(Emc_eufar.imageZenLab);
-			Emc_eufar.horizontalPanel128.add(Emc_eufar.imageStarLab08);
-			Emc_eufar.horizontalPanel129.add(Emc_eufar.imageAziLab);
-			Emc_eufar.horizontalPanel129.add(Emc_eufar.imageStarLab09);
-			Emc_eufar.horizontalPanel130.add(Emc_eufar.imageAnoLab);
-			Emc_eufar.horizontalPanel130.add(Emc_eufar.imageStarLab10);
-			Emc_eufar.horizontalPanel131.add(Emc_eufar.imageLevLab);
-			Emc_eufar.horizontalPanel131.add(Emc_eufar.imageStarLab11);
-			Emc_eufar.horizontalPanel132.add(Emc_eufar.imageDCLab);
-			Emc_eufar.horizontalPanel132.add(Emc_eufar.imageStarLab12);
-			Emc_eufar.horizontalPanel133.add(Emc_eufar.imageIntPixel);
-			Emc_eufar.horizontalPanel133.add(Emc_eufar.imageStarLab13);
-			Emc_eufar.horizontalPanel134.add(Emc_eufar.imageBadPixel);
-			Emc_eufar.horizontalPanel134.add(Emc_eufar.imageStarLab14);
-			Emc_eufar.horizontalPanel135.add(Emc_eufar.imageSatPixel);
-			Emc_eufar.horizontalPanel135.add(Emc_eufar.imageStarLab15);
-			Emc_eufar.horizontalPanel136.add(Emc_eufar.imageAffPixel);
-			Emc_eufar.horizontalPanel136.add(Emc_eufar.imageStarLab16);
-			Emc_eufar.horizontalPanel137.add(Emc_eufar.imagePosInfo);
-			Emc_eufar.horizontalPanel137.add(Emc_eufar.imageStarLab17);
-			Emc_eufar.horizontalPanel138.add(Emc_eufar.imageAttInfo);
-			Emc_eufar.horizontalPanel138.add(Emc_eufar.imageStarLab18);
-			Emc_eufar.horizontalPanel139.add(Emc_eufar.imageSyncProblem);
-			Emc_eufar.horizontalPanel139.add(Emc_eufar.imageStarLab19);
-			Emc_eufar.horizontalPanel140.add(Emc_eufar.imageIntGeocoding);
-			Emc_eufar.horizontalPanel140.add(Emc_eufar.imageStarLab20);
-			Emc_eufar.horizontalPanel141.add(Emc_eufar.imageAtmCorrection);
-			Emc_eufar.horizontalPanel141.add(Emc_eufar.imageStarLab21);
-			Emc_eufar.horizontalPanel142.add(Emc_eufar.imageCloudMask);
-			Emc_eufar.horizontalPanel142.add(Emc_eufar.imageStarLab22);
-			Emc_eufar.horizontalPanel143.add(Emc_eufar.imageShadMask);
-			Emc_eufar.horizontalPanel143.add(Emc_eufar.imageStarLab23);
-			Emc_eufar.horizontalPanel144.add(Emc_eufar.imageHazeMask);
-			Emc_eufar.horizontalPanel144.add(Emc_eufar.imageStarLab24);
-			Emc_eufar.horizontalPanel145.add(Emc_eufar.imageRouMeasure);
-			Emc_eufar.horizontalPanel145.add(Emc_eufar.imageStarLab25);
-			Emc_eufar.horizontalPanel146.add(Emc_eufar.imageIllAngle);
-			Emc_eufar.horizontalPanel146.add(Emc_eufar.imageStarLab26);
-			Emc_eufar.horizontalPanel147.add(Emc_eufar.imageBRDFGeometry);
-			Emc_eufar.horizontalPanel147.add(Emc_eufar.imageStarLab27);
-			Emc_eufar.imageCalAcqProTab.setWidget(0, 0, Emc_eufar.horizontalPanel39);
-			Emc_eufar.imageCalAcqProTab.setWidget(1, 0, Emc_eufar.horizontalPanel122);
-			Emc_eufar.imageCalAcqProTab.setWidget(1, 1, Emc_eufar.imageCalBox);
-			Emc_eufar.imageCalAcqProTab.setWidget(2, 0, Emc_eufar.horizontalPanel123);
-			Emc_eufar.imageCalAcqProTab.setWidget(2, 1, Emc_eufar.imageRadDat);
-			Emc_eufar.imageCalAcqProTab.setWidget(3, 0, Emc_eufar.horizontalPanel124);
-			Emc_eufar.imageCalAcqProTab.setWidget(3, 1, Emc_eufar.imageSpeDat);
-			Emc_eufar.imageCalAcqProTab.setWidget(4, 0, Emc_eufar.imageAcqLab);
-			Emc_eufar.imageCalAcqProTab.setWidget(5, 0, Emc_eufar.horizontalPanel125);
-			Emc_eufar.imageCalAcqProTab.setWidget(5, 1, Emc_eufar.horizontalPanel40);
-			Emc_eufar.imageCalAcqProTab.setWidget(6, 0, Emc_eufar.horizontalPanel126);
-			Emc_eufar.imageCalAcqProTab.setWidget(6, 1, Emc_eufar.imageDirBox);
-			Emc_eufar.imageCalAcqProTab.setWidget(7, 0, Emc_eufar.horizontalPanel127);
-			Emc_eufar.imageCalAcqProTab.setWidget(7, 1, Emc_eufar.imageAltBox);
-			Emc_eufar.imageCalAcqProTab.setWidget(8, 0, Emc_eufar.horizontalPanel128);
-			Emc_eufar.imageCalAcqProTab.setWidget(8, 1, Emc_eufar.imageZenBox);
-			Emc_eufar.imageCalAcqProTab.setWidget(9, 0, Emc_eufar.horizontalPanel129);
-			Emc_eufar.imageCalAcqProTab.setWidget(9, 1, Emc_eufar.imageAziBox);
-			Emc_eufar.imageCalAcqProTab.setWidget(10, 0, Emc_eufar.horizontalPanel130);
-			Emc_eufar.imageCalAcqProTab.setWidget(10, 1, Emc_eufar.imageAnoBox);
-			Emc_eufar.imageCalAcqProTab.setWidget(11, 0, Emc_eufar.imageProLab);
-			Emc_eufar.imageCalAcqProTab.setWidget(12, 0, Emc_eufar.horizontalPanel131);
-			Emc_eufar.imageCalAcqProTab.setWidget(12, 1, Emc_eufar.imageLevLst);
-			Emc_eufar.imageCalAcqProTab.setWidget(13, 0, Emc_eufar.horizontalPanel132);
-			Emc_eufar.imageCalAcqProTab.setWidget(13, 1, Emc_eufar.horizontalPanel41);
-			Emc_eufar.imageQuaLayTab.setWidget(0, 0, Emc_eufar.horizontalPanel42);
-			Emc_eufar.imageQuaLayTab.setWidget(1, 0, Emc_eufar.imageCalcorrLab);
-			Emc_eufar.imageQuaLayTab.setWidget(2, 0, Emc_eufar.horizontalPanel133);
-			Emc_eufar.imageQuaLayTab.setWidget(2, 1, Emc_eufar.horizontalPanel44);
-			Emc_eufar.imageQuaLayTab.setWidget(3, 0, Emc_eufar.horizontalPanel134);
-			Emc_eufar.imageQuaLayTab.setWidget(3, 1, Emc_eufar.horizontalPanel45);
-			Emc_eufar.imageQuaLayTab.setWidget(4, 0, Emc_eufar.imageErrLab);
-			Emc_eufar.imageQuaLayTab.setWidget(5, 0, Emc_eufar.horizontalPanel135);
-			Emc_eufar.imageQuaLayTab.setWidget(5, 1, Emc_eufar.horizontalPanel46);
-			Emc_eufar.imageQuaLayTab.setWidget(6, 0, Emc_eufar.horizontalPanel136);
-			Emc_eufar.imageQuaLayTab.setWidget(6, 1, Emc_eufar.horizontalPanel47);
-			Emc_eufar.imageQuaLayTab.setWidget(7, 0, Emc_eufar.horizontalPanel43);
-			Emc_eufar.imageQuaLayTab.setWidget(8, 0, Emc_eufar.horizontalPanel137);
-			Emc_eufar.imageQuaLayTab.setWidget(8, 1, Emc_eufar.horizontalPanel48);
-			Emc_eufar.imageQuaLayTab.setWidget(9, 0, Emc_eufar.horizontalPanel138);
-			Emc_eufar.imageQuaLayTab.setWidget(9, 1, Emc_eufar.horizontalPanel49);
-			Emc_eufar.imageQuaLayTab.setWidget(10, 0, Emc_eufar.horizontalPanel139);
-			Emc_eufar.imageQuaLayTab.setWidget(10, 1, Emc_eufar.horizontalPanel50);
-			Emc_eufar.imageQuaLayTab.setWidget(11, 0, Emc_eufar.horizontalPanel140);
-			Emc_eufar.imageQuaLayTab.setWidget(11, 1, Emc_eufar.horizontalPanel51);
-			Emc_eufar.imageQuaLayTab.setWidget(12, 0, Emc_eufar.imageCorrconLab);
-			Emc_eufar.imageQuaLayTab.setWidget(13, 0, Emc_eufar.horizontalPanel141);
-			Emc_eufar.imageQuaLayTab.setWidget(13, 1, Emc_eufar.horizontalPanel52);
-			Emc_eufar.imageQuaLayTab.setWidget(14, 0, Emc_eufar.horizontalPanel142);
-			Emc_eufar.imageQuaLayTab.setWidget(14, 1, Emc_eufar.horizontalPanel53);
-			Emc_eufar.imageQuaLayTab.setWidget(15, 0, Emc_eufar.horizontalPanel143);
-			Emc_eufar.imageQuaLayTab.setWidget(15, 1, Emc_eufar.horizontalPanel54);
-			Emc_eufar.imageQuaLayTab.setWidget(16, 0, Emc_eufar.horizontalPanel144);
-			Emc_eufar.imageQuaLayTab.setWidget(16, 1, Emc_eufar.horizontalPanel55);
-			Emc_eufar.imageQuaLayTab.setWidget(17, 0, Emc_eufar.horizontalPanel145);
-			Emc_eufar.imageQuaLayTab.setWidget(17, 1, Emc_eufar.horizontalPanel56);
-			Emc_eufar.imageQuaLayTab.setWidget(18, 0, Emc_eufar.horizontalPanel146);
-			Emc_eufar.imageQuaLayTab.setWidget(18, 1, Emc_eufar.horizontalPanel57);
-			Emc_eufar.imageQuaLayTab.setWidget(19, 0, Emc_eufar.horizontalPanel147);
-			Emc_eufar.imageQuaLayTab.setWidget(19, 1, Emc_eufar.horizontalPanel58);
-			FlexCellFormatter cellFormatter01 = Emc_eufar.imageCalAcqProTab.getFlexCellFormatter();
-			cellFormatter01.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(6, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(7, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(8, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(9, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(10, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(12, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter01.setHorizontalAlignment(13, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			FlexCellFormatter cellFormatter02 = Emc_eufar.imageQuaLayTab.getFlexCellFormatter();
-			cellFormatter02.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(6, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(8, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(9, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(10, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(11, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(13, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(14, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(15, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(16, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(17, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(18, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter02.setHorizontalAlignment(19, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.imageCalAcqProTab);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.imageQuaLayTab);
-			Emc_eufar.imageStarLab02.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab03.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab04.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab05.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab06.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab07.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab08.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab09.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab10.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab11.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab12.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab13.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab14.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab15.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab16.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab17.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab18.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab19.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab20.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab21.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab22.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab23.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab24.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab25.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab26.setStyleName("qvStarLabel");
-			Emc_eufar.imageStarLab27.setStyleName("qvStarLabel");
-			Emc_eufar.imageSpeDat.setStyleName("qv_imageDatebox");
-			Emc_eufar.imageRadDat.setStyleName("qv_imageDatebox");
-			Emc_eufar.imageCalLab.setStyleName("qv_imageLabelTitle");
-			Emc_eufar.imageAcqLab.setStyleName("qv_imageLabelTitle");
-			Emc_eufar.imageProLab.setStyleName("qv_imageLabelTitle");
-			Emc_eufar.imageNameLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageRadLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageSpeLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageBanLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageDirLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageAltLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageZenLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageAziLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageAnoLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageLevLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageDCLab.setStyleName("qv_imageLabel");
-			Emc_eufar.imageCalBox.setStyleName("qv_imageBox");
-			Emc_eufar.imageBanBox.setStyleName("qv_imageBox2");
-			Emc_eufar.imageDirBox.setStyleName("qv_imageBox2");
-			Emc_eufar.imageAltBox.setStyleName("qv_imageBox2");
-			Emc_eufar.imageZenBox.setStyleName("qv_imageBox2");
-			Emc_eufar.imageAziBox.setStyleName("qv_imageBox2");
-			Emc_eufar.imageAnoBox.setStyleName("qv_imageBox");
-			Emc_eufar.imageLevLst.setStyleName("qv_imageList");
-			Emc_eufar.imageLayLab.setStyleName("qv_imageLabelTitle");
-			Emc_eufar.imageCalcorrLab.setStyleName("qv_imageLabelTitle2");
-			Emc_eufar.imageErrLab.setStyleName("qv_imageLabelTitle2");
-			Emc_eufar.imageErrcorrLab.setStyleName("qv_imageLabelTitle2");
-			Emc_eufar.imageCorrconLab.setStyleName("qv_imageLabelTitle2");
-			Emc_eufar.imageIntPixel.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageBadPixel.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageSatPixel.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageAffPixel.setStyleName("qv_imageLabel2");
-			Emc_eufar.imagePosInfo.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageAttInfo.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageSyncProblem.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageIntGeocoding.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageAtmCorrection.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageCloudMask.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageShadMask.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageHazeMask.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageRouMeasure.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageIllAngle.setStyleName("qv_imageLabel2");
-			Emc_eufar.imageBRDFGeometry.setStyleName("qv_imageLabel2");
-			Emc_eufar.horizontalPanel41.getElement().setAttribute("style", "margin-left: 20px;");
-			Emc_eufar.qvInfoButton06.getElement().setAttribute("style", "margin-top: 5px !important;");
-			Emc_eufar.qvInfoButton09.getElement().setAttribute("style", "margin-top: 5px !important;");
-			Emc_eufar.qvInfoButton14.getElement().setAttribute("style", "margin-top: 5px !important;");
-			Emc_eufar.horizontalPanel48.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel49.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel50.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel51.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel53.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel54.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel55.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel148.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel149.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel150.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel151.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel152.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel153.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel154.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel155.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.horizontalPanel156.setStyleName("qvHorizontalPanel4");
-			Emc_eufar.rootLogger.log(Level.INFO, "RadioButton: imageRad");
-		} else if (string == "Atmospheric/In-situ data") {
-			Emc_eufar.verticalPanel17.clear();
-			Emc_eufar.horizontalPanel35.add(Emc_eufar.insituCalLab);
-			Emc_eufar.horizontalPanel35.add(Emc_eufar.qvInfoButton02);
-			Emc_eufar.horizontalPanel36.add(Emc_eufar.insituOutLab);
-			Emc_eufar.horizontalPanel36.add(Emc_eufar.insituStarLab06);
-			Emc_eufar.horizontalPanel36.add(Emc_eufar.qvInfoButton03);
-			Emc_eufar.horizontalPanel37.add(Emc_eufar.insituFlaLab);
-			Emc_eufar.horizontalPanel37.add(Emc_eufar.insituStarLab07);
-			Emc_eufar.horizontalPanel37.add(Emc_eufar.qvInfoButton04);
-			Emc_eufar.horizontalPanel38.add(Emc_eufar.insituAssLab);
-			Emc_eufar.horizontalPanel38.add(Emc_eufar.insituStarLab08);
-			Emc_eufar.horizontalPanel38.add(Emc_eufar.qvInfoButton05);
-			Emc_eufar.horizontalPanel59.add(Emc_eufar.insituGeoLab);
-			Emc_eufar.horizontalPanel59.add(Emc_eufar.insituStarLab05);
-			Emc_eufar.horizontalPanel121.add(Emc_eufar.insituChk01Y);
-			Emc_eufar.horizontalPanel121.add(Emc_eufar.insituChk01N);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel35);
-			Emc_eufar.horizontalPanel118.add(Emc_eufar.insituLinkLab);
-			Emc_eufar.horizontalPanel118.add(Emc_eufar.insituStarLab02);
-			Emc_eufar.horizontalPanel119.add(Emc_eufar.insituConstLab);
-			Emc_eufar.horizontalPanel119.add(Emc_eufar.insituStarLab03);
-			Emc_eufar.horizontalPanel120.add(Emc_eufar.insituMatLab);
-			Emc_eufar.horizontalPanel120.add(Emc_eufar.insituStarLab04);
-			Emc_eufar.insituCalTab.setWidget(0, 0, Emc_eufar.horizontalPanel118);
-			Emc_eufar.insituCalTab.setWidget(0, 1, Emc_eufar.insituLinkBox);
-			Emc_eufar.insituCalTab.setWidget(1, 0, Emc_eufar.horizontalPanel119);
-			Emc_eufar.insituCalTab.setWidget(1, 1, Emc_eufar.insituConstBox);
-			Emc_eufar.insituCalTab.setWidget(2, 0, Emc_eufar.horizontalPanel120);
-			Emc_eufar.insituCalTab.setWidget(2, 1, Emc_eufar.insituMatBox);
-			FlexCellFormatter cellFormatter = Emc_eufar.insituCalTab.getFlexCellFormatter();
-			cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			cellFormatter.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.insituCalTab);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel59);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel121);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel36);
-			Emc_eufar.verticalPanel18.add(Emc_eufar.insituChk04);
-			Emc_eufar.verticalPanel18.add(Emc_eufar.insituChk05);
-			Emc_eufar.verticalPanel19.add(Emc_eufar.insituChk06);
-			Emc_eufar.verticalPanel19.add(Emc_eufar.horizontalPanel32);
-			Emc_eufar.horizontalPanel34.add(Emc_eufar.verticalPanel18);
-			Emc_eufar.horizontalPanel34.add(Emc_eufar.verticalPanel19);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel34);
-			Emc_eufar.horizontalPanel32.add(Emc_eufar.insituChk07);
-			((FocusWidget) Emc_eufar.insituChk07.getWidget(0)).addClickHandler(new ClickHandler() {
+	// add a tab to the QV panel
+	public static void addQvTab(String domain) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Adding a QV form to the GUI - " + domain);
+		final int tabNum = Emc_eufar.qvTabPanel.getWidgetCount();
+		final PushButton pushButton = new PushButton("");
+		if (domain == "insitu") {
+			if (tabNum == 0) {
+				Emc_eufar.simplePanel01.add(Emc_eufar.qvTabPanel);
+				Emc_eufar.qvTabPanel.setHeight("710px");
+			}
+			Emc_eufar.insituNum++;
+			pushButton.setText("Atmospheric/In-situ data " + Integer.toString(Emc_eufar.insituNum));
+			SimplePanel insituPanel = insituMainPanel(Emc_eufar.insituNum);
+			Emc_eufar.qvTabPanel.add(insituPanel, pushButton);
+			updateControlListbox(domain);
+		} else if (domain == "imagery") {
+			if (tabNum == 0) {
+				Emc_eufar.simplePanel01.add(Emc_eufar.qvTabPanel);
+				Emc_eufar.qvTabPanel.setHeight("1200px");
+			}
+			Emc_eufar.imageryNum++;
+			pushButton.setText("Earth observation/Remote sensing data " + Integer.toString(Emc_eufar.imageryNum));
+			SimplePanel imageryPanel = imageryMainPanel(Emc_eufar.imageryNum);
+			Emc_eufar.qvTabPanel.add(imageryPanel, pushButton);
+			updateControlListbox("imagery");
+		}
+		pushButton.setStyleName("delTabButton");
+		pushButton.addMouseUpHandler(new MouseUpHandler() {
+			@Override
+			public void onMouseUp(MouseUpEvent event) {
+				int posx = pushButton.getAbsoluteLeft();
+				int posy = pushButton.getAbsoluteTop();
+				int sizex = pushButton.getOffsetWidth();
+				int sizey = pushButton.getOffsetHeight();
+				int mousePosX = event.getClientX();
+				int mousePosY = event.getClientY();
+				if (mousePosX >= (posx + sizex - 15) && mousePosX <= (posx + sizex) && mousePosY >= posy && mousePosY <= posy + sizey) {
+					Emc_eufar.rootLogger.log(Level.INFO, "Removing QV form from the GUI");
+					int tabNum = Emc_eufar.qvTabPanel.getWidgetCount();
+					Widget eachButton;
+					String buttonText = "";
+					int tabIndex = -1;
+					for (int i = 0; i < tabNum; i++) {
+						eachButton = Emc_eufar.qvTabPanel.getTabWidget(i);
+						if (eachButton == pushButton) {
+							tabIndex = i;
+							buttonText = ((PushButton) eachButton).getText();
+							break;
+						}
+					}
+					if (buttonText.contains("Atmospheric")) {
+						int num = Integer.parseInt(buttonText.substring(25));
+						Emc_eufar.insituNum--;
+						Emc_eufar.qvInsituMap.remove(num - 1);
+					} else if (buttonText.contains("Earth")) {
+						int num = Integer.parseInt(buttonText.substring(38));
+						Emc_eufar.imageryNum--;
+						Emc_eufar.qvImageryMap.remove(num - 1);
+					}
+					Emc_eufar.qvTabPanel.remove(tabIndex);
+					int actualTab = 0;
+					try {
+						actualTab = Emc_eufar.qvTabPanel.getSelectedIndex();
+						if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(actualTab)).getText().contains("Atmospheric")) {
+							Emc_eufar.qvTabPanel.setHeight("710px");
+						} else if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(actualTab)).getText().contains("Earth")) {
+							Emc_eufar.qvTabPanel.setHeight("1200px");
+						}
+					} catch (AssertionError | IndexOutOfBoundsException e) {}
+					tabNum = Emc_eufar.qvTabPanel.getWidgetCount();
+					if (tabNum == 0) {
+						Emc_eufar.simplePanel01.remove(Emc_eufar.qvTabPanel);
+					} else {
+						int cleanInsituNum = 1;
+						int cleanimageryNum = 1;
+						for (int i = 0; i < tabNum; i++) {
+							PushButton tmpPushButton = (PushButton) Emc_eufar.qvTabPanel.getTabWidget(i);
+							if (tmpPushButton.getText().contains("Atmospheric")) {
+								tmpPushButton.setText("Atmospheric/In-situ data " + Integer.toString(cleanInsituNum));
+								cleanInsituNum++;
+							} else if (tmpPushButton.getText().contains("Earth")) {
+								tmpPushButton.setText("Earth observation/Remote sensing data " + Integer.toString(cleanimageryNum));
+								cleanimageryNum++;
+							}
+						}
+						updateControlListbox("insitu");
+						updateControlListbox("imagery");
+					}
+					Emc_eufar.rootLogger.log(Level.INFO, "QV form removed from the GUI");
+				} else if (mousePosX >= (posx) && mousePosX <= (posx + sizex - 16) && mousePosY >= posy && mousePosY <= posy + sizey){
+					int tabNum = Emc_eufar.qvTabPanel.getWidgetCount();
+					Widget eachButton;
+					int tabIndex = -1;
+					for (int i = 0; i < tabNum; i++) {
+						eachButton = Emc_eufar.qvTabPanel.getTabWidget(i);
+						if (eachButton == pushButton) {
+							tabIndex = i;
+							break;
+						}
+					}
+					if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(tabIndex)).getText().contains("Atmospheric")) {
+						Emc_eufar.qvTabPanel.setHeight("710px");
+					} else if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(tabIndex)).getText().contains("Earth")) {
+						Emc_eufar.qvTabPanel.setHeight("1200px");
+					}
+				}
+			}
+		});
+		Emc_eufar.rootLogger.log(Level.INFO, "QV form '" + domain + "' added to the GUI");
+	}
+	
+	
+	// creating insitu widgets in panel
+	@SuppressWarnings("rawtypes")
+	public static SimplePanel insituMainPanel(final Integer tabNum) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Building of the In-situ QV form");
+		SimplePanel simplePanel = new SimplePanel();
+		VerticalPanel mainPanel = new VerticalPanel();
+		simplePanel.add(mainPanel);
+		VerticalPanel VerticalPanel01 = new VerticalPanel();
+		VerticalPanel VerticalPanel02 = new VerticalPanel();
+		HorizontalPanel horizontalPanel01 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel02 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel03 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel04 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel05 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel06 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel07 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel08 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel09 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel10 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel11 = new HorizontalPanel();
+		final HorizontalPanel horizontalPanel12 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel13 = new HorizontalPanel();
+		FlexTable insituCalTab = new FlexTable();
+		TextBox insituLinkBox = new TextBox();
+		TextBox insituConstBox = new TextBox();
+		TextBox insituMatBox = new TextBox();
+		final TextBox insituOtherBox = new TextBox();
+		TextArea insituFlagAre = new TextArea();
+		TextArea insituAssumptionAre = new TextArea();
+		final ListBox insituControlLst01 = new ListBox();
+		final ListBox insituControlLst02 = new ListBox();
+		final ListBox insituInstrumentLst = new ListBox();
+		ArrayList<String> controlList = new ArrayList<String>();
+		ArrayList<String> instrumentList = new ArrayList<String>();
+ 		final HorizontalPanel insituChk01Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "1","Yes");
+		final HorizontalPanel insituChk01N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "1","No");
+		final HorizontalPanel insituChk04 = Elements.checkBox("NetCDF");
+		final HorizontalPanel insituChk05 = Elements.checkBox("HDF");
+		final HorizontalPanel insituChk06 = Elements.checkBox("NASA/Ames");
+		final HorizontalPanel insituChk07 = Elements.checkBox("Other");
+		SimplePanel qvInfoButton02 = Elements.addInfoButton("qvLineage2");
+		SimplePanel qvInfoButton03 = Elements.addInfoButton("qvLineage3");
+		SimplePanel qvInfoButton04 = Elements.addInfoButton("qvLineage4");
+		SimplePanel qvInfoButton05 = Elements.addInfoButton("qvLineage5");
+		SimplePanel qvInfoButton06 = Elements.addInfoButton("qvLineage19");
+		SimplePanel qvInfoButton07 = Elements.addInfoButton("qvLineage20");
+		Label insituStarLab02 = new Label("*");
+		Label insituStarLab03 = new Label("*");
+		Label insituStarLab04 = new Label("*");
+		Label insituStarLab05 = new Label("*");
+		Label insituStarLab06 = new Label("*");
+		Label insituStarLab07 = new Label("*");
+		Label insituStarLab08 = new Label("*");
+		Label insituStarLab09 = new Label("*");
+		Label insituCalLab = new Label("Operator's standard calibration procedures applied to raw digital data");
+		Label insituGeoLab = new Label("Conversion to geophysical units");
+		Label insituOutLab = new Label("Output in standardized format");
+		Label insituFlaLab = new Label("Quality-control flagging applied to individual data points");
+		Label insituAssLab = new Label("Assumption");
+		Label insituLinkLab = new Label("Link to the procedure's description");
+		Label insituConstLab = new Label("Source of calibration constants");
+		Label insituMatLab = new Label("Source of calibration materials");
+		Label insituControlLab = new Label("Tab controls");
+		Label insituInstrumentLab = new Label("The current form is linked to the following instrument");
+		final Image insituImage = new Image(Emc_eufar.resources.forward().getSafeUri());
+		Image image01 = new Image(Emc_eufar.resources.transfert().getSafeUri());
+		image01.setSize("21px","21px");
+		image01.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
+		final Image image02 = new Image(Emc_eufar.resources.forward().getSafeUri());
+		image02.setStyleName("qv_insituForwardImage2");
+		SimplePanel insituControlButton = new SimplePanel(image01);
+		controlList.add("Make a choice...");
+		controlList.add("Copy all form content to a new tab");
+		controlList.add("Copy all form content to an existing tab");
+		Utilities.populateListBox(insituControlLst01, controlList, 0);
+		instrumentList.add("Make a choice...");
+		for (int i = 0; i < Emc_eufar.instrumentTabList.size(); i++) {
+			instrumentList.add(Emc_eufar.manufacturerTabList.get(i) + " - " + Emc_eufar.instrumentTabList.get(i));
+		}
+		Utilities.populateListBox(insituInstrumentLst, instrumentList, 0);
+		insituControlButton.setPixelSize(25, 25);
+		insituControlButton.setStyleName("infoButton");
+		horizontalPanel12.add(insituControlLab);
+		horizontalPanel12.add(insituControlLst01);
+		horizontalPanel12.add(image02);
+		horizontalPanel12.add(insituControlLst02);
+		horizontalPanel12.add(insituControlButton);
+		horizontalPanel12.add(qvInfoButton06);
+		horizontalPanel13.add(insituInstrumentLab);
+		horizontalPanel13.add(insituStarLab09);
+		horizontalPanel13.add(insituInstrumentLst);
+		horizontalPanel13.add(qvInfoButton07);
+		horizontalPanel01.add(insituCalLab);
+		horizontalPanel01.add(qvInfoButton02);
+		horizontalPanel02.add(insituOutLab);
+		horizontalPanel02.add(insituStarLab06);
+		horizontalPanel02.add(qvInfoButton03);
+		horizontalPanel03.add(insituFlaLab);
+		horizontalPanel03.add(insituStarLab07);
+		horizontalPanel03.add(qvInfoButton04);
+		horizontalPanel04.add(insituAssLab);
+		horizontalPanel04.add(insituStarLab08);
+		horizontalPanel04.add(qvInfoButton05);
+		horizontalPanel05.add(insituGeoLab);
+		horizontalPanel05.add(insituStarLab05);
+		horizontalPanel06.add(insituLinkLab);
+		horizontalPanel06.add(insituStarLab02);
+		horizontalPanel07.add(insituConstLab);
+		horizontalPanel07.add(insituStarLab03);
+		horizontalPanel08.add(insituMatLab);
+		horizontalPanel08.add(insituStarLab04);
+		horizontalPanel09.add(insituChk01Y);
+		horizontalPanel09.add(insituChk01N);
+		VerticalPanel01.add(insituChk04);
+		VerticalPanel01.add(insituChk05);
+		VerticalPanel02.add(insituChk06);
+		VerticalPanel02.add(horizontalPanel11);
+		horizontalPanel10.add(VerticalPanel01);
+		horizontalPanel10.add(VerticalPanel02);
+		horizontalPanel11.add(insituChk07);
+		horizontalPanel11.add(insituImage);
+		horizontalPanel11.add(insituOtherBox);
+		insituCalTab.setWidget(0, 0, horizontalPanel06);
+		insituCalTab.setWidget(0, 1, insituLinkBox);
+		insituCalTab.setWidget(1, 0, horizontalPanel07);
+		insituCalTab.setWidget(1, 1, insituConstBox);
+		insituCalTab.setWidget(2, 0, horizontalPanel08);
+		insituCalTab.setWidget(2, 1, insituMatBox);
+		FlexCellFormatter cellFormatter = insituCalTab.getFlexCellFormatter();
+		cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		mainPanel.add(horizontalPanel12);
+		mainPanel.add(horizontalPanel13);
+		mainPanel.add(horizontalPanel01);
+		mainPanel.add(insituCalTab);
+		mainPanel.add(horizontalPanel05);
+		mainPanel.add(horizontalPanel09);
+		mainPanel.add(horizontalPanel02);
+		mainPanel.add(horizontalPanel10);
+		mainPanel.add(horizontalPanel03);
+		mainPanel.add(insituFlagAre);
+		mainPanel.add(horizontalPanel04);
+		mainPanel.add(insituAssumptionAre);
+		insituInstrumentLab.setStyleName("qv_insituLabel3");
+		insituInstrumentLst.setStyleName("qv_insituTextList");
+		qvInfoButton07.getElement().setAttribute("style", "margin-top: 0px !important;");
+		insituChk05.getElement().setAttribute("style","margin-top: 10px !important;");
+		insituChk06.getElement().setAttribute("style","margin-left: 40px !important;");
+		insituChk07.getElement().setAttribute("style","margin-left: 40px !important;");
+		qvInfoButton02.getElement().setAttribute("style", "margin-top: 5px !important;");
+		qvInfoButton03.getElement().setAttribute("style", "margin-top: -5px !important;");
+		qvInfoButton04.getElement().setAttribute("style", "margin-top: -5px !important;");
+		qvInfoButton05.getElement().setAttribute("style", "margin-top: -5px !important;");
+		qvInfoButton06.getElement().setAttribute("style", "margin-left: 20px !important;");
+		horizontalPanel11.getElement().setAttribute("style","margin-top: 10px;");
+		horizontalPanel12.getElement().setAttribute("style", "margin-left: 350px; margin-top: 10px; margin-bottom: 15px;");
+		horizontalPanel13.getElement().setAttribute("style", "margin-top: 20px; margin-bottom: 20px;");
+		insituStarLab02.setStyleName("qvStarLabel");
+		insituStarLab03.setStyleName("qvStarLabel");
+		insituStarLab04.setStyleName("qvStarLabel");
+		insituStarLab05.setStyleName("qvStarLabel2");
+		insituStarLab06.setStyleName("qvStarLabel");
+		insituStarLab07.setStyleName("qvStarLabel");
+		insituStarLab08.setStyleName("qvStarLabel2");
+		insituStarLab09.setStyleName("qvStarLabel");
+		insituControlLab.setStyleName("qv_insituLabel2");
+		insituLinkLab.setStyleName("qv_insituLabel");
+		insituConstLab.setStyleName("qv_insituLabel");
+		insituMatLab.setStyleName("qv_insituLabel");
+		insituLinkBox.setStyleName("qv_insituBox");
+		insituConstBox.setStyleName("qv_insituBox");
+		insituMatBox.setStyleName("qv_insituBox");
+		//insituImage.getElement().setAttribute("style", "margin-left: 23px; margin-top: 7px;");
+		
+		insituImage.setStyleName("qv_insituForwardImage");
+		
+		insituOtherBox.setStyleName("qv_otherBox");
+		insituFlagAre.setStyleName("qv_insituTextAre");
+		insituAssumptionAre.setStyleName("qv_insituTextAre");
+		insituCalLab.setStyleName("qv_insituLabelTitle");
+		insituOutLab.setStyleName("qv_insituLabelTitle2");
+		insituFlaLab.setStyleName("qv_insituLabelTitle2");
+		insituAssLab.setStyleName("qv_insituLabelTitle2");
+		insituGeoLab.setStyleName("qv_insituLabelTitle2");
+		horizontalPanel05.setStyleName("qvHorizontalPanel1");
+		horizontalPanel09.setStyleName("qvHorizontalPanel2");
+		horizontalPanel02.setStyleName("qvHorizontalPanel1");
+		horizontalPanel10.setStyleName("qvHorizontalPanel3");
+		horizontalPanel03.setStyleName("qvHorizontalPanel1");
+		horizontalPanel04.setStyleName("qvHorizontalPanel1");
+		insituControlLst01.setStyleName("qv_insituTextList");
+		insituControlLst02.setStyleName("qv_insituTextList");
+		insituImage.setVisible(false);
+		insituOtherBox.setVisible(false);
+		image02.setVisible(false);
+		insituControlLst02.setVisible(false);
+		simplePanel.getElement().setAttribute("style", "height: 100%; width: 100%;");
+		mainPanel.getElement().setAttribute("style", "background: white; height: 100%; width: 100%; margin-top: -6px; margin-left: -6px;");
+		ArrayList<ArrayList> insituAllLists = new ArrayList<ArrayList>();
+		final ArrayList<TextBoxBase> insituAllTextBoxes = new ArrayList<TextBoxBase>();
+		insituAllTextBoxes.add(insituLinkBox);
+		insituAllTextBoxes.add(insituConstBox);
+		insituAllTextBoxes.add(insituMatBox);
+		insituAllTextBoxes.add(insituOtherBox);
+		insituAllTextBoxes.add(insituFlagAre);
+		insituAllTextBoxes.add(insituAssumptionAre);
+		ArrayList<String> insituTextBoxFields = new ArrayList<String>();
+		insituTextBoxFields.add("string");
+		insituTextBoxFields.add("string");
+		insituTextBoxFields.add("string");
+		insituTextBoxFields.add("string");
+		insituTextBoxFields.add("string");
+		insituTextBoxFields.add("string");
+		ArrayList<HorizontalPanel> insituAllRadioButtons = new ArrayList<HorizontalPanel>();
+		insituAllRadioButtons.add(horizontalPanel09);
+		ArrayList<HorizontalPanel> insituAllCheckBoxes = new ArrayList<HorizontalPanel>();
+		insituAllCheckBoxes.add(horizontalPanel10);
+		ArrayList<ListBox> insituAllListBoxes = new ArrayList<ListBox>();
+		insituAllListBoxes.add(insituInstrumentLst);
+		insituAllListBoxes.add(insituControlLst02);
+		ArrayList<Image> insituAllImages = new ArrayList<Image>();
+		insituAllImages.add(insituImage);
+		insituAllLists.add(insituAllTextBoxes);
+		insituAllLists.add(insituAllRadioButtons);
+		insituAllLists.add(insituAllCheckBoxes);
+		insituAllLists.add(insituAllListBoxes);
+		insituAllLists.add(insituTextBoxFields);
+		insituAllLists.add(insituAllImages);
+		Emc_eufar.qvInsituMap.add(insituAllLists);
+		for (int i = 0; i < insituAllTextBoxes.size(); i++) {
+			insituAllTextBoxes.get(i).addChangeHandler(new ChangeHandler() {
 				@Override
-				public void onClick(ClickEvent event) {GuiModification.otherFormat();}
+				public void onChange(ChangeEvent event) {
+					Utilities.docIsModified();
+				}
 			});
-			Emc_eufar.horizontalPanel32.add(Emc_eufar.insituImage);
-			Emc_eufar.horizontalPanel32.add(Emc_eufar.insituOtherBox);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel37);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.insituFlagAre);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.horizontalPanel38);
-			Emc_eufar.verticalPanel17.add(Emc_eufar.insituAssumptionAre);
-			Emc_eufar.horizontalPanel59.setStyleName("qvHorizontalPanel1");
-			Emc_eufar.horizontalPanel121.setStyleName("qvHorizontalPanel2");
-			Emc_eufar.horizontalPanel36.setStyleName("qvHorizontalPanel1");
-			Emc_eufar.horizontalPanel34.setStyleName("qvHorizontalPanel3");
-			Emc_eufar.horizontalPanel37.setStyleName("qvHorizontalPanel1");
-			Emc_eufar.horizontalPanel38.setStyleName("qvHorizontalPanel1");
-			Emc_eufar.insituStarLab02.setStyleName("qvStarLabel");
-			Emc_eufar.insituStarLab03.setStyleName("qvStarLabel");
-			Emc_eufar.insituStarLab04.setStyleName("qvStarLabel");
-			Emc_eufar.insituStarLab05.setStyleName("qvStarLabel2");
-			Emc_eufar.insituStarLab06.setStyleName("qvStarLabel");
-			Emc_eufar.insituStarLab07.setStyleName("qvStarLabel");
-			Emc_eufar.insituStarLab08.setStyleName("qvStarLabel2");
-			Emc_eufar.insituLinkLab.setStyleName("qv_insituLabel");
-			Emc_eufar.insituConstLab.setStyleName("qv_insituLabel");
-			Emc_eufar.insituMatLab.setStyleName("qv_insituLabel");
-			Emc_eufar.insituLinkBox.setStyleName("qv_insituTextAre2");
-			Emc_eufar.insituConstBox.setStyleName("qv_insituTextAre2");
-			Emc_eufar.insituMatBox.setStyleName("qv_insituTextAre2");
-			Emc_eufar.insituImage.getElement().setAttribute("style", "margin-left: 23px; margin-top: -5px;");
-			Emc_eufar.insituOtherBox.setStyleName("qv_otherBox");
-			Emc_eufar.insituFlagAre.setStyleName("qv_insituTextAre");
-			Emc_eufar.insituAssumptionAre.setStyleName("qv_insituTextAre");
-			Emc_eufar.insituCalLab.setStyleName("qv_insituLabelTitle");
-			Emc_eufar.insituOutLab.setStyleName("qv_insituLabelTitle2");
-			Emc_eufar.insituFlaLab.setStyleName("qv_insituLabelTitle2");
-			Emc_eufar.insituAssLab.setStyleName("qv_insituLabelTitle2");
-			Emc_eufar.insituGeoLab.setStyleName("qv_insituLabelTitle2");
-			Emc_eufar.insituChk06.getElement().setAttribute("style","margin-left: 40px !important;");
-			Emc_eufar.insituChk07.getElement().setAttribute("style","margin-left: 40px !important;");
-			Emc_eufar.qvInfoButton02.getElement().setAttribute("style", "margin-top: 5px !important;");
-			Emc_eufar.qvInfoButton03.getElement().setAttribute("style", "margin-top: -5px !important;");
-			Emc_eufar.qvInfoButton04.getElement().setAttribute("style", "margin-top: -5px !important;");
-			Emc_eufar.qvInfoButton05.getElement().setAttribute("style", "margin-top: -5px !important;");
-			Emc_eufar.insituImage.setVisible(false);
-			Emc_eufar.insituOtherBox.setVisible(false);
-			Emc_eufar.rootLogger.log(Level.INFO, "RadioButton: insituRad");
+		}
+		CheckBox check1 = (CheckBox) insituChk04.getWidget(0);
+		CheckBox check2 = (CheckBox) insituChk05.getWidget(0);
+		CheckBox check3 = (CheckBox) insituChk06.getWidget(0);
+		CheckBox check4 = (CheckBox) insituChk07.getWidget(0);
+		RadioButton radioY = (RadioButton) insituChk01Y.getWidget(0);
+		RadioButton radioN = (RadioButton) insituChk01N.getWidget(0);
+		radioY.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Utilities.docIsModified();
+			}
+		});
+		radioN.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Utilities.docIsModified();
+			}
+		});
+		check1.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Utilities.docIsModified();
+			}
+		});
+		check2.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Utilities.docIsModified();
+			}
+		});
+		check3.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Utilities.docIsModified();
+			}
+		});
+		check4.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				Utilities.docIsModified();
+			}
+		});
+		image01.addClickHandler(new ClickHandler() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onClick(ClickEvent event) {
+				if (insituControlLst01.getSelectedItemText() == "Copy all form content to a new tab") {
+					String string = XmlSave.createInsituCode(Emc_eufar.qvInsituMap.get(tabNum - 1), tabNum);
+					GuiModification.addQvTab("insitu");
+					XmlOpen.readInsituCode(string.substring(1, string.length() - 1), Emc_eufar.insituNum - 1);
+				} else if (insituControlLst01.getSelectedItemText() == "Copy all form content to an existing tab") {
+					if (insituControlLst02.getSelectedItemText() != "Make a choice..." && insituControlLst02.getSelectedItemText() != "") {
+						int num = Integer.parseInt(insituControlLst02.getSelectedItemText().substring(25));
+						String string = XmlSave.createInsituCode(Emc_eufar.qvInsituMap.get(tabNum - 1), tabNum);
+						XmlOpen.readInsituCode(string.substring(1, string.length() - 1), num - 1);
+					}
+				}
+			}
+		});
+		((FocusWidget) insituChk07.getWidget(0)).addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				if (((CheckBox) insituChk07.getWidget(0)).getValue() == true) {
+					insituImage.setVisible(true);
+					insituOtherBox.setVisible(true);
+					//insituImage.setPixelSize(20, 12);
+				} else {
+					insituImage.setVisible(false);
+					insituOtherBox.setVisible(false);
+					//insituImage.setPixelSize(20, 12);
+				}
+			}
+		});
+		insituControlLst01.addChangeHandler(new ChangeHandler() {
+			@Override
+			public void onChange(ChangeEvent event) {
+				if (insituControlLst01.getSelectedItemText() == "Copy all form content to an existing tab") {
+					image02.setVisible(true);
+					insituControlLst02.setVisible(true);
+					updateControlListbox("insitu");
+				} else {
+					image02.setVisible(false);
+					insituControlLst02.setVisible(false);
+				}
+			}
+		});
+		Emc_eufar.rootLogger.log(Level.INFO, "In-situ QV form built");
+		return simplePanel;
+	}
+	
+	
+	// creating insitu widgets in panel
+	@SuppressWarnings("rawtypes")
+	public static SimplePanel imageryMainPanel(final int tabNum) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Building of the Imagery QV form");
+		SimplePanel simplePanel = new SimplePanel();
+		VerticalPanel mainPanel = new VerticalPanel();
+		simplePanel.add(mainPanel);
+		SimplePanel qvInfoButton06 = Elements.addInfoButton("qvLineage6");
+		SimplePanel qvInfoButton07 = Elements.addInfoButton("qvLineage7");
+		SimplePanel qvInfoButton08 = Elements.addInfoButton("qvLineage8");
+		SimplePanel qvInfoButton09 = Elements.addInfoButton("qvLineage9");
+		SimplePanel qvInfoButton10 = Elements.addInfoButton("qvLineage10");
+		SimplePanel qvInfoButton11 = Elements.addInfoButton("qvLineage11");
+		SimplePanel qvInfoButton12 = Elements.addInfoButton("qvLineage12");
+		SimplePanel qvInfoButton13 = Elements.addInfoButton("qvLineage13");
+		SimplePanel qvInfoButton14 = Elements.addInfoButton("qvLineage14");
+		SimplePanel qvInfoButton15 = Elements.addInfoButton("qvLineage15");
+		SimplePanel qvInfoButton16 = Elements.addInfoButton("qvLineage16");
+		SimplePanel qvInfoButton17 = Elements.addInfoButton("qvLineage17");
+		SimplePanel qvInfoButton18 = Elements.addInfoButton("qvLineage18");
+		SimplePanel qvInfoButton19 = Elements.addInfoButton("qvLineage19");
+		SimplePanel qvInfoButton20 = Elements.addInfoButton("qvLineage20");
+		HorizontalPanel horizontalPanel01 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel02 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel03 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel04 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel05 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel06 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel07 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel08 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel09 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel10 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel11 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel12 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel13 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel14 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel15 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel16 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel17 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel18 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel19 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel20 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel21 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel22 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel23 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel24 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel25 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel26 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel27 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel28 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel29 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel30 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel31 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel32 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel33 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel34 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel35 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel36 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel37 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel38 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel39 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel40 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel41 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel42 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel43 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel44 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel45 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel46 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel47 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel48 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel49 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel50 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel51 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel52 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel53 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel54 = new HorizontalPanel();
+		HorizontalPanel horizontalPanel55 = new HorizontalPanel();
+		final HorizontalPanel horizontalPanel56 = new HorizontalPanel();
+		final HorizontalPanel horizontalPanel57 = new HorizontalPanel();
+		Label imageStarLab02 = new Label("*");
+		Label imageStarLab03 = new Label("*");
+		Label imageStarLab04 = new Label("*");
+		Label imageStarLab05 = new Label("*");
+		Label imageStarLab06 = new Label("*");
+		Label imageStarLab07 = new Label("*");
+		Label imageStarLab08 = new Label("*");
+		Label imageStarLab09 = new Label("*");
+		Label imageStarLab10 = new Label("*");
+		Label imageStarLab11 = new Label("*");
+		Label imageStarLab12 = new Label("*");
+		Label imageStarLab13 = new Label("*");
+		Label imageStarLab14 = new Label("*");
+		Label imageStarLab15 = new Label("*");
+		Label imageStarLab16 = new Label("*");
+		Label imageStarLab17 = new Label("*");
+		Label imageStarLab18 = new Label("*");
+		Label imageStarLab19 = new Label("*");
+		Label imageStarLab20 = new Label("*");
+		Label imageStarLab21 = new Label("*");
+		Label imageStarLab22 = new Label("*");
+		Label imageStarLab23 = new Label("*");
+		Label imageStarLab24 = new Label("*");
+		Label imageStarLab25 = new Label("*");
+		Label imageStarLab26 = new Label("*");
+		Label imageStarLab27 = new Label("*");
+		Label imageStarLab28 = new Label("*");
+		Label imageCalLab = new Label("Calibration information");
+		Label imageAcqLab = new Label("Acquisition information");
+		Label imageProLab = new Label("Processing information");
+		Label imageLayLab = new Label("Data Quality Layers");
+		Label imageNameLab = new Label("Name of calibration laboratory");
+		Label imageRadLab = new Label("Date of radiometric calibration");
+		Label imageSpeLab = new Label("Date of spectral calibration");
+		Label imageBanLab = new Label("Number of spectral bands (spectral mode)");
+		Label imageDirLab = new Label("Overall heading / fligh direction (dd)");
+		Label imageAltLab = new Label("Overall altitude / average height ASL (m)");
+		Label imageZenLab = new Label("Solar zenith (dd)");
+		Label imageAziLab = new Label("Solar azimuth (dd)");
+		Label imageAnoLab = new Label("Report anomalies in data acquisition");
+		Label imageLevLab = new Label("Processing level");
+		Label imageDCLab = new Label("Dark current (DC) correction ?");
+		Label imageCalcorrLab = new Label("Sensor calibration and system correction");
+		Label imageErrLab = new Label("Image data artefacts and processing errors");
+		Label imageErrcorrLab = new Label("GPS/IMU related errors, geometric correction");
+		Label imageCorrconLab = new Label("Atmospheric correction and atmospheric conditions");
+		Label imageIntPixel = new Label("Aggregated interpolated pixel mask ('corrected pixels') ?");
+		Label imageBadPixel = new Label("Aggregated bad pixel mask ('not corrected pixels') ?");
+		Label imageSatPixel = new Label("Saturated pixels / overflow ?");
+		Label imageAffPixel = new Label("Pixels affected by saturation in spatial/spectral neighbourhood ?");
+		Label imagePosInfo = new Label("Problems with position information / Interpolated position information ?");
+		Label imageAttInfo = new Label("Problems with attitude information / Interpolated attitude information ?");
+		Label imageSyncProblem = new Label("Synchronization problems ?");
+		Label imageIntGeocoding = new Label("Interpolated pixels during geocoding ?");
+		Label imageAtmCorrection = new Label("Failure of atmospheric correction ?");
+		Label imageCloudMask = new Label("Cloud mask ?");
+		Label imageShadMask = new Label("Cloud shadow mask ?");
+		Label imageHazeMask = new Label("Haze mask ?");
+		Label imageRouMeasure = new Label("Critical terrain correction based on DEM roughness measure ?");
+		Label imageIllAngle = new Label("Critical terrain correction based on slope/local illumination angle ?");
+		Label imageBRDFGeometry = new Label("Critical BRDF geometry based on sun-sensor-terrain geometry ?");
+		Label imageryControlLab = new Label("Tab controls");
+		Label imageryInstrumentLab = new Label("The current form is linked to the following instrument");
+		Image image01 = new Image(Emc_eufar.resources.transfert().getSafeUri());
+		image01.setSize("21px","21px");
+		image01.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
+		final Image image02 = new Image(Emc_eufar.resources.forward().getSafeUri());
+		SimplePanel imageryControlButton = new SimplePanel(image01);
+		TextBox imageCalBox = new TextBox();
+		TextBox imageBanBox = new TextBox();
+		TextBox imageDirBox = new TextBox();
+		TextBox imageAltBox = new TextBox();
+		TextBox imageZenBox = new TextBox();
+		TextBox imageAziBox = new TextBox();
+		TextBox imageAnoBox = new TextBox();
+		DateBox imageRadDat = new DateBox();
+		DateBox imageSpeDat = new DateBox();
+		final ListBox imageLevLst = new ListBox();
+		final ListBox imageryControlLst01 = new ListBox();
+		final ListBox imageryControlLst02 = new ListBox();
+		final ListBox imageryInstrumentLst = new ListBox();
+		ArrayList<String> levelList = Materials.levelList();
+		ArrayList<String> controlList = new ArrayList<String>();
+		ArrayList<String> instrumentList = new ArrayList<String>();
+		FlexTable imageCalAcqProTab = new FlexTable();
+		FlexTable imageQuaLayTab = new FlexTable();
+		HorizontalPanel imageChk10Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "3","Yes");
+		HorizontalPanel imageChk10N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "3","No");
+		HorizontalPanel imageChk11Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "4","Yes");
+		HorizontalPanel imageChk11N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "4","No");
+		HorizontalPanel imageChk12Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "5","Yes");
+		HorizontalPanel imageChk12N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "5","No");
+		HorizontalPanel imageChk13Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "6","Yes");
+		HorizontalPanel imageChk13N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "6","No");
+		HorizontalPanel imageChk14Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "7","Yes");
+		HorizontalPanel imageChk14N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "7","No");
+		HorizontalPanel imageChk15Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "8","Yes");
+		HorizontalPanel imageChk15N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "8","No");
+		HorizontalPanel imageChk16Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "9","Yes");
+		HorizontalPanel imageChk16N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "9","No");
+		HorizontalPanel imageChk17Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "10","Yes");
+		HorizontalPanel imageChk17N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "10","No");
+		HorizontalPanel imageChk18Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "11","Yes");
+		HorizontalPanel imageChk18N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "11","No");
+		HorizontalPanel imageChk19Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "12","Yes");
+		HorizontalPanel imageChk19N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "12","No");
+		HorizontalPanel imageChk20Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "13","Yes");
+		HorizontalPanel imageChk20N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "13","No");
+		HorizontalPanel imageChk21Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "14","Yes");
+		HorizontalPanel imageChk21N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "14","No");
+		HorizontalPanel imageChk22Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "15","Yes");
+		HorizontalPanel imageChk22N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "15","No");
+		HorizontalPanel imageChk23Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "16","Yes");
+		HorizontalPanel imageChk23N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "16","No");
+		HorizontalPanel imageChk24Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "17","Yes");
+		HorizontalPanel imageChk24N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "17","No");
+		HorizontalPanel imageChk25Y = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "18","Yes");
+		HorizontalPanel imageChk25N = Elements.radioButton("radioGrp" + Integer.toString(tabNum) + "18","No");
+		Utilities.populateListBox(imageLevLst, levelList, 0);
+		controlList.add("Make a choice...");
+		controlList.add("Copy all form content to a new tab");
+		controlList.add("Copy all form content to an existing tab");
+		Utilities.populateListBox(imageryControlLst01, controlList, 0);
+		instrumentList.add("Make a choice...");
+		for (int i = 0; i < Emc_eufar.instrumentTabList.size(); i++) {
+			instrumentList.add(Emc_eufar.manufacturerTabList.get(i) + " - " + Emc_eufar.instrumentTabList.get(i));
+		}
+		Utilities.populateListBox(imageryInstrumentLst, instrumentList, 0);
+		imageryControlButton.setPixelSize(25, 25);
+		imageryControlButton.setStyleName("infoButton");
+		imageRadDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
+		imageRadDat.setValue(new Date());
+		imageSpeDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
+		imageSpeDat.setValue(new Date());
+		horizontalPanel01.add(imageCalLab);
+		horizontalPanel01.add(qvInfoButton06);
+		horizontalPanel02.add(imageBanBox);
+		horizontalPanel02.add(qvInfoButton07);
+		horizontalPanel03.add(imageChk10Y);
+		horizontalPanel03.add(imageChk10N);
+		horizontalPanel04.add(horizontalPanel03);
+		horizontalPanel04.add(qvInfoButton08);
+		horizontalPanel05.add(imageLayLab);
+		horizontalPanel05.add(qvInfoButton09);
+		horizontalPanel06.add(imageErrcorrLab);
+		horizontalPanel06.add(qvInfoButton14);
+		horizontalPanel07.add(imageChk11Y);
+		horizontalPanel07.add(imageChk11N);
+		horizontalPanel08.add(horizontalPanel07);
+		horizontalPanel08.add(qvInfoButton10);
+		horizontalPanel09.add(imageChk12Y);
+		horizontalPanel09.add(imageChk12N);
+		horizontalPanel10.add(horizontalPanel09);
+		horizontalPanel10.add(qvInfoButton11);
+		horizontalPanel11.add(imageChk13Y);
+		horizontalPanel11.add(imageChk13N);
+		horizontalPanel12.add(horizontalPanel11);
+		horizontalPanel12.add(qvInfoButton12);
+		horizontalPanel13.add(imageChk14Y);
+		horizontalPanel13.add(imageChk14N);
+		horizontalPanel14.add(horizontalPanel13);
+		horizontalPanel14.add(qvInfoButton13);
+		horizontalPanel15.add(imageChk15Y);
+		horizontalPanel15.add(imageChk15N);
+		horizontalPanel16.add(imageChk16Y);
+		horizontalPanel16.add(imageChk16N);
+		horizontalPanel17.add(imageChk17Y);
+		horizontalPanel17.add(imageChk17N);
+		horizontalPanel18.add(imageChk18Y);
+		horizontalPanel18.add(imageChk18N);
+		horizontalPanel19.add(imageChk19Y);
+		horizontalPanel19.add(imageChk19N);
+		horizontalPanel20.add(horizontalPanel19);
+		horizontalPanel20.add(qvInfoButton15);
+		horizontalPanel21.add(imageChk20Y);
+		horizontalPanel21.add(imageChk20N);
+		horizontalPanel22.add(imageChk21Y);
+		horizontalPanel22.add(imageChk21N);
+		horizontalPanel23.add(imageChk22Y);
+		horizontalPanel23.add(imageChk22N);
+		horizontalPanel24.add(imageChk23Y);
+		horizontalPanel24.add(imageChk23N);
+		horizontalPanel25.add(horizontalPanel24);
+		horizontalPanel25.add(qvInfoButton16);
+		horizontalPanel26.add(imageChk24Y);
+		horizontalPanel26.add(imageChk24N);
+		horizontalPanel27.add(horizontalPanel26);
+		horizontalPanel27.add(qvInfoButton17);
+		horizontalPanel28.add(imageChk25Y);
+		horizontalPanel28.add(imageChk25N);
+		horizontalPanel29.add(horizontalPanel28);
+		horizontalPanel29.add(qvInfoButton18);
+		horizontalPanel30.add(imageNameLab);
+		horizontalPanel30.add(imageStarLab02);
+		horizontalPanel31.add(imageRadLab);
+		horizontalPanel31.add(imageStarLab03);
+		horizontalPanel32.add(imageSpeLab);
+		horizontalPanel32.add(imageStarLab04);
+		horizontalPanel33.add(imageBanLab);
+		horizontalPanel33.add(imageStarLab05);
+		horizontalPanel34.add(imageDirLab);
+		horizontalPanel34.add(imageStarLab06);
+		horizontalPanel35.add(imageAltLab);
+		horizontalPanel35.add(imageStarLab07);
+		horizontalPanel36.add(imageZenLab);
+		horizontalPanel36.add(imageStarLab08);
+		horizontalPanel37.add(imageAziLab);
+		horizontalPanel37.add(imageStarLab09);
+		horizontalPanel38.add(imageAnoLab);
+		horizontalPanel38.add(imageStarLab10);
+		horizontalPanel39.add(imageLevLab);
+		horizontalPanel39.add(imageStarLab11);
+		horizontalPanel40.add(imageDCLab);
+		horizontalPanel40.add(imageStarLab12);
+		horizontalPanel41.add(imageIntPixel);
+		horizontalPanel41.add(imageStarLab13);
+		horizontalPanel42.add(imageBadPixel);
+		horizontalPanel42.add(imageStarLab14);
+		horizontalPanel43.add(imageSatPixel);
+		horizontalPanel43.add(imageStarLab15);
+		horizontalPanel44.add(imageAffPixel);
+		horizontalPanel44.add(imageStarLab16);
+		horizontalPanel45.add(imagePosInfo);
+		horizontalPanel45.add(imageStarLab17);
+		horizontalPanel46.add(imageAttInfo);
+		horizontalPanel46.add(imageStarLab18);
+		horizontalPanel47.add(imageSyncProblem);
+		horizontalPanel47.add(imageStarLab19);
+		horizontalPanel48.add(imageIntGeocoding);
+		horizontalPanel48.add(imageStarLab20);
+		horizontalPanel49.add(imageAtmCorrection);
+		horizontalPanel49.add(imageStarLab21);
+		horizontalPanel50.add(imageCloudMask);
+		horizontalPanel50.add(imageStarLab22);
+		horizontalPanel51.add(imageShadMask);
+		horizontalPanel51.add(imageStarLab23);
+		horizontalPanel52.add(imageHazeMask);
+		horizontalPanel52.add(imageStarLab24);
+		horizontalPanel53.add(imageRouMeasure);
+		horizontalPanel53.add(imageStarLab25);
+		horizontalPanel54.add(imageIllAngle);
+		horizontalPanel54.add(imageStarLab26);
+		horizontalPanel55.add(imageBRDFGeometry);
+		horizontalPanel55.add(imageStarLab27);
+		horizontalPanel56.add(imageryControlLab);
+		horizontalPanel56.add(imageryControlLst01);
+		horizontalPanel56.add(image02);
+		image02.setStyleName("qv_imageForwardImage");
+		horizontalPanel56.add(imageryControlLst02);
+		horizontalPanel56.add(imageryControlButton);
+		horizontalPanel56.add(qvInfoButton19);
+		horizontalPanel57.add(imageryInstrumentLab);
+		horizontalPanel57.add(imageStarLab28);
+		horizontalPanel57.add(imageryInstrumentLst);
+		horizontalPanel57.add(qvInfoButton20);
+		imageCalAcqProTab.setWidget(0, 0, horizontalPanel01);
+		imageCalAcqProTab.setWidget(1, 0, horizontalPanel30);
+		imageCalAcqProTab.setWidget(1, 1, imageCalBox);
+		imageCalAcqProTab.setWidget(2, 0, horizontalPanel31);
+		imageCalAcqProTab.setWidget(2, 1, imageRadDat);
+		imageCalAcqProTab.setWidget(3, 0, horizontalPanel32);
+		imageCalAcqProTab.setWidget(3, 1, imageSpeDat);
+		imageCalAcqProTab.setWidget(4, 0, imageAcqLab);
+		imageCalAcqProTab.setWidget(5, 0, horizontalPanel33);
+		imageCalAcqProTab.setWidget(5, 1, horizontalPanel02);
+		imageCalAcqProTab.setWidget(6, 0, horizontalPanel34);
+		imageCalAcqProTab.setWidget(6, 1, imageDirBox);
+		imageCalAcqProTab.setWidget(7, 0, horizontalPanel35);
+		imageCalAcqProTab.setWidget(7, 1, imageAltBox);
+		imageCalAcqProTab.setWidget(8, 0, horizontalPanel36);
+		imageCalAcqProTab.setWidget(8, 1, imageZenBox);
+		imageCalAcqProTab.setWidget(9, 0, horizontalPanel37);
+		imageCalAcqProTab.setWidget(9, 1, imageAziBox);
+		imageCalAcqProTab.setWidget(10, 0, horizontalPanel38);
+		imageCalAcqProTab.setWidget(10, 1, imageAnoBox);
+		imageCalAcqProTab.setWidget(11, 0, imageProLab);
+		imageCalAcqProTab.setWidget(12, 0, horizontalPanel39);
+		imageCalAcqProTab.setWidget(12, 1, imageLevLst);
+		imageCalAcqProTab.setWidget(13, 0, horizontalPanel40);
+		imageCalAcqProTab.setWidget(13, 1, horizontalPanel04);
+		imageQuaLayTab.setWidget(0, 0, horizontalPanel05);
+		imageQuaLayTab.setWidget(1, 0, imageCalcorrLab);
+		imageQuaLayTab.setWidget(2, 0, horizontalPanel41);
+		imageQuaLayTab.setWidget(2, 1, horizontalPanel08);
+		imageQuaLayTab.setWidget(3, 0, horizontalPanel42);
+		imageQuaLayTab.setWidget(3, 1, horizontalPanel10);
+		imageQuaLayTab.setWidget(4, 0, imageErrLab);
+		imageQuaLayTab.setWidget(5, 0, horizontalPanel43);
+		imageQuaLayTab.setWidget(5, 1, horizontalPanel12);
+		imageQuaLayTab.setWidget(6, 0, horizontalPanel44);
+		imageQuaLayTab.setWidget(6, 1, horizontalPanel14);
+		imageQuaLayTab.setWidget(7, 0, horizontalPanel06);
+		imageQuaLayTab.setWidget(8, 0, horizontalPanel45);
+		imageQuaLayTab.setWidget(8, 1, horizontalPanel15);
+		imageQuaLayTab.setWidget(9, 0, horizontalPanel46);
+		imageQuaLayTab.setWidget(9, 1, horizontalPanel16);
+		imageQuaLayTab.setWidget(10, 0, horizontalPanel47);
+		imageQuaLayTab.setWidget(10, 1, horizontalPanel17);
+		imageQuaLayTab.setWidget(11, 0, horizontalPanel48);
+		imageQuaLayTab.setWidget(11, 1, horizontalPanel18);
+		imageQuaLayTab.setWidget(12, 0, imageCorrconLab);
+		imageQuaLayTab.setWidget(13, 0, horizontalPanel49);
+		imageQuaLayTab.setWidget(13, 1, horizontalPanel20);
+		imageQuaLayTab.setWidget(14, 0, horizontalPanel50);
+		imageQuaLayTab.setWidget(14, 1, horizontalPanel21);
+		imageQuaLayTab.setWidget(15, 0, horizontalPanel51);
+		imageQuaLayTab.setWidget(15, 1, horizontalPanel22);
+		imageQuaLayTab.setWidget(16, 0, horizontalPanel52);
+		imageQuaLayTab.setWidget(16, 1, horizontalPanel23);
+		imageQuaLayTab.setWidget(17, 0, horizontalPanel53);
+		imageQuaLayTab.setWidget(17, 1, horizontalPanel25);
+		imageQuaLayTab.setWidget(18, 0, horizontalPanel54);
+		imageQuaLayTab.setWidget(18, 1, horizontalPanel27);
+		imageQuaLayTab.setWidget(19, 0, horizontalPanel55);
+		imageQuaLayTab.setWidget(19, 1, horizontalPanel29);
+		mainPanel.add(horizontalPanel56);
+		mainPanel.add(horizontalPanel57);
+		mainPanel.add(imageCalAcqProTab);
+		mainPanel.add(imageQuaLayTab);
+		FlexCellFormatter cellFormatter01 = imageCalAcqProTab.getFlexCellFormatter();
+		cellFormatter01.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(6, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(7, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(8, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(9, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(10, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(12, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter01.setHorizontalAlignment(13, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		FlexCellFormatter cellFormatter02 = imageQuaLayTab.getFlexCellFormatter();
+		cellFormatter02.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(5, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(6, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(8, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(9, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(10, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(11, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(13, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(14, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(15, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(16, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(17, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(18, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		cellFormatter02.setHorizontalAlignment(19, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		imageryInstrumentLab.setStyleName("qv_insituLabel3");
+		imageryInstrumentLst.setStyleName("qv_insituTextList");
+		qvInfoButton20.getElement().setAttribute("style", "margin-top: 0px !important;");
+		horizontalPanel57.getElement().setAttribute("style", "margin-top: 20px; margin-bottom: 20px;");
+		imageStarLab02.setStyleName("qvStarLabel");
+		imageStarLab03.setStyleName("qvStarLabel");
+		imageStarLab04.setStyleName("qvStarLabel");
+		imageStarLab05.setStyleName("qvStarLabel");
+		imageStarLab06.setStyleName("qvStarLabel");
+		imageStarLab07.setStyleName("qvStarLabel");
+		imageStarLab08.setStyleName("qvStarLabel");
+		imageStarLab09.setStyleName("qvStarLabel");
+		imageStarLab10.setStyleName("qvStarLabel");
+		imageStarLab11.setStyleName("qvStarLabel");
+		imageStarLab12.setStyleName("qvStarLabel");
+		imageStarLab13.setStyleName("qvStarLabel");
+		imageStarLab14.setStyleName("qvStarLabel");
+		imageStarLab15.setStyleName("qvStarLabel");
+		imageStarLab16.setStyleName("qvStarLabel");
+		imageStarLab17.setStyleName("qvStarLabel");
+		imageStarLab18.setStyleName("qvStarLabel");
+		imageStarLab19.setStyleName("qvStarLabel");
+		imageStarLab20.setStyleName("qvStarLabel");
+		imageStarLab21.setStyleName("qvStarLabel");
+		imageStarLab22.setStyleName("qvStarLabel");
+		imageStarLab23.setStyleName("qvStarLabel");
+		imageStarLab24.setStyleName("qvStarLabel");
+		imageStarLab25.setStyleName("qvStarLabel");
+		imageStarLab26.setStyleName("qvStarLabel");
+		imageStarLab27.setStyleName("qvStarLabel");
+		imageStarLab28.setStyleName("qvStarLabel");
+		imageSpeDat.setStyleName("qv_imageDatebox");
+		imageRadDat.setStyleName("qv_imageDatebox");
+		imageCalLab.setStyleName("qv_imageLabelTitle");
+		imageAcqLab.setStyleName("qv_imageLabelTitle");
+		imageProLab.setStyleName("qv_imageLabelTitle");
+		imageNameLab.setStyleName("qv_imageLabel");
+		imageRadLab.setStyleName("qv_imageLabel");
+		imageSpeLab.setStyleName("qv_imageLabel");
+		imageBanLab.setStyleName("qv_imageLabel");
+		imageDirLab.setStyleName("qv_imageLabel");
+		imageAltLab.setStyleName("qv_imageLabel");
+		imageZenLab.setStyleName("qv_imageLabel");
+		imageAziLab.setStyleName("qv_imageLabel");
+		imageAnoLab.setStyleName("qv_imageLabel");
+		imageLevLab.setStyleName("qv_imageLabel");
+		imageDCLab.setStyleName("qv_imageLabel");
+		imageCalBox.setStyleName("qv_imageBox");
+		imageBanBox.setStyleName("qv_imageBox2");
+		imageDirBox.setStyleName("qv_imageBox2");
+		imageAltBox.setStyleName("qv_imageBox2");
+		imageZenBox.setStyleName("qv_imageBox2");
+		imageAziBox.setStyleName("qv_imageBox2");
+		imageAnoBox.setStyleName("qv_imageBox");
+		imageLevLst.setStyleName("qv_imageList");
+		imageLayLab.setStyleName("qv_imageLabelTitle");
+		imageCalcorrLab.setStyleName("qv_imageLabelTitle2");
+		imageErrLab.setStyleName("qv_imageLabelTitle2");
+		imageErrcorrLab.setStyleName("qv_imageLabelTitle2");
+		imageCorrconLab.setStyleName("qv_imageLabelTitle2");
+		imageIntPixel.setStyleName("qv_imageLabel2");
+		imageBadPixel.setStyleName("qv_imageLabel2");
+		imageSatPixel.setStyleName("qv_imageLabel2");
+		imageAffPixel.setStyleName("qv_imageLabel2");
+		imagePosInfo.setStyleName("qv_imageLabel2");
+		imageAttInfo.setStyleName("qv_imageLabel2");
+		imageSyncProblem.setStyleName("qv_imageLabel2");
+		imageIntGeocoding.setStyleName("qv_imageLabel2");
+		imageAtmCorrection.setStyleName("qv_imageLabel2");
+		imageCloudMask.setStyleName("qv_imageLabel2");
+		imageShadMask.setStyleName("qv_imageLabel2");
+		imageHazeMask.setStyleName("qv_imageLabel2");
+		imageRouMeasure.setStyleName("qv_imageLabel2");
+		imageIllAngle.setStyleName("qv_imageLabel2");
+		imageBRDFGeometry.setStyleName("qv_imageLabel2");
+		horizontalPanel04.getElement().setAttribute("style", "margin-left: 20px;");
+		qvInfoButton06.getElement().setAttribute("style", "margin-top: 5px !important;");
+		qvInfoButton09.getElement().setAttribute("style", "margin-top: 5px !important;");
+		qvInfoButton14.getElement().setAttribute("style", "margin-top: 5px !important;");
+		horizontalPanel03.setStyleName("qvHorizontalPanel5");
+		horizontalPanel07.setStyleName("qvHorizontalPanel4");
+		horizontalPanel09.setStyleName("qvHorizontalPanel4");
+		horizontalPanel11.setStyleName("qvHorizontalPanel4");
+		horizontalPanel13.setStyleName("qvHorizontalPanel4");
+		horizontalPanel15.setStyleName("qvHorizontalPanel4");
+		horizontalPanel16.setStyleName("qvHorizontalPanel4");
+		horizontalPanel17.setStyleName("qvHorizontalPanel4");
+		horizontalPanel18.setStyleName("qvHorizontalPanel4");
+		horizontalPanel19.setStyleName("qvHorizontalPanel4");
+		horizontalPanel21.setStyleName("qvHorizontalPanel4");
+		horizontalPanel22.setStyleName("qvHorizontalPanel4");
+		horizontalPanel23.setStyleName("qvHorizontalPanel4");
+		horizontalPanel24.setStyleName("qvHorizontalPanel4");
+		horizontalPanel26.setStyleName("qvHorizontalPanel4");
+		horizontalPanel28.setStyleName("qvHorizontalPanel4");
+		horizontalPanel56.getElement().setAttribute("style", "margin-left: 350px; margin-top: 10px; margin-bottom: 15px;");
+		imageryControlLst01.setStyleName("qv_insituTextList");
+		imageryControlLst02.setStyleName("qv_insituTextList");
+		imageryControlLab.setStyleName("qv_insituLabel2");
+		qvInfoButton19.getElement().setAttribute("style", "margin-left: 20px !important;");
+		image02.setVisible(false);
+		imageryControlLst02.setVisible(false);
+		simplePanel.getElement().setAttribute("style", "height: 100%; width: 100%;");
+		mainPanel.getElement().setAttribute("style", "background: white; height: 100%; width: 100%; margin-top: -6px; margin-left: -6px;");
+		ArrayList<ArrayList> imageryAllLists = new ArrayList<ArrayList>();
+		ArrayList<TextBoxBase> imageryAllTextBoxes = new ArrayList<TextBoxBase>();
+		imageryAllTextBoxes.add(imageCalBox);
+		imageryAllTextBoxes.add(imageBanBox);
+		imageryAllTextBoxes.add(imageDirBox);
+		imageryAllTextBoxes.add(imageAltBox);
+		imageryAllTextBoxes.add(imageZenBox);
+		imageryAllTextBoxes.add(imageAziBox);
+		imageryAllTextBoxes.add(imageAnoBox);
+		ArrayList<String> imageryTextBoxFields = new ArrayList<String>();
+		imageryTextBoxFields.add("string");
+		imageryTextBoxFields.add("number");
+		imageryTextBoxFields.add("number");
+		imageryTextBoxFields.add("number");
+		imageryTextBoxFields.add("number");
+		imageryTextBoxFields.add("number");
+		imageryTextBoxFields.add("string");
+		ArrayList<DateBox> imageryAllDateBoxes = new ArrayList<DateBox>();
+		imageryAllDateBoxes.add(imageRadDat);
+		imageryAllDateBoxes.add(imageSpeDat);
+		ArrayList<HorizontalPanel> imageryAllRadioButtons = new ArrayList<HorizontalPanel>();
+		imageryAllRadioButtons.add(horizontalPanel03);
+		imageryAllRadioButtons.add(horizontalPanel07);
+		imageryAllRadioButtons.add(horizontalPanel09);
+		imageryAllRadioButtons.add(horizontalPanel11);
+		imageryAllRadioButtons.add(horizontalPanel13);
+		imageryAllRadioButtons.add(horizontalPanel15);
+		imageryAllRadioButtons.add(horizontalPanel16);
+		imageryAllRadioButtons.add(horizontalPanel17);
+		imageryAllRadioButtons.add(horizontalPanel18);
+		imageryAllRadioButtons.add(horizontalPanel19);
+		imageryAllRadioButtons.add(horizontalPanel21);
+		imageryAllRadioButtons.add(horizontalPanel22);
+		imageryAllRadioButtons.add(horizontalPanel23);
+		imageryAllRadioButtons.add(horizontalPanel24);
+		imageryAllRadioButtons.add(horizontalPanel26);
+		imageryAllRadioButtons.add(horizontalPanel28);
+		ArrayList<ListBox> imageryAllListBoxes = new ArrayList<ListBox>();
+		imageryAllListBoxes.add(imageryInstrumentLst);
+		imageryAllListBoxes.add(imageLevLst);
+		imageryAllListBoxes.add(imageryControlLst02);
+		imageryAllLists.add(imageryAllTextBoxes);
+		imageryAllLists.add(imageryAllRadioButtons);
+		imageryAllLists.add(imageryAllListBoxes);
+		imageryAllLists.add(imageryAllDateBoxes);
+		imageryAllLists.add(imageryTextBoxFields);
+		Emc_eufar.qvImageryMap.add(imageryAllLists);
+		for (int i = 0; i < imageryAllTextBoxes.size(); i++) {
+			imageryAllTextBoxes.get(i).addChangeHandler(new ChangeHandler() {
+				@Override
+				public void onChange(ChangeEvent event) {
+					Utilities.docIsModified();
+				}
+			});
+		}
+		for (int i = 0; i < imageryAllRadioButtons.size(); i++) {
+			RadioButton radioY = (RadioButton) ((ComplexPanel) imageryAllRadioButtons.get(i).getWidget(0)).getWidget(0);
+			RadioButton radioN = (RadioButton) ((ComplexPanel) imageryAllRadioButtons.get(i).getWidget(1)).getWidget(0);
+			radioY.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					Utilities.docIsModified();
+				}
+			});
+			radioN.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					Utilities.docIsModified();
+				}
+			});
+		}
+		imageLevLst.addChangeHandler(new ChangeHandler() {
+			@Override
+			public void onChange(ChangeEvent event) {
+				if (imageLevLst.getSelectedItemText() != "Make a choice...")
+				Utilities.docIsModified();
+			}
+		});
+		imageRadDat.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			@Override
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				Utilities.docIsModified();
+			}
+		});
+		imageSpeDat.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			@Override
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				Utilities.docIsModified();
+			}
+		});
+		image01.addClickHandler(new ClickHandler() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onClick(ClickEvent event) {
+				if (imageryControlLst01.getSelectedItemText() == "Copy all form content to a new tab") {
+					String string = XmlSave.createImageryCode(Emc_eufar.qvImageryMap.get(tabNum - 1), tabNum);	
+					GuiModification.addQvTab("imagery");
+					XmlOpen.readImageryCode(string.substring(1, string.length() - 1), Emc_eufar.imageryNum - 1);
+				} else if (imageryControlLst01.getSelectedItemText() == "Copy all form content to an existing tab") {
+					if (imageryControlLst02.getSelectedItemText() != "Make a choice..." && imageryControlLst02.getSelectedItemText() != "") {
+						int num = Integer.parseInt(imageryControlLst02.getSelectedItemText().substring(38));
+						String string = XmlSave.createImageryCode(Emc_eufar.qvImageryMap.get(tabNum - 1), tabNum);
+						XmlOpen.readImageryCode(string.substring(1, string.length() - 1), num - 1);
+					}
+				}
+			}
+		});
+		imageryControlLst01.addChangeHandler(new ChangeHandler() {
+			@Override
+			public void onChange(ChangeEvent event) {
+				if (imageryControlLst01.getSelectedItemText() == "Copy all form content to an existing tab") {
+					image02.setVisible(true);
+					imageryControlLst02.setVisible(true);
+					updateControlListbox("imagery");
+				} else {
+					image02.setVisible(false);
+					imageryControlLst02.setVisible(false);
+				}
+			}
+		});
+		Emc_eufar.rootLogger.log(Level.INFO, "Imagery QV form built");
+		return simplePanel;
+	}
+	
+	
+	// update all listboxes in QV section if instrument list is modified
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	static void updateInstrumentListbox() {
+		Emc_eufar.rootLogger.log(Level.INFO, "Updating of the instrument list in all QV forms invoked");
+		ArrayList<ListBox> allQVListboxes = new ArrayList<ListBox>();
+		if (Emc_eufar.qvInsituMap.size() > 0) {
+			for (int i = 0; i < Emc_eufar.qvInsituMap.size(); i++) {
+				ArrayList<ArrayList> insituAllLists = Emc_eufar.qvInsituMap.get(i);
+				allQVListboxes.add((ListBox) insituAllLists.get(3).get(0));
+			}
+		}
+		if (Emc_eufar.qvImageryMap.size() > 0) {
+			for (int i = 0; i < Emc_eufar.qvImageryMap.size(); i++) {
+				ArrayList<ArrayList> imageryAllLists = Emc_eufar.qvImageryMap.get(i);
+				allQVListboxes.add((ListBox) imageryAllLists.get(2).get(0));
+			}
+
+		}
+		for (int i = 0; i < allQVListboxes.size(); i++) {
+			ListBox listBox = allQVListboxes.get(i);
+			String string = listBox.getSelectedItemText();
+			ArrayList<String> list = new ArrayList<String>();
+			int index = 0;
+			listBox.clear();
+			list.add("Make a choice...");
+			for (int j = 0; j < Emc_eufar.instrumentTabList.size(); j++) {
+				list.add(Emc_eufar.manufacturerTabList.get(j) + " - " + Emc_eufar.instrumentTabList.get(j));
+				if (string == Emc_eufar.manufacturerTabList.get(j) + " - " + Emc_eufar.instrumentTabList.get(j)) {
+					index = j;
+				}
+			}
+			for (int j = 0; j < list.size(); j++) {
+				if (string == list.get(j)) {
+					index = j;
+					break;
+				}
+			}
+			Utilities.populateListBox(listBox, list, index);
+			Emc_eufar.rootLogger.log(Level.INFO, "Updating of the instrument list in all QV forms finished");
 		}
 	}
 	
 	
-	// add a textbox to the format when "other" is selected in the QV section
-	public static void otherFormat() {
-		if (((CheckBox) Emc_eufar.insituChk07.getWidget(0)).getValue() == true) {
-			Emc_eufar.insituImage.setVisible(true);
-			Emc_eufar.insituOtherBox.setVisible(true);
-		} else {
-			Emc_eufar.insituImage.setVisible(false);
-			Emc_eufar.insituOtherBox.setVisible(false);
+	// update all control listboxes in QV section if a tab has been added or removed - in-situ
+	@SuppressWarnings({ "unchecked", "rawtypes"})
+	static void updateControlListbox(String domain) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Updating of the tab list for control in all QV forms invoked");
+		ArrayList<ListBox> allQVListboxes = new ArrayList<ListBox>();
+		ArrayList<ArrayList> map = null;
+		String tabString = null;
+		int listIndex = 0;
+		int listboxIndex = 0;
+		int tabCount = 0;
+		if (domain == "insitu") {
+			map = Emc_eufar.qvInsituMap;
+			tabString = "Atmospheric";
+			listIndex = 3;
+			listboxIndex = 1;
+		} else if (domain == "imagery") {
+			map = Emc_eufar.qvImageryMap;
+			tabString = "Earth";
+			listIndex = 2;
+			listboxIndex = 2;
 		}
+		for (int i = 0; i < Emc_eufar.qvTabPanel.getWidgetCount(); i++) {
+			if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(i)).getText().contains(tabString)) {
+				tabCount++;
+			}
+		}
+		for (int i = 0; i < map.size(); i++) {
+			ArrayList<ArrayList> insituAllLists = map.get(i);
+			allQVListboxes.add((ListBox) insituAllLists.get(listIndex).get(listboxIndex));
+		}
+		if (tabCount > 1) {
+			ArrayList<String> allInsituTabs = new ArrayList<String>();
+			for (int j = 0; j < Emc_eufar.qvTabPanel.getWidgetCount(); j++) {
+				if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(j)).getText().contains(tabString)) {
+					allInsituTabs.add(((PushButton) Emc_eufar.qvTabPanel.getTabWidget(j)).getText());
+				}
+			}
+			for (ListBox listBox : allQVListboxes) {
+				listBox.setEnabled(true);
+				if (listBox.isVisible()) {
+					int actualIndex = 0;
+					Widget parent = listBox.getParent();
+					while (!(parent instanceof SimplePanel)) {
+						parent = parent.getParent();
+					}
+					Iterator<String> listIterator = allInsituTabs.iterator();
+					ArrayList<String> tmp = new ArrayList<String>();
+					while (listIterator.hasNext()) {
+						String string = listIterator.next();
+						if (string != ((PushButton) Emc_eufar.qvTabPanel.getTabWidget(
+								Emc_eufar.qvTabPanel.getWidgetIndex(parent))).getText()) {
+							tmp.add(string);
+						}
+					}
+					tmp.add(0, "Make a choice...");
+					for (int j = 0; j < tmp.size(); j++) {
+						if (listBox.getSelectedItemText() == tmp.get(j)) {
+							actualIndex = j;
+						}
+					}
+					listBox.clear();
+					Utilities.populateListBox(listBox, tmp, actualIndex);
+				}
+			}
+		} else {
+			allQVListboxes.get(0).clear();
+			allQVListboxes.get(0).setEnabled(false);
+		}
+		Emc_eufar.rootLogger.log(Level.INFO, "Updating of the tab list for control in all QV forms finished");
 	}
 }

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.eufar.emc.client.ScrollableTabLayoutPanel;
+import com.eufar.emc.client.Materials.Resources;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
@@ -29,6 +29,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Navigator;
@@ -66,26 +67,31 @@ public class Emc_eufar implements EntryPoint {
 	static Logger rootLogger = Logger.getLogger("");
 	
 	// few items initialization
-	public static HashMap<String, String> languageMap = Resources.languageMap();
-	public static HashMap<String, String> categoriesMap = Resources.categoriesMap();
-	public static HashMap<String, String> keywordsMap = Resources.keywordsMap();
-	public static HashMap<String, String> roleMap = Resources.roleMap();
-	public static HashMap<String, String> operatorMap = Resources.operatorMap();
-	public static HashMap<String, String> typeMap = Resources.typeMap();
-	public static HashMap<String, String> instrumentMap = Resources.instrumentMap();
-	public static HashMap<String, String> unitMap = Resources.unitMap();
-	private HashMap<TextBoxBase, Label> requiredField = Resources.requiredField();
-	private HashMap<TextBoxBase, String> correctField = Resources.correctField();
-	public static HashMap<HorizontalPanel, Label> requiredCheckbox = Resources.requiredCheck();
-	private HashMap<DateBox, Label> correctDate = Resources.correctDate();
-	private String emcVersion = new String("v1.2.1 (2016-08-24)");
+	public static Date actualDate = new Date();
+	public static HashMap<String, String> languageMap = Materials.languageMap();
+	public static HashMap<String, String> categoriesMap = Materials.categoriesMap();
+	public static HashMap<String, String> keywordsMap = Materials.keywordsMap();
+	public static HashMap<String, String> roleMap = Materials.roleMap();
+	public static HashMap<String, String> operatorMap = Materials.operatorMap();
+	public static HashMap<String, String> typeMap = Materials.typeMap();
+	public static HashMap<String, String> instrumentMap = Materials.instrumentMap();
+	public static HashMap<String, String> unitMap = Materials.unitMap();
+	public static ArrayList<String> allCorrectFields = Materials.allCorrectFields();
+	public static ArrayList<TextBoxBase> allTextBoxes = new ArrayList<TextBoxBase>();
+	public static ArrayList<String> allTextboxFields = new ArrayList<String>();
+	public static ArrayList<ListBox> allListBoxes = new ArrayList<ListBox>();
+	public static ArrayList<HorizontalPanel> allRadioButtons = new ArrayList<HorizontalPanel>();
+	public static ArrayList<HorizontalPanel> allCheckBoxes = new ArrayList<HorizontalPanel>();
+	public static ArrayList<DateBox> allDateBoxes = new ArrayList<DateBox>();
+	private String emcVersion = new String("v1.3.0 (2016-10-06)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.6");
-	private String javaVersion = new String("1.7.0.79");
+	private String javaVersion = new String("1.8.0");
 	private String inspireVersion = new String("v1.3");
 	public static Boolean isModified = new Boolean(false);
 	public static String titleString = new String("EUFAR Metadata Creator");
 	public static String emcPath = new String("");
+	public static Resources resources = GWT.create(Materials.Resources.class);
 	
 
 	// Main window items initialization
@@ -93,7 +99,7 @@ public class Emc_eufar implements EntryPoint {
 	private MenuBar emcMenu = new MenuBar(true);
 	private MenuBar aboutMenu = new MenuBar(true);
 	private MenuBar fileMenu = new MenuBar(true);
-	private String imageEMC = "<img src='icons/menu_icon.png' height='16' width='20'/>";
+	private String imageEMC = "<i class='fa fa-bars' aria-hidden='true' style='color: white; font-size: 1.7em;'></i>";
 	public static DockLayoutPanel subDockPanel = new DockLayoutPanel(Unit.PX);
 	public static StackLayoutPanel stackPanel = new StackLayoutPanel(Unit.PX);
 	public static ScrollableTabLayoutPanel tabPanel = new ScrollableTabLayoutPanel(42, Unit.PX);
@@ -103,7 +109,7 @@ public class Emc_eufar implements EntryPoint {
 	private int clouds_heading_width = 3840;
 	private int clouds_heading_height = 322;
 	private int screen_width = Utilities.getScreenWidth();
-	private int menu_width = screen_width / 10;
+	private int menu_width = (screen_width) / 10;
 	private float ratio = (float) clouds_heading_height / clouds_heading_width;
 	private float new_clouds_heading_height = screen_width * ratio;
 	
@@ -186,8 +192,8 @@ public class Emc_eufar implements EntryPoint {
 	public static TextBox identIdentifierBox = new TextBox();
 	public static ListBox identLanguageLst = new ListBox();
 	public static ListBox identTypeLst = new ListBox();
-	public static ArrayList<String> languageList = Resources.languageList();
-	public static ArrayList<String> typeList = Resources.typeList();
+	public static ArrayList<String> languageList = Materials.languageList();
+	public static ArrayList<String> typeList = Materials.typeList();
 	public static FlexTable idGrid = new FlexTable();
 	private SimplePanel idTitleInfo = Elements.addInfoButton("idTitle");
 	private SimplePanel idAbstractInfo = Elements.addInfoButton("idAbstract");
@@ -213,25 +219,25 @@ public class Emc_eufar implements EntryPoint {
 	private Label classPathLab2 = new Label("Classification");
 	private SimplePanel classCategoriesInfo = Elements.addInfoButton("Categories");
 	public static Label classCategoriesLab = new Label("Topic Categories");
-	private HorizontalPanel classBiotaCheck = Elements.checkBox("Biota");
-	private HorizontalPanel classBoundariesCheck = Elements.checkBox("Boundaries");
-	private HorizontalPanel classClimatologyCheck = Elements.checkBox("Climatology / Meteorology / Atmosphere");
-	private HorizontalPanel classEconomyCheck = Elements.checkBox("Economy");
-	private HorizontalPanel classElevationCheck = Elements.checkBox("Elevation");
-	private HorizontalPanel classEnvironmentCheck = Elements.checkBox("Environment");
-	private HorizontalPanel classFarmingCheck = Elements.checkBox("Farming");
-	private HorizontalPanel classInformationCheck = Elements.checkBox("Geoscientific Information");
-	private HorizontalPanel classHealthCheck = Elements.checkBox("Health");
-	private HorizontalPanel classImageryCheck = Elements.checkBox("Imagery / Base Maps / Earth Cover");
-	private HorizontalPanel classIntelligenceCheck = Elements.checkBox("Intelligence / Military");
-	private HorizontalPanel classWatersCheck = Elements.checkBox("Inland Waters");
-	private HorizontalPanel classLocationCheck = Elements.checkBox("Location");
-	private HorizontalPanel classOceansCheck = Elements.checkBox("Oceans");
-	private HorizontalPanel classPlanningCheck = Elements.checkBox("Planning / Cadastre");
-	private HorizontalPanel classSocietyCheck = Elements.checkBox("Society");
-	private HorizontalPanel classStructureCheck = Elements.checkBox("Structure");
-	private HorizontalPanel classTransportationCheck = Elements.checkBox("Transportation");
-	private HorizontalPanel classCommunicationCheck = Elements.checkBox("Utilities / Communication");
+	public static HorizontalPanel classBiotaCheck = Elements.checkBox("Biota");
+	public static HorizontalPanel classBoundariesCheck = Elements.checkBox("Boundaries");
+	public static HorizontalPanel classClimatologyCheck = Elements.checkBox("Climatology / Meteorology / Atmosphere");
+	public static HorizontalPanel classEconomyCheck = Elements.checkBox("Economy");
+	public static HorizontalPanel classElevationCheck = Elements.checkBox("Elevation");
+	public static HorizontalPanel classEnvironmentCheck = Elements.checkBox("Environment");
+	public static HorizontalPanel classFarmingCheck = Elements.checkBox("Farming");
+	public static HorizontalPanel classInformationCheck = Elements.checkBox("Geoscientific Information");
+	public static HorizontalPanel classHealthCheck = Elements.checkBox("Health");
+	public static HorizontalPanel classImageryCheck = Elements.checkBox("Imagery / Base Maps / Earth Cover");
+	public static HorizontalPanel classIntelligenceCheck = Elements.checkBox("Intelligence / Military");
+	public static HorizontalPanel classWatersCheck = Elements.checkBox("Inland Waters");
+	public static HorizontalPanel classLocationCheck = Elements.checkBox("Location");
+	public static HorizontalPanel classOceansCheck = Elements.checkBox("Oceans");
+	public static HorizontalPanel classPlanningCheck = Elements.checkBox("Planning / Cadastre");
+	public static HorizontalPanel classSocietyCheck = Elements.checkBox("Society");
+	public static HorizontalPanel classStructureCheck = Elements.checkBox("Structure");
+	public static HorizontalPanel classTransportationCheck = Elements.checkBox("Transportation");
+	public static HorizontalPanel classCommunicationCheck = Elements.checkBox("Utilities / Communication");
 	public static ScrollPanel clScroll = new ScrollPanel(verticalPanel22);
 
 
@@ -262,66 +268,66 @@ public class Emc_eufar implements EntryPoint {
 	private Label keySpectralLab = new Label("Spectral / Engineering:");
 	private Label keyInteractionsLab = new Label("Sun-Earth Interactions:");
 	private Label keyHydrosphereLab = new Label("Terrestrial Hydrosphere:");
-	private HorizontalPanel classAgEngineeringCheck = Elements.checkBox("Agricultural engineering");
-	private HorizontalPanel classAgPlantCheck = Elements.checkBox("Agricultural plant science");
-	private HorizontalPanel classAgFoodCheck = Elements.checkBox("Food science");
-	private HorizontalPanel classAgForestCheck = Elements.checkBox("Forest science");
-	private HorizontalPanel classAgSoilsCheck = Elements.checkBox("Soils");
-	private HorizontalPanel classAtAerosolsCheck = Elements.checkBox("Aerosols");
-	private HorizontalPanel classAtAirCheck = Elements.checkBox("Air quality");
-	private HorizontalPanel classAtAltitudeCheck = Elements.checkBox("Altitude");
-	private HorizontalPanel classAtChemistryCheck = Elements.checkBox("Atmospheric chemistry");
-	private HorizontalPanel classAtElectricityCheck = Elements.checkBox("Atmospheric electricity");
-	private HorizontalPanel classAtPhenomenaCheck = Elements.checkBox("Atmospheric phenomena");
-	private HorizontalPanel classAtPressureCheck = Elements.checkBox("Atmospheric pressure");
-	private HorizontalPanel classAtRadiationCheck = Elements.checkBox("Atmospheric radiation");
-	private HorizontalPanel classAtTemperatureCheck = Elements.checkBox("Atmospheric temperature");
-	private HorizontalPanel classAtVapourCheck = Elements.checkBox("Atmospheric water vapor");
-	private HorizontalPanel classAtWindsCheck = Elements.checkBox("Atmospheric winds");
-	private HorizontalPanel classAtCloudsCheck = Elements.checkBox("Clouds");
-	private HorizontalPanel classAtPrecipitationCheck = Elements.checkBox("Precipitation");
-	private HorizontalPanel classBiDynamicsCheck = Elements.checkBox("Ecological dynamics");
-	private HorizontalPanel classBiEcosystemsCheck = Elements.checkBox("Terrestrial ecosystems");
-	private HorizontalPanel classBiVegetationCheck = Elements.checkBox("Vegetation");
-	private HorizontalPanel classCrGroundCheck = Elements.checkBox("Frozen ground");
-	private HorizontalPanel classCrGlaciersCheck = Elements.checkBox("Glaciers / Ice sheet");
-	private HorizontalPanel classCrIceCheck = Elements.checkBox("Sea ice");
-	private HorizontalPanel classCrSnowCheck = Elements.checkBox("Snow / Ice");
-	private HorizontalPanel classLsErosionCheck = Elements.checkBox("Erosion / Sedimentation");
-	private HorizontalPanel classLsGeomorphologyCheck = Elements.checkBox("Geomorphology");
-	private HorizontalPanel classLsTemperatureCheck = Elements.checkBox("Land temperature");
-	private HorizontalPanel classLsCoverCheck = Elements.checkBox("Land use / Land cover");
-	private HorizontalPanel classLsLandscapeCheck = Elements.checkBox("Landscape");
-	private HorizontalPanel classLsSurfaceCheck = Elements.checkBox("Surface radiative properties");
-	private HorizontalPanel classLsTopographyCheck = Elements.checkBox("Topography");
-	private HorizontalPanel classOcBathymetryCheck = Elements.checkBox("Bathymetry");
-	private HorizontalPanel classOcProcessesCheck = Elements.checkBox("Coastal processes");
-	private HorizontalPanel classOcEnvironmentCheck = Elements.checkBox("Marine environment");
-	private HorizontalPanel classOcGeophysicsCheck = Elements.checkBox("Marine geophysics");
-	private HorizontalPanel classOcWavesCheck = Elements.checkBox("Ocean waves");
-	private HorizontalPanel classOcWindsCheck = Elements.checkBox("Ocean winds");
-	private HorizontalPanel classOcTopographyCheck = Elements.checkBox("Sea surface topography");
-	private HorizontalPanel classOcTidesCheck = Elements.checkBox("Tides");
-	private HorizontalPanel classOcQualityCheck = Elements.checkBox("Water quality");
-	private HorizontalPanel classSeGeodeticsCheck = Elements.checkBox("Geodetics");
-	private HorizontalPanel classSeGeomagnetismCheck = Elements.checkBox("Geomagnetism");
-	private HorizontalPanel classSeLandformsCheck = Elements.checkBox("Geomorphic landforms");
-	private HorizontalPanel classSeGravityCheck = Elements.checkBox("Gravity");
-	private HorizontalPanel classSpGammaCheck = Elements.checkBox("Gamma ray");
-	private HorizontalPanel classSpInfraredCheck = Elements.checkBox("Infrared wavelengths");
-	private HorizontalPanel classSpLidarCheck = Elements.checkBox("LIDAR");
-	private HorizontalPanel classSpMicrowaveCheck = Elements.checkBox("Microwave");
-	private HorizontalPanel classSpRadarCheck = Elements.checkBox("RADAR");
-	private HorizontalPanel classSpRadioCheck = Elements.checkBox("Radio wave");
-	private HorizontalPanel classSpUltravioletCheck = Elements.checkBox("Ultraviolet wavelengths");
-	private HorizontalPanel classSpVisibleCheck = Elements.checkBox("Visible wavelengths");
-	private HorizontalPanel classSpXrayCheck = Elements.checkBox("X-ray");
-	private HorizontalPanel classInIonosphereCheck = Elements.checkBox("Ionosphere / Magnetosphere");
-	private HorizontalPanel classInActivityCheck = Elements.checkBox("Solar activity");
-	private HorizontalPanel classInParticleCheck = Elements.checkBox("Solar energetic particle");
-	private HorizontalPanel classThGroundCheck = Elements.checkBox("Ground water");
-	private HorizontalPanel classThSurfaceCheck = Elements.checkBox("Surface water");
-	private HorizontalPanel classThChemistryCheck = Elements.checkBox("Water quality / chemistry");
+	public static HorizontalPanel classAgEngineeringCheck = Elements.checkBox("Agricultural engineering");
+	public static HorizontalPanel classAgPlantCheck = Elements.checkBox("Agricultural plant science");
+	public static HorizontalPanel classAgFoodCheck = Elements.checkBox("Food science");
+	public static HorizontalPanel classAgForestCheck = Elements.checkBox("Forest science");
+	public static HorizontalPanel classAgSoilsCheck = Elements.checkBox("Soils");
+	public static HorizontalPanel classAtAerosolsCheck = Elements.checkBox("Aerosols");
+	public static HorizontalPanel classAtAirCheck = Elements.checkBox("Air quality");
+	public static HorizontalPanel classAtAltitudeCheck = Elements.checkBox("Altitude");
+	public static HorizontalPanel classAtChemistryCheck = Elements.checkBox("Atmospheric chemistry");
+	public static HorizontalPanel classAtElectricityCheck = Elements.checkBox("Atmospheric electricity");
+	public static HorizontalPanel classAtPhenomenaCheck = Elements.checkBox("Atmospheric phenomena");
+	public static HorizontalPanel classAtPressureCheck = Elements.checkBox("Atmospheric pressure");
+	public static HorizontalPanel classAtRadiationCheck = Elements.checkBox("Atmospheric radiation");
+	public static HorizontalPanel classAtTemperatureCheck = Elements.checkBox("Atmospheric temperature");
+	public static HorizontalPanel classAtVapourCheck = Elements.checkBox("Atmospheric water vapor");
+	public static HorizontalPanel classAtWindsCheck = Elements.checkBox("Atmospheric winds");
+	public static HorizontalPanel classAtCloudsCheck = Elements.checkBox("Clouds");
+	public static HorizontalPanel classAtPrecipitationCheck = Elements.checkBox("Precipitation");
+	public static HorizontalPanel classBiDynamicsCheck = Elements.checkBox("Ecological dynamics");
+	public static HorizontalPanel classBiEcosystemsCheck = Elements.checkBox("Terrestrial ecosystems");
+	public static HorizontalPanel classBiVegetationCheck = Elements.checkBox("Vegetation");
+	public static HorizontalPanel classCrGroundCheck = Elements.checkBox("Frozen ground");
+	public static HorizontalPanel classCrGlaciersCheck = Elements.checkBox("Glaciers / Ice sheet");
+	public static HorizontalPanel classCrIceCheck = Elements.checkBox("Sea ice");
+	public static HorizontalPanel classCrSnowCheck = Elements.checkBox("Snow / Ice");
+	public static HorizontalPanel classLsErosionCheck = Elements.checkBox("Erosion / Sedimentation");
+	public static HorizontalPanel classLsGeomorphologyCheck = Elements.checkBox("Geomorphology");
+	public static HorizontalPanel classLsTemperatureCheck = Elements.checkBox("Land temperature");
+	public static HorizontalPanel classLsCoverCheck = Elements.checkBox("Land use / Land cover");
+	public static HorizontalPanel classLsLandscapeCheck = Elements.checkBox("Landscape");
+	public static HorizontalPanel classLsSurfaceCheck = Elements.checkBox("Surface radiative properties");
+	public static HorizontalPanel classLsTopographyCheck = Elements.checkBox("Topography");
+	public static HorizontalPanel classOcBathymetryCheck = Elements.checkBox("Bathymetry");
+	public static HorizontalPanel classOcProcessesCheck = Elements.checkBox("Coastal processes");
+	public static HorizontalPanel classOcEnvironmentCheck = Elements.checkBox("Marine environment");
+	public static HorizontalPanel classOcGeophysicsCheck = Elements.checkBox("Marine geophysics");
+	public static HorizontalPanel classOcWavesCheck = Elements.checkBox("Ocean waves");
+	public static HorizontalPanel classOcWindsCheck = Elements.checkBox("Ocean winds");
+	public static HorizontalPanel classOcTopographyCheck = Elements.checkBox("Sea surface topography");
+	public static HorizontalPanel classOcTidesCheck = Elements.checkBox("Tides");
+	public static HorizontalPanel classOcQualityCheck = Elements.checkBox("Water quality");
+	public static HorizontalPanel classSeGeodeticsCheck = Elements.checkBox("Geodetics");
+	public static HorizontalPanel classSeGeomagnetismCheck = Elements.checkBox("Geomagnetism");
+	public static HorizontalPanel classSeLandformsCheck = Elements.checkBox("Geomorphic landforms");
+	public static HorizontalPanel classSeGravityCheck = Elements.checkBox("Gravity");
+	public static HorizontalPanel classSpGammaCheck = Elements.checkBox("Gamma ray");
+	public static HorizontalPanel classSpInfraredCheck = Elements.checkBox("Infrared wavelengths");
+	public static HorizontalPanel classSpLidarCheck = Elements.checkBox("LIDAR");
+	public static HorizontalPanel classSpMicrowaveCheck = Elements.checkBox("Microwave");
+	public static HorizontalPanel classSpRadarCheck = Elements.checkBox("RADAR");
+	public static HorizontalPanel classSpRadioCheck = Elements.checkBox("Radio wave");
+	public static HorizontalPanel classSpUltravioletCheck = Elements.checkBox("Ultraviolet wavelengths");
+	public static HorizontalPanel classSpVisibleCheck = Elements.checkBox("Visible wavelengths");
+	public static HorizontalPanel classSpXrayCheck = Elements.checkBox("X-ray");
+	public static HorizontalPanel classInIonosphereCheck = Elements.checkBox("Ionosphere / Magnetosphere");
+	public static HorizontalPanel classInActivityCheck = Elements.checkBox("Solar activity");
+	public static HorizontalPanel classInParticleCheck = Elements.checkBox("Solar energetic particle");
+	public static HorizontalPanel classThGroundCheck = Elements.checkBox("Ground water");
+	public static HorizontalPanel classThSurfaceCheck = Elements.checkBox("Surface water");
+	public static HorizontalPanel classThChemistryCheck = Elements.checkBox("Water quality / chemistry");
 	public static ScrollPanel kwScroll = new ScrollPanel(verticalPanel23);
 
 
@@ -345,11 +351,6 @@ public class Emc_eufar implements EntryPoint {
 	private HorizontalPanel horizontalPanel74 = new HorizontalPanel();
 	private Label aiStarLab01 = new Label("*");
 	private Label aiStarLab02 = new Label("*");
-	public static Label aiStarLab03 = new Label("*");
-	public static Label aiStarLab04 = new Label("*");
-	public static Label aiStarLab05 = new Label("*");
-	public static Label aiStarLab06 = new Label("*");
-	public static Label aiStarLab07 = new Label("*");
 	private Label aiMainLab2 = new Label("EUFAR METADATA CREATOR");
 	private Label aiMainLab = new Label("EUFAR METADATA CREATOR");
 	private Label aiPathLab = new Label(">");
@@ -358,8 +359,8 @@ public class Emc_eufar implements EntryPoint {
 	public static FlexTable airAircraftTable = new FlexTable();
 	private SimplePanel airPlatformInfo = Elements.addInfoButton("aiAircraft");
 	private SimplePanel airInstrumentInfo = Elements.addInfoButton("aiInstrument");
-	private SimplePanel airPlusButton01 = Elements.plusButton("aircraft");
-	private SimplePanel airPlusButton02 = Elements.plusButton("airInstrument");
+	public static Label airPlusButton01 = new Label("Add this aircraft to the list");
+	private Label airPlusButton02 = new Label("Add this instrument to the list");
 	public static Label airAircraftLab = new Label("Aircraft");
 	public static Label airManufacturerLab = new Label("Manufacturer");
 	public static Label airManufacturerInfo = new Label("");
@@ -382,10 +383,10 @@ public class Emc_eufar implements EntryPoint {
 	public static TextBox airRegistrationBox = new TextBox();
 	public static TextBox airInstNameBox = new TextBox();
 	public static TextBox airInstManufacturerBox = new TextBox();
-	private Image airCopyrightImage = new Image("icons/copyright_icon_small.png");
+	private Image airCopyrightImage = new Image(Emc_eufar.resources.copyright().getSafeUri());
 	public static ListBox airAircraftLst = new ListBox();
 	public static ListBox airInstrumentLst = new ListBox();
-	private ArrayList<String> aircraftList = Resources.aircraftList();
+	private ArrayList<String> aircraftList = Materials.aircraftList();
 	public static ArrayList<String> aircraftTabList = new ArrayList<String>();
 	public static ArrayList<String> operatorTabList = new ArrayList<String>();
 	public static ArrayList<String> manufacturairTabList = new ArrayList<String>();
@@ -393,9 +394,11 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<String> identificationTabList = new ArrayList<String>();
 	public static ArrayList<String> instrumentTabList = new ArrayList<String>();
 	public static ArrayList<String> manufacturerTabList = new ArrayList<String>();
-	public static Image airAircraftImg = new Image("eufar_aircraft/logo_eufar_emc_v2.png");
-	public static String[][] airAircraftInfo = Resources.aircraftInfo();
+	public static Image airAircraftImg = new Image(Emc_eufar.resources.eufarLogo());
+	public static String[][] airAircraftInfo = Materials.aircraftInfo();
+	public static ArrayList<ImageResource> airAircraftImages = Materials.aircraftImages();
 	public static ScrollPanel aiScroll = new ScrollPanel(verticalPanel24);
+	public static FlexTable aiFlexTable = new FlexTable();
 
 
 	// Geographic information items
@@ -424,20 +427,20 @@ public class Emc_eufar implements EntryPoint {
 	public static ListBox geoDetailLst = new ListBox();
 	public static ListBox geoResolutionLst = new ListBox();
 	public static ListBox geoUnitLst = new ListBox();
-	public static ArrayList<String> countryList = Resources.countryList();
-	public static ArrayList<String> continentList = Resources.continentList();
-	public static ArrayList<String> oceanList = Resources.oceanList();
-	public static ArrayList<String> regionList = Resources.regionList();
-	private ArrayList<String> locationList = Resources.locationList();
-	private ArrayList<String> resolutionList = Resources.resolutionList();
-	private ArrayList<String> unitList = Resources.unitList();
+	public static ArrayList<String> countryList = Materials.countryList();
+	public static ArrayList<String> continentList = Materials.continentList();
+	public static ArrayList<String> oceanList = Materials.oceanList();
+	public static ArrayList<String> regionList = Materials.regionList();
+	private ArrayList<String> locationList = Materials.locationList();
+	private ArrayList<String> resolutionList = Materials.resolutionList();
+	private ArrayList<String> unitList = Materials.unitList();
 	public static TextBox geoNorthBox = new TextBox();
 	public static TextBox geoSouthBox = new TextBox();
 	public static TextBox geoEastBox = new TextBox();
 	public static TextBox geoWestBox = new TextBox();
 	public static TextBox geoResolutionBox = new TextBox();
-	private Image geoFollowImage = new Image("icons/fwd_arrow_small.png");
-	private Image geoCoordImage = new Image("icons/EMC_globe_terrestre.png");
+	private Image geoFollowImage = new Image(Emc_eufar.resources.forward().getSafeUri());
+	private Image geoCoordImage = new Image(Emc_eufar.resources.earth());
 	private FlexTable geoCoordTab = new FlexTable();
 	public static ScrollPanel giScroll = new ScrollPanel(verticalPanel25);
 
@@ -475,260 +478,41 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<DateBox> refEndLst = new ArrayList<DateBox>();
 	public static FlexTable refDateTab = new FlexTable();
 	public static FlexTable refPhaseTab = new FlexTable();
-	public static Image refDelImage = new Image("icons/del_icon_v2.png");
+	public static Image refDelImage = new Image(Emc_eufar.resources.delete().getSafeUri());
 	public static SimplePanel refDelButton = new SimplePanel(refDelImage);
 	public static ScrollPanel trScroll = new ScrollPanel(verticalPanel26);
 
 	
 	// Quality and Validity items
+	public static ScrollableTabLayoutPanel qvTabPanel = new ScrollableTabLayoutPanel(42, Unit.PX);
 	public static VerticalPanel verticalPanel14 = new VerticalPanel();
-	public static VerticalPanel verticalPanel17 = new VerticalPanel();
-	public static VerticalPanel verticalPanel18 = new VerticalPanel();
-	public static VerticalPanel verticalPanel19 = new VerticalPanel();
-	public static HorizontalPanel horizontalPanel30 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel31 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel32 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel33 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel34 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel35 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel36 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel37 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel38 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel39 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel40 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel41 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel42 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel43 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel44 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel45 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel46 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel47 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel48 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel49 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel50 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel51 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel52 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel53 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel54 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel55 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel56 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel57 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel58 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel59 = new HorizontalPanel();
+	public static SimplePanel simplePanel01 = new SimplePanel();
+	public static VerticalPanel verticalPanel27 = new VerticalPanel();
+	private HorizontalPanel horizontalPanel30 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel79 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel80 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel116 = new HorizontalPanel();
 	private HorizontalPanel horizontalPanel117 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel118 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel119 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel120 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel121 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel122 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel123 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel124 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel125 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel126 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel127 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel128 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel129 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel130 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel131 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel132 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel133 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel134 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel135 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel136 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel137 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel138 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel139 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel140 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel141 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel142 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel143 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel144 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel145 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel146 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel147 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel148 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel149 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel150 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel151 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel152 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel153 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel154 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel155 = new HorizontalPanel();
-	public static HorizontalPanel horizontalPanel156 = new HorizontalPanel();
-	public static VerticalPanel verticalPanel27 = new VerticalPanel();
 	private Label qvMainLab2 = new Label("EUFAR METADATA CREATOR");
 	private Label qvMainLab = new Label("EUFAR METADATA CREATOR");
 	private Label qvPathLab = new Label(">");
 	private Label qvPathLab2 = new Label("Quality and Validity");
-	public static HorizontalPanel imageRad = Elements.radioButton("radioGrp1","Earth observation/Remote sensing data");
-	public static HorizontalPanel insituRad  = Elements.radioButton("radioGrp1","Atmospheric/In-situ data");
-	public static HorizontalPanel insituChk01Y = Elements.radioButton("radioGrp19","Yes");
-	public static HorizontalPanel insituChk01N = Elements.radioButton("radioGrp19","No");
-	public static HorizontalPanel insituChk04 = Elements.checkBox("NetCDF");
-	public static HorizontalPanel insituChk05 = Elements.checkBox("HDF");
-	public static HorizontalPanel insituChk06 = Elements.checkBox("NASA/Ames");
-	public static HorizontalPanel insituChk07 = Elements.checkBox("Other");
-	public static HorizontalPanel imageChk10Y = Elements.radioButton("radioGrp3","Yes");
-	public static HorizontalPanel imageChk10N = Elements.radioButton("radioGrp3","No");
-	public static HorizontalPanel imageChk11Y = Elements.radioButton("radioGrp4","Yes");
-	public static HorizontalPanel imageChk11N = Elements.radioButton("radioGrp4","No");
-	public static HorizontalPanel imageChk12Y = Elements.radioButton("radioGrp5","Yes");
-	public static HorizontalPanel imageChk12N = Elements.radioButton("radioGrp5","No");
-	public static HorizontalPanel imageChk13Y = Elements.radioButton("radioGrp6","Yes");
-	public static HorizontalPanel imageChk13N = Elements.radioButton("radioGrp6","No");
-	public static HorizontalPanel imageChk14Y = Elements.radioButton("radioGrp7","Yes");
-	public static HorizontalPanel imageChk14N = Elements.radioButton("radioGrp7","No");
-	public static HorizontalPanel imageChk15Y = Elements.radioButton("radioGrp8","Yes");
-	public static HorizontalPanel imageChk15N = Elements.radioButton("radioGrp8","No");
-	public static HorizontalPanel imageChk16Y = Elements.radioButton("radioGrp9","Yes");
-	public static HorizontalPanel imageChk16N = Elements.radioButton("radioGrp9","No");
-	public static HorizontalPanel imageChk17Y = Elements.radioButton("radioGrp10","Yes");
-	public static HorizontalPanel imageChk17N = Elements.radioButton("radioGrp10","No");
-	public static HorizontalPanel imageChk18Y = Elements.radioButton("radioGrp11","Yes");
-	public static HorizontalPanel imageChk18N = Elements.radioButton("radioGrp11","No");
-	public static HorizontalPanel imageChk19Y = Elements.radioButton("radioGrp12","Yes");
-	public static HorizontalPanel imageChk19N = Elements.radioButton("radioGrp12","No");
-	public static HorizontalPanel imageChk20Y = Elements.radioButton("radioGrp13","Yes");
-	public static HorizontalPanel imageChk20N = Elements.radioButton("radioGrp13","No");
-	public static HorizontalPanel imageChk21Y = Elements.radioButton("radioGrp14","Yes");
-	public static HorizontalPanel imageChk21N = Elements.radioButton("radioGrp14","No");
-	public static HorizontalPanel imageChk22Y = Elements.radioButton("radioGrp15","Yes");
-	public static HorizontalPanel imageChk22N = Elements.radioButton("radioGrp15","No");
-	public static HorizontalPanel imageChk23Y = Elements.radioButton("radioGrp16","Yes");
-	public static HorizontalPanel imageChk23N = Elements.radioButton("radioGrp16","No");
-	public static HorizontalPanel imageChk24Y = Elements.radioButton("radioGrp17","Yes");
-	public static HorizontalPanel imageChk24N = Elements.radioButton("radioGrp17","No");
-	public static HorizontalPanel imageChk25Y = Elements.radioButton("radioGrp18","Yes");
-	public static HorizontalPanel imageChk25N = Elements.radioButton("radioGrp18","No");
-	public static SimplePanel qvInfoButton01 = Elements.addInfoButton("qvLineage1");
-	public static SimplePanel qvInfoButton02 = Elements.addInfoButton("qvLineage2");
-	public static SimplePanel qvInfoButton03 = Elements.addInfoButton("qvLineage3");
-	public static SimplePanel qvInfoButton04 = Elements.addInfoButton("qvLineage4");
-	public static SimplePanel qvInfoButton05 = Elements.addInfoButton("qvLineage5");
-	public static SimplePanel qvInfoButton06 = Elements.addInfoButton("qvLineage6");
-	public static SimplePanel qvInfoButton07 = Elements.addInfoButton("qvLineage7");
-	public static SimplePanel qvInfoButton08 = Elements.addInfoButton("qvLineage8");
-	public static SimplePanel qvInfoButton09 = Elements.addInfoButton("qvLineage9");
-	public static SimplePanel qvInfoButton10 = Elements.addInfoButton("qvLineage10");
-	public static SimplePanel qvInfoButton11 = Elements.addInfoButton("qvLineage11");
-	public static SimplePanel qvInfoButton12 = Elements.addInfoButton("qvLineage12");
-	public static SimplePanel qvInfoButton13 = Elements.addInfoButton("qvLineage13");
-	public static SimplePanel qvInfoButton14 = Elements.addInfoButton("qvLineage14");
-	public static SimplePanel qvInfoButton15 = Elements.addInfoButton("qvLineage15");
-	public static SimplePanel qvInfoButton16 = Elements.addInfoButton("qvLineage16");
-	public static SimplePanel qvInfoButton17 = Elements.addInfoButton("qvLineage17");
-	public static SimplePanel qvInfoButton18 = Elements.addInfoButton("qvLineage18");
 	private Label insituStarLab01 = new Label("*");
-	public static Label insituStarLab02 = new Label("*");
-	public static Label insituStarLab03 = new Label("*");
-	public static Label insituStarLab04 = new Label("*");
-	public static Label insituStarLab05 = new Label("*");
-	public static Label insituStarLab06 = new Label("*");
-	public static Label insituStarLab07 = new Label("*");
-	public static Label insituStarLab08 = new Label("*");
 	private Label imageStarLab01 = new Label("*");
-	public static Label imageStarLab02 = new Label("*");
-	public static Label imageStarLab03 = new Label("*");
-	public static Label imageStarLab04 = new Label("*");
-	public static Label imageStarLab05 = new Label("*");
-	public static Label imageStarLab06 = new Label("*");
-	public static Label imageStarLab07 = new Label("*");
-	public static Label imageStarLab08 = new Label("*");
-	public static Label imageStarLab09 = new Label("*");
-	public static Label imageStarLab10 = new Label("*");
-	public static Label imageStarLab11 = new Label("*");
-	public static Label imageStarLab12 = new Label("*");
-	public static Label imageStarLab13 = new Label("*");
-	public static Label imageStarLab14 = new Label("*");
-	public static Label imageStarLab15 = new Label("*");
-	public static Label imageStarLab16 = new Label("*");
-	public static Label imageStarLab17 = new Label("*");
-	public static Label imageStarLab18 = new Label("*");
-	public static Label imageStarLab19 = new Label("*");
-	public static Label imageStarLab20 = new Label("*");
-	public static Label imageStarLab21 = new Label("*");
-	public static Label imageStarLab22 = new Label("*");
-	public static Label imageStarLab23 = new Label("*");
-	public static Label imageStarLab24 = new Label("*");
-	public static Label imageStarLab25 = new Label("*");
-	public static Label imageStarLab26 = new Label("*");
-	public static Label imageStarLab27 = new Label("*");
-	public static Label insituCalLab = new Label("Operator's standard calibration procedures applied to raw digital data");
-	public static Label insituGeoLab = new Label("Conversion to geophysical units");
-	public static Label insituOutLab = new Label("Output in standardized format");
-	public static Label insituFlaLab = new Label("Quality-control flagging applied to individual data points");
-	public static Label insituAssLab = new Label("Assumption");
-	public static Label insituLinkLab = new Label("Link to the procedure's description");
-	public static Label insituConstLab = new Label("Source of calibration constants");
-	public static Label insituMatLab = new Label("Source of calibration materials");
-	public static Label insituFlagLab = new Label("Description or link to the operator's standard procedure");
-	public static Label imageCalLab = new Label("Calibration information");
-	public static Label imageAcqLab = new Label("Acquisition information");
-	public static Label imageProLab = new Label("Processing information");
-	public static Label imageLayLab = new Label("Data Quality Layers");
-	public static Label imageNameLab = new Label("Name of calibration laboratory");
-	public static Label imageRadLab = new Label("Date of radiometric calibration");
-	public static Label imageSpeLab = new Label("Date of spectral calibration");
-	public static Label imageBanLab = new Label("Number of spectral bands (spectral mode)");
-	public static Label imageDirLab = new Label("Overall heading / fligh direction (dd)");
-	public static Label imageAltLab = new Label("Overall altitude / average height ASL (m)");
-	public static Label imageZenLab = new Label("Solar zenith (dd)");
-	public static Label imageAziLab = new Label("Solar azimuth (dd)");
-	public static Label imageAnoLab = new Label("Report anomalies in data acquisition");
-	public static Label imageLevLab = new Label("Processing level");
-	public static Label imageDCLab = new Label("Dark current (DC) correction ?");
-	public static Label imageCalcorrLab = new Label("Sensor calibration and system correction");
-	public static Label imageErrLab = new Label("Image data artefacts and processing errors");
-	public static Label imageErrcorrLab = new Label("GPS/IMU related errors, geometric correction");
-	public static Label imageCorrconLab = new Label("Atmospheric correction and atmospheric conditions");
-	public static Label imageIntPixel = new Label("Aggregated interpolated pixel mask ('corrected pixels') ?");
-	public static Label imageBadPixel = new Label("Aggregated bad pixel mask ('not corrected pixels') ?");
-	public static Label imageSatPixel = new Label("Saturated pixels / overflow ?");
-	public static Label imageAffPixel = new Label("Pixels affected by saturation in spatial/spectral neighbourhood ?");
-	public static Label imagePosInfo = new Label("Problems with position information / Interpolated position information ?");
-	public static Label imageAttInfo = new Label("Problems with attitude information / Interpolated attitude information ?");
-	public static Label imageSyncProblem = new Label("Synchronization problems ?");
-	public static Label imageIntGeocoding = new Label("Interpolated pixels during geocoding ?");
-	public static Label imageAtmCorrection = new Label("Failure of atmospheric correction ?");
-	public static Label imageCloudMask = new Label("Cloud mask ?");
-	public static Label imageShadMask = new Label("Cloud shadow mask ?");
-	public static Label imageHazeMask = new Label("Haze mask ?");
-	public static Label imageRouMeasure = new Label("Critical terrain correction based on DEM roughness measure ?");
-	public static Label imageIllAngle = new Label("Critical terrain correction based on slope/local illumination angle ?");
-	public static Label imageBRDFGeometry = new Label("Critical BRDF geometry based on sun-sensor-terrain geometry ?");
-	public static TextArea insituLinkBox = new TextArea();
-	public static TextArea insituConstBox = new TextArea();
-	public static TextArea insituMatBox = new TextArea();
-	public static TextBox insituOtherBox = new TextBox();
-	public static TextBox imageCalBox = new TextBox();
-	public static TextBox imageBanBox = new TextBox();
-	public static TextBox imageDirBox = new TextBox();
-	public static TextBox imageAltBox = new TextBox();
-	public static TextBox imageZenBox = new TextBox();
-	public static TextBox imageAziBox = new TextBox();
-	public static TextBox imageAnoBox = new TextBox();
-	public static DateBox imageRadDat = new DateBox();
-	public static DateBox imageSpeDat = new DateBox();
-	public static ListBox imageLevLst = new ListBox();
-	public static ListBox imageDCLst = new ListBox();
-	public static ArrayList<String> levelList = Resources.levelList();
-	public static ArrayList<String> DCList = Resources.DCList();
-	public static FlexTable imageCalAcqProTab = new FlexTable();
-	public static FlexTable imageQuaLayTab = new FlexTable();
-	public static FlexTable imageCalcorrTab = new FlexTable();
-	public static FlexTable imageErrTab = new FlexTable();
-	public static FlexTable imageErrcorrTab = new FlexTable();
-	public static FlexTable imageCorrconTab = new FlexTable();
-	public static Image insituImage = new Image("icons/fwd_arrow_small.png");
-	public static TextArea insituFlagAre = new TextArea();
-	public static TextArea insituAssumptionAre = new TextArea();
-	public static FlexTable insituCalTab = new FlexTable();
-	public static FlexTable insituFlagTab = new FlexTable();
+	private Label qvAddInsituLab = new Label("Atmospheric/In-situ data");
+	private Label qvAddImageryLab = new Label("Earth observation/Remote sensing data");
+	public static SimplePanel qvInfoButton01 = Elements.addInfoButton("qvLineage1");
+	private SimplePanel qvAddInsituTabBut = Elements.plusButton("qvAddInsituTab");
+	private SimplePanel qvAddImageryTabBut = Elements.plusButton("qvAddImageryTab");
+	public static int insituNum = 0;
+	public static int imageryNum = 0;
+	public static int activeTab = 0;
 	public static ScrollPanel qvScroll = new ScrollPanel(verticalPanel27);
-	
+	@SuppressWarnings("rawtypes")
+	public static ArrayList<ArrayList> qvInsituMap = new ArrayList<ArrayList>();
+	@SuppressWarnings("rawtypes")
+	public static ArrayList<ArrayList> qvImageryMap = new ArrayList<ArrayList>();
+
 
 	// Access and Use Constraints items
 	public static VerticalPanel verticalPanel15 = new VerticalPanel();
@@ -753,8 +537,10 @@ public class Emc_eufar implements EntryPoint {
 	public static FlexTable useLimitationsAddTab = new FlexTable();
 	public static ArrayList<TextArea> useConditionsLst = new ArrayList<TextArea>();
 	public static ArrayList<TextArea> useLimitationsLst = new ArrayList<TextArea>();
-	public static Image useDelImage1 = new Image("icons/del_icon_v2.png");
-	public static Image useDelImage2 = new Image("icons/del_icon_v2.png");
+	public static ArrayList<String> useCondCorrectLst = new ArrayList<String>();
+	public static ArrayList<String> useLimCorrectLst = new ArrayList<String>();
+	public static Image useDelImage1 = new Image(Emc_eufar.resources.delete().getSafeUri());
+	public static Image useDelImage2 = new Image(Emc_eufar.resources.delete().getSafeUri());
 	public static SimplePanel auDelButton1 = new SimplePanel(useDelImage1);
 	public static SimplePanel auDelButton2 = new SimplePanel(useDelImage2);
 	public static SimplePanel usePlusButton2 = Elements.plusButton("limitation");
@@ -788,13 +574,15 @@ public class Emc_eufar implements EntryPoint {
 	public static TextBox orgPartyBox = new TextBox();
 	public static TextBox orgEmailBox = new TextBox();
 	public static ListBox orgRoleLst = new ListBox();
-	public static ArrayList<String> roleList = Resources.roleList();
+	public static ArrayList<String> roleList = Materials.roleList();
 	public static ArrayList<TextBox> orgPartyLst = new ArrayList<TextBox>();
 	public static ArrayList<ListBox> orgRole2Lst = new ArrayList<ListBox>();
 	public static ArrayList<TextBox> orgEmailLst = new ArrayList<TextBox>();
+	public static ArrayList<String> orgPartyCorrectLst = new ArrayList<String>();
+	public static ArrayList<String> orgEmailCorrectLst = new ArrayList<String>();
 	public static FlexTable orgPartyTab = new FlexTable();
 	public static FlexTable orgAddTab = new FlexTable();
-	public static Image orgDelImage = new Image("icons/del_icon_v2.png");
+	public static Image orgDelImage = new Image(Emc_eufar.resources.delete().getSafeUri());
 	public static SimplePanel orgDelButton = new SimplePanel(orgDelImage);
 	public static ScrollPanel roScroll = new ScrollPanel(verticalPanel29);
 
@@ -838,9 +626,21 @@ public class Emc_eufar implements EntryPoint {
 	public static FlexTable metAddTab = new FlexTable();
 	public static ArrayList<TextBox> metNameLst = new ArrayList<TextBox>();
 	public static ArrayList<TextBox> metEmailLst = new ArrayList<TextBox>();
-	public static Image metDelImage = new Image("icons/del_icon_v2.png");
+	public static ArrayList<String> metNameCorrectLst = new ArrayList<String>();
+	public static ArrayList<String> metEmailCorrectLst = new ArrayList<String>();
+	public static Image metDelImage = new Image(Emc_eufar.resources.delete().getSafeUri());
 	public static SimplePanel mmDelButton = new SimplePanel(metDelImage);
 	public static ScrollPanel mmScroll = new ScrollPanel(verticalPanel30);
+	
+	
+	// Preparing object lists for checking purpose
+	public static ArrayList<TextBoxBase> allRequiredTextboxes = Materials.allRequiredTextboxes();
+	public static ArrayList<DateBox> allRequiredDateboxes = Materials.allRequiredDateboxes();
+	public static ArrayList<ListBox> allRequiredListboxes = Materials.allRequiredListboxes();
+	public static ArrayList<HorizontalPanel> allRequiredClassCheckboxes = Materials.allRequiredClassCheckboxes();
+	public static ArrayList<HorizontalPanel> allRequiredKeyCheckboxes = Materials.allRequiredKeyCheckboxes();
+	
+	
 	public void onModuleLoad() {
 		GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
 			public void onUncaughtException(Throwable e) {
@@ -1490,25 +1290,43 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel62.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel63.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel64.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel20.add(horizontalPanel60);
-		verticalPanel20.add(horizontalPanel61);
-		verticalPanel20.add(horizontalPanel62);
-		verticalPanel20.add(horizontalPanel63);
-		verticalPanel20.add(horizontalPanel64);
-		verticalPanel20.getElement().setAttribute("style", "margin-top: 10px !important;");
-		verticalPanel20.setSize("550px", "250px");
-		horizontalPanel60.add(airManufacturerLab);
 		horizontalPanel60.add(airManufacturerInfo);
-		horizontalPanel61.add(airTypeLab);
+		horizontalPanel60.add(airManufacturerBox);
 		horizontalPanel61.add(airTypeInfo);
-		horizontalPanel62.add(airOperatorLab);
+		horizontalPanel61.add(airTypeBox);
 		horizontalPanel62.add(airOperatorInfo);
-		horizontalPanel63.add(airCountryLab);
+		horizontalPanel62.add(airOperatorBox);
 		horizontalPanel63.add(airCountryInfo);
-		horizontalPanel64.add(airRegistrationLab);
+		horizontalPanel63.add(airCountryLst);
 		horizontalPanel64.add(airRegistrationInfo);
-		verticalPanel08.add(verticalPanel20);
+		horizontalPanel64.add(airRegistrationBox);
+		airManufacturerBox.setVisible(false);
+		airTypeBox.setVisible(false);
+		airOperatorBox.setVisible(false);
+		airCountryLst.setVisible(false);
+		airRegistrationBox.setVisible(false);
+		aiFlexTable.setWidget(0, 0, airManufacturerLab);
+		aiFlexTable.setWidget(0, 1, horizontalPanel60);
+		aiFlexTable.setWidget(1, 0, airTypeLab);
+		aiFlexTable.setWidget(1, 1, horizontalPanel61);
+		aiFlexTable.setWidget(2, 0, airOperatorLab);
+		aiFlexTable.setWidget(2, 1, horizontalPanel62);
+		aiFlexTable.setWidget(3, 0, airCountryLab);
+		aiFlexTable.setWidget(3, 1, horizontalPanel63);
+		aiFlexTable.setWidget(4, 0, airRegistrationLab);
+		aiFlexTable.setWidget(4, 1, horizontalPanel64);
+		verticalPanel08.add(aiFlexTable);
+		aiFlexTable.setStyleName("airFlexTable");
+		aiFlexTable.getColumnFormatter().setWidth(0, "130px");
+		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT);
+		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		Emc_eufar.airAircraftImg.setSize("550px","302px");
+		
+		airCopyrightImage.setSize("12px","12px");
+		airCopyrightImage.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 12px; width: 12px;");
 		horizontalPanel10.add(airCopyrightImage);
 		horizontalPanel10.add(airCopyrightInfo);
 		verticalPanel09.add(airAircraftImg);
@@ -1522,20 +1340,29 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel12.add(airInstrumentLab);
 		horizontalPanel12.add(aiStarLab02);
 		horizontalPanel12.add(airInstrumentLst);
-		horizontalPanel12.add(Emc_eufar.airInstNameLab);
-		horizontalPanel12.add(Emc_eufar.airInstNameBox);
-		horizontalPanel12.add(Emc_eufar.airInstManufacturerLab);
-		horizontalPanel12.add(Emc_eufar.airInstManufacturerBox);
+		horizontalPanel12.add(airInstNameLab);
+		horizontalPanel12.add(airInstNameBox);
+		horizontalPanel12.add(airInstManufacturerLab);
+		horizontalPanel12.add(airInstManufacturerBox);
 		horizontalPanel12.add(airPlusButton02);
 		horizontalPanel12.add(airInstrumentInfo);
 		verticalPanel10.add(horizontalPanel12);
 		verticalPanel10.add(airInstrumentTable);
 		airInstrumentTable.setCellSpacing(10);
-		Emc_eufar.airInstNameBox.setStyleName("airTextBox6");
-		Emc_eufar.airInstManufacturerBox.setStyleName("airTextBox6");
-		Emc_eufar.airInstNameLab.setStyleName("airTitleTextLabel2");
-		Emc_eufar.airInstManufacturerLab.setStyleName("airTitleTextLabel2");
-		Emc_eufar.horizontalPanel65.getElement().setAttribute("style","margin-top: 13px;");
+		airInstNameBox.setStyleName("airTextBox6");
+		airInstNameBox.setName("instrument");
+		airInstManufacturerBox.setName("instrument");
+		airManufacturerBox.setName("aircraft");
+		airTypeBox.setName("aircraft");
+		airOperatorBox.setName("aircraft");
+		airCountryLst.setName("aircraft");
+		airRegistrationBox.setName("aircraft");
+		airInstManufacturerBox.setStyleName("airTextBox6");
+		airInstNameLab.setStyleName("airTitleTextLabel2");
+		airInstManufacturerLab.setStyleName("airTitleTextLabel2");
+		horizontalPanel65.getElement().setAttribute("style","margin-top: 13px;");
+		airPlusButton01.setStyleName("airPushButton1");
+		airPlusButton02.setStyleName("airPushButton1");
 		verticalPanel10.setStyleName("airVerticalPanel");
 		airAircraftLab.setStyleName("airTitleTextLabel");
 		airAircraftLst.setStyleName("airTextList");
@@ -1548,10 +1375,10 @@ public class Emc_eufar implements EntryPoint {
 		airCountryLab.setStyleName("airFlexTableLabel1");
 		airRegistrationLab.setStyleName("airFlexTableLabel1");
 		airManufacturerInfo.setStyleName("airFlexTableLabel2");
-		airTypeInfo.setStyleName("airFlexTableLabel3");
-		airOperatorInfo.setStyleName("airFlexTableLabel4");
-		airCountryInfo.setStyleName("airFlexTableLabel5");
-		airRegistrationInfo.setStyleName("airFlexTableLabel6");
+		airTypeInfo.setStyleName("airFlexTableLabel2");
+		airOperatorInfo.setStyleName("airFlexTableLabel2");
+		airCountryInfo.setStyleName("airFlexTableLabel2");
+		airRegistrationInfo.setStyleName("airFlexTableLabel2");
 		airInstrumentTable.getElement().setAttribute("style","margin-left: 40px;");
 		airInstrumentLst.setStyleName("airTextList2");
 		airInstrumentLab.setStyleName("airTitleTextLabel3");
@@ -1581,6 +1408,24 @@ public class Emc_eufar implements EntryPoint {
 			@Override
 			public void onChange(ChangeEvent event) {
 				GuiModification.otherInstrument();
+			}
+		});
+		airPlusButton01.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				if (Emc_eufar.airAircraftLst.getSelectedItemText() != "Make a choice...") {
+					GuiModification.addAircraftPlus();
+				}
+				
+			}
+		});
+		airPlusButton02.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				if (Emc_eufar.airInstrumentLst.getSelectedItemText() != "Make a choice...") {
+					GuiModification.addInstPlus();
+				}
+				
 			}
 		});
 		Emc_eufar.airInstNameLab.setVisible(false);
@@ -1626,7 +1471,9 @@ public class Emc_eufar implements EntryPoint {
 		geoLocationLst.setStyleName("geoTextList");
 		geoDetailLst.setStyleName("geoTextList");
 		geoDetailLst.setEnabled(false);
-		geoFollowImage.getElement().setAttribute("style", "margin-left: 20px !important;");
+
+		geoFollowImage.setStyleName("geoForwardImage");
+		
 		verticalPanel11.add(horizontalPanel13);
 		verticalPanel11.add(geoCoordTab);
 		horizontalPanel16.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -1634,12 +1481,15 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel16.add(geoResolutionLst);
 		Utilities.populateListBox(geoResolutionLst, resolutionList, 0);
 		geoResolutionLst.setName("geoResolutionList");
-		horizontalPanel16.add(horizontalPanel17);
-		horizontalPanel17.add(geoResolutionBox);
+		horizontalPanel16.add(geoResolutionBox);
+		horizontalPanel16.add(geoUnitLab);
+		horizontalPanel16.add(geoUnitLst);
 		horizontalPanel16.add(geoUnitInfo); 
 		geoResolutionLab.setStyleName("geoTitleTextLabel");
 		geoResolutionLst.setStyleName("geoTextList");
 		geoResolutionBox.setStyleName("geoTextBox2");
+		geoUnitLab.setStyleName("geoTitleTextLabel3");
+		geoUnitLst.setStyleName("geoTextList");
 		verticalPanel11.add(horizontalPanel16);
 		verticalPanel11.setStyleName("geoVerticalPanel");
 		geoCoordInfo.getElement().setAttribute("style", "margin-left: 40px !important;");
@@ -1648,13 +1498,15 @@ public class Emc_eufar implements EntryPoint {
 		geoSouthBox.setStyleName("geoTextBox4");
 		geoEastBox.setStyleName("geoTextBox");
 		geoWestBox.setStyleName("geoTextBox");
-		geoCoordImage.getElement().setAttribute("style", "margin-top: 5px !important; height: 300px !important; width: 298 px !important;");
+		geoCoordImage.getElement().setAttribute("style", "margin-top: 5px !important; height: 300px !important; width: 298px !important;");
 		geoCoordTab.getElement().setAttribute("style", "margin-top: 20px !important; margin-bottom: 30px !important;");
 		geoUnitInfo.getElement().setAttribute("style", "margin-top: 1px !important;");
 		horizontalPanel76.setStyleName("identLine");
 		geoMainLab.setStyleName("identMainText");
 		geoPathLab.setStyleName("identPathText");
 		geoPathLab2.setStyleName("identPathText2");
+		geoUnitLab.setVisible(false);
+		geoUnitLst.setVisible(false);
 		verticalPanel25.getElement().setAttribute("style", 
 				"margin-top: " + (new_clouds_heading_height - 31) + "px !important;");
 		giScroll.getElement().setAttribute("style", 
@@ -1758,8 +1610,10 @@ public class Emc_eufar implements EntryPoint {
 		HTMLTable.CellFormatter formatter = refDateTab.getCellFormatter();
 		formatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		formatter.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-		Emc_eufar.refDelImage.setVisible(false);
-		Emc_eufar.refDelImage.addClickHandler(new ClickHandler() {
+		refDelImage.setSize("21px","21px");
+		refDelImage.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
+		refDelImage.setVisible(false);
+		refDelImage.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				refStartDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(
 						DateTimeFormat.getFormat("yyyy-MM-dd").format(refStartLst.get(1).getValue())));
@@ -1768,7 +1622,7 @@ public class Emc_eufar implements EntryPoint {
 				refPhaseTab.removeRow(1);
 				refStartLst.remove(1);
 				refEndLst.remove(1);
-				List<Label> allLabel = $("*", Emc_eufar.refPhaseTab).widgets(Label.class);
+				List<Label> allLabel = $("*", refPhaseTab).widgets(Label.class);
 				int id = 0;
 				for (Object o : allLabel) {
 					((Label) o).setText("Phase " + Integer.toString(id + 1));
@@ -1776,7 +1630,7 @@ public class Emc_eufar implements EntryPoint {
 				}
 				int row = refPhaseTab.getRowCount();
 				if (row == 1) {
-					Emc_eufar.refDelImage.setVisible(false);
+					refDelImage.setVisible(false);
 				}
 			}
 		});
@@ -1791,34 +1645,32 @@ public class Emc_eufar implements EntryPoint {
 		verticalPanel27.add(qvMainLab2);
 		verticalPanel27.add(horizontalPanel79);
 		verticalPanel27.add(horizontalPanel80);
-		verticalPanel27.add(verticalPanel14);
-		Utilities.populateListBox(imageLevLst, levelList, 0);
-		Utilities.populateListBox(imageDCLst, DCList, 0);
-		imageRadDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
-		imageRadDat.setValue(new Date());
-		imageSpeDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
-		imageSpeDat.setValue(new Date());
-		horizontalPanel117.add(imageRad);
-		horizontalPanel117.add(imageStarLab01);
-		horizontalPanel30.add(horizontalPanel117);
-		horizontalPanel116.add(insituRad);
-		horizontalPanel116.add(insituStarLab01);
+		horizontalPanel116.add(qvAddImageryLab);
+		horizontalPanel116.add(imageStarLab01);
+		horizontalPanel117.add(qvAddInsituLab);
+		horizontalPanel117.add(insituStarLab01);
+		horizontalPanel30.add(qvAddImageryTabBut);
 		horizontalPanel30.add(horizontalPanel116);
+		horizontalPanel30.add(qvAddInsituTabBut);
+		horizontalPanel30.add(horizontalPanel117);
 		horizontalPanel30.add(qvInfoButton01);
-		qvInfoButton01.getElement().setAttribute("style","margin-left: 200px !important;");
-		horizontalPanel30.getElement().setAttribute("style", "margin-bottom: 20px;");
 		verticalPanel14.add(horizontalPanel30);
-		verticalPanel14.add(verticalPanel17);
-		insituStarLab01.setStyleName("qvStarLabel");
+		verticalPanel14.add(simplePanel01);
+		verticalPanel27.add(verticalPanel14);
 		imageStarLab01.setStyleName("qvStarLabel");
-		imageRad.setStyleName("qv_imageRad");
-		insituRad.setStyleName("qv_insituRad");
-		verticalPanel14.setStyleName("qvVerticalPanel");
+		insituStarLab01.setStyleName("qvStarLabel");
+		qvAddImageryLab.setStyleName("qv_imageLabMain");
+		qvAddInsituLab.setStyleName("qv_insituLabMain");
 		horizontalPanel80.setStyleName("identLine");
+		verticalPanel14.setStyleName("qvVerticalPanel");
+		simplePanel01.getElement().setAttribute("style", "margin: 10px !important; margin-bottom: 0px !important;");
 		qvMainLab.setStyleName("identMainText");
 		qvPathLab.setStyleName("identPathText");
 		qvPathLab2.setStyleName("identPathText2");
 		qvMainLab2.setStyleName("identMainText2");
+		horizontalPanel30.getElement().setAttribute("style", "margin-left: 200px;");
+		horizontalPanel116.getElement().setAttribute("style", "margin-left: 10px; margin-top:3px; margin-right: 100px;");
+		horizontalPanel117.getElement().setAttribute("style", "margin-left: 10px; margin-top:3px; margin-right: 100px;");
 		verticalPanel27.getElement().setAttribute("style", 
 				"margin-top: " + (new_clouds_heading_height - 31) + "px !important;");
 		qvScroll.getElement().setAttribute("style", 
@@ -1883,6 +1735,8 @@ public class Emc_eufar implements EntryPoint {
 		useInfoButton2.getElement().setAttribute("style", "margin-top: 46px !important;");
 		useConditionsLst.add(useConditionsBox);
 		useLimitationsLst.add(useLimitationsBox);
+		useCondCorrectLst.add("string");
+		useLimCorrectLst.add("string");
 		useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");
 		useLimitationsBox.setText("No limitations");
@@ -1901,24 +1755,30 @@ public class Emc_eufar implements EntryPoint {
 		useMainLab2.setStyleName("identMainText2");
 		useStarLab01.setStyleName("useStarLabel");
 		useStarLab02.setStyleName("useStarLabel");
-		Emc_eufar.useDelImage1.setVisible(false);
-		Emc_eufar.useDelImage2.setVisible(false);
-		Emc_eufar.useDelImage1.addClickHandler(new ClickHandler() {
+		useDelImage1.setSize("21px","21px");
+		useDelImage1.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
+		useDelImage2.setSize("21px","21px");
+		useDelImage2.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
+		useDelImage1.setVisible(false);
+		useDelImage2.setVisible(false);
+		useDelImage1.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				useConditionsBox.setText(useConditionsLst.get(1).getText());
 				useConditionsAddTab.removeRow(1);
 				useConditionsLst.remove(1);
+				useCondCorrectLst.remove(1);
 				int row = Emc_eufar.useConditionsAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.useDelImage1.setVisible(false);
 				}
 			}
 		});
-		Emc_eufar.useDelImage2.addClickHandler(new ClickHandler() {
+		useDelImage2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				useLimitationsBox.setText(useLimitationsLst.get(1).getText());
 				useLimitationsAddTab.removeRow(1);
 				useLimitationsLst.remove(1);
+				useLimCorrectLst.remove(1);
 				int row = Emc_eufar.useLimitationsAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.useDelImage2.setVisible(false);
@@ -1960,6 +1820,8 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel27.add(orgPartyTab);
 		horizontalPanel27.add(orgDelButton);
 		horizontalPanel27.add(orgPlusButton);
+		orgDelImage.setSize("21px","21px");
+		orgDelImage.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		orgDelImage.setVisible(false);
 		orgAddTab.setWidget(0, 0, horizontalPanel27);
 		orgPartyLab.setStyleName("orgTextLabel");
@@ -1972,6 +1834,8 @@ public class Emc_eufar implements EntryPoint {
 		orgPartyLst.add(orgPartyBox);
 		orgRole2Lst.add(orgRoleLst);
 		orgEmailLst.add(orgEmailBox);
+		orgPartyCorrectLst.add("string");
+		orgEmailCorrectLst.add("email");
 		horizontalPanel84.setStyleName("identLine");
 		orgMainLab.setStyleName("identMainText");
 		orgPathLab.setStyleName("identPathText");
@@ -1993,7 +1857,7 @@ public class Emc_eufar implements EntryPoint {
 		orgCellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		orgCellFormatter.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		orgCellFormatter.setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-		Emc_eufar.orgDelImage.addClickHandler(new ClickHandler() {
+		orgDelImage.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				orgPartyBox.setText(orgPartyLst.get(1).getText());
 				orgEmailBox.setText(orgEmailLst.get(1).getText());
@@ -2007,6 +1871,8 @@ public class Emc_eufar implements EntryPoint {
 				Emc_eufar.orgPartyLst.remove(1);
 				Emc_eufar.orgRole2Lst.remove(1);
 				Emc_eufar.orgEmailLst.remove(1);
+				Emc_eufar.orgPartyCorrectLst.remove(1);
+				Emc_eufar.orgEmailCorrectLst.remove(1);
 				int row = Emc_eufar.orgAddTab.getRowCount();
 				if (row == 1) {
 					Emc_eufar.orgDelImage.setVisible(false);
@@ -2055,6 +1921,8 @@ public class Emc_eufar implements EntryPoint {
 		horizontalPanel66.add(metPartyTab);
 		horizontalPanel66.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel66.add(mmDelButton);
+		metDelImage.setSize("21px","21px");
+		metDelImage.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		metDelImage.setVisible(false);
 		metAddTab.setWidget(0, 0, horizontalPanel66);
 		metContactTab.setWidget(0, 1, metAddTab);
@@ -2082,6 +1950,8 @@ public class Emc_eufar implements EntryPoint {
 		mmDelButton.setStyleName("emptyButton");
 		metNameLst.add(metNameBox);
 		metEmailLst.add(metEmailBox);
+		metNameCorrectLst.add("string");
+		metEmailCorrectLst.add("email");
 		horizontalPanel86.setStyleName("identLine");
 		metMainLab.setStyleName("identMainText");
 		metPathLab.setStyleName("identPathText");
@@ -2106,16 +1976,18 @@ public class Emc_eufar implements EntryPoint {
 		FlexCellFormatter metCellFormatter3 = metMetadataTab.getFlexCellFormatter();
 		metCellFormatter3.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		metCellFormatter3.setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-		Emc_eufar.metDelImage.addClickHandler(new ClickHandler() {
+		metDelImage.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				metNameBox.setText(Emc_eufar.metNameLst.get(1).getText());
 				metEmailBox.setText(Emc_eufar.metEmailLst.get(1).getText());
 				Emc_eufar.metAddTab.removeRow(1);
 				Emc_eufar.metNameLst.remove(1);
 				Emc_eufar.metEmailLst.remove(1);
+				metNameCorrectLst.remove(1);
+				metEmailCorrectLst.remove(1);
 				int row = Emc_eufar.metAddTab.getRowCount();
 				if (row == 1) {
-					Emc_eufar.metDelImage.setVisible(false);
+					metDelImage.setVisible(false);
 				}
 			}
 		});
@@ -2156,7 +2028,9 @@ public class Emc_eufar implements EntryPoint {
 		for (int i = 0; i < allTextBox.size(); i++) {
 			allTextBox.get(i).addChangeHandler(new ChangeHandler() {
 				@Override
-				public void onChange(ChangeEvent event) {Utilities.docIsModified();}
+				public void onChange(ChangeEvent event) {
+					Utilities.docIsModified();
+				}
 			});
 		}
 
@@ -2166,7 +2040,9 @@ public class Emc_eufar implements EntryPoint {
 		for (int i = 0; i < allCheckBoxes.size(); i++) {
 			allCheckBoxes.get(i).addClickHandler(new ClickHandler() {
 				@Override
-				public void onClick(ClickEvent event) {Utilities.docIsModified();}
+				public void onClick(ClickEvent event) {
+					Utilities.docIsModified();
+				}
 			});
 		}
 
@@ -2176,7 +2052,9 @@ public class Emc_eufar implements EntryPoint {
 		for (int i = 0; i < allListBoxes.size(); i++) {
 			allListBoxes.get(i).addChangeHandler(new ChangeHandler() {
 				@Override
-				public void onChange(ChangeEvent event) {Utilities.docIsModified();}
+				public void onChange(ChangeEvent event) {
+					Utilities.docIsModified();
+				}
 			});
 		}
 
@@ -2186,7 +2064,9 @@ public class Emc_eufar implements EntryPoint {
 		for (int i = 0; i < allDateBoxes.size(); i++) {
 			allDateBoxes.get(i).addValueChangeHandler(new ValueChangeHandler<Date>() {
 				@Override
-				public void onValueChange(ValueChangeEvent<Date> event) {Utilities.docIsModified();}
+				public void onValueChange(ValueChangeEvent<Date> event) {
+					Utilities.docIsModified();
+				}
 			});
 		}
 		rootLogger.log(Level.INFO, "ASMM GUI fully initialized...");
@@ -2207,6 +2087,8 @@ public class Emc_eufar implements EntryPoint {
 				}
 			}
 		});
+		
+		
 	}
 
 	
@@ -2219,7 +2101,8 @@ public class Emc_eufar implements EntryPoint {
 			final VerticalPanel verticalPanel02 = new VerticalPanel();
 			final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 			final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-			final Image image = new Image("icons/warning_popup_icon.png");
+			final Image image = new Image(Emc_eufar.resources.warningPopup().getSafeUri());
+			image.setSize("68px", "68px");
 			final Label label = new Label("The actual document has been modified. Changes will be lost if the document is not saved.");
 			final Label label2 = new Label("Do you want to save your changes?");
 			final Button saveButton = new Button("Save", new ClickHandler() {			
@@ -2272,213 +2155,290 @@ public class Emc_eufar implements EntryPoint {
 	
 
 	// check if all fields have been filled in before saving it
-	private void runCheck(final String string) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	static
+	void runCheck(final String string) {
 		rootLogger.log(Level.INFO, "Check of all fields in progress...");
 		int notCompleted = 0;
 		int widgetIndex = -1;
-		int allClaCheckNumber = 0;
-		int allKeyCheckNumber = 0;
+		Widget parent;
+		allTextBoxes.clear();
+		allTextboxFields.clear();
+		allRadioButtons.clear();
+		allCheckBoxes.clear();
+		allListBoxes.clear();
+		allDateBoxes.clear();
+		allTextBoxes.addAll(allRequiredTextboxes);
+		allTextboxFields.addAll(allCorrectFields);
+		allDateBoxes.addAll(allRequiredDateboxes);
+		allDateBoxes.addAll(refStartLst.subList(1, refStartLst.size()));
+		allDateBoxes.addAll(refEndLst.subList(1, refEndLst.size()));
+		allTextBoxes.addAll(useConditionsLst.subList(1, useConditionsLst.size()));
+		allTextBoxes.addAll(useLimitationsLst.subList(1, useLimitationsLst.size()));
+		allTextboxFields.addAll(useCondCorrectLst.subList(1, useConditionsLst.size()));
+		allTextboxFields.addAll(useLimCorrectLst.subList(1, useLimitationsLst.size()));
+		allTextBoxes.addAll(orgPartyLst.subList(1, orgPartyLst.size()));
+		allTextBoxes.addAll(orgEmailLst.subList(1, orgEmailLst.size()));
+		allTextboxFields.addAll(orgPartyCorrectLst.subList(1, orgPartyCorrectLst.size()));
+		allTextboxFields.addAll(orgEmailCorrectLst.subList(1, orgEmailCorrectLst.size()));
+		allTextBoxes.addAll(metNameLst.subList(1, metNameLst.size()));
+		allTextBoxes.addAll(metEmailLst.subList(1, metEmailLst.size()));
+		allTextboxFields.addAll(metNameCorrectLst.subList(1, metNameCorrectLst.size()));
+		allTextboxFields.addAll(metEmailCorrectLst.subList(1, metNameCorrectLst.size()));
+		allListBoxes.addAll(allRequiredListboxes);
+		if (qvTabPanel.getWidgetCount() >= 1) {
+			for (int i = 0; i < qvInsituMap.size(); i++) {
+				ArrayList<ArrayList> insituAllLists = qvInsituMap.get(i);
+				allTextBoxes.addAll(insituAllLists.get(0));
+				allRadioButtons.addAll(insituAllLists.get(1));
+				allCheckBoxes.addAll(insituAllLists.get(2));
+				allListBoxes.addAll(insituAllLists.get(3));
+				allTextboxFields.addAll(insituAllLists.get(4));
+			}
+			for (int i = 0; i < qvImageryMap.size(); i++) {
+				ArrayList<ArrayList> imageryAllLists = qvImageryMap.get(i);
+				allTextBoxes.addAll(imageryAllLists.get(0));
+				allRadioButtons.addAll(imageryAllLists.get(1));
+				allListBoxes.addAll(imageryAllLists.get(2));
+				allDateBoxes.addAll(imageryAllLists.get(3));
+				allTextboxFields.addAll(imageryAllLists.get(4));
+			}
+		}
 		Utilities.runCheckDefault();
-		List<DateBox> allDateBox = $("*", subDockPanel).widgets(DateBox.class);
-		for (int i = 0; i < allDateBox.size(); i++) {
-			if (!runCorrect(allDateBox.get(i))) {
+		rootLogger.log(Level.INFO, "Checking textboxes ...");
+		for (int i = 0; i < allTextBoxes.size(); i++) {
+			if (allTextBoxes.get(i).isVisible()) {
+				if (allTextBoxes.get(i).getText() == "") {
+					parent = allTextBoxes.get(i).getParent();
+					try {
+						while (!(parent instanceof SimplePanel)) {
+							parent = parent.getParent();
+						}
+						widgetIndex = qvTabPanel.getWidgetIndex(parent);
+						qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+					} catch (AssertionError|IndexOutOfBoundsException ex) {
+						while (!(parent instanceof ScrollPanel)) {
+							parent = parent.getParent();
+						}
+						widgetIndex = tabPanel.getWidgetIndex(parent);
+						if (allTextBoxes.get(i).getName() == "aircraft") {
+							if (aircraftTabList.size() == 0) {
+								tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+							}
+						} else if (allTextBoxes.get(i).getName() == "instrument") {
+							if (instrumentTabList.size() == 0) {
+								tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+							}
+						} else {
+							tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						}
+					}
+					if (allTextBoxes.get(i).getName() == "aircraft") {
+						if (aircraftTabList.size() == 0) {
+							notCompleted++;
+							allTextBoxes.get(i).getElement().setAttribute("style","border-color: #ED1C24 !important;");
+						}
+					} else if (allTextBoxes.get(i).getName() == "instrument") {
+						if (instrumentTabList.size() == 0) {
+							notCompleted++;
+							allTextBoxes.get(i).getElement().setAttribute("style","border-color: #ED1C24 !important;");
+						}
+					} else {
+						notCompleted++;
+						allTextBoxes.get(i).getElement().setAttribute("style","border-color: #ED1C24 !important;");
+					}
+				} else {
+					boolean textboxCorrect = false;
+					if (allTextBoxes.get(i).getName() == "aircraft") {
+						if (aircraftTabList.size() == 0) {
+							textboxCorrect = runCorrect(allTextBoxes.get(i), allTextboxFields.get(i));
+						}
+					} else if (allTextBoxes.get(i).getName() == "instrument") {
+						if (instrumentTabList.size() == 0) {
+							textboxCorrect = runCorrect(allTextBoxes.get(i), allTextboxFields.get(i));
+						}
+					} else {
+						textboxCorrect = runCorrect(allTextBoxes.get(i), allTextboxFields.get(i));
+					}
+					if (!textboxCorrect) {
+						parent = allTextBoxes.get(i).getParent();
+						try {
+							while (!(parent instanceof SimplePanel)) {
+								parent = parent.getParent();
+							}
+							widgetIndex = qvTabPanel.getWidgetIndex(parent);
+							if (qvTabPanel.getTabWidget(widgetIndex).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+								qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+							}
+							if (tabPanel.getTabWidget(6).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+								tabPanel.getTabWidget(6).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+							}
+						} catch (AssertionError|IndexOutOfBoundsException ex) {
+							while (!(parent instanceof ScrollPanel)) {
+								parent = parent.getParent();
+							}
+							widgetIndex = tabPanel.getWidgetIndex(parent);
+							if (tabPanel.getTabWidget(widgetIndex).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+								tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+							}
+						}
+						notCompleted++;
+					}
+				}
+			}
+		}
+		rootLogger.log(Level.INFO, "Checking textboxes finished...");
+		rootLogger.log(Level.INFO, "Checking dateboxes ...");
+		for (int i = 0; i < allDateBoxes.size(); i++) {
+			if (allDateBoxes.get(i).getValue().after(actualDate)) {
+				allDateBoxes.get(i).getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
+				parent = allDateBoxes.get(i).getParent();
+				try {
+					while (!(parent instanceof SimplePanel)) {
+						parent = parent.getParent();
+					}
+					widgetIndex = qvTabPanel.getWidgetIndex(parent);
+					if (qvTabPanel.getTabWidget(widgetIndex).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+						qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+					}
+					if (tabPanel.getTabWidget(6).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+						tabPanel.getTabWidget(6).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+					}
+				} catch (AssertionError|IndexOutOfBoundsException ex) {
+					while (!(parent instanceof ScrollPanel)) {
+						parent = parent.getParent();
+					}
+					widgetIndex = tabPanel.getWidgetIndex(parent);
+					if (tabPanel.getTabWidget(widgetIndex).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+					}
+				}
 				notCompleted++;
 			}
 		}
-		Widget parent;
-		for (Map.Entry<TextBoxBase, Label> entry : requiredField.entrySet()) {
-			Label label = entry.getValue();
-			TextBoxBase textBox = entry.getKey();
-			parent = textBox.getParent();
-			try {
-				while (!(parent instanceof ScrollPanel)) {
-					parent = parent.getParent();
-				}
-				if (textBox.getText() == "") {
-					if (label == null) {
-						textBox.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-						
+		rootLogger.log(Level.INFO, "Checking dateboxes finished...");
+		rootLogger.log(Level.INFO, "Checking listboxes ...");
+		for (int i = 0; i < allListBoxes.size(); i++) {
+			if (allListBoxes.get(i).isVisible() && allListBoxes.get(i).isEnabled()) {
+				if (allListBoxes.get(i).getSelectedItemText() == "Make a choice...") {
+					parent = allListBoxes.get(i).getParent();
+					try {
+						while (!(parent instanceof SimplePanel)) {
+							parent = parent.getParent();
+						}
+						widgetIndex = qvTabPanel.getWidgetIndex(parent);
+						qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+					} catch (AssertionError|IndexOutOfBoundsException ex) {
+						while (!(parent instanceof ScrollPanel)) {
+							parent = parent.getParent();
+						}
 						widgetIndex = tabPanel.getWidgetIndex(parent);
-						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
-					} else if (label.getText() == "Spatial resolution:") {} 
-					else {
-						notCompleted++;
-						textBox.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-						widgetIndex = tabPanel.getWidgetIndex(parent);
-						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						if (widgetIndex == 3) {
+							if (aircraftTabList.size() == 0) {
+								tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+							}
+						} else {
+							tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						}
 					}
-				} else {
-					if (!runCorrect(textBox)) {
+					if (widgetIndex == 3) {
+						if (aircraftTabList.size() == 0) {
+							notCompleted++;
+							allListBoxes.get(i).getElement().setAttribute("style","border-color: #ED1C24 !important;");
+						}
+					} else {
 						notCompleted++;
-						widgetIndex = tabPanel.getWidgetIndex(parent);
-						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						allListBoxes.get(i).getElement().setAttribute("style","border-color: #ED1C24 !important;");
 					}
 				}
-			} catch (Exception ex) {
-				rootLogger.log(Level.WARNING, "the widget has no parent: " + ex.getMessage());
 			}
 		}
-		List<CheckBox> allClaCheck = $("*", clScroll).widgets(CheckBox.class);
-		for (int i = 0; i < allClaCheck.size(); i++) {
-			if  (allClaCheck.get(i).getValue() == true) {
-				allClaCheckNumber++;
+		rootLogger.log(Level.INFO, "Checking listboxes finished...");
+		rootLogger.log(Level.INFO, "Checking checkboxes ...");
+		boolean oneCheckboxChecked = false;
+		for (int i = 0; i < allRequiredClassCheckboxes.size(); i++) {
+			if (((CheckBox) allRequiredClassCheckboxes.get(i).getWidget(0)).getValue() == true) {
+				oneCheckboxChecked = true;
+				break;
 			}
 		}
-		if (allClaCheckNumber == 0) {
+		if (oneCheckboxChecked == false) {
 			notCompleted++;
 			tabPanel.getTabWidget(1).getElement().setAttribute("style","color: #ED1C24 !important;");
 		}
-		List<CheckBox> allKeyCheck = $("*", kwScroll).widgets(CheckBox.class);
-		for (int i = 0; i < allKeyCheck.size(); i++) {
-			if (allKeyCheck.get(i).getValue() == true) {
-				allKeyCheckNumber++;
+		
+		oneCheckboxChecked = false;
+		for (int i = 0; i < allRequiredKeyCheckboxes.size(); i++) {
+			if (((CheckBox) allRequiredKeyCheckboxes.get(i).getWidget(0)).getValue() == true) {
+				oneCheckboxChecked = true;
+				break;
 			}
 		}
-		if (allKeyCheckNumber == 0) {
+		if (oneCheckboxChecked == false) {
 			notCompleted++;
 			tabPanel.getTabWidget(2).getElement().setAttribute("style","color: #ED1C24 !important;");
 		}
+		rootLogger.log(Level.INFO, "Checking checkboxes finished...");
+		rootLogger.log(Level.INFO, "Checking aircraft and instrument lists ...");
 		if (aircraftTabList.size() == 0) {
 			notCompleted++;
 			tabPanel.getTabWidget(3).getElement().setAttribute("style","color: #ED1C24 !important;");
 			airAircraftLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-			if (airAircraftLst.getSelectedIndex() == 1) {
-				if (Emc_eufar.airManufacturerBox.getText() == "") {
-					Emc_eufar.airManufacturerBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
-				}
-				if (Emc_eufar.airTypeBox.getText() == "") {
-					Emc_eufar.airTypeBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
-				}
-				if (Emc_eufar.airOperatorBox.getText() == "") {
-					Emc_eufar.airOperatorBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
-				}
-				if (Emc_eufar.airCountryLst.getSelectedItemText() == "Make a choice...") {
-					Emc_eufar.airCountryLst.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
-				}
-				if (Emc_eufar.airRegistrationBox.getText() == "") {
-					Emc_eufar.airRegistrationBox.getElement().setAttribute("style", "border-color: #ED1C24 !important;");
-				}
-			}
 		}
 		if (instrumentTabList.size() == 0) {
 			notCompleted++;
 			tabPanel.getTabWidget(3).getElement().setAttribute("style","color: #ED1C24 !important;");
 			airInstrumentLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
 		}
-		if (geoLocationLst.getSelectedIndex() == 0 || geoDetailLst.getSelectedIndex() == 0 || geoDetailLst.isEnabled() == false) {
-			if (geoLocationLst.getSelectedIndex() == 0) {
-				geoLocationLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-			}
-			if (geoDetailLst.getSelectedIndex() == 0 || geoDetailLst.isEnabled() == false) {
-				geoDetailLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-			}
-			notCompleted++;
-			tabPanel.getTabWidget(4).getElement().setAttribute("style","color: #ED1C24 !important;");
-		}
-		if (((CheckBox) insituRad.getWidget(0)).getValue() == false && ((CheckBox) imageRad.getWidget(0)).getValue() == false) {
+		rootLogger.log(Level.INFO, "Checking aircraft and instrument lists finished...");
+		rootLogger.log(Level.INFO, "Checking QV forms ...");
+		if (qvTabPanel.getWidgetCount() < 1) {
 			notCompleted++;
 			tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-		} else if (((CheckBox) insituRad.getWidget(0)).getValue() == true && ((CheckBox) imageRad.getWidget(0)).getValue() == false) {
-			if (((CheckBox) insituChk04.getWidget(0)).getValue() == false && ((CheckBox) insituChk05.getWidget(0)).getValue() == false && 
-					((CheckBox) insituChk06.getWidget(0)).getValue() == false && ((CheckBox) insituChk07.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel34.getElement().setAttribute("style","border: 1px solid #ED1C24;");
-				notCompleted++;
-			} else if (((CheckBox) insituChk07.getWidget(0)).getValue() == true && insituOtherBox.getText() == "") {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				insituOtherBox.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-				notCompleted++;
+		} else {
+			for (int i = 0; i < allCheckBoxes.size(); i++) {
+				VerticalPanel verticalPanel01 = (VerticalPanel) allCheckBoxes.get(i).getWidget(0);
+				VerticalPanel verticalPanel02 = (VerticalPanel) allCheckBoxes.get(i).getWidget(1);
+				HorizontalPanel netcdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(0);
+				HorizontalPanel hdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(1);
+				HorizontalPanel amesCheckBox = (HorizontalPanel) verticalPanel02.getWidget(0);
+				HorizontalPanel otherPanel = (HorizontalPanel) verticalPanel02.getWidget(1);
+				HorizontalPanel otherCheckBox = (HorizontalPanel) otherPanel.getWidget(0);
+				if (((CheckBox) netcdfCheckBox.getWidget(0)).getValue() == false 
+						&& ((CheckBox) hdfCheckBox.getWidget(0)).getValue() == false
+						&& ((CheckBox) amesCheckBox.getWidget(0)).getValue() == false
+						&& ((CheckBox) otherCheckBox.getWidget(0)).getValue() == false) {
+					parent = allCheckBoxes.get(i).getParent();
+					while (!(parent instanceof SimplePanel)) {
+						parent = parent.getParent();
+					}
+					widgetIndex = qvTabPanel.getWidgetIndex(parent);
+					allCheckBoxes.get(i).getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+					qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+					tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+					notCompleted++;
+				}
 			}
-			if (((CheckBox) insituChk01Y.getWidget(0)).getValue() == false && ((CheckBox) insituChk01N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel121.getElement().setAttribute("style","border: 1px solid #ED1C24;");
-				notCompleted++;
-			}
-		} else if (((CheckBox) insituRad.getWidget(0)).getValue() == false && ((CheckBox) imageRad.getWidget(0)).getValue() == true) {
-			if (imageLevLst.getSelectedValue() == "Make a choice...") {
-				imageLevLst.getElement().setAttribute("style","border-color: #ED1C24 !important;");
-			}
-			if (((CheckBox) imageChk10Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk10N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel148.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk11Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk11N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel149.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk12Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk12N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel150.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk13Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk13N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel151.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk14Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk14N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel152.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk15Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk15N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel48.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk16Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk16N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel49.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk17Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk17N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel50.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk18Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk18N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel51.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk19Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk19N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel153.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk20Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk20N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel53.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk21Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk21N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel54.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk22Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk22N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel55.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk23Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk23N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel154.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk24Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk24N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel155.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
-			}
-			if (((CheckBox) imageChk25Y.getWidget(0)).getValue() == false && ((CheckBox) imageChk25N.getWidget(0)).getValue() == false) {
-				Emc_eufar.tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
-				Emc_eufar.horizontalPanel156.getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
-				notCompleted++;
+			for (int i = 0; i < allRadioButtons.size(); i++) {
+				HorizontalPanel yesCheckBox = (HorizontalPanel) allRadioButtons.get(i).getWidget(0);
+				HorizontalPanel noCheckBox = (HorizontalPanel) allRadioButtons.get(i).getWidget(1);
+				if (((CheckBox) yesCheckBox.getWidget(0)).getValue() == false 
+						&& ((CheckBox) noCheckBox.getWidget(0)).getValue() == false) {
+					parent = allRadioButtons.get(i).getParent();
+					while (!(parent instanceof SimplePanel)) {
+						parent = parent.getParent();
+					}
+					widgetIndex = qvTabPanel.getWidgetIndex(parent);
+					allRadioButtons.get(i).getElement().setAttribute("style","border: 1px solid #ED1C24 !important;");
+					qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+					tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+					notCompleted++;
+				}
 			}
 		}
+		rootLogger.log(Level.INFO, "Checking QV forms finished...");
 		rootLogger.log(Level.INFO, "Check of all fields finished.");
 		if (notCompleted > 0) {
 			PopupMessages.notcompletePanel(string);
@@ -2488,104 +2448,47 @@ public class Emc_eufar implements EntryPoint {
 	}
 	
 	
-	// check if all TextBoxes have been correctly filled in before saving it
-	private boolean runCorrect(final TextBoxBase textBox) {
-		Emc_eufar.rootLogger.log(Level.INFO, "Check of text in all fields in progress...");
+	// check if all TextBoxes have been correctly filled in before saving it - 2
+	private static boolean runCorrect(final TextBoxBase textBox, final String string) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Check of text in textbox in progress...");
 		boolean result = true;
-		for (Map.Entry<TextBoxBase, String> entry : correctField.entrySet()) {
-			String string = entry.getValue();
-			TextBoxBase textBoxE = entry.getKey();
-			if (textBoxE == textBox) {
-				switch (string) {
+			switch (string) {
 				case "number":
-					try { 
-						Double.parseDouble(textBox.getText());
-					} 
-					catch (NumberFormatException e) {
-						textBox.getElement().setAttribute("style","border-color: blue !important;");
+					if (!textBox.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
+						textBox.getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
 						result = false;
 					}
 					break;
 				case "string":
-					try {
-						Double.parseDouble(textBox.getText());
-						textBox.getElement().setAttribute("style","border-color: blue !important;");
+					if (textBox.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
+						textBox.getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
 						result = false;
-					} catch (NumberFormatException e) {}
+					}
 					break;
 				case "email":
-					boolean isEmail = false;
-					for (char ch: textBox.getText().toCharArray()) {
-						if (ch == '@') {
-							isEmail = true;
-						}
-					}
-					if (!isEmail) {
-						textBox.getElement().setAttribute("style","border-color: blue !important;");
+					if (!textBox.getText().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+						textBox.getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
 						result = false;
 					}
 					break;
-				}
 			}
-		}
-		rootLogger.log(Level.INFO, "Check of text in all fields finished.");
+		rootLogger.log(Level.INFO, "Check of text in textbox finished.");
 		return result;
 	}
 	
-	
-	// check if all DateBoxes have been correctly set before saving it
-	private boolean runCorrect(final DateBox dateBox) {
-		rootLogger.log(Level.INFO, "Check of a datebox in progress...");
-		boolean result = true;		
-		Date actualDate = new Date();
-		Date boxDate = dateBox.getValue();
-		Widget parent;
-		int widgetIndex = -1;
-		if (boxDate.after(actualDate)) {
-			result = false;
-			dateBox.getElement().setAttribute("style","border-color: blue !important;");
-			parent = dateBox.getParent();
-			while (!(parent instanceof ScrollPanel)) {
-				parent = parent.getParent();
-			}
-			widgetIndex = tabPanel.getWidgetIndex(parent);
-			tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
-			if (refStartLst.contains(dateBox) || refEndLst.contains(dateBox)) {
-				for (int row = 0; row < refPhaseTab.getRowCount(); row++) {
-					for (int col = 0; col < refPhaseTab.getCellCount(row); col++) {
-						Widget w = refPhaseTab.getWidget(row, col);
-						if (w == dateBox) {
-							refPhaseTab.getWidget(row, 0).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
-						}
-					}
-				}
-			} else {
-				for (Map.Entry<DateBox, Label> entry : correctDate.entrySet()) {
-					Label label = entry.getValue();
-					DateBox dateBoxE = entry.getKey();
-					if (dateBoxE == dateBox) {
-						label.getElement().setAttribute("style","color: rgb(0,0,200) !important;");
-					}
-				}
-			}
-		}
-		rootLogger.log(Level.INFO, "Check of a datebox finished.");
-		return result;
-	}
-	
-	
+
 	// functions to navigate between tabs
 	private void navigateTab(final int direction) {
+		rootLogger.log(Level.INFO, "Navigation by arrow invoked.");
 		int selected_tab = tabPanel.getSelectedIndex();
 		int new_tab = selected_tab + direction;
 		if (new_tab < 0) {
-			new_tab = 8;
-		} else if (new_tab > 8) {
+			new_tab = 9;
+		} else if (new_tab > 9) {
 			new_tab = 0;
 		}
 		tabPanel.selectTab(new_tab);
 	}
-	
 	
 	
 	// capture all uncaught exceptions

@@ -2,14 +2,11 @@ package com.eufar.emc.client;
 
 import com.google.gwt.animation.client.Animation;
 import com.google.gwt.cell.client.SafeHtmlCell;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.cellview.client.CellTable;
@@ -35,29 +32,23 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
 
     private final double barHeight;
     private final Unit barUnit;
-    private final Resources resources;
 
     //tabLayoutPanel root widget
     private LayoutPanel panel;
     private FlowPanel tabBar;
     private HorizontalPanel scrollPanel;
 
-    private static Resources DEFAULT_RESOURCES;
 
     public ScrollableTabLayoutPanel() {
         this(30, Unit.PX);
     }
 
-    public ScrollableTabLayoutPanel(double barHeight, Unit barUnit) {
-        this(barHeight, barUnit, getDefaultResources());
-    }
 
-    public ScrollableTabLayoutPanel(double barHeight, Unit barUnit, Resources resources) {
+    public ScrollableTabLayoutPanel(double barHeight, Unit barUnit) {
         super(barHeight, barUnit);
 
         this.barUnit = barUnit;
         this.barHeight = barHeight;
-        this.resources = resources;
 
         // The main widget wrapped by this composite, which is a LayoutPanel with the tab bar & the tab content
         panel = (LayoutPanel) getWidget();
@@ -148,11 +139,13 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
      * Create and attach the scroll button images with a click handler
      */
     private void initScrollButtons() {
-        Image scrollLeftButtonImage = new Image(resources.back());
-        Image scrollRightButtonImage = new Image(resources.next());
-        Image menuButtonImage = new Image(resources.menu());
-        int leftArrowWidth = scrollLeftButtonImage.getWidth();
-        int rightArrowWidth = scrollRightButtonImage.getWidth();
+        Image scrollLeftButtonImage = new Image(Emc_eufar.resources.back().getSafeUri());
+        Image scrollRightButtonImage = new Image(Emc_eufar.resources.next().getSafeUri());
+        Image menuButtonImage = new Image(Emc_eufar.resources.menu());
+        scrollLeftButtonImage.setSize("20px", "20px");
+        scrollRightButtonImage.setSize("20px", "20px");
+        int leftArrowWidth = 20;
+        int rightArrowWidth = 20;
         scrollPanel = new HorizontalPanel();
         panel.insert(scrollPanel, 0);
         panel.setWidgetTopHeight(scrollPanel, 0, Unit.PX, barHeight, barUnit);
@@ -371,12 +364,6 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
         return sign * position;
     }
 
-    private static Resources getDefaultResources() {
-        if(DEFAULT_RESOURCES == null) {
-            DEFAULT_RESOURCES = GWT.create(Resources.class);
-        }
-        return DEFAULT_RESOURCES;
-    }
 
     private class MyPopup extends PopupPanel {
 
@@ -420,17 +407,5 @@ public class ScrollableTabLayoutPanel extends TabLayoutPanel {
             //put the table into the scroll panel for the case if it height exceeds the window height
             setWidget(new ScrollPanel(table));
         }
-    }
-
-    
-    public static interface Resources extends ClientBundle {
-        @Source("images/bwd_tab_arrow_v3.png")
-        ImageResource back();
-
-        @Source("images/fwd_tab_arrow_v3.png")
-        ImageResource next();
-
-        @Source("images/menu_tab_arrow_v3.png")
-        ImageResource menu();
     }
 }

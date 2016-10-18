@@ -381,7 +381,7 @@ body {
 
 
 .airTextList2 {
-  width: 300px;
+  width: 250px;
   height: 25px;
   border: 1px solid #ccc;
   font-family: MyFontItalic;
@@ -403,7 +403,7 @@ body {
   border: 1px solid #ccc;
   font-family: MyFontItalic;
   font-size: 14px;
-  margin-left: 94px;
+  margin-left: 20px;
   background-color: rgb(238,238,238);
   color: #4f4f4f;
 }
@@ -428,78 +428,6 @@ body {
 
 
 .airTextBox:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.airTextBox2 {
-  width: 170px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFontItalic;
-  font-size: 14px;
-  margin-left: 10px;
-  background-color: rgb(238,238,238);
-  color: #4f4f4f;
-}
-
-
-.airTextBox2:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.airTextBox3 {
-  width: 200px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFontItalic;
-  color: #4f4f4f;
-  font-size: 14px;
-  margin-left: 63px;
-  background-color: rgb(238,238,238);
-}
-
-
-.airTextBox3:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.airTextBox4 {
-  width: 200px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFontItalic;
-  color: #4f4f4f;
-  font-size: 14px;
-  margin-left: 71px;
-  background-color: rgb(238,238,238);
-}
-
-
-.airTextBox4:focus {
-  border: 1px solid #ffa126;
-}
-
-
-.airTextBox5 {
-  width: 200px;
-  height: 17px;
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  font-family: MyFontItalic;
-  color: #4f4f4f;
-  font-size: 14px;
-  margin-left: 89px;
-  background-color: rgb(238,238,238);
-}
-
-
-.airTextBox5:focus {
   border: 1px solid #ffa126;
 }
 
@@ -548,9 +476,16 @@ body {
   font-size: 14px;
 }
 
+
+.airFlexTable {
+  width: 600px;
+  height: 280px;
+  margin-left: 20px;
+}
+
 .airFlexTableLabel1 {
   color: #4f4f4f;
-  margin-left: 65px;
+  /* margin-left: 65px; */
   font-family: MyFontBold;
   font-size: 14px;
 }
@@ -560,46 +495,42 @@ body {
   font-family: MyFontBoldItalic;
   font-size: 14px;
   height: 17px;
-  margin-left: 63px;
-}
-
-
-.airFlexTableLabel3 {
-  font-family: MyFontBoldItalic;
-  font-size: 14px;
-  height: 17px;
-  margin-left: 71px;
-}
-
-
-.airFlexTableLabel4 {
-  font-family: MyFontBoldItalic;
-  font-size: 14px;
-  height: 17px;
-  margin-left: 89px;
-}
-
-
-.airFlexTableLabel5 {
-  font-family: MyFontBoldItalic;
-  font-size: 14px;
-  height: 17px;
-  margin-left: 94px;
-}
-
-
-.airFlexTableLabel6 {
-  font-family: MyFontBoldItalic;
-  font-size: 14px;
-  height: 17px;
+  width: 400px;
   margin-left: 20px;
 }
+
 
 
 .airFlexTableLabel7 {
   color: #4f4f4f;
   font-family: MyFont;
   font-size: 14px;
+}
+
+
+.airPushButton1 {
+  font-family: MyFont;
+  font-size: 14px;
+  border: 1px solid #F9A12B;
+  color: #F9A12B;
+  background-color: white;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px 12px;
+  margin-left: 20px;
+  -moz-user-select: none;
+}
+
+
+.airPushButton1:hover {
+  color: #0098D9;
+  border-color: #0098D9;
+  cursor: default;
+}
+
+
+.airPushButton1:active {
+  transform: translateX(1px) translateY(1px);
 }
 
 
@@ -766,6 +697,14 @@ body {
 }
 
 
+.geoForwardImage {
+  margin-left: 20px;
+  margin-top: 3px;
+  height: 15px;
+  width: 20px;
+}
+
+
 .refVerticalPanel {
   background: white;
   margin-left: 30px;
@@ -880,27 +819,38 @@ body {
 }
 
 
+.qvHorizontalPanel5 {
+  padding-right: 4px;
+  border: 1px solid white;
+}
+
+
 .qvVerticalPanel {
   width: 1200px;
   background: white;
   margin-left: 30px;
-  margin-top: -6px;
+  margin-top: -7px;
   padding-top: 10px;
   color: #4f4f4f;
   padding-bottom: 10px;
 }
 
 
-.qv_imageRad {
-  margin-left: 100px;
+.qvVerticalPanel2 {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 10px;
+}
+
+
+.qv_imageLabMain {
   font-family: MyFontBold;
   font-size: 14px;
   color: #4f4f4f;
 }
 
 
-.qv_insituRad {
-  margin-left: 200px;
+.qv_insituLabMain {
   font-family: MyFontBold;
   font-size: 14px;
   color: #4f4f4f;
@@ -919,10 +869,18 @@ body {
 .qv_insituLabel2 {
   font-family: MyFontBold;
   font-size: 14px;
-  text-align: right;
-  width: 200px;
-  margin-left: 40px;
+  margin-top: 2px;
   color: #4f4f4f;
+}
+
+
+.qv_insituLabel3 {
+  font-family: MyFontBold;
+  font-size: 14px;
+  margin-top: 0px;
+  color: #4f4f4f;
+  margin-left: 10px;
+  text-decoration: underline;
 }
 
 
@@ -1013,6 +971,52 @@ body {
 
 .qv_insituTextAre2:focus {
   border: 1px solid #ffa126;
+}
+
+
+.qv_insituTextList {
+  width: 250px;
+  height: 25px;
+  border: 1px solid #ccc;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  background: rgb(238,238,238);
+  margin-left: 15px;
+  color: #4f4f4f;
+}
+
+
+.qv_insituTextList:disabled {
+  background: #d6d6d6;
+}
+
+
+.qv_insituTextList:focus {
+  border: 1px solid #ffa126;
+}
+
+
+.qv_insituForwardImage {
+  margin-left: 20px;
+  margin-top: 5px;
+  height: 15px;
+  width: 20px;
+}
+
+
+.qv_insituForwardImage2 {
+  margin-left: 15px;
+  margin-top: 5px;
+  height: 15px;
+  width: 20px;
+}
+
+
+.qv_imageForwardImage {
+  margin-left: 15px;
+  margin-top: 5px;
+  height: 15px;
+  width: 20px;
 }
 
 
@@ -1143,6 +1147,18 @@ body {
   border: 1px solid #ffa126;
 }
 
+.qv_otherHideBox {
+  border: 1px solid white;
+  background: white;
+  width: 300px;
+  height: 17px;
+  padding: 3px 3px;
+  font-family: MyFontItalic;
+  font-size: 14px;
+  margin-left: 24px; 
+  margin-top: -1px;
+  color: #4f4f4f;
+}
 
 .useVerticalPanel {
   margin-left: 30px;
@@ -1386,7 +1402,7 @@ body {
 
 
 .gwt-TabLayoutPanel {
-   background: #616266 !important;
+  background: #616266 !important;
 }
 
 
@@ -1411,7 +1427,6 @@ body {
   font-size: 14px !important;
   margin-left: 4px !important;
   padding: 0px 10px 6px 10px !important;
-  cursor: pointer !important;
   cursor: hand !important;
   color: white !important;
   font-weight: 300 !important;
@@ -1962,6 +1977,14 @@ body {
 }
 
 
+.openPanel2 {
+  background: rgb(238,238,238);
+  padding: 10px 10px 10px 10px;
+  cursor: wait;
+  border: 1px solid black;
+}
+
+
 .openButton1 {
   font-family: MyFontBold !important;
   margin-top: 20px !important;
@@ -1977,6 +2000,26 @@ body {
   font-size: 14px !important;
   color: #4f4f4f !important;
   margin-left: 100px !important;
+}
+
+
+.openButton3 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 10px !important;
+  cursor: wait;
+}
+
+
+.openButton4 {
+  font-family: MyFontBold !important;
+  margin-top: 20px !important;
+  font-size: 14px !important;
+  color: #4f4f4f !important;
+  margin-left: 100px !important;
+  cursor: wait;
 }
 
 
@@ -2083,4 +2126,38 @@ body {
   color: #4f4f4f;
   text-align: center;
   margin-top: 10px;
+}
+
+
+.delTabButton {
+  font-family: MyFont;
+  font-size: 14px;
+  cursor: hand;
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 5px;
+  background-image: url(icons/del_icon_tab.png);
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  background-position: right 7px;
+  padding-right: 25px;
+  padding-bottom: 0px;
+}
+
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+
+:focus {
+  outline:none;
+}
+
+
+.addTabLayoutPanel {
+  margin: 10px !important;
+  margin-bottom: 0px !important;
 }

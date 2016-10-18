@@ -8,7 +8,11 @@ import java.util.logging.Level;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextBoxBase;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.XMLParser;
@@ -16,6 +20,7 @@ import com.google.gwt.xml.client.XMLParser;
 public class XmlSave {
 	
 	/// create the string containing all xml code
+	@SuppressWarnings("unchecked")
 	public static String createXml() {
 
 		Emc_eufar.rootLogger.log(Level.INFO, "Creation of the XML code in progress...");
@@ -305,64 +310,14 @@ public class XmlSave {
 			////////////////////
 			/// Data Quality ///
 			////////////////////
-			String lineageString = new String("");
-			if (((RadioButton) Emc_eufar.imageRad.getWidget(0)).getValue() == true) {
-				lineageString = lineageString + "Earth observation/Remote sensing data|";
-				lineageString = lineageString + "Name of calibration laboratory: " + Emc_eufar.imageCalBox.getText() + "|Date of radiometric calibration: "
-						+ DateTimeFormat.getFormat("yyyy-MM-dd").format(Emc_eufar.imageRadDat.getValue()) + "|Date of spectral calibration: " + 
-						DateTimeFormat.getFormat("yyyy-MM-dd").format(Emc_eufar.imageSpeDat.getValue()) + "|Number of spectral bands: " + 
-						Emc_eufar.imageBanBox.getText() + "|Overall heading / fligh direction (dd): " + Emc_eufar.imageDirBox.getText() + "|Overall altitude / "
-						+ "average height ASL (m): " + Emc_eufar.imageAltBox.getText() + "|Solar zenith (dd): " + Emc_eufar.imageZenBox.getText() + "|Solar azimuth "
-						+ "(dd): " + Emc_eufar.imageAziBox.getText() + "|Report anomalies in data acquisition: " + Emc_eufar.imageAnoBox.getText();
-				String imageLstAnswer = new String("");
-				if (Emc_eufar.imageLevLst.getSelectedValue() != "Make a choice...") {
-					imageLstAnswer = Emc_eufar.imageLevLst.getSelectedValue();
-				}
-				lineageString = lineageString + "|Processing level: " + imageLstAnswer;
-				lineageString = lineageString + "|Dark current (DC) correction: " + Utilities.getAnswer(Emc_eufar.imageChk10Y, Emc_eufar.imageChk10N) + "|Aggregated "
-						+ "interpolated pixel mask: " + Utilities.getAnswer(Emc_eufar.imageChk11Y, Emc_eufar.imageChk11N) + "|Aggregated bad pixel mask: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk12Y, Emc_eufar.imageChk12N) + "|Saturated pixels / overflow: " + Utilities.getAnswer(Emc_eufar.imageChk13Y, Emc_eufar.imageChk13N) + "|Pixels "
-						+ "affected by saturation in spatial/spectral neighbourhood: " + Utilities.getAnswer(Emc_eufar.imageChk14Y, Emc_eufar.imageChk14N) + "|Problems with "
-						+ "position information / Interpolated position information: " + Utilities.getAnswer(Emc_eufar.imageChk15Y, Emc_eufar.imageChk15N) + "|Problems with "
-						+ "attitude information / Interpolated attitude information: " + Utilities.getAnswer(Emc_eufar.imageChk16Y, Emc_eufar.imageChk16N) + "|Synchronization "
-						+ "problems: " + Utilities.getAnswer(Emc_eufar.imageChk17Y, Emc_eufar.imageChk17N) + "|Interpolated pixels during geocoding: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk18Y, Emc_eufar.imageChk18N) + "|Failure of atmospheric correction: " + Utilities.getAnswer(Emc_eufar.imageChk19Y, Emc_eufar.imageChk19N) + 
-						"|Cloud mask: " + Utilities.getAnswer(Emc_eufar.imageChk20Y, Emc_eufar.imageChk20N) + "|Cloud shadow mask: " + Utilities.getAnswer(Emc_eufar.imageChk21Y, Emc_eufar.imageChk21N) + 
-						"|Haze mask: " + Utilities.getAnswer(Emc_eufar.imageChk22Y, Emc_eufar.imageChk22N) + "|Critical terrain correction based on DEM roughness measure: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk23Y, Emc_eufar.imageChk23N) + "|Critical terrain correction based on slope/local illumination angle: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk24Y, Emc_eufar.imageChk24N) + "|Critical BRDF geometry based on sun-sensor-terrain geometry: " + 
-						Utilities.getAnswer(Emc_eufar.imageChk25Y, Emc_eufar.imageChk25N) + "|";
-			} else if (((RadioButton) Emc_eufar.insituRad.getWidget(0)).getValue() == true) {
-				lineageString = lineageString + "Atmospheric/In-situ measurements|";
-				lineageString = lineageString + "Link to the procedure's description: " + Emc_eufar.insituLinkBox.getText()+ "|Source of calibration " + 
-						"constants: " + Emc_eufar.insituConstBox.getText()+ "|Source of calibration materials: " + Emc_eufar.insituMatBox.getText()+ "|";
-				lineageString = lineageString + "Data converted to geophysical units: " + Utilities.getAnswer(Emc_eufar.insituChk01Y, Emc_eufar.insituChk01N) + "|";
-				ArrayList<String> listTemp = new ArrayList<String>();
-				String insituChk03Answer = new String("");
-				if (((CheckBox) Emc_eufar.insituChk04.getWidget(0)).getValue() == true) {
-					listTemp.add("NetCDF");
-				}
-				if (((CheckBox) Emc_eufar.insituChk05.getWidget(0)).getValue() == true) {
-					listTemp.add("HDF");
-				}
-				if (((CheckBox) Emc_eufar.insituChk06.getWidget(0)).getValue() == true) {
-					listTemp.add("NASA/Ames");
-				}
-				if (((CheckBox) Emc_eufar.insituChk07.getWidget(0)).getValue() == true) {
-					listTemp.add("Other/" + Emc_eufar.insituOtherBox.getText());
-				}
-				if (listTemp.size() > 1) {
-					for (int i = 0; i < listTemp.size(); i++) {
-						insituChk03Answer = insituChk03Answer + listTemp.get(i) + "; ";
-					}
-					insituChk03Answer = insituChk03Answer.substring(0,insituChk03Answer.lastIndexOf(';'));
-				} else if (listTemp.size() == 1) {
-					insituChk03Answer = listTemp.get(0);
-				}
-				lineageString = lineageString + "Output format: " + insituChk03Answer + "|";
-				lineageString = lineageString + "Quality-control flagging applied to individual data points: " + Emc_eufar.insituFlagAre.getText() + "|";
-				lineageString = lineageString + "Assumption: " + Emc_eufar.insituAssumptionAre.getText() + "|";
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int i = 0; i < Emc_eufar.qvInsituMap.size(); i++) {
+				stringBuilder.append(XmlSave.createInsituCode(Emc_eufar.qvInsituMap.get(i), i + 1));
 			}
+			for (int i = 0; i < Emc_eufar.qvImageryMap.size(); i++) {
+				stringBuilder.append(XmlSave.createImageryCode(Emc_eufar.qvImageryMap.get(i), i + 1));
+			}
+			String lineageString = stringBuilder.toString();
 			Element dataQualityInfo1 = Elements.addElement(doc, "gmd:dataQualityInfo", rootElement);
 			Element dataQualityDQ = Elements.addElement(doc, "gmd:DQ_DataQuality", dataQualityInfo1);
 			Element lineageQuality = Elements.addElement(doc, "gmd:lineage", dataQualityDQ);
@@ -376,7 +331,7 @@ public class XmlSave {
 			Element specificationQuality = Elements.addElement(doc, "gmd:specification", conformanceResultDQ);
 			Element citationQualityCI = Elements.addElement(doc, "gmd:CI_Citation", specificationQuality);
 			Element titleQuality = Elements.addElement(doc, "gmd:title", citationQualityCI);
-			Elements.addElement(doc, "gco:CharacterString", titleQuality, "COMMISSION REGULATION (EC) No 1205/2008 of 3 December 2008 implementing Directive "
+			Elements.addElement(doc, "gco:CharacterString", titleQuality, "Commission Regulation (EC) No 1205/2008 of 3 December 2008 implementing Directive "
 					+ "2007/2/EC of the European Parliament and of the Council as regards metadata");
 			Element dateQuality = Elements.addElement(doc, "gmd:date", citationQualityCI);
 			Element dateQualityCI = Elements.addElement(doc, "gmd:CI_Date", dateQuality);
@@ -388,7 +343,7 @@ public class XmlSave {
 					+ "ML_gmxCodelists.xml#CI_DateTypeCode");	
 			dateTypeCode.setAttribute("codeListValue", "publication");
 			Element passQuality = Elements.addElement(doc, "gmd:pass", conformanceResultDQ);
-			Elements.addElement(doc, "gco:Boolean", passQuality, "True");
+			Elements.addElement(doc, "gco:Boolean", passQuality, "true");
 
 
 			////////////////////////////////
@@ -478,5 +433,169 @@ public class XmlSave {
 			Emc_eufar.rootLogger.log(Level.SEVERE, "A problem occured: ", ex);
 		}
 		return xmlString;
+	}
+
+	
+	/// create the string containing all xml code for in-situ
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static String createInsituCode(ArrayList<ArrayList> map, int tabNum) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Creation of the In-situ string ...");
+		StringBuilder stringBuilder = new StringBuilder();
+		ArrayList<TextBoxBase> allTextBoxes = map.get(0);
+		ArrayList<ListBox> allListBoxes = map.get(3);
+		ArrayList<HorizontalPanel> allRadioButtons = map.get(1);
+		ArrayList<HorizontalPanel> allCheckBoxes = map.get(2);
+		stringBuilder.append("[Atmospheric/In-situ measurements " + Integer.toString(tabNum) + "|");
+		
+		/// instrument
+		if (allListBoxes.get(0).getSelectedItemText() == "Make a choice...") {
+			stringBuilder.append("Instrument: |");
+		} else {
+			stringBuilder.append("Instrument: " + allListBoxes.get(0).getSelectedItemText() + "|");
+		}
+		
+		/// procedures
+		stringBuilder.append("Link to the procedure's description: " + allTextBoxes.get(0).getText() + "|");
+		stringBuilder.append("Source of calibration constants: " + allTextBoxes.get(1).getText() + "|");
+		stringBuilder.append("Source of calibration materials: " + allTextBoxes.get(2).getText() + "|");
+		
+		/// geophysical units
+		stringBuilder.append("Data converted to geophysical units: " + 
+				Utilities.getAnswer((HorizontalPanel) allRadioButtons.get(0).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(1)) + "|");
+		
+		/// output format
+		VerticalPanel verticalPanel01 = (VerticalPanel) allCheckBoxes.get(0).getWidget(0);
+		VerticalPanel verticalPanel02 = (VerticalPanel) allCheckBoxes.get(0).getWidget(1);
+		HorizontalPanel netcdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(0);
+		HorizontalPanel hdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(1);
+		HorizontalPanel amesCheckBox = (HorizontalPanel) verticalPanel02.getWidget(0);
+		HorizontalPanel otherPanel = (HorizontalPanel) verticalPanel02.getWidget(1);
+		HorizontalPanel otherCheckBox = (HorizontalPanel) otherPanel.getWidget(0);
+		ArrayList<String> listTemp = new ArrayList<String>();
+		String outputFormat = new String("");
+		if (((CheckBox) netcdfCheckBox.getWidget(0)).getValue() == true) {
+			listTemp.add("NetCDF");
+		}
+		if (((CheckBox) hdfCheckBox.getWidget(0)).getValue() == true) {
+			listTemp.add("HDF");
+		}
+		if (((CheckBox) amesCheckBox.getWidget(0)).getValue() == true) {
+			listTemp.add("NASA/Ames");
+		}
+		if (((CheckBox) otherCheckBox.getWidget(0)).getValue() == true) {
+			listTemp.add("Other/" + allTextBoxes.get(3).getText());
+		}
+		if (listTemp.size() > 1) {
+			for (int i = 0; i < listTemp.size(); i++) {
+				outputFormat = outputFormat + listTemp.get(i) + "; ";
+			}
+			outputFormat = outputFormat.substring(0,outputFormat.lastIndexOf(';'));
+		} else if (listTemp.size() == 1) {
+			outputFormat = listTemp.get(0);
+		}
+		stringBuilder.append("Output format: " + outputFormat + "|");
+		
+		/// flag
+		stringBuilder.append("Quality-control flagging applied to individual data points: " + allTextBoxes.get(4).getText() + "|");
+		
+		/// assumption
+		stringBuilder.append("Assumption: " + allTextBoxes.get(5).getText() + "]");
+		Emc_eufar.rootLogger.log(Level.INFO, "In-situ string created");
+		return stringBuilder.toString();
+	}
+	
+	
+	/// create the string containing all xml code for imagery
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static String createImageryCode(ArrayList<ArrayList> map, int tabNum) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Creation of the Imagery string ...");
+		StringBuilder stringBuilder = new StringBuilder();
+		ArrayList<TextBoxBase> allTextBoxes = map.get(0);
+		ArrayList<ListBox> allListBoxes = map.get(2);
+		ArrayList<HorizontalPanel> allRadioButtons = map.get(1);
+		ArrayList<DateBox> allDateBoxes = map.get(3);
+		stringBuilder.append("[Earth observation/Remote sensing data " + Integer.toString(tabNum) + "|");
+		
+		/// instrument
+		if (allListBoxes.get(0).getSelectedItemText() == "Make a choice...") {
+			stringBuilder.append("Instrument: |");
+		} else {
+			stringBuilder.append("Instrument: " + allListBoxes.get(0).getSelectedItemText() + "|");
+		}
+		
+		/// calibration information
+		stringBuilder.append("Name of calibration laboratory: " + allTextBoxes.get(0).getText() + "|");
+		stringBuilder.append("Date of radiometric calibration: " + DateTimeFormat.getFormat("yyyy-MM-dd").
+				format(allDateBoxes.get(0).getValue()) + "|");
+		stringBuilder.append("Date of spectral calibration: " + DateTimeFormat.getFormat("yyyy-MM-dd").
+				format(allDateBoxes.get(1).getValue()) + "|");
+		
+		/// acquisition information
+		stringBuilder.append("Number of spectral bands: " + allTextBoxes.get(1).getText() + "|");
+		stringBuilder.append("Overall heading / fligh direction (dd): " + allTextBoxes.get(2).getText() + "|");
+		stringBuilder.append("Overall altitude / average height ASL (m): " + allTextBoxes.get(3).getText() + "|");
+		stringBuilder.append("Solar zenith (dd): " + allTextBoxes.get(4).getText() + "|");
+		stringBuilder.append("Solar azimuth (dd): " + allTextBoxes.get(5).getText() + "|");
+		stringBuilder.append("Report anomalies in data acquisition: " + allTextBoxes.get(6).getText() + "|");
+		
+		/// processing information
+		if (allListBoxes.get(1).getSelectedItemText() == "Make a choice...") {
+			stringBuilder.append("Processing level: |");
+		} else {
+			stringBuilder.append("Processing level: " + allListBoxes.get(1).getSelectedItemText() + "|");
+		}
+		stringBuilder.append("Dark current (DC) correction: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(1)) + "|");
+		
+		/// data quality layers
+		stringBuilder.append("Aggregated interpolated pixel mask: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(1).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(1).getWidget(1)) + "|");
+		stringBuilder.append("Aggregated bad pixel mask: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(2).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(2).getWidget(1)) + "|");
+		stringBuilder.append("Saturated pixels / overflow: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(3).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(3).getWidget(1)) + "|");
+		stringBuilder.append("Pixels affected by saturation in spatial/spectral neighbourhood: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(4).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(4).getWidget(1)) + "|");
+		stringBuilder.append("Problems with position information / Interpolated position information: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(5).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(5).getWidget(1)) + "|");
+		stringBuilder.append("Problems with attitude information / Interpolated attitude information: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(6).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(6).getWidget(1)) + "|");
+		stringBuilder.append("Synchronization problems: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(7).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(7).getWidget(1)) + "|");
+		stringBuilder.append("Interpolated pixels during geocoding: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(8).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(8).getWidget(1)) + "|");
+		stringBuilder.append("Failure of atmospheric correction: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(9).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(9).getWidget(1)) + "|");
+		stringBuilder.append("Cloud mask: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(10).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(10).getWidget(1)) + "|");
+		stringBuilder.append("Cloud shadow mask: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(11).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(11).getWidget(1)) + "|");
+		stringBuilder.append("Haze mask: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(12).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(12).getWidget(1)) + "|");
+		stringBuilder.append("Critical terrain correction based on DEM roughness measure: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(13).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(13).getWidget(1)) + "|");
+		stringBuilder.append("Critical terrain correction based on slope/local illumination angle: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(14).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(14).getWidget(1)) + "|");
+		stringBuilder.append("Critical BRDF geometry based on sun-sensor-terrain geometry: " + Utilities.getAnswer(
+				(HorizontalPanel) allRadioButtons.get(15).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(15).getWidget(1)) + "]");
+		Emc_eufar.rootLogger.log(Level.INFO, "Imagery string created");
+		return stringBuilder.toString();
 	}
 }

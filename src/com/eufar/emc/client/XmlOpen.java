@@ -1,12 +1,17 @@
 package com.eufar.emc.client;
 
-
-
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextBoxBase;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.xml.client.DOMException;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
@@ -51,9 +56,7 @@ public class XmlOpen {
 				String value = ((Element) dates.item(loop)).getElementsByTagName("ci_datetypecode").
 						item(0).getFirstChild().getNodeValue();
 				String dateValue = dates.item(loop).getFirstChild().getFirstChild().getFirstChild().getNodeValue();
-				if (value == "publication") {
-					Emc_eufar.refPublicationDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(dateValue));
-				} else if (value == "revision") {
+				if (value == "revision") {
 					Emc_eufar.refRevisionDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(dateValue));
 				} else if (value == "creation") {
 					Emc_eufar.refCreationDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(dateValue));
@@ -194,196 +197,7 @@ public class XmlOpen {
 			}
 			
 			
-			// Data Quality section
-			try {
-				String lineageText = doc.getElementsByTagName("dq_dataquality").item(0).getFirstChild().getFirstChild()
-					.getFirstChild().getFirstChild().getFirstChild().getNodeValue();
-				if (lineageText.contains("Atmospheric/In-situ measurements")) {
-					((CheckBox) Emc_eufar.insituRad.getWidget(0)).setValue(true);
-					GuiModification.changeTarget("Atmospheric/In-situ data");
-					String linkText = new String("Link to the procedure's description: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(linkText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + linkText.length());
-						Emc_eufar.insituLinkBox.setValue(lineageText.substring(linkIndex01 + linkText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'URLlink' failed: " + ex.getMessage());}
-					String constantsText = new String("Source of calibration constants: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(constantsText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + constantsText.length());
-						Emc_eufar.insituConstBox.setValue(lineageText.substring(linkIndex01 + constantsText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Constantslink' failed: " + ex.getMessage());}
-					String materialsText = new String("Source of calibration materials: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(materialsText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + materialsText.length());
-						Emc_eufar.insituMatBox.setValue(lineageText.substring(linkIndex01 + materialsText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Materialslink' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Data converted to geophysical units: ", Emc_eufar.insituChk01Y, Emc_eufar.insituChk01N);	
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'geophysicalUnits' failed: " + ex.getMessage());}
-					String formatText = new String("Output format: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(formatText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + formatText.length());
-						if (lineageText.substring(linkIndex01 + formatText.length(), linkIndex02).contains("NetCDF")) {
-							((CheckBox) Emc_eufar.insituChk04.getWidget(0)).setValue(true);
-						}
-						if (lineageText.substring(linkIndex01 + formatText.length(), linkIndex02).contains("HDF")) {
-							((CheckBox) Emc_eufar.insituChk05.getWidget(0)).setValue(true);
-						}
-						if (lineageText.substring(linkIndex01 + formatText.length(), linkIndex02).contains("NASA/Ames")) {
-							((CheckBox) Emc_eufar.insituChk06.getWidget(0)).setValue(true);
-						}
-						if (lineageText.substring(linkIndex01 + formatText.length(), linkIndex02).contains("Other")) {
-							((CheckBox) Emc_eufar.insituChk07.getWidget(0)).setValue(true);
-							Emc_eufar.insituImage.setVisible(true);
-							Emc_eufar.insituOtherBox.setVisible(true);
-							Emc_eufar.insituOtherBox.setText(lineageText.substring(linkIndex01 + formatText.length(), linkIndex02)
-									.substring(lineageText.substring(linkIndex01 + formatText.length(), linkIndex02).indexOf("Other/") + 6));
-						}
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'outputFormat' failed: " + ex.getMessage());}
-					String flagText = new String("Quality-control flagging applied to individual data points: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(flagText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + flagText.length());
-						Emc_eufar.insituFlagAre.setText(lineageText.substring(linkIndex01 + flagText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'flag' failed: " + ex.getMessage());}
-					String assumptionText = new String("Assumption: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(assumptionText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + assumptionText.length());
-						Emc_eufar.insituAssumptionAre.setText(lineageText.substring(linkIndex01 + assumptionText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'assumption' failed: " + ex.getMessage());}
-				} else if (lineageText.contains("Earth observation/Remote sensing data")) {
-					GuiModification.changeTarget("Earth observation/Remote sensing data");
-					((CheckBox) Emc_eufar.imageRad.getWidget(0)).setValue(true);
-					String linkText = new String("Name of calibration laboratory: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(linkText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + linkText.length());
-						Emc_eufar.imageCalBox.setValue(lineageText.substring(linkIndex01 + linkText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Laboratory Name' failed: " + ex.getMessage());}
-					String radText = new String("Date of radiometric calibration: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(radText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + radText.length());
-						Emc_eufar.imageRadDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(lineageText.substring(linkIndex01 + radText.
-								length(), linkIndex02)));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Radiometric Calibration' failed: " + ex.getMessage());}
-					String speText = new String("Date of spectral calibration: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(speText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + speText.length());
-						Emc_eufar.imageSpeDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(lineageText.substring(linkIndex01 + speText.
-								length(), linkIndex02)));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Spectral Calibration' failed: " + ex.getMessage());}
-					String bandText = new String("Number of spectral bands: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(bandText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + bandText.length());
-						Emc_eufar.imageBanBox.setValue(lineageText.substring(linkIndex01 + bandText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Spectral Bands' failed: " + ex.getMessage());}
-					String headText = new String("Overall heading / fligh direction (dd): ");
-					try {
-						int linkIndex01 = lineageText.indexOf(headText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + headText.length());
-						Emc_eufar.imageDirBox.setValue(lineageText.substring(linkIndex01 + headText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Flight Heading' failed: " + ex.getMessage());}
-					String altText = new String("Overall altitude / average height ASL (m): ");
-					try {
-						int linkIndex01 = lineageText.indexOf(altText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + altText.length());
-						Emc_eufar.imageAltBox.setValue(lineageText.substring(linkIndex01 + altText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Flight Altitude' failed: " + ex.getMessage());}
-					String zenText = new String("Solar zenith (dd): ");
-					try {
-						int linkIndex01 = lineageText.indexOf(zenText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + zenText.length());
-						Emc_eufar.imageZenBox.setValue(lineageText.substring(linkIndex01 + zenText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Solar Zenith' failed: " + ex.getMessage());}
-					String aziText = new String("Solar azimuth (dd): ");
-					try {
-						int linkIndex01 = lineageText.indexOf(aziText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + aziText.length());
-						Emc_eufar.imageAziBox.setValue(lineageText.substring(linkIndex01 + aziText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Solar Azimuth' failed: " + ex.getMessage());}
-					String anoText = new String("Report anomalies in data acquisition: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(anoText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + anoText.length());
-						Emc_eufar.imageAnoBox.setValue(lineageText.substring(linkIndex01 + anoText.length(), linkIndex02));
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Anomalies' failed: " + ex.getMessage());}
-					String lvlText = new String("Processing level: ");
-					try {
-						int linkIndex01 = lineageText.indexOf(lvlText);
-						int linkIndex02 = lineageText.indexOf("|", linkIndex01 + lvlText.length());
-						int indexToFind = -1;
-						for (int i = 0; i < Emc_eufar.imageLevLst.getItemCount(); i++) {
-							if (Emc_eufar.imageLevLst.getItemText(i).equals(lineageText.substring(linkIndex01 + lvlText.length(), linkIndex02))) {
-								indexToFind = i;
-								break;
-							}
-						}
-						Emc_eufar.imageLevLst.setSelectedIndex(indexToFind);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Processing Level' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Dark current (DC) correction: ", Emc_eufar.imageChk10Y, Emc_eufar.imageChk10N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Dark Current' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Aggregated interpolated pixel mask: ", Emc_eufar.imageChk11Y, Emc_eufar.imageChk11N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Interpolated Pixel' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Aggregated bad pixel mask: ", Emc_eufar.imageChk12Y, Emc_eufar.imageChk12N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Bad Pixel' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Saturated pixels / overflow: ", Emc_eufar.imageChk13Y, Emc_eufar.imageChk13N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Saturation' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Pixels affected by saturation in spatial/spectral neighbourhood: ", Emc_eufar.imageChk14Y, 
-							Emc_eufar.imageChk14N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Saturation Neighbourhood' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Problems with position information / Interpolated position information: ", Emc_eufar.imageChk15Y,
-								Emc_eufar.imageChk15N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Position information' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Problems with attitude information / Interpolated attitude information: ", Emc_eufar.imageChk16Y,
-								Emc_eufar.imageChk16N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Attitude information' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Synchronization problems: ", Emc_eufar.imageChk17Y, Emc_eufar.imageChk17N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Synchronization' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Interpolated pixels during geocoding: ", Emc_eufar.imageChk18Y, Emc_eufar.imageChk18N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Geocoding' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Failure of atmospheric correction: ", Emc_eufar.imageChk19Y, Emc_eufar.imageChk19N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Atmospheric Correction' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Cloud mask: ", Emc_eufar.imageChk20Y, Emc_eufar.imageChk20N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Cloud Mask' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Cloud shadow mask: ", Emc_eufar.imageChk21Y, Emc_eufar.imageChk21N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Cloud Shadow Mask' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Haze mask: ", Emc_eufar.imageChk22Y, Emc_eufar.imageChk22N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Haze Mask' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Critical terrain correction based on DEM roughness measure: ", Emc_eufar.imageChk23Y, Emc_eufar.imageChk23N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'DEM' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Critical terrain correction based on slope/local illumination angle: ", Emc_eufar.imageChk24Y, 
-							Emc_eufar.imageChk24N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'Illumination' failed: " + ex.getMessage());}
-					try {
-						Utilities.getPosition(lineageText, "Critical BRDF geometry based on sun-sensor-terrain geometry: ", Emc_eufar.imageChk25Y, 
-								Emc_eufar.imageChk25N);
-					} catch (Exception ex) {Emc_eufar.rootLogger.log(Level.WARNING, "Element 'BRDF' failed: " + ex.getMessage());}
-				}
-			} catch (Exception ex) {
-				Emc_eufar.rootLogger.log(Level.WARNING, "Element 'dataqualityinfo' failed: " + ex.getMessage());
-			}
+			
 			
 			
 			//// resource constraints
@@ -393,7 +207,7 @@ public class XmlOpen {
 					if (loop == 0) {
 						Emc_eufar.useConditionsBox.setText(useLimitation.item(loop).getFirstChild().getFirstChild().getNodeValue());
 					} else {
-						GuiModification.addUseRead(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst, 
+						GuiModification.addUseRead(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst, Emc_eufar.useCondCorrectLst,
 								useLimitation.item(loop).getFirstChild().getFirstChild().getNodeValue(), Emc_eufar.useDelImage1);
 					}
 				}
@@ -406,7 +220,7 @@ public class XmlOpen {
 					if (loop == 0) {
 						Emc_eufar.useLimitationsBox.setText(otherConstraints.item(loop).getFirstChild().getFirstChild().getNodeValue());
 					} else {
-						GuiModification.addUseRead(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst, 
+						GuiModification.addUseRead(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst, Emc_eufar.useLimCorrectLst,
 								otherConstraints.item(loop).getFirstChild().getFirstChild().getNodeValue(), Emc_eufar.useDelImage2);
 					}
 				}
@@ -508,7 +322,6 @@ public class XmlOpen {
 					String aircraftCnt = countries.item(loop).getFirstChild().getFirstChild().getNodeValue();
 					String aircraftReg = registrations.item(loop).getFirstChild().getFirstChild().getNodeValue();
 					GuiModification.addAircraftRead(aircraftTyp, aircraftMan, aircraftOpe, aircraftCnt, aircraftReg);
-					
 				}
 			} catch (Exception ex) {
 				Emc_eufar.rootLogger.log(Level.WARNING, "Element 'platform' failed: " + ex.getMessage());
@@ -529,9 +342,416 @@ public class XmlOpen {
 			} catch (Exception ex) {
 				Emc_eufar.rootLogger.log(Level.WARNING, "Element 'instrument' failed: " + ex.getMessage());
 			}
+			
+			
+			// Data Quality section
+			boolean oldQV = false;
+			try {
+				String lineageText = doc.getElementsByTagName("dq_dataquality").item(0).getFirstChild().getFirstChild()
+						.getFirstChild().getFirstChild().getFirstChild().getNodeValue();
+				ArrayList<String> stringList = new ArrayList<String>();
+				int indexStart = lineageText.indexOf("[");
+				int indexEnd = lineageText.indexOf("]");
+				stringList.add(lineageText.substring(indexStart + 1, indexEnd));
+				if (indexEnd == -1) {
+					oldQV = true;
+				} else {
+					while (indexEnd >= 0) {
+						indexStart = lineageText.indexOf("[", indexStart + 1);
+						indexEnd = lineageText.indexOf("]", indexEnd + 1);
+						stringList.add(lineageText.substring(indexStart + 1, indexEnd));
+					}
+				}
+				stringList.remove(stringList.size() - 1);
+				if (oldQV == true) {
+					if (lineageText.contains("Atmospheric")) {
+						GuiModification.addQvTab("insitu");
+						readInsituCode_Old(lineageText);
+					} else if (lineageText.contains("Earth")) {
+						GuiModification.addQvTab("imagery");
+						readImageryCode_Old(lineageText);
+					}
+				} else {
+					int insituIndex = 0;
+					int imageryIndex = 0;
+					for (int i = 0; i < stringList.size(); i++) {
+						String subString = stringList.get(i);
+						if (subString.contains("Atmospheric")) {
+							GuiModification.addQvTab("insitu");
+							readInsituCode(subString, insituIndex);
+							insituIndex++;
+						} else if (subString.contains("Earth")) {
+							GuiModification.addQvTab("imagery");
+							readImageryCode(subString, imageryIndex);
+							imageryIndex++;
+						}
+					}
+				}
+			} catch (Exception ex) {
+				Emc_eufar.rootLogger.log(Level.WARNING, "Element 'dataqualityinfo' failed: " + ex.getMessage());
+			}
+			if (oldQV == true) {
+				PopupMessages.oldQVPanel();
+			}
 		} catch (DOMException ex) {
 			Emc_eufar.rootLogger.log(Level.SEVERE, "A problem occured during the loading of the file...", ex);
 			Window.alert("Could not parse XML document. A log has been saved on the server for debugging.");
 		}
+	}
+	
+	/// read the string containing all QV xml code for in-situ and imagery data
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void readInsituCode(String string, int mapIndex) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the In-situ string invoked");
+		ArrayList<ArrayList> insituAllLists = Emc_eufar.qvInsituMap.get(mapIndex);
+		ArrayList<TextBoxBase> allTextBoxes = insituAllLists.get(0);
+		ArrayList<ListBox> allListBoxes = insituAllLists.get(3);
+		ArrayList<HorizontalPanel> allRadioButtons = insituAllLists.get(1);
+		ArrayList<HorizontalPanel> allCheckBoxes = insituAllLists.get(2);
+		ArrayList<Image> allImages = insituAllLists.get(5);
+		
+		/// collect all substrings
+		ArrayList<String> stringList = new ArrayList<String>();
+		int indexStart = string.indexOf(":");
+		int indexEnd = string.indexOf("|", indexStart);
+		stringList.add(string.substring(indexStart + 2, indexEnd));
+		while (indexEnd >= 0) {
+			indexStart = string.indexOf(":", indexStart + 1);
+			indexEnd = string.indexOf("|", indexEnd + 1);
+			stringList.add(string.substring(indexStart + 2, indexEnd));
+		}
+		stringList.remove(stringList.size() - 1);
+		stringList.add(string.substring(indexStart + 2, string.length()));
+
+		/// instrument
+		if (stringList.get(0) != "") {
+			for (int i = 0; i < allListBoxes.get(0).getItemCount(); i++) {
+				if (stringList.get(0) == allListBoxes.get(0).getItemText(i)) {
+					allListBoxes.get(0).setSelectedIndex(i);
+					break;
+				}
+			}
+		}
+		
+		/// procedures
+		allTextBoxes.get(0).setText(stringList.get(1));
+		allTextBoxes.get(1).setText(stringList.get(2));
+		allTextBoxes.get(2).setText(stringList.get(3));
+		
+		/// geophysical units
+		Utilities.getPosition(stringList.get(4), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(1));
+		
+		/// output format
+		String outputString = stringList.get(5);
+		VerticalPanel verticalPanel01 = (VerticalPanel) allCheckBoxes.get(0).getWidget(0);
+		VerticalPanel verticalPanel02 = (VerticalPanel) allCheckBoxes.get(0).getWidget(1);
+		HorizontalPanel netcdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(0);
+		HorizontalPanel hdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(1);
+		HorizontalPanel amesCheckBox = (HorizontalPanel) verticalPanel02.getWidget(0);
+		HorizontalPanel otherPanel = (HorizontalPanel) verticalPanel02.getWidget(1);
+		HorizontalPanel otherCheckBox = (HorizontalPanel) otherPanel.getWidget(0);
+		if (outputString.contains("NetCDF")) {
+			((CheckBox) netcdfCheckBox.getWidget(0)).setValue(true);
+		}
+		if (outputString.contains("HDF")) {
+			((CheckBox) hdfCheckBox.getWidget(0)).setValue(true);
+		}
+		if (outputString.contains("NASA/Ames")) {
+			((CheckBox) amesCheckBox.getWidget(0)).setValue(true);
+		}
+		if (outputString.contains("Other/")) {
+			((CheckBox) otherCheckBox.getWidget(0)).setValue(true);
+			allImages.get(0).setVisible(true);
+			allImages.get(0).setPixelSize(20, 12);
+			allTextBoxes.get(3).setVisible(true);
+			int index = outputString.indexOf("Other/");
+			allTextBoxes.get(3).setText(outputString.substring(index + 6));
+		}
+		
+		/// flag
+		allTextBoxes.get(4).setText(stringList.get(6));
+		
+		/// assumption
+		allTextBoxes.get(5).setText(stringList.get(7));
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the In-situ string finished");
+	}
+	
+	
+	/// read the string containing all QV xml code for in-situ and imagery data
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void readImageryCode(String string, int mapIndex) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the Imagery string invoked");
+		ArrayList<ArrayList> imageryAllLists = Emc_eufar.qvImageryMap.get(mapIndex);
+		ArrayList<TextBoxBase> allTextBoxes = imageryAllLists.get(0);
+		ArrayList<ListBox> allListBoxes = imageryAllLists.get(2);
+		ArrayList<HorizontalPanel> allRadioButtons = imageryAllLists.get(1);
+		ArrayList<DateBox> allDateBoxes = imageryAllLists.get(3);
+		
+		/// collect all substrings
+		ArrayList<String> stringList = new ArrayList<String>();
+		int indexStart = string.indexOf(":");
+		int indexEnd = string.indexOf("|", indexStart);
+		stringList.add(string.substring(indexStart + 2, indexEnd));
+		while (indexEnd >= 0) {
+			indexStart = string.indexOf(":", indexStart + 1);
+			indexEnd = string.indexOf("|", indexEnd + 1);
+			stringList.add(string.substring(indexStart + 2, indexEnd));
+		}
+		stringList.remove(stringList.size() - 1);
+		stringList.add(string.substring(indexStart + 2, string.length()));
+				
+		/// instrument
+		if (stringList.get(0) != "") {
+			for (int i = 0; i < allListBoxes.get(0).getItemCount(); i++) {
+				if (stringList.get(0) == allListBoxes.get(0).getItemText(i)) {
+					allListBoxes.get(0).setSelectedIndex(i);
+					break;
+				}
+			}
+		}
+		
+		/// calibration information
+		allTextBoxes.get(0).setText(stringList.get(1));
+		allDateBoxes.get(0).setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(stringList.get(2)));
+		allDateBoxes.get(1).setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(stringList.get(3)));
+		
+		/// acquisition information
+		allTextBoxes.get(1).setText(stringList.get(4));
+		allTextBoxes.get(2).setText(stringList.get(5));
+		allTextBoxes.get(3).setText(stringList.get(6));
+		allTextBoxes.get(4).setText(stringList.get(7));
+		allTextBoxes.get(5).setText(stringList.get(8));
+		allTextBoxes.get(6).setText(stringList.get(9));
+		
+		/// processing information
+		if (stringList.get(10) != "") {
+			for (int i = 0; i < allListBoxes.get(1).getItemCount(); i++) {
+				if (stringList.get(10) == allListBoxes.get(1).getItemText(i)) {
+					allListBoxes.get(1).setSelectedIndex(i);
+					break;
+				}
+			}
+		}
+		Utilities.getPosition(stringList.get(11), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(1));
+		
+		/// data quality layers
+		Utilities.getPosition(stringList.get(12), 
+				(HorizontalPanel) allRadioButtons.get(1).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(1).getWidget(1));
+		Utilities.getPosition(stringList.get(13), 
+				(HorizontalPanel) allRadioButtons.get(2).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(2).getWidget(1));
+		Utilities.getPosition(stringList.get(14), 
+				(HorizontalPanel) allRadioButtons.get(3).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(3).getWidget(1));
+		Utilities.getPosition(stringList.get(15), 
+				(HorizontalPanel) allRadioButtons.get(4).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(4).getWidget(1));
+		Utilities.getPosition(stringList.get(16), 
+				(HorizontalPanel) allRadioButtons.get(5).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(5).getWidget(1));
+		Utilities.getPosition(stringList.get(17), 
+				(HorizontalPanel) allRadioButtons.get(6).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(6).getWidget(1));
+		Utilities.getPosition(stringList.get(18), 
+				(HorizontalPanel) allRadioButtons.get(7).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(7).getWidget(1));
+		Utilities.getPosition(stringList.get(19), 
+				(HorizontalPanel) allRadioButtons.get(8).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(8).getWidget(1));
+		Utilities.getPosition(stringList.get(20), 
+				(HorizontalPanel) allRadioButtons.get(9).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(9).getWidget(1));
+		Utilities.getPosition(stringList.get(21), 
+				(HorizontalPanel) allRadioButtons.get(10).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(10).getWidget(1));
+		Utilities.getPosition(stringList.get(22), 
+				(HorizontalPanel) allRadioButtons.get(11).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(11).getWidget(1));
+		Utilities.getPosition(stringList.get(23), 
+				(HorizontalPanel) allRadioButtons.get(12).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(12).getWidget(1));
+		Utilities.getPosition(stringList.get(24), 
+				(HorizontalPanel) allRadioButtons.get(13).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(13).getWidget(1));
+		Utilities.getPosition(stringList.get(25), 
+				(HorizontalPanel) allRadioButtons.get(14).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(14).getWidget(1));
+		Utilities.getPosition(stringList.get(26), 
+				(HorizontalPanel) allRadioButtons.get(15).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(15).getWidget(1));
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the Imagery string finished");
+	}
+	
+	
+	/// read the string containing all QV xml code for in-situ and imagery data
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void readInsituCode_Old(String string) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the old In-situ string invoked");
+		ArrayList<ArrayList> insituAllLists = Emc_eufar.qvInsituMap.get(0);
+		ArrayList<TextBoxBase> allTextBoxes = insituAllLists.get(0);
+		ArrayList<HorizontalPanel> allRadioButtons = insituAllLists.get(1);
+		ArrayList<HorizontalPanel> allCheckBoxes = insituAllLists.get(2);
+		ArrayList<Image> allImages = insituAllLists.get(5);
+		
+		/// collect all substrings
+		ArrayList<String> stringList = new ArrayList<String>();
+		int indexStart = string.indexOf(":");
+		int indexEnd = string.indexOf("|", indexStart);
+		stringList.add(string.substring(indexStart + 2, indexEnd));
+		while (indexEnd >= 0) {
+			indexStart = string.indexOf(":", indexStart + 1);
+			indexEnd = string.indexOf("|", indexEnd + 1);
+			stringList.add(string.substring(indexStart + 2, indexEnd));
+		}
+		stringList.remove(stringList.size() - 1);
+		stringList.add(string.substring(indexStart + 2, string.length()));
+		
+		/// procedures
+		allTextBoxes.get(0).setText(stringList.get(0));
+		allTextBoxes.get(1).setText(stringList.get(1));
+		allTextBoxes.get(2).setText(stringList.get(2));
+				
+		/// geophysical units
+		Utilities.getPosition(stringList.get(3), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(1));
+				
+		/// output format
+		String outputString = stringList.get(4);
+		VerticalPanel verticalPanel01 = (VerticalPanel) allCheckBoxes.get(0).getWidget(0);
+		VerticalPanel verticalPanel02 = (VerticalPanel) allCheckBoxes.get(0).getWidget(1);
+		HorizontalPanel netcdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(0);
+		HorizontalPanel hdfCheckBox = (HorizontalPanel) verticalPanel01.getWidget(1);
+		HorizontalPanel amesCheckBox = (HorizontalPanel) verticalPanel02.getWidget(0);
+		HorizontalPanel otherPanel = (HorizontalPanel) verticalPanel02.getWidget(1);
+		HorizontalPanel otherCheckBox = (HorizontalPanel) otherPanel.getWidget(0);
+		if (outputString.contains("NetCDF")) {
+			((CheckBox) netcdfCheckBox.getWidget(0)).setValue(true);
+		}
+		if (outputString.contains("HDF")) {
+			((CheckBox) hdfCheckBox.getWidget(0)).setValue(true);
+		}
+		if (outputString.contains("NASA/Ames")) {
+			((CheckBox) amesCheckBox.getWidget(0)).setValue(true);
+		}
+		if (outputString.contains("Other/")) {
+			((CheckBox) otherCheckBox.getWidget(0)).setValue(true);
+			allImages.get(0).setVisible(true);
+			allImages.get(0).setPixelSize(20, 12);
+			allTextBoxes.get(3).setVisible(true);
+			int index = outputString.indexOf("Other/");
+			allTextBoxes.get(3).setText(outputString.substring(index + 6));
+		}
+				
+		/// flag
+		allTextBoxes.get(4).setText(stringList.get(5));
+				
+		/// assumption
+		allTextBoxes.get(5).setText(stringList.get(6));
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of old the In-situ string finished");
+	}
+	
+	
+	/// read the string containing all QV xml code for in-situ and imagery data
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void readImageryCode_Old(String string) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the old Imagery string invoked");
+		ArrayList<ArrayList> imageryAllLists = Emc_eufar.qvImageryMap.get(0);
+		ArrayList<TextBoxBase> allTextBoxes = imageryAllLists.get(0);
+		ArrayList<ListBox> allListBoxes = imageryAllLists.get(2);
+		ArrayList<HorizontalPanel> allRadioButtons = imageryAllLists.get(1);
+		ArrayList<DateBox> allDateBoxes = imageryAllLists.get(3);
+
+		/// collect all substrings
+		ArrayList<String> stringList = new ArrayList<String>();
+		int indexStart = string.indexOf(":");
+		int indexEnd = string.indexOf("|", indexStart);
+		stringList.add(string.substring(indexStart + 2, indexEnd));
+		while (indexEnd >= 0) {
+			indexStart = string.indexOf(":", indexStart + 1);
+			indexEnd = string.indexOf("|", indexEnd + 1);
+			stringList.add(string.substring(indexStart + 2, indexEnd));
+		}
+		stringList.remove(stringList.size() - 1);
+		stringList.add(string.substring(indexStart + 2, string.length()));
+			
+		/// calibration information
+		allTextBoxes.get(0).setText(stringList.get(0));
+		allDateBoxes.get(0).setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(stringList.get(1)));
+		allDateBoxes.get(1).setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(stringList.get(2)));
+			
+		/// acquisition information
+		allTextBoxes.get(1).setText(stringList.get(3));
+		allTextBoxes.get(2).setText(stringList.get(4));
+		allTextBoxes.get(3).setText(stringList.get(5));
+		allTextBoxes.get(4).setText(stringList.get(6));
+		allTextBoxes.get(5).setText(stringList.get(7));
+		allTextBoxes.get(6).setText(stringList.get(8));
+			
+		/// processing information
+		if (stringList.get(9) != "") {
+			for (int i = 0; i < allListBoxes.get(1).getItemCount(); i++) {
+				if (stringList.get(9) == allListBoxes.get(1).getItemText(i)) {
+					allListBoxes.get(1).setSelectedIndex(i);
+					break;
+				}
+			}
+		}
+		Utilities.getPosition(stringList.get(10), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(0).getWidget(1));
+			
+		/// data quality layers
+		Utilities.getPosition(stringList.get(11), 
+				(HorizontalPanel) allRadioButtons.get(1).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(1).getWidget(1));
+		Utilities.getPosition(stringList.get(12), 
+				(HorizontalPanel) allRadioButtons.get(2).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(2).getWidget(1));
+		Utilities.getPosition(stringList.get(13), 
+				(HorizontalPanel) allRadioButtons.get(3).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(3).getWidget(1));
+		Utilities.getPosition(stringList.get(14), 
+				(HorizontalPanel) allRadioButtons.get(4).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(4).getWidget(1));
+		Utilities.getPosition(stringList.get(15), 
+				(HorizontalPanel) allRadioButtons.get(5).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(5).getWidget(1));
+		Utilities.getPosition(stringList.get(16), 
+				(HorizontalPanel) allRadioButtons.get(6).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(6).getWidget(1));
+		Utilities.getPosition(stringList.get(17), 
+				(HorizontalPanel) allRadioButtons.get(7).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(7).getWidget(1));
+		Utilities.getPosition(stringList.get(18), 
+				(HorizontalPanel) allRadioButtons.get(8).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(8).getWidget(1));
+		Utilities.getPosition(stringList.get(19), 
+				(HorizontalPanel) allRadioButtons.get(9).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(9).getWidget(1));
+		Utilities.getPosition(stringList.get(20), 
+				(HorizontalPanel) allRadioButtons.get(10).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(10).getWidget(1));
+		Utilities.getPosition(stringList.get(21), 
+				(HorizontalPanel) allRadioButtons.get(11).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(11).getWidget(1));
+		Utilities.getPosition(stringList.get(22), 
+				(HorizontalPanel) allRadioButtons.get(12).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(12).getWidget(1));
+		Utilities.getPosition(stringList.get(23), 
+				(HorizontalPanel) allRadioButtons.get(13).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(13).getWidget(1));
+		Utilities.getPosition(stringList.get(24), 
+				(HorizontalPanel) allRadioButtons.get(14).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(14).getWidget(1));
+		Utilities.getPosition(stringList.get(25), 
+				(HorizontalPanel) allRadioButtons.get(15).getWidget(0), 
+				(HorizontalPanel) allRadioButtons.get(15).getWidget(1));
+		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the old Imagery string finished");
 	}
 }

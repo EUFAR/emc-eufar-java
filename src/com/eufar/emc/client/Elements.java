@@ -9,14 +9,13 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
 
 public class Elements {
 	
-	public enum infoEnum{TEMPREF, CONDITION, LIMITATION, RESPORG, METADATA, AIRINSTRUMENT, AIRCRAFT};
+	public enum infoEnum{TEMPREF, CONDITION, LIMITATION, RESPORG, METADATA, AIRINSTRUMENT, AIRCRAFT, QVADDINSITUTAB, QVADDIMAGERYTAB};
 	
 	
 	// checkbox hack to align vertically text
@@ -42,12 +41,6 @@ public class Elements {
 		inlineLabel.setStyleName("checkBoxLabel");
 		horizontalPanel.add(box);
 		horizontalPanel.add(inlineLabel);
-		box.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				GuiModification.changeTarget(inlineLabel.getText());
-			}
-		});
 		return horizontalPanel;
 	}
 	
@@ -71,7 +64,9 @@ public class Elements {
 	
 	// create all the Info buttons in the different tabs
 	public static SimplePanel addInfoButton(final String context) {
-		final Image image = new Image("icons/info_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.info().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel infoButton = new SimplePanel(image);
 		infoButton.setPixelSize(25, 25);
 		infoButton.setStyleName("infoButton");
@@ -86,7 +81,9 @@ public class Elements {
 	
 	// add a new widget in the GUI based on user demand
 	public static SimplePanel plusButton(final String string) {
-		final Image image = new Image("icons/plus_icon_v2.png");
+		final Image image = new Image(Emc_eufar.resources.plus().getSafeUri());
+		image.setSize("21px","21px");
+		image.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 21px; width: 21px;");
 		final SimplePanel plusButton = new SimplePanel(image);
 		plusButton.setPixelSize(25, 25);
 		plusButton.setStyleName("infoButton");
@@ -97,10 +94,12 @@ public class Elements {
 					GuiModification.addRefPlus();
 					break;
 				case CONDITION:
-					GuiModification.addUsePlus(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst, Emc_eufar.useDelImage1);
+					GuiModification.addUsePlus(Emc_eufar.useConditionsAddTab, Emc_eufar.useConditionsLst, 
+							Emc_eufar.useCondCorrectLst, Emc_eufar.useDelImage1);
 					break;
 				case LIMITATION:
-					GuiModification.addUsePlus(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst, Emc_eufar.useDelImage2);
+					GuiModification.addUsePlus(Emc_eufar.useLimitationsAddTab, Emc_eufar.useLimitationsLst, 
+							Emc_eufar.useLimCorrectLst, Emc_eufar.useDelImage2);
 					break;
 				case RESPORG:
 					GuiModification.addOrgPlus();
@@ -119,6 +118,12 @@ public class Elements {
 						break;
 					}
 					GuiModification.addAircraftPlus();
+					break;
+				case QVADDINSITUTAB:
+					GuiModification.addQvTab("insitu");
+					break;
+				case QVADDIMAGERYTAB:
+					GuiModification.addQvTab("imagery");
 					break;
 				default:
 					break;

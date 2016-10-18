@@ -30,7 +30,8 @@ public class PopupMessages {
 	public enum infoEnum{IDTITLE, IDABSTRACT, IDTYPE, KEYWORDS, IDLOCATOR, IDIDENTIFIER, IDLANGUAGE, CATEGORIES, AIAIRCRAFT, AIINSTRUMENT, 
 		GILOCATION, GIBOX, GIUNIT, TRPUBLICATION, TRREVISION, TRCREATION, TRPHASE, AUCONDITIONS, AULIMITATIONS, ROPARTY, ROEMAIL, ROROLE, 
 		MMDATE, MMLANGUAGE, MMPARTY, QVLINEAGE1, QVLINEAGE2, QVLINEAGE3, QVLINEAGE4, QVLINEAGE5, QVLINEAGE6, QVLINEAGE7, QVLINEAGE8, 
-		QVLINEAGE9, QVLINEAGE10, QVLINEAGE11, QVLINEAGE12, QVLINEAGE13, QVLINEAGE14, QVLINEAGE15, QVLINEAGE16, QVLINEAGE17, QVLINEAGE18;}
+		QVLINEAGE9, QVLINEAGE10, QVLINEAGE11, QVLINEAGE12, QVLINEAGE13, QVLINEAGE14, QVLINEAGE15, QVLINEAGE16, QVLINEAGE17, QVLINEAGE18, 
+		QVLINEAGE19, QVLINEAGE20;}
 	
 	
 	// build and launch an About window with a dedicated text to present EMC
@@ -39,7 +40,8 @@ public class PopupMessages {
 		final DialogBox infoDialog = new DialogBox();
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
-		final Image image = new Image("icons/about_popup_icon.png");
+		final Image image = new Image(Emc_eufar.resources.aboutPopup().getSafeUri());
+		image.setSize("68px", "68px");
 		final HTML label = new HTML("The EUFAR Metadata Creator (EMC) " + emcVersion + " online version, was developed by "
 				+ "EUFAR using Eclipse " + eclipseVersion + ", Google Web Toolkit " + gwtVersion + " and Java " + javaVersion + ". The goal of "
 				+ "the EUFAR Metadata Creator is to produce metadata to facilitate data storage and "
@@ -76,10 +78,11 @@ public class PopupMessages {
 		final DialogBox infoDialog = new DialogBox();
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
-		final Image image = new Image("icons/inspire_popup_icon.png");
-		final HTML label = new HTML("INSPIRE is 'an European Union initiative to establish an infrastructure for spatial information in "
+		final Image image = new Image(Emc_eufar.resources.inspirePopup().getSafeUri());
+		image.setSize("68px", "68px");
+		final HTML label = new HTML("INSPIRE is <i>an European Union initiative to establish an infrastructure for spatial information in "
 				+ "Europe that is geared to help to make spatial or geographical information more accessible and interoperable for a wide "
-				+ "range of purposes supporting sustainable development.'<p>The INSPIRE directive lays down a general framework for a "
+				+ "range of purposes supporting sustainable development.</i><p>The INSPIRE directive lays down a general framework for a "
 				+ "Spatial Data Infrastructure (SDI) for the purposes of European Community environmental policies and policies or "
 				+ "activities which may have an impact on the environment. The INSPIRE Directive entered into force on 15 May 2007.</p><p>"
 				+ "INSPIRE is based on the infrastructures for spatial information established and operated by the member states of the "
@@ -95,7 +98,7 @@ public class PopupMessages {
 				+ "; color:#0000ff;\">https://en.wikipedia.org/wiki/Infrastructure_for_Spatial_Information_in_the_Eu ropean_Community</a>)"
 				+ "</p><p>Link to the INSPIRE regulation: <a href=http://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32008R1205&"
 				+ "from=EN target='_blank'><span style=\" text-decoration: underline; color:#0000ff;\">http://eur-lex.europa.eu/legal-content"
-				+ "/EN/TXT/PDF/?uri=CELEX:32008R1205&from=EN</a></p><p>Link to the INSPIRE website: <a href=http://inspire.ec.europa.eu/index"
+				+ "/EN/TXT/PDF/?uri=CELEX:32008 R1205&from=EN</a></p><p>Link to the INSPIRE website: <a href=http://inspire.ec.europa.eu/index"
 				+ ".cfm target='_blank'><span style=\" text-decoration: underline; color:#0000ff;\">http://inspire.ec.europa.eu/index.cfm</a>"
 				+ "</p>");
 		final Button button = new Button("Ok", new ClickHandler() {			
@@ -132,7 +135,8 @@ public class PopupMessages {
 				infoDialog.hide();
 			}
 		});
-		final Image image = new Image("icons/info_popup_icon.png");
+		final Image image = new Image(Emc_eufar.resources.infoPopup().getSafeUri());
+		image.setSize("68px", "68px");
 		final Label label = addInfoText(context);
 		infoDialog.setGlassEnabled(true);
 		horizontalPanel01.add(image);
@@ -157,7 +161,8 @@ public class PopupMessages {
 		final ScrollPanel scrollPanel = new ScrollPanel();
 		final VerticalPanel verticalPanel = new VerticalPanel();
 		final HorizontalPanel horizontalPanel = new HorizontalPanel();
-		final Image image = new Image("icons/changelog_popup_icon.png");
+		final Image image = new Image(Emc_eufar.resources.changelogPopup().getSafeUri());
+		image.setSize("68px", "68px");
 		final HTML label = new HTML(logText());
 		final Button okButton = new Button("Ok", new ClickHandler() {			
 			@Override
@@ -189,8 +194,9 @@ public class PopupMessages {
 		final DialogBox aboutDialog = new DialogBox();
 		final VerticalPanel verticalPanel01 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
-		final Image image = new Image("icons/warning_popup_icon.png");
-		final HTML label = new HTML("EMC has detected that you are using Internet Explorer.<br><br>EMC has been deeply tested on Firefox, "
+		final Image image = new Image(Emc_eufar.resources.warningPopup().getSafeUri());
+		image.setSize("68px", "68px");
+		final HTML label = new HTML("The EMC has detected that you are using Internet Explorer.<br><br>EMC has been deeply tested on Firefox, "
 				+ "Internet Explorer, Chrome and Opera. However, it presents serious compatibility issues with Internet Explorer, which prevent "
 				+ "a proper use of the following functions: save and open a document.<br><br>We strongly recommend "
 				+ "that you use a different browser to ensure the proper functioning of EMC.");
@@ -217,6 +223,43 @@ public class PopupMessages {
 	}
 	
 	
+	// Popup to warn the user with Internet Explorer
+	public static void oldQVPanel() {
+		final DialogBox infoDialog = new DialogBox();
+		final VerticalPanel verticalPanel01 = new VerticalPanel();
+		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
+		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
+		final Image image = new Image(Emc_eufar.resources.warningPopup().getSafeUri());
+		image.setSize("68px", "68px");
+		final HTML label = new HTML("The EMC has detected that the Quality and Validity section of your XML file has been produced with an old "
+				+ "version of the EMC. Since the version 1.2.1, the XML code for the Quality and Validity section has been replaced to take "
+				+ "into account multiple instruments and multiple forms.<p> All Quality and Validity data in the XML file have been loaded "
+				+ "into a new form. In order to convert the old XML code to the new one, <b>after selecting an instrument in your "
+				+ "Quality and Validity form</b>, please save your document to a new file.<p>");
+		final Button buttonOk = new Button("Ok", new ClickHandler() {			
+			@Override
+			public void onClick(ClickEvent event) {
+				infoDialog.hide();
+			}
+		});
+		infoDialog.setGlassEnabled(true);
+		horizontalPanel01.add(image);
+		horizontalPanel01.add(label);
+		verticalPanel01.add(horizontalPanel01);
+		verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		verticalPanel01.add(horizontalPanel02);
+		horizontalPanel02.add(buttonOk);
+		label.setStyleName("infoExplorerText");
+		buttonOk.addStyleName("infoExplorerButton");
+		infoDialog.setStyleName("infoExplorerPanel");
+		infoDialog.add(verticalPanel01);
+		infoDialog.setSize("500px","180px");
+		infoDialog.setModal(true);
+		infoDialog.center();
+		infoDialog.show();
+	}
+	
+	
 	// save the current work in an xml file (a new or existing one)
 	public static void saveFile(final String string) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Saving function invoked...");
@@ -226,10 +269,11 @@ public class PopupMessages {
 		final VerticalPanel verticalPanel03 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-		final Image image = new Image("icons/save_popup_icon.png");
+		final Image image = new Image(Emc_eufar.resources.savePopup().getSafeUri());
+		image.setSize("68px", "68px");
 		final TextArea xmlTree = new TextArea();
 		final Label label = new HTML("Please enter a name to save the XML file. For a EUFAR project, the name should start with "
-				+ "<span style=\" font-weight:600; color:#c80000;\">Project-acronym_</span>.");
+				+ "<span style=\" font-weight:600; color:#ED1C24;\">Project-acronym_</span>.");
 		final TextBox fileName = new TextBox();
 		final TextBox filebox = new TextBox();
 		final FormPanel myForm = new FormPanel();
@@ -249,6 +293,7 @@ public class PopupMessages {
 					Emc_eufar.rootLogger.log(Level.INFO, "No filename entered...");
 					return;
 				} else {
+					Emc_eufar.myFileName = fileName.getText();
 					if (!fileName.getText().toLowerCase().endsWith(".xml")) {
 						Emc_eufar.myFileName = Emc_eufar.myFileName + ".xml";
 					}
@@ -268,6 +313,7 @@ public class PopupMessages {
 						Emc_eufar.rootLogger.log(Level.INFO, "No filename entered...");
 						return;
 					} else {
+						Emc_eufar.myFileName = fileName.getText();
 						if (!fileName.getText().toLowerCase().endsWith(".xml")) {
 							Emc_eufar.myFileName = Emc_eufar.myFileName + ".xml";
 						}
@@ -289,7 +335,6 @@ public class PopupMessages {
 		xmlTree.setName("xmltree");
 		verticalPanel01.add(xmlTree);
 		verticalPanel02.add(label);
-		fileName.setText(Emc_eufar.myFileName);
 		verticalPanel02.add(fileName);
 		if (Emc_eufar.myFileName == "" || Emc_eufar.myFileName == ".xml") {
 			fileName.setText(Emc_eufar.identIdentifierBox.getText());
@@ -329,7 +374,8 @@ public class PopupMessages {
 			final VerticalPanel verticalPanel02 = new VerticalPanel();
 			final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 			final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-			final Image image = new Image("icons/warning_popup_icon.png");
+			final Image image = new Image(Emc_eufar.resources.warningPopup().getSafeUri());
+			image.setSize("68px", "68px");
 			final Label label = new Label("The actual document has been modified. Changes will be lost if the document is not saved.");
 			final Label label2 = new Label("Do you want to save your changes?");
 			final Button saveButton = new Button("Save", new ClickHandler() {			
@@ -388,9 +434,19 @@ public class PopupMessages {
 		final VerticalPanel verticalPanel02 = new VerticalPanel();
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
-		final Image image = new Image("icons/open_popup_icon.png");
+		final Image image = new Image(Emc_eufar.resources.openPopup().getSafeUri());
+		image.setSize("68px", "68px");
 		final Label label = new Label("Please select a file.");
-		final Button submitButton = new Button("Open", new ClickHandler() {			
+		final Button cancelButton = new Button("Cancel/Close");
+		final Button submitButton = new Button("Open");
+		cancelButton.addClickHandler(new ClickHandler() {			
+			@Override
+			public void onClick(ClickEvent event) {
+				Emc_eufar.rootLogger.log(Level.INFO, "Load of a file canceled");
+				myOpenDialog.hide();
+			}
+		});
+		submitButton.addClickHandler(new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
 				if (myFileUpload.getFilename().length() == 0) {
@@ -398,16 +454,14 @@ public class PopupMessages {
 					return;
 				} else {
 					Emc_eufar.myFileName = myFileUpload.getFilename();
+					if (Emc_eufar.myFileName.contains("C:\\fakepath\\")) {
+						Emc_eufar.myFileName = Emc_eufar.myFileName.substring(12);
+					} else if (Emc_eufar.myFileName.contains("C:\\fake_path\\")) {
+						Emc_eufar.myFileName = Emc_eufar.myFileName.substring(13);
+					}
 					myUploadForm.submit();
 					Utilities.clearFields();
 				}
-			}
-		});
-		final Button cancelButton = new Button("Cancel/Close", new ClickHandler() {			
-			@Override
-			public void onClick(ClickEvent event) {
-				Emc_eufar.rootLogger.log(Level.INFO, "Load of a file canceled");
-				myOpenDialog.hide();
 			}
 		});
 		myOpenDialog.setGlassEnabled(true);
@@ -469,11 +523,12 @@ public class PopupMessages {
 		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
 		final HorizontalPanel horizontalPanel02 = new HorizontalPanel();
 		final HTML label = new HTML("All mandatory fields have not been filled in, or have been incorrectly filled in. "
-				+ "You can save your file if you want to complete/correct it later. All fields which have not been completely filled in are "
-				+ "indicated in <span style=\" font-weight:600; color:#c80000;\">red</span>, and in <span style=\" font-weight:600; "
-				+ "color:#0000c8;\">blue</span> for those incorrectly filled in. <span style=\" font-weight:600;\">Do not use an "
+				+ "You can save your file if you want to complete/correct it later.<p>All fields which have not been completely filled in are "
+				+ "indicated in <span style=\" font-weight:600; color:#ED1C24;\">red</span>, and in <span style=\" font-weight:600; "
+				+ "color:rgb(0,0,200);\">blue</span> for those incorrectly filled in.</p><span style=\" font-weight:600;\">Do not use an "
 				+ "incomplete/incorrect xml file for storage and/or sql queries.</span>");
-		final Image image = new Image("icons/warning_popup_icon.png");
+		final Image image = new Image(Emc_eufar.resources.warningPopup().getSafeUri());
+		image.setSize("68px", "68px");
 		final Button buttonOk = new Button("Save", new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -530,8 +585,8 @@ public class PopupMessages {
 			break;
 		case IDIDENTIFIER:
 			infoLabel.setHTML("This element uniquely identifying the project and it is generally formed with mandatory and/or optional "
-					+ "string codes. In a EUFAR project, it is available in the EUFAR TA application form (<b>Project acronym</b>).</p><p><u>"
-					+ "Example:</u> SMALLPROJECT");
+					+ "string codes. In a EUFAR project, it is available in the EUFAR TA application form (<b>Project acronym</b>). The "
+					+ "project acronym is also used as a part of the filename once the document is saved.</p><p><u>Example:</u> SMALLPROJECT");
 			break;
 		case IDLANGUAGE:
 			infoLabel.setHTML("The language(s) used within the resource. In a EUFAR project, English is always selected and should not be "
@@ -539,8 +594,8 @@ public class PopupMessages {
 			break;
 		case CATEGORIES:
 			infoLabel.setHTML("The topic category is a high-level classification scheme to facilitate the grouping and topic-based search of "
-					+ "available spatial data resources. This item corresponds to the Main <b>Scientific Field / specific discipline</b> in the "
-					+ "EUFAR Ta application form.<p><u>Example:</u> Environment.</p>");
+					+ "available spatial data resources.<p></p>");//This item corresponds to the Main <b>Scientific Field / specific discipline</b> in the "
+					//+ "EUFAR TA application form.<p><u>Example:</u> Environment.</p>");
 			break;
 		case KEYWORDS:
 			infoLabel.setHTML("The keyword value is a commonly used word to describe the subject. The keyword scheme is from NASA/Global "
@@ -548,14 +603,13 @@ public class PopupMessages {
 			break;
 		case AIAIRCRAFT:
 			infoLabel.setHTML("The selection of an aircraft can help to improve storage and queries in a database. Please select here the "
-					+ "aircraft used to acquire and prepare the actual data and metadata. If multiple aircraft were used during the campaign, "
-					+ "click on the '+' button once an aircraft has been selected to add it to the list.<p><u>Example:</u> AWI - POLAR 5.</p>");
+					+ "aircraft used to acquire and prepare the actual data and metadata, and click on the 'Add this aircraft to the list' "
+					+ "button to add it to the list. It's possible to add multiple aircraft.<p><u>Example:</u> AWI - POLAR 5.</p>");
 			break;
 		case AIINSTRUMENT:
 			infoLabel.setHTML("The selection of an instrument, or multiple instruments, can help to improve storage and queries in a database. "
-					+ "Please select here the instrument(s) used to acquire and prepare the actual data and metadata, and click on the '+' icon "
-					+ "to add it into the list.<p><u>Example:</u> APEX."
-					+ "</p>");
+					+ "Please select here the instrument(s) used to acquire and prepare the actual data and metadata, and click on the 'Add "
+					+ "this instrument to the list' icon to add it into the list.<p><u>Example:</u> APEX.</p>");
 			break;
 		case GILOCATION:
 			infoLabel.setHTML("This is the name of the formal location covered by the dataset. It is available in the EUFAR TA application "
@@ -579,128 +633,141 @@ public class PopupMessages {
 					+ "(N8-DB) should be used and set <b>before</b> the current date.<p><u>Example:</u> 2015/07/12.</p>");
 			break;
 		case TRREVISION:
-			infoLabel.setHTML("This is the date of last revision of the resource if available.");
+			infoLabel.setHTML("This is the date of last revision of the resource if available.<p><u>Example:</u> 2015/07/11.</p>");
 			break;
 		case TRCREATION:
 			infoLabel.setHTML("This is the date of creation of the resource. In a EUFAR project, the date should be set to the date of data "
 					+ "processing.<p><u>Example:</u> 2015/07/11.</p>");
 			break;
 		case TRPHASE:
-			infoLabel.setHTML("<p>The temporal extent defines the time period covered by the data acquisition. It can be composed of multiple "
-					+ "phases if necessary.</p><p><u>Example:</u> &nbsp &nbsp 2015/07/01 - 2015/07/03</p><p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp"
+			infoLabel.setHTML("The temporal extent defines the time period covered by the airborne campaign. It can be composed of multiple "
+					+ "phases if necessary.<p><u>Example:</u> &nbsp &nbsp 2015/07/01 - 2015/07/03</p><p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp"
 					+ "&nbsp &nbsp &nbsp &nbsp 2015/07/05 - 2015/07/07</p>");
 			break;
 		case AUCONDITIONS:
-			infoLabel.setHTML("<p>This metadata element defines the conditions for access and use of spatial data sets. In a EUFAR project, this "
-					+ "element has already been filled in in agreement with the EUFAR Consortium Agreement.</p>");
+			infoLabel.setHTML("This metadata element defines the conditions for access and use of spatial data sets. In a EUFAR project, this "
+					+ "element has already been filled in in agreement with the EUFAR Consortium Agreement.<p></p>");
 			break;
 		case AULIMITATIONS:
-			infoLabel.setHTML("<p>This metadata element defines the limitations for public access to spatial data sets and the reason for that. "
-					+ "In a EUFAR project, this element has already been filled in in agreement with the EUFAR Consortium Agreement.</p>");
+			infoLabel.setHTML("This metadata element defines the limitations for public access to spatial data sets and the reason for that. "
+					+ "In a EUFAR project, this element has already been filled in in agreement with the EUFAR Consortium Agreement.<p></p>");
 			break;
 		case ROPARTY:
-			infoLabel.setHTML("<p>This is the description of the organisation responsible for the production of the resource. The description "
-					+ "shall include the name of the organisation.</p><p><u>Example:</u> SAFIRE</p>");
+			infoLabel.setHTML("This is the description of the organisation responsible for the production of the resource. The description "
+					+ "shall include the name of the organisation.<p><u>Example:</u> SAFIRE</p>");
 			break;
 		case ROEMAIL:
-			infoLabel.setHTML("<p>This is the email of the point of contact.</p><p><u>Example:</u> john.doe@email.com.</p>");
+			infoLabel.setHTML("This is the email of the point of contact.<p><u>Example:</u> john.doe@email.com.</p>");
 			break;
 		case ROROLE:
-			infoLabel.setHTML("<p>This is the role of the responsible organisation. In a EUFAR project, the value is <b>Point of Contact</b>."
-					+ "</p><p><u>Example:</u> Point of Contact.</p>");
+			infoLabel.setHTML("This is the role of the responsible organisation. In a EUFAR project, the value is <b>Point of Contact</b>."
+					+ "<p><u>Example:</u> Point of Contact.</p>");
 			break;
 		case MMDATE:
-			infoLabel.setHTML("<p>The date which specifies when the metadata record was created or updated.</p><p><u>Example:</u> 2015/07/14.</p>");
+			infoLabel.setHTML("The date which specifies when the metadata record was created or updated.<p><u>Example:</u> 2015/07/14.</p>");
 			break;
 		case MMLANGUAGE:
-			infoLabel.setHTML("<p>This is the language in which the metadata elements are expressed. In a EUFAR project, English is always "
-					+ "selected and should not be changed.</p><p><u>Example:</u> English.</p>");
+			infoLabel.setHTML("This is the language in which the metadata elements are expressed. In a EUFAR project, English is always "
+					+ "selected and should not be changed.<p><u>Example:</u> English.</p>");
 			break;
 		case MMPARTY:
-			infoLabel.setHTML("<p>This is the name and the contact e-mail of the party responsible for the metadata.</p><p><u>Example:</u> SAFIRE "
+			infoLabel.setHTML("This is the name and the contact e-mail of the party responsible for the metadata.<p><u>Example:</u> SAFIRE "
 					+ "or John Doe</p>");
 			break;
 		case QVLINEAGE1:
-			infoLabel.setHTML("<p>This is a statement on process history and/or overall quality of the spatial data set. The user has to fill in "
-					+ "the requested fields. Once it has been done, EMC will format the inputs as free text to conform to INSPIRE standard.</p>");
+			infoLabel.setHTML("This is a statement on process history and/or overall quality of the spatial data set. For each data file "
+					+ "of the dataset, a Quality and Validity form must be completed. <p>1 - Click on the corresponding domain to add a new "
+					+ "corresponding form.</p><p>2 - Then select in the dedicated list an instrument to link to this form (one or more instr"
+					+ "uments have to be entered in the 'Aircraft and Instrument' section).</p><p>3 - Fill in the form.</p><p>Once "
+					+ "a form has been created, you have the possibility to copy/past the form to a new or an existing tab, and you have the possibility "
+					+ "to delete it. When saving the document, EMC will format the inputs as free text to conform to INSPIRE standard.</p>");
 			break;
 		case QVLINEAGE2:
-			infoLabel.setHTML("<p>Those items are a link to the description of all procedures, constants and materials applied to raw digital "
-					+ "data for calibration purpose. A free text description is also accepted for each item if necessary.</p><p><u>Example:</u>"
+			infoLabel.setHTML("Those items are a link to the description of all procedures, constants and materials applied to raw digital "
+					+ "data for calibration purpose. A free text description is also accepted for each item if necessary.<p><u>Example:</u>"
 					+ " <b>http://www.operator.com/path/pa th2/document_to_explain_procedures.html</b> or <b>We proceed this way and this way to "
 					+ "calibrate the instrument / The calibration constants come from this book and this publication</b>.</p>");
 			break;
 		case QVLINEAGE3:
-			infoLabel.setHTML("<p>Once the data has been processed, the final output format. Multiple entries are possible. If 'Other' is"
-					+ "selected for free text, the characters ';', '|' and '/' are prohibited.</p><p><u>Example:</u> NetCDF.</p>");
+			infoLabel.setHTML("Once the data has been processed, the final output format. Multiple entries are possible. If 'Other' is "
+					+ "selected for free text, the following characters are prohibited: <span style=\" font-weight:600; color:#ED1C24;\">;"
+					+ "  |  [  ]  /</span>.<p><u>Example:</u> NetCDF.</p>");
 			break;
 		case QVLINEAGE4:
-			infoLabel.setHTML("<p>The Quality and Validity section needs a brief description, or a link to the document, of the operator's "
-					+ "standard procedures explaining the quality-control flagging applied to individual data points.</p><p><u>Example:</u> <b>"
+			infoLabel.setHTML("The Quality and Validity section needs a brief description, or a link to the document, of the operator's "
+					+ "standard procedures explaining the quality-control flagging applied to individual data points.<p><u>Example:</u> <b>"
 					+ "http://www.operator.com/path/p ath2/document_to_explain_flagging.html</b> or <b>Each point has a certain number of flag "
 					+ "to say if the measurement is allright or not</b>.</p>");
 			break;
 		case QVLINEAGE5:
-			infoLabel.setHTML("<p>What are the empirical assumptions, made when processing the data ? Please give references if possible.</p><p>"
+			infoLabel.setHTML("What are the empirical assumptions, made when processing the data ? Please give references if possible.<p>"
 					+ "<u>Example:</u> aerosol refractive index, ice crystal bulk density.</p>");
 			break;
 		case QVLINEAGE6:
-			infoLabel.setHTML("<p>In case of issues with the sensor calibration, it is important to track back the calibration cycle.</p>");	
+			infoLabel.setHTML("In case of issues with the sensor calibration, it is important to track back the calibration cycle.<p></p>");	
 			break;
 		case QVLINEAGE7:
-			infoLabel.setHTML("<p>The setting up of the spectral mode can be changed with some sensor systems.</p>");	
+			infoLabel.setHTML("The setting up of the spectral mode can be changed with some sensor systems.<p></p>");	
 			break;	
 		case QVLINEAGE8:
-			infoLabel.setHTML("<p>As basic processing information, it is important to know if the DC was already corrected, or if this has to be "
-					+ "done before all subsequent information retrieval.</p>");	
+			infoLabel.setHTML("As basic processing information, it is important to know if the DC was already corrected, or if this has to be "
+					+ "done before all subsequent information retrieval.<p></p>");	
 			break;
 
 		case QVLINEAGE9:
-			infoLabel.setHTML("<p>Some data Quality Indicators can be assigned to single pixels and can therefore provided as Quality Layers in "
-					+ "a spatial dataset.</p>");	
+			infoLabel.setHTML("Some data Quality Indicators can be assigned to single pixels and can therefore provided as Quality Layers in "
+					+ "a spatial dataset.<p></p>");	
 			break;	
 		case QVLINEAGE10:
-			infoLabel.setHTML("<p>This mask includes all pixels for which corrections where carried out in one or more bands.</p>");	
+			infoLabel.setHTML("This mask includes all pixels for which corrections where carried out in one or more bands.<p></p>");	
 			break;
 		case QVLINEAGE11:
-			infoLabel.setHTML("<p>All pixels where defects were detected, but which were not corrected, are included in this bad pixel mask.</p>");	
+			infoLabel.setHTML("All pixels where defects were detected, but which were not corrected, are included in this bad pixel mask.<p></p>");	
 			break;
 		case QVLINEAGE12:
-			infoLabel.setHTML("<p>Saturation occurs when the sensed and amplified signal exceeds the dynamic range of the detector.</p>");	
+			infoLabel.setHTML("Saturation occurs when the sensed and amplified signal exceeds the dynamic range of the detector.<p></p>");	
 			break;
 		case QVLINEAGE13:
-			infoLabel.setHTML("<p>The quality of pixels, spatially or spectrally neighbouring a saturated pixel, can be reduced for sensor "
-					+ "designs based on frame-transfer CCDs (e.g., AISA Eagle). Thus these pixels are detected and included in a separate mask."
-					+ "</p>");	
+			infoLabel.setHTML("The quality of pixels, spatially or spectrally neighbouring a saturated pixel, can be reduced for sensor "
+					+ "designs based on frame-transfer CCDs (e.g., AISA Eagle). Thus these pixels are detected and included in a separate m"
+					+ "ask.<p></p>");	
 			break;
 		case QVLINEAGE14:
-			infoLabel.setHTML("<p>Position information might include data gaps, errors and increased uncertainties related to the reception of "
+			infoLabel.setHTML("Position information might include data gaps, errors and increased uncertainties related to the reception of "
 					+ "a small number of GPS satellites, or rapid changes in case of turbulent flight conditions. When geocoding, the "
-					+ "corresponding scan lines might have an error or an increased uncertainty in geo-location.</p>");	
+					+ "corresponding scan lines might have an error or an increased uncertainty in geo-location.<p></p>");	
 			break;
 		case QVLINEAGE15:
-			infoLabel.setHTML("<p>In certain cases, the parameters required for an accurate atmospheric correction cannot be estimated for all "
-					+ "pixels in an image. Such critical pixels should be flagged.</p>");	
+			infoLabel.setHTML("In certain cases, the parameters required for an accurate atmospheric correction cannot be estimated for all "
+					+ "pixels in an image. Such critical pixels should be flagged.<p></p>");	
 			break;
 		case QVLINEAGE16:
-			infoLabel.setHTML("<p>One of the limiting factors, regarding processing quality, is the accuracy and spatial resolution of the DEM. "
+			infoLabel.setHTML("One of the limiting factors, regarding processing quality, is the accuracy and spatial resolution of the DEM. "
 					+ "Therefore one can expect an increased uncertainty wherever the terrain is rough. Thus the local variability of the "
 					+ "terrain height is calculated in a <b>moving window</b> approach, and critical areas are detected and flagged in this "
-					+ "quality layer.</p>");	
+					+ "quality layer.<p></p>");	
 			break;
 		case QVLINEAGE17:
-			infoLabel.setHTML("<p>In addition to the increased DEM uncertainty in rough terrain, areas with high slope values and/or "
+			infoLabel.setHTML("In addition to the increased DEM uncertainty in rough terrain, areas with high slope values and/or "
 					+ "unfavourable local illumination (large solar zenith angles) are likely affected by an increased uncertainty for the "
-					+ "terrain correction.</p>");	
+					+ "terrain correction.<p></p>");	
 			break;
 		case QVLINEAGE18:
-			infoLabel.setHTML("<p>Regarding the strength of the BRDF effect and the related accuracy of BRDF correction, critical conditions "
+			infoLabel.setHTML("Regarding the strength of the BRDF effect and the related accuracy of BRDF correction, critical conditions "
 					+ "should be addressed. The strength of the BRDF effect is a function of viewing / illumination geometry, terrain as well "
-					+ "as land cover. Therefore strongly affected areas can be detected based on these parameters and are subsequently flagged."
-					+ "</p>");	
+					+ "as land cover. Therefore strongly affected areas can be detected based on these parameters and are subsequently flag"
+					+ "ged.<p></p>");	
+			break;
+		case QVLINEAGE19:
+			infoLabel.setHTML("With the tab controls, you have the possibility to copy/paste any information entered in the current form to "
+					+ "a new form or another existing form.<p></p>");
+			break;
+		case QVLINEAGE20:
+			infoLabel.setHTML("Each form has to be linked to an instrument. All instruments selected in the 'Aircraft and Instrument' section"
+					+ " will be displayed here.<p>Use the list on the left to select an instrument.</p>");
 			break;
 		default:
-			infoLabel.setHTML("No information for this item");
+			infoLabel.setHTML("No information for this item.<p></p>");
 			break;
 		}
 		infoLabel.setWordWrap(true);
@@ -712,10 +779,35 @@ public class PopupMessages {
 	private static String logText() {
 		String string = new String(""
 				+ "<b><u>CHANGELOG</u></b><br><br>"
-				+ "<u>TESTED ON:</u><ul><li>Firefox 31.5.3, 38.0.1, 39, 40, 45.0.1 (succeeded)</li><li>Chrome 44 "
+				+ "<u>TESTED ON:</u><ul><li>Firefox 31, 38, 39, 40, 45, 49 (succeeded)</li><li>Chrome 44, 53 "
 				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
-				+ "(succeeded)</li><li>Opera 30 (succeeded)</li></ul><br>"
+				+ "(succeeded)</li><li>Opera 30, 40 (succeeded)</li><li>Vivaldi 1.4</li></ul><br>"
 
+				+ "<b><u>October 06 2016, Release version 1.3.0 [ONLINE]</u></b><br>A new 'Quality and Validity' section has been introduced"
+				+ " to take into account multiple instruments and multiple data. Each QV form has to be linked to one instrument. Old QV xml"
+				+ " code can still be read but EMC will ask the user to save again his/her document.<br><ul style='list-style-type:none'><li>"
+				+ "FIXED:<ul><li>few style problems.</li><li>if a user try to add the same aircraft twice, the function crashes. It has been "
+				+ "fixed.</li><li>a user could enter a personal aircraft or instrument even if one of the corresponding textboxes was empty. "
+				+ "It has been fixed.</li><li>few mistakes in QV xml code have been fixed.- if a file is opened more than one time, one just "
+				+ "after the other, and then saved, EMC crashes during saving. It has been fixed.</li><li>because of differences between Tomcat"
+				+ " and Jetty for exception handling, few exception handlings have been doubled to catch Tomcat and Jetty exceptions.</li><li>"
+				+ "an issue has been corrected in the function to read QV data for insitu data.</li><li>if a textbox is empty, the tab number "
+				+ "6 is always in red. It has been fixed.</li><li>if 'Other' is selected in the Aircraft list, during checking, textboxes for "
+				+ "'Other' instrument appear. It has been fixed.</li><li>once checked, and if text is present, textboxes for aircraft and "
+				+ "instrument weren't displayed properly.</li><li>an issue with the navigation between tabs has been fixed.- because of "
+				+ "security policy of few browsers, a 'fakepath' string is present in the filename when opening a file. It has been fixed."
+				+ "</li><li> fixed an issue with the size of the Earth globe in the 'Geographic Information' section.</li></ul></li></ul>"
+				+ "<ul style='list-style-type:none'>"
+				+ "<li>MODIFIED:<ul><li>the 'Aircraft & Instrument' section has been modified to make the presentation less heavy.</li><li>the"
+				+ " checking function has been re-designed to simplify the process to check each element, it has lowered the time needed to "
+				+ "check each element.</li><li>info text for output format in the Insitu QV section has been modified for better readability."
+				+ "</li><li>almost all icons have been moved to a Resources file for better performance.</li><li>almost all icons have been "
+				+ "converted to SVG format for better rendering with high-resolution screens.</li><li>all aircraft pictures have been moved to"
+				+ " a Resources file for better performance.</li></ul></li></ul><ul style='list-style-type:none'>"
+				+ "<li>ADDED:<ul><li>functions have been added to read"
+				+ " Atmospheric and Remote sensing Quality layers from xml code.</li><li>functions have been added to format inputs in Quality"
+				+ " and Validity section to xml code.</li><li>new listbox has been added to each QV form to help the user, if necessary, to "
+				+ "copy/paste inputs from one form to a new one or another one.</li></ul></li></ul><br>"
 				+ "<b><u>August 24 2016, Release version 1.2.1 [ONLINE]</u></b><br>The 'Quality and Validity' section is finally present in "
 				+ "EMC, few textboxes have been modified to handle a full dataset. The style used in EMC has been corrected to be in accorda"
 				+ "nce with ASMM.<br><ul style='list-style-type:none'><li>ADDED:<ul><li>a help page has been introduced (first draft).</li>"

@@ -1,6 +1,5 @@
 package com.eufar.emc.client;
 
-
 import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class Utilities {
 	}
 	
 	
-	// populate easily each List Box
+	// populate easily each List Box - 1
 	public static void populateListBox(ListBox listBox, ArrayList<String> list, int defaultItem) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Populating " + listBox.getName() + " in progress...");
 		for (int i=0; i<list.size(); i++) {
@@ -59,6 +58,7 @@ public class Utilities {
 	}
 	
 	
+	// populate easily each List Box - 2
 	public static void populateListBox(ListBox listBox, HashMap<String, String> map, int defaultItem) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Populating " + listBox.getName() + " in progress...");
 		ArrayList<String> test = new ArrayList<String>();
@@ -88,13 +88,23 @@ public class Utilities {
 	}
 	
 	
-	// read position of RadioButton in XML file
+	// read position of RadioButton in XML file - 1
 	public static void getPosition(final String string, final String subString, final HorizontalPanel panel01, final HorizontalPanel panel02) {
 		int linkIndex01 = string.indexOf(subString);
 		int linkIndex02 = string.indexOf("|", linkIndex01 + subString.length());
 		if (string.substring(linkIndex01 + subString.length(), linkIndex02) == "yes") {
 			((CheckBox) panel01.getWidget(0)).setValue(true);
 		} else if (string.substring(linkIndex01 + subString.length(), linkIndex02) == "no") {
+			((CheckBox) panel02.getWidget(0)).setValue(true);
+		}
+	}
+	
+	
+	// read position of RadioButton in XML file - 2
+	public static void getPosition(final String string, final HorizontalPanel panel01, final HorizontalPanel panel02) {
+		if (string == "yes") {
+			((CheckBox) panel01.getWidget(0)).setValue(true);
+		} else if (string == "no") {
 			((CheckBox) panel02.getWidget(0)).setValue(true);
 		}
 	}
@@ -143,26 +153,38 @@ public class Utilities {
 	/// put all labels and text to default color and position
 	public static void runCheckDefault() {
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display before check in progress...");
-		boolean otherFormatState = Emc_eufar.insituOtherBox.isVisible();
 		boolean otherInstrumentState = Emc_eufar.airInstNameLab.isVisible();
+		boolean otherAircraftState = Emc_eufar.airTypeBox.isVisible();
+		boolean labelAircraftState = Emc_eufar.airManufacturerInfo.isVisible();
+		boolean otherUnitState = Emc_eufar.geoUnitLab.isVisible();
+		ArrayList<TextBoxBase> allHiddenTextBoxes = new ArrayList<TextBoxBase>();
+		ArrayList<ListBox> allHiddenListBoxes = new ArrayList<ListBox>();
+		for (int i = 0; i < Emc_eufar.allTextBoxes.size(); i++) {
+			if (!Emc_eufar.allTextBoxes.get(i).isVisible()) {
+				allHiddenTextBoxes.add(Emc_eufar.allTextBoxes.get(i));
+			}
+		}
+		for (int i = 0; i < Emc_eufar.allListBoxes.size(); i++) {
+			if (!Emc_eufar.allListBoxes.get(i).isVisible()) {
+				allHiddenListBoxes.add(Emc_eufar.allListBoxes.get(i));
+			}
+		}
 		List<Label> allLabel = $("*", Emc_eufar.subDockPanel).widgets(Label.class);
-		List<TextBoxBase> allBox = $("*", Emc_eufar.subDockPanel).widgets(TextBoxBase.class);
-		List<DateBox> allDateBox = $("*", Emc_eufar.subDockPanel).widgets(DateBox.class);
 		List<ListBox> allListBox = $("*", Emc_eufar.subDockPanel).widgets(ListBox.class);
 		for (int i = 0; i < allLabel.size(); i++) {
 			String style = allLabel.get(i).getStylePrimaryName();
 			allLabel.get(i).getElement().setAttribute("style","");
 			allLabel.get(i).setStyleName(style);
 		}
-		for (int i = 0; i < allBox.size(); i++) {
-			String style = allBox.get(i).getStylePrimaryName();
-			allBox.get(i).getElement().setAttribute("style","");
-			allBox.get(i).setStyleName(style);
+		for (int i = 0; i < Emc_eufar.allTextBoxes.size(); i++) {
+			String style = Emc_eufar.allTextBoxes.get(i).getStylePrimaryName();
+			Emc_eufar.allTextBoxes.get(i).getElement().setAttribute("style","");
+			Emc_eufar.allTextBoxes.get(i).setStyleName(style);
 		}
-		for (int i = 0; i < allDateBox.size(); i++) {
-			String style = allDateBox.get(i).getStylePrimaryName();
-			allDateBox.get(i).getElement().setAttribute("style","");
-			allDateBox.get(i).setStyleName(style);
+		for (int i = 0; i < Emc_eufar.allDateBoxes.size(); i++) {
+			String style = Emc_eufar.allDateBoxes.get(i).getStylePrimaryName();
+			Emc_eufar.allDateBoxes.get(i).getElement().setAttribute("style","");
+			Emc_eufar.allDateBoxes.get(i).setStyleName(style);
 		}
 		for (int i = 0; i < allListBox.size(); i++) {
 			String style = allListBox.get(i).getStylePrimaryName();
@@ -172,31 +194,38 @@ public class Utilities {
 		for (int i = 0; i < 9; i++) {
 			Emc_eufar.tabPanel.getTabWidget(i).getElement().setAttribute("style","color: white !important;");
 		}
-		Emc_eufar.insituOtherBox.setVisible(otherFormatState);
-		Emc_eufar.insituImage.setVisible(otherFormatState);
+		for (int i = 0; i < Emc_eufar.qvTabPanel.getWidgetCount(); i++) {
+			Emc_eufar.qvTabPanel.getTabWidget(i).getElement().setAttribute("style","color: white !important;");
+		}
 		Emc_eufar.airInstNameLab.setVisible(otherInstrumentState);
 		Emc_eufar.airInstNameBox.setVisible(otherInstrumentState);
 		Emc_eufar.airInstManufacturerLab.setVisible(otherInstrumentState);
 		Emc_eufar.airInstManufacturerBox.setVisible(otherInstrumentState);
-		Emc_eufar.horizontalPanel34.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel121.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel148.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel149.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel150.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel151.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel152.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel153.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel154.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel155.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel156.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel48.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel49.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel50.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel51.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel52.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel53.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel54.getElement().setAttribute("style","border: 1px solid white !important;");
-		Emc_eufar.horizontalPanel55.getElement().setAttribute("style","border: 1px solid white !important;");
+		Emc_eufar.airManufacturerBox.setVisible(otherAircraftState);
+		Emc_eufar.airTypeBox.setVisible(otherAircraftState);
+		Emc_eufar.airOperatorBox.setVisible(otherAircraftState);
+		Emc_eufar.airCountryLst.setVisible(otherAircraftState);
+		Emc_eufar.airRegistrationBox.setVisible(otherAircraftState);
+		Emc_eufar.airManufacturerInfo.setVisible(labelAircraftState);
+		Emc_eufar.airTypeInfo.setVisible(labelAircraftState);
+		Emc_eufar.airOperatorInfo.setVisible(labelAircraftState);
+		Emc_eufar.airCountryInfo.setVisible(labelAircraftState);
+		Emc_eufar.airRegistrationInfo.setVisible(labelAircraftState);
+		Emc_eufar.geoUnitLab.setVisible(otherUnitState);
+		Emc_eufar.geoUnitLst.setVisible(otherUnitState);
+		for (int i = 0; i < allHiddenTextBoxes.size(); i++) {
+			allHiddenTextBoxes.get(i).setVisible(false);
+		}
+		for (int i = 0; i < allHiddenListBoxes.size(); i++) {
+			allHiddenListBoxes.get(i).setVisible(false);
+		}
+		for (int i = 0; i < Emc_eufar.allRadioButtons.size(); i++) {
+			Emc_eufar.allRadioButtons.get(i).getElement().setAttribute("style","border: 1px solid white !important;");
+		}
+		for (int i = 0; i < Emc_eufar.allCheckBoxes.size(); i++) {
+			HorizontalPanel horizontalPanel = Emc_eufar.allCheckBoxes.get(i);
+			horizontalPanel.getElement().setAttribute("style","border: 1px solid white !important;");
+		}
 		Emc_eufar.rootLogger.log(Level.INFO, "Default display set.");
 	}
 	
@@ -225,12 +254,6 @@ public class Utilities {
 	public static native int getScreenWidth()/*-{
 		return screen.width;
 	}-*/;
-
-
-	// obtain screen height
-	public static native int getScreenHeight()/*-{
-		return screen.height;
-	}-*/;
 	
 	
 	// clear all fields
@@ -249,17 +272,17 @@ public class Utilities {
 			allTextArea.get(i).setText("");
 		}
 		List<CheckBox> allCheckBox = $("*", Emc_eufar.subDockPanel).widgets(CheckBox.class);
-		for (int i = 0; i < allCheckBox.size(); i = i + 1) {
+		for (int i = 0; i < allCheckBox.size(); i++) {
 			allCheckBox.get(i).setValue(false);
 		}
 		List<DateBox> allDateBox = $("*", Emc_eufar.subDockPanel).widgets(DateBox.class);
-		for (int i = 0; i < allDateBox.size(); i = i + 1) {
+		for (int i = 0; i < allDateBox.size(); i++) {
 			allDateBox.get(i).setValue(new Date());
 		}
 		Emc_eufar.identTypeLst.setSelectedIndex(0);
 		Emc_eufar.identLanguageLst.setSelectedIndex(4);
 		Emc_eufar.airAircraftLst.setSelectedIndex(0);
-		GuiModification.aircraftInformation(0 + 1);
+		GuiModification.aircraftInformation(0);
 		Emc_eufar.airInstrumentLst.setSelectedIndex(0);
 		GuiModification.otherInstrument();
 		Emc_eufar.geoLocationLst.setSelectedIndex(0);
@@ -274,6 +297,30 @@ public class Utilities {
 		Emc_eufar.useLimitationsAddTab.removeAllRows();
 		Emc_eufar.useLimitationsAddTab.setWidget(0, 0, Emc_eufar.useLimitationsBox);
 		Emc_eufar.useLimitationsAddTab.setWidget(0, 1, Emc_eufar.auDelButton2);
+		Emc_eufar.useConditionsLst.clear();
+		Emc_eufar.useLimitationsLst.clear();
+		Emc_eufar.useConditionsLst.add(Emc_eufar.useConditionsBox);
+		Emc_eufar.useLimitationsLst.add(Emc_eufar.useLimitationsBox);
+		Emc_eufar.useCondCorrectLst.clear();
+		Emc_eufar.useLimCorrectLst.clear();
+		Emc_eufar.useCondCorrectLst.add("string");
+		Emc_eufar.useLimCorrectLst.add("string");
+		Emc_eufar.orgPartyLst.clear();
+		Emc_eufar.orgEmailLst.clear();
+		Emc_eufar.orgPartyLst.add(Emc_eufar.orgPartyBox);
+		Emc_eufar.orgEmailLst.add(Emc_eufar.orgEmailBox);
+		Emc_eufar.orgPartyCorrectLst.clear();
+		Emc_eufar.orgEmailCorrectLst.clear();
+		Emc_eufar.orgPartyCorrectLst.add("string");
+		Emc_eufar.orgEmailCorrectLst.add("email");
+		Emc_eufar.metNameLst.clear();
+		Emc_eufar.metEmailLst.clear();
+		Emc_eufar.metNameLst.add(Emc_eufar.metNameBox);
+		Emc_eufar.metEmailLst.add(Emc_eufar.metEmailBox);
+		Emc_eufar.metNameCorrectLst.clear();
+		Emc_eufar.metEmailCorrectLst.clear();
+		Emc_eufar.metNameCorrectLst.add("string");
+		Emc_eufar.metEmailCorrectLst.add("email");
 		Emc_eufar.refPhaseTab.removeAllRows();
 		Emc_eufar.refPhaseTab.setWidget(0, 0, Emc_eufar.refPhaseLab);
 		Emc_eufar.refPhaseTab.setWidget(0, 1, Emc_eufar.refStartDat);
@@ -290,10 +337,16 @@ public class Utilities {
 		Emc_eufar.useDelImage2.setVisible(false);
 		Emc_eufar.refDelButton.setStyleName("emptyButton");
 		Emc_eufar.airInstrumentTable.removeAllRows();
+		Emc_eufar.airAircraftTable.removeAllRows();
 		Emc_eufar.instrumentTabList.clear();
 		Emc_eufar.manufacturerTabList.clear();
-		Emc_eufar.verticalPanel17.clear();
-		Utilities.runCheckDefault();
+		Emc_eufar.qvTabPanel.clear();
+		Emc_eufar.simplePanel01.clear();
+		Emc_eufar.insituNum = 0;
+		Emc_eufar.imageryNum = 0;
+		Emc_eufar.qvInsituMap.clear();
+		Emc_eufar.qvImageryMap.clear();
+		runCheckDefault();
 		Emc_eufar.useConditionsBox.setText("As EUFAR is an EU-funded project, data in the EUFAR archive are available to everyone. All users are "
 				+ "requiered to acknowledge the data providers in any publication based on EUFAR data.");
 		Emc_eufar.useLimitationsBox.setText("No limitations");
