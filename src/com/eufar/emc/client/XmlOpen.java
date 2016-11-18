@@ -196,10 +196,6 @@ public class XmlOpen {
 				Emc_eufar.rootLogger.log(Level.WARNING, "Element 'spatialresolution' failed: " + ex.getMessage());
 			}
 			
-			
-			
-			
-			
 			//// resource constraints
 			try {
 				NodeList useLimitation = ((Element) identificationInfo).getElementsByTagName("uselimitation");

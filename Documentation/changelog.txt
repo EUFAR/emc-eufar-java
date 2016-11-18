@@ -12,8 +12,18 @@ ONLINE VERSION TESTED ON:
     - Vivaldi 1.4+
 
 
+November 18 2016, Release version 1.3.1 [ONLINE]
+================================================
+  FIXED:
+    - fixed an issue with the saving of the xml code dedicated to the resolution of a dataset.
+    - during the creation of the xml file, a blank line was introduced in the xml code. It has been fixed.
+    
+  MODIFIED:
+    - the saving function has been modified for harmonisation with the offline version of EMC.
+
+
 October 06 2016, Release version 1.3.0 [ONLINE]
-=============================================
+===============================================
   A new "Quality and Validity" section has been introduced to take into account multiple instruments and multiple data. Each QV form has to be linked to one instrument. Old QV xml code can still be read but EMC will ask the user to save again his/her document.
   
   FIXED:
@@ -46,7 +56,7 @@ October 06 2016, Release version 1.3.0 [ONLINE]
 
 
 August 24 2016, Release version 1.2.1 [ONLINE]
-=============================================
+==============================================
   The "Quality and Validity" section is finally present in EMC, few textboxes have been modified to handle a full dataset.
   The style used in EMC has been corrected to be in accordance with ASMM.
   
@@ -61,7 +71,7 @@ August 24 2016, Release version 1.2.1 [ONLINE]
 
 
 August 02 2016, Release version 1.2.0 [ONLINE]
-=============================================
+==============================================
   The style used in EMC has been modified and harmonized to comply with the EUFAR website style.
   Few changes in the GUI have been made to comply with the recommandations of the last meeting between N7SP and N8DB.
   
@@ -73,7 +83,7 @@ August 02 2016, Release version 1.2.0 [ONLINE]
 
 
 May 30 2016, Release version 1.1.0 [ONLINE]
-=============================================
+===========================================
   The style used in ASMM has been modified and harmonized to comply with the EUFAR website style.
 
 

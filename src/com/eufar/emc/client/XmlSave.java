@@ -174,7 +174,11 @@ public class XmlSave {
 			if (Emc_eufar.geoResolutionLst.getSelectedItemText() == "Distance") {
 				Element IdentDistance1 = Elements.addElement(doc, "gmd:distance", identResolutionMD);
 				Element IdentDistance2 = Elements.addElement(doc, "gco:Distance", IdentDistance1, Emc_eufar.geoResolutionBox.getText());
-				IdentDistance2.setAttribute("uom",Emc_eufar.unitMap.get(Emc_eufar.geoUnitLst.getSelectedItemText()));
+				if (Emc_eufar.geoUnitLst.getSelectedItemText() == "Make a choice...") {
+					IdentDistance2.setAttribute("uom","");
+				} else {
+					IdentDistance2.setAttribute("uom",Emc_eufar.unitMap.get(Emc_eufar.geoUnitLst.getSelectedItemText()));
+				}
 			}
 			else if (Emc_eufar.geoResolutionLst.getSelectedItemText() == "Scale") {
 				Element identScale = Elements.addElement(doc, "gmd:equivalentScale", identResolutionMD);
@@ -312,10 +316,10 @@ public class XmlSave {
 			////////////////////
 			StringBuilder stringBuilder = new StringBuilder();
 			for (int i = 0; i < Emc_eufar.qvInsituMap.size(); i++) {
-				stringBuilder.append(XmlSave.createInsituCode(Emc_eufar.qvInsituMap.get(i), i + 1));
+				stringBuilder.append(createInsituCode(Emc_eufar.qvInsituMap.get(i), i + 1));
 			}
 			for (int i = 0; i < Emc_eufar.qvImageryMap.size(); i++) {
-				stringBuilder.append(XmlSave.createImageryCode(Emc_eufar.qvImageryMap.get(i), i + 1));
+				stringBuilder.append(createImageryCode(Emc_eufar.qvImageryMap.get(i), i + 1));
 			}
 			String lineageString = stringBuilder.toString();
 			Element dataQualityInfo1 = Elements.addElement(doc, "gmd:dataQualityInfo", rootElement);

@@ -55,9 +55,11 @@ public class DownloadFunction extends HttpServlet {
 	        format.setIndentSize(4); 
 	        XMLWriter xw = new XMLWriter(sw, format);  
 	        xw.write(doc); 
-				
+	        String xmlString = sw.toString();
+	        xmlString = xmlString.replace("\n\n", "\n");
+	        
 	        Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "/" + filename), "UTF-8"));
-			out.append(sw.toString());
+	        out.append(xmlString);
 			out.flush();
 			out.close();
 		} catch (Exception ex) {
