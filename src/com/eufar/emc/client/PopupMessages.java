@@ -783,6 +783,10 @@ public class PopupMessages {
 				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
 				+ "(succeeded)</li><li>Opera 30, 40 (succeeded)</li><li>Vivaldi 1.4</li></ul><br>"
 				
+				+ "<b><u>June 15 2017, Release version 1.3.2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul><li>textboxes"
+				+ " for instrument in the Aircraft & Instrument section weren't well tested for text during the saving of a document, and gen"
+				+ "erated blue text for the parent tab. It has been fixed.</li></ul><li>MODIFIED:<ul><li>the list of aircraft has been updated."
+				+ "</li></ul></li></ul>"  
 				+ "<b><u>November 18 2016, Release version 1.3.1 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul><li>fixed"
 				+ " an issue with the saving of the xml code dedicated to the resolution of a dataset.</li><li>during the creation of the xml "
 				+ "file, a blank line was introduced in the xml code. It has been fixed.</li></ul></li></ul>"

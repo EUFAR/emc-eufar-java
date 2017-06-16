@@ -101,6 +101,7 @@ public class Materials {
 		list.add("AWI - POLAR 5");
 		list.add("CNR - ERA Skyarrow");
 		list.add("CNR - Partenavia");
+		list.add("CzechGlobe - C 208");
 		list.add("DLR - C 208");
 		list.add("DLR - DO 228 D-CFFU");
 		list.add("DLR - DO 228 D-CODE");
@@ -112,8 +113,8 @@ public class Materials {
 		list.add("INTA - CASA 212 AR");
 		list.add("INTA - CASA 212 RS");
 		list.add("KIT - Enduro");
-		list.add("NERC - DO 228");
-		list.add("NERC - Twin Otter");
+		list.add("NERC - Twin Otter VP-FAZ");
+		list.add("NERC - Twin Otter VP-FBL");
 		list.add("SAFIRE - ATR 42");
 		list.add("SAFIRE - Falcon 20");
 		list.add("SAFIRE - PIPER Aztec");
@@ -1133,6 +1134,8 @@ public class Materials {
 				"CNR, Istituto per i Sistemi Agricoli e Forestali del Mediterraneo"},
 			{"CNR - Partenavia", "Partenavia / Vulcanair", "P-68", "Consiglio Nazionale delle Ricerche (CNR) - IMAA", "Italy", "I-ALTM", 
 				"CNR, Istituto di Metodologie per l'Analisi Ambientale"},
+			{"CzechGlobe - C 208", "Cessna Aircraft Company", "Cessna 208", "Ústav výzkumu globální změny AV ČR", "Czech Republic", 
+					"OK-CZG", "CzechGlobe"},
 			{"DLR - C 208", "Cessna Aircraft Company", "Cessna 208", "Deutsches Zentrum fur Luft- und Raumfahrt (DLR)", "Germany", "D-FDLR", 
 				"DLR, CC-BY 3.0"},
 			{"DLR - DO 228 D-CFFU", "Dornier Flugzeugwerke", "DO-228", "Deutsches Zentrum fur Luft- und Raumfahrt (DLR)", "Germany", "D-CFFU", 
@@ -1153,10 +1156,10 @@ public class Materials {
 				"EC-DUQ", "Instituto Nacional de Tecnica Aeroespacial"},
 			{"KIT - Enduro", "Ultraleichtflug Schmidtler", "Enduro", "Karlsruhe Institute of Technology (KIT) - IMK-IFU", "Germany", "D-MIFU", 
 				"KIT, Institute of Meteorology and Climate Research"},
-			{"NERC - DO 228", "Dornier Flugzeugwerke", "DO-228", "Natural Environment Research Council (NERC) - ARSF", "United Kingdom", 
-				"EC-DUQ", "NERC, Airborne Research and Survey Facility"},
-			{"NERC - Twin Otter", "De Havilland Canada", "DHC-6", "Natural Environment Research Council (NERC) - BAS", "United Kingdom", 
+			{"NERC - Twin Otter VP-FAZ", "De Havilland Canada", "DHC-6", "Natural Environment Research Council (NERC) - BAS", "United Kingdom", 
 				"VP-FAZ", "NERC, British Antarctic Survey"},
+			{"NERC - Twin Otter VP-FBL", "De Havilland Canada", "DHC-6", "Natural Environment Research Council (NERC) - BAS", "United Kingdom", 
+				"VP-FBL", "NERC, British Antarctic Survey"},
 			{"SAFIRE - ATR 42", "ATR", "ATR-42", "Service des Avions Francais Instrumentés pour la Recherche en Environnement (SAFIRE)", 
 				"France", "F-HMTO", "SAFIRE"},
 			{"SAFIRE - Falcon 20", "Dassault Aviation", "Mystere/Falcon 20", "Service des Avions Francais Instrumentés pour la Recherche en "
@@ -1176,6 +1179,7 @@ public class Materials {
 		list.add(Emc_eufar.resources.polarAwi());
 		list.add(Emc_eufar.resources.eraIsafom());
 		list.add(Emc_eufar.resources.partenaviaCnr());
+		list.add(Emc_eufar.resources.cessnaCzechglobe());
 		list.add(Emc_eufar.resources.cessnaDlr());
 		list.add(Emc_eufar.resources.do1Dlr());
 		list.add(Emc_eufar.resources.do2Dlr());
@@ -1187,8 +1191,8 @@ public class Materials {
 		list.add(Emc_eufar.resources.casaInta());
 		list.add(Emc_eufar.resources.casaInta());
 		list.add(Emc_eufar.resources.enduroKit());
-		list.add(Emc_eufar.resources.doNerc());
 		list.add(Emc_eufar.resources.twinotterNerc());
+		list.add(Emc_eufar.resources.twinotter2Nerc());
 		list.add(Emc_eufar.resources.atrSafire());
 		list.add(Emc_eufar.resources.falconSafire());
 		list.add(Emc_eufar.resources.aztecSafire());
@@ -1198,56 +1202,9 @@ public class Materials {
 	
 	
 	public static interface Resources extends ClientBundle {
-        /*@Source("images/icons/about_popup_icon.png")
-        ImageResource aboutPopup();
-
-        @Source("images/icons/info_popup_icon.png")
-        ImageResource infoPopup();
-
-        @Source("images/icons/save_popup_icon.png")
-        ImageResource savePopup();
-        
-        @Source("images/icons/changelog_popup_icon.png")
-        ImageResource changelogPopup();
-        
-        @Source("images/icons/inspire_popup_icon.png")
-        ImageResource inspirePopup();
-        
-        @Source("images/icons/open_popup_icon.png")
-        ImageResource openPopup();
-        
-        @Source("images/icons/warning_popup_icon.png")	
-        ImageResource warningPopup();
-        
-        @Source("images/icons/continue_icon.png")
-        ImageResource transfert();
-        
-        @Source("images/icons/copyright_icon_small.png")
-        ImageResource copyright();
-        
-        @Source("images/icons/del_icon_v2.png")
-        ImageResource delete();
-        
-        @Source("images/icons/fwd_arrow.png")
-        ImageResource forward();
-        
-        @Source("images/icons/fwd_arrow_small.png")
-        ImageResource forwardSmall();
-        
-        @Source("images/icons/info_icon_v2.png")
-        ImageResource info();
-        
-        @Source("images/icons/plus_icon_v2.png")
-        ImageResource plus();*/
         
         @Source("images/icons/earth_globe.png")
         ImageResource earth();
-        
-        /*@Source("images/icons/bwd_tab_arrow_v3.png")
-        ImageResource back();
-
-        @Source("images/icons/fwd_tab_arrow_v3.png")
-        ImageResource next();*/
 
         @Source("images/icons/menu_tab_arrow_v3.png")
         ImageResource menu();
@@ -1294,11 +1251,14 @@ public class Materials {
         @Source("images/eufar_aircraft/ENDURO-KIT.png")
         ImageResource enduroKit();
         
-        @Source("images/eufar_aircraft/DO228-NERC.png")
-        ImageResource doNerc();
-        
         @Source("images/eufar_aircraft/TWINOTTER-NERC.png")
         ImageResource twinotterNerc();
+        
+        @Source("images/eufar_aircraft/TWINOTTER2-NERC.png")
+        ImageResource twinotter2Nerc();
+        
+        @Source("images/eufar_aircraft/C208-CZECHGLOBE.png")
+        ImageResource cessnaCzechglobe();
         
         @Source("images/eufar_aircraft/ATR42-SAFIRE.png")
         ImageResource atrSafire();

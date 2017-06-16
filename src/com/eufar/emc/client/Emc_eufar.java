@@ -83,7 +83,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<HorizontalPanel> allRadioButtons = new ArrayList<HorizontalPanel>();
 	public static ArrayList<HorizontalPanel> allCheckBoxes = new ArrayList<HorizontalPanel>();
 	public static ArrayList<DateBox> allDateBoxes = new ArrayList<DateBox>();
-	private String emcVersion = new String("v1.3.1 (2016-11-18)");
+	private String emcVersion = new String("v1.3.2 (2017-06-16)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.6.1");
 	private String javaVersion = new String("1.8.0");
@@ -2253,10 +2253,14 @@ public class Emc_eufar implements EntryPoint {
 					if (allTextBoxes.get(i).getName() == "aircraft") {
 						if (aircraftTabList.size() == 0) {
 							textboxCorrect = runCorrect(allTextBoxes.get(i), allTextboxFields.get(i));
+						} else {
+							textboxCorrect = true;
 						}
 					} else if (allTextBoxes.get(i).getName() == "instrument") {
 						if (instrumentTabList.size() == 0) {
 							textboxCorrect = runCorrect(allTextBoxes.get(i), allTextboxFields.get(i));
+						} else {
+							textboxCorrect = true;
 						}
 					} else {
 						textboxCorrect = runCorrect(allTextBoxes.get(i), allTextboxFields.get(i));

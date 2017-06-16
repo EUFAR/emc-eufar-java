@@ -1,6 +1,6 @@
 # emc-eufar
 
-A detailed changelog can be found in the Documentation directory. Current version: 1.3.1
+A detailed changelog can be found in the Documentation directory. Current version: 1.3.2
 This is an Online version of the following software: https://github.com/eufarn7sp/emc-eufar. It has been coded with Java and Google Web Toolkit.
 
 Overview

@@ -12,6 +12,15 @@ ONLINE VERSION TESTED ON:
     - Vivaldi 1.4+
 
 
+June 15 2017, Release version 1.3.2 [ONLINE]
+============================================
+  FIXED:
+    - textboxes for instrument in the Aircraft & Instrument section weren't well tested for text during the saving of a document, and generated blue text for the parent tab. It has been fixed.
+    
+  MODIFIED:
+    - the list of aircraft has been updated.
+    
+    
 November 18 2016, Release version 1.3.1 [ONLINE]
 ================================================
   FIXED:
