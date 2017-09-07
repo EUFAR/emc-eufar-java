@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -24,12 +26,19 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.UmbrellaException;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Navigator;
@@ -50,17 +59,22 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.StackLayoutPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
-
+import com.google.gwt.xml.client.Document;
+import com.google.gwt.xml.client.Element;
+import com.google.gwt.xml.client.NodeList;
+import com.google.gwt.xml.client.XMLParser;
 
 public class Emc_eufar implements EntryPoint {
 
@@ -74,16 +88,18 @@ public class Emc_eufar implements EntryPoint {
 	public static HashMap<String, String> roleMap = Materials.roleMap();
 	public static HashMap<String, String> operatorMap = Materials.operatorMap();
 	public static HashMap<String, String> typeMap = Materials.typeMap();
-	public static HashMap<String, String> instrumentMap = Materials.instrumentMap();
 	public static HashMap<String, String> unitMap = Materials.unitMap();
 	public static ArrayList<String> allCorrectFields = Materials.allCorrectFields();
+	public static ArrayList<String> allCorrectFields2 = Materials.allCorrectFields2();
 	public static ArrayList<TextBoxBase> allTextBoxes = new ArrayList<TextBoxBase>();
+	public static ArrayList<SuggestBox> allSuggestBoxes = new ArrayList<SuggestBox>();
 	public static ArrayList<String> allTextboxFields = new ArrayList<String>();
+	public static ArrayList<String> allSuggestboxFields = new ArrayList<String>();
 	public static ArrayList<ListBox> allListBoxes = new ArrayList<ListBox>();
 	public static ArrayList<HorizontalPanel> allRadioButtons = new ArrayList<HorizontalPanel>();
 	public static ArrayList<HorizontalPanel> allCheckBoxes = new ArrayList<HorizontalPanel>();
 	public static ArrayList<DateBox> allDateBoxes = new ArrayList<DateBox>();
-	private String emcVersion = new String("v1.3.2 (2017-06-16)");
+	private String emcVersion = new String("v1.4.0 (2017-09-07)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.6.1");
 	private String javaVersion = new String("1.8.0");
@@ -92,6 +108,11 @@ public class Emc_eufar implements EntryPoint {
 	public static String titleString = new String("EUFAR Metadata Creator");
 	public static String emcPath = new String("");
 	public static Resources resources = GWT.create(Materials.Resources.class);
+	public static HashMap<String, HashMap<String, String>> aircraftDBMap = new HashMap<String, HashMap<String, String>>();
+	public static HashMap<String, HashMap<String, String>> projectsDBMap = new HashMap<String, HashMap<String, String>>();
+	public static HashMap<String, HashMap<String, String>> operatorsDBMap = new HashMap<String, HashMap<String, String>>();
+	public static HashMap<String, HashMap<String, String>> instrumentsDBMap = new HashMap<String, HashMap<String, String>>();
+	public static HashMap<String, String> monthMap = Materials.monthMap();
 	
 
 	// Main window items initialization
@@ -186,13 +207,13 @@ public class Emc_eufar implements EntryPoint {
 	public static Label identLocatorLab = new Label("Resource locator");
 	public static Label identIdentifierLab = new Label("Project acronym");
 	private Label identLanguageLab = new Label("Resource language");
+	public static SuggestBox identIdentifierBox = new SuggestBox();
 	public static TextArea identAbstractAre = new TextArea();
 	public static TextBox identTitleBox = new TextBox();
 	public static TextBox identLocatorBox = new TextBox();
-	public static TextBox identIdentifierBox = new TextBox();
 	public static ListBox identLanguageLst = new ListBox();
 	public static ListBox identTypeLst = new ListBox();
-	public static ArrayList<String> languageList = Materials.languageList();
+	public static HashMap<String, String> languageList = Materials.languageMap();
 	public static ArrayList<String> typeList = Materials.typeList();
 	public static FlexTable idGrid = new FlexTable();
 	private SimplePanel idTitleInfo = Elements.addInfoButton("idTitle");
@@ -383,10 +404,8 @@ public class Emc_eufar implements EntryPoint {
 	public static TextBox airRegistrationBox = new TextBox();
 	public static TextBox airInstNameBox = new TextBox();
 	public static TextBox airInstManufacturerBox = new TextBox();
-	private Image airCopyrightImage = new Image(Emc_eufar.resources.copyright().getSafeUri());
 	public static ListBox airAircraftLst = new ListBox();
 	public static ListBox airInstrumentLst = new ListBox();
-	private ArrayList<String> aircraftList = Materials.aircraftList();
 	public static ArrayList<String> aircraftTabList = new ArrayList<String>();
 	public static ArrayList<String> operatorTabList = new ArrayList<String>();
 	public static ArrayList<String> manufacturairTabList = new ArrayList<String>();
@@ -395,8 +414,8 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<String> instrumentTabList = new ArrayList<String>();
 	public static ArrayList<String> manufacturerTabList = new ArrayList<String>();
 	public static Image airAircraftImg = new Image(Emc_eufar.resources.eufarLogo());
-	public static String[][] airAircraftInfo = Materials.aircraftInfo();
-	public static ArrayList<ImageResource> airAircraftImages = Materials.aircraftImages();
+	public static String[][] aircraftInfo = Materials.newAircraftInfo();
+	public static String[][] instrumentInfo = Materials.newInstrumentInfo();
 	public static ScrollPanel aiScroll = new ScrollPanel(verticalPanel24);
 	public static FlexTable aiFlexTable = new FlexTable();
 
@@ -427,7 +446,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ListBox geoDetailLst = new ListBox();
 	public static ListBox geoResolutionLst = new ListBox();
 	public static ListBox geoUnitLst = new ListBox();
-	public static ArrayList<String> countryList = Materials.countryList();
+	public static HashMap<String, String> countryList = Materials.countryCodeList();
 	public static ArrayList<String> continentList = Materials.continentList();
 	public static ArrayList<String> oceanList = Materials.oceanList();
 	public static ArrayList<String> regionList = Materials.regionList();
@@ -635,6 +654,7 @@ public class Emc_eufar implements EntryPoint {
 	
 	// Preparing object lists for checking purpose
 	public static ArrayList<TextBoxBase> allRequiredTextboxes = Materials.allRequiredTextboxes();
+	public static ArrayList<SuggestBox> allRequiredSuggestboxes = Materials.allRequiredSuggestboxes();
 	public static ArrayList<DateBox> allRequiredDateboxes = Materials.allRequiredDateboxes();
 	public static ArrayList<ListBox> allRequiredListboxes = Materials.allRequiredListboxes();
 	public static ArrayList<HorizontalPanel> allRequiredClassCheckboxes = Materials.allRequiredClassCheckboxes();
@@ -657,6 +677,7 @@ public class Emc_eufar implements EntryPoint {
 	}
 	
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void onModuleLoad2() {
 		rootLogger.log(Level.INFO, "***************************************************************");
 		rootLogger.log(Level.INFO, "EMC has started on: " + Navigator.getUserAgent());
@@ -665,6 +686,13 @@ public class Emc_eufar implements EntryPoint {
 		}
 		rootLogger.log(Level.INFO, "PATH: " + emcPath);
 
+		
+		// reading data from EUFAR database
+		parseXMLDataFromServer("aircraft");
+		parseXMLDataFromServer("projects");
+		parseXMLDataFromServer("operators");
+		parseXMLDataFromServer("instruments");
+		
 		
 		// Commands in the menu bar
 		Command aboutWindow = new Command() {
@@ -797,6 +825,12 @@ public class Emc_eufar implements EntryPoint {
 		
 		
 		// Assemble the header
+		hdTitleLab.getElement().getStyle().setCursor(Cursor.POINTER); 
+		hdTitleLab.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Window.open("http://www.eufar.net", "_self", "");
+			}
+		});
 		horizontalPanel87.add(hdTitleLab);
 		horizontalPanel87.setStyleName("headerHorizontalPanel");
 		horizontalPanel87.getElement().setAttribute("style", "background-position: " + screen_width/6 + "px;");
@@ -969,7 +1003,7 @@ public class Emc_eufar implements EntryPoint {
 		idGrid.setWidget(5, 1, horizontalPanel06);
 		idGrid.setCellSpacing(10);
 		Utilities.populateListBox(identTypeLst, typeList, 0);
-		Utilities.populateListBox(identLanguageLst, languageList, 4);
+		Utilities.populateListBox(identLanguageLst, languageList, 5);
 		identTitleBox.setStyleName("identTextBox");
 		identLocatorBox.setStyleName("identTextBox");
 		identIdentifierBox.setStyleName("identTextBox");
@@ -1005,6 +1039,13 @@ public class Emc_eufar implements EntryPoint {
 		identLanguageLst.setName("identLanguageList");
 		identTypeLst.setName("identTypeList");
 		identLocatorBox.setText("http://browse.ceda.ac.uk/browse/badc/eufar/docs/00eufararchivecontents.html");
+		identIdentifierBox.addSelectionHandler(new SelectionHandler() {
+			@Override
+			public void onSelection(SelectionEvent event) {
+				String selected = identIdentifierBox.getText();
+				GuiModification.fillInFieldsFromProject(selected);
+			}
+        });
 		rootLogger.log(Level.INFO, "Identification panel initialized");
 
 
@@ -1277,8 +1318,8 @@ public class Emc_eufar implements EntryPoint {
 		verticalPanel24.add(horizontalPanel73);
 		verticalPanel24.add(horizontalPanel74);
 		verticalPanel24.add(verticalPanel10);
-		Utilities.populateListBox(airAircraftLst, aircraftList, 0);
-		Utilities.populateListBox(airInstrumentLst, instrumentMap, 0);
+		Utilities.populateAircraftListBox(airAircraftLst, aircraftInfo, 0);
+		Utilities.populateInstrumentListBox(airInstrumentLst, instrumentInfo, 0);
 		horizontalPanel09.add(airAircraftLab);
 		horizontalPanel09.add(aiStarLab01);
 		horizontalPanel09.add(airAircraftLst);
@@ -1323,14 +1364,8 @@ public class Emc_eufar implements EntryPoint {
 		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_RIGHT);
 		aiFlexTable.getFlexCellFormatter().setHorizontalAlignment(4, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-		Emc_eufar.airAircraftImg.setSize("550px","302px");
-		
-		airCopyrightImage.setSize("12px","12px");
-		airCopyrightImage.getElement().setAttribute("style", "margin-left: 2px; margin-top: 2px; height: 12px; width: 12px;");
-		horizontalPanel10.add(airCopyrightImage);
-		horizontalPanel10.add(airCopyrightInfo);
+		airAircraftImg.setSize("550px","229px");
 		verticalPanel09.add(airAircraftImg);
-		verticalPanel09.add(horizontalPanel10);
 		horizontalPanel11.add(verticalPanel08);
 		horizontalPanel11.add(verticalPanel09);
 		verticalPanel10.add(horizontalPanel11);
@@ -1390,6 +1425,7 @@ public class Emc_eufar implements EntryPoint {
 		aiPathLab2.setStyleName("identPathText2");
 		horizontalPanel74.setStyleName("identLine");
 		airCopyrightInfo.setStyleName("airCopyrightInfo");
+		airAircraftImg.setStyleName("airAircraftImage2");
 		verticalPanel24.getElement().setAttribute("style", 
 				"margin-top: " + (new_clouds_heading_height - 31) + "px !important;");
 		aiScroll.getElement().setAttribute("style", 
@@ -1401,7 +1437,7 @@ public class Emc_eufar implements EntryPoint {
 		airAircraftLst.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
-				GuiModification.aircraftInformation(airAircraftLst.getSelectedIndex());
+				GuiModification.newAircraftInformation(airAircraftLst.getSelectedItemText(), "");
 			}
 		});
 		airInstrumentLst.addChangeHandler(new ChangeHandler() {
@@ -1471,9 +1507,7 @@ public class Emc_eufar implements EntryPoint {
 		geoLocationLst.setStyleName("geoTextList");
 		geoDetailLst.setStyleName("geoTextList");
 		geoDetailLst.setEnabled(false);
-
 		geoFollowImage.setStyleName("geoForwardImage");
-		
 		verticalPanel11.add(horizontalPanel13);
 		verticalPanel11.add(geoCoordTab);
 		horizontalPanel16.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -1901,7 +1935,7 @@ public class Emc_eufar implements EntryPoint {
 		verticalPanel30.add(verticalPanel16);
 		metDateDat.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("yyyy-MM-dd")));
 		metDateDat.setValue(new Date());
-		Utilities.populateListBox(metLanguageLst, languageList, 4);
+		Utilities.populateListBox(metLanguageLst, languageList, 5);
 		metLanguageLst.setName("metLanguageList");
 		metMetadataTab.setWidget(0, 0, horizontalPanel108);
 		metMetadataTab.setWidget(0, 1, metDateDat);
@@ -2089,6 +2123,8 @@ public class Emc_eufar implements EntryPoint {
 		});
 		
 		
+		// Information about the new API, since v1.4.0
+		PopupMessages.apiInformation();
 	}
 
 	
@@ -2169,7 +2205,9 @@ public class Emc_eufar implements EntryPoint {
 		allListBoxes.clear();
 		allDateBoxes.clear();
 		allTextBoxes.addAll(allRequiredTextboxes);
+		allSuggestBoxes.addAll(allRequiredSuggestboxes);
 		allTextboxFields.addAll(allCorrectFields);
+		allSuggestboxFields.addAll(allCorrectFields2);
 		allDateBoxes.addAll(allRequiredDateboxes);
 		allDateBoxes.addAll(refStartLst.subList(1, refStartLst.size()));
 		allDateBoxes.addAll(refEndLst.subList(1, refEndLst.size()));
@@ -2292,7 +2330,58 @@ public class Emc_eufar implements EntryPoint {
 				}
 			}
 		}
-		rootLogger.log(Level.INFO, "Checking textboxes finished...");
+		rootLogger.log(Level.INFO, "Checking suggestboxes ...");
+		for (int i = 0; i < allSuggestBoxes.size(); i++) {
+			if (allSuggestBoxes.get(i).isVisible()) {
+				if (allSuggestBoxes.get(i).getText() == "") {
+					parent = allSuggestBoxes.get(i).getParent();
+					try {
+						while (!(parent instanceof SimplePanel)) {
+							parent = parent.getParent();
+						}
+						widgetIndex = qvTabPanel.getWidgetIndex(parent);
+						qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+						tabPanel.getTabWidget(6).getElement().setAttribute("style","color: #ED1C24 !important;");
+					} catch (AssertionError|IndexOutOfBoundsException ex) {
+						while (!(parent instanceof ScrollPanel)) {
+							parent = parent.getParent();
+						}
+						widgetIndex = tabPanel.getWidgetIndex(parent);
+						tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: #ED1C24 !important;");
+					}
+					notCompleted++;
+					allSuggestBoxes.get(i).getElement().setAttribute("style","border-color: #ED1C24 !important;");
+				} else {
+					boolean textboxCorrect = false;
+					textboxCorrect = runCorrect(allSuggestBoxes.get(i), allSuggestboxFields.get(i));
+					if (!textboxCorrect) {
+						parent = allSuggestBoxes.get(i).getParent();
+						try {
+							while (!(parent instanceof SimplePanel)) {
+								parent = parent.getParent();
+							}
+							widgetIndex = qvTabPanel.getWidgetIndex(parent);
+							if (qvTabPanel.getTabWidget(widgetIndex).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+								qvTabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+							}
+							if (tabPanel.getTabWidget(6).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+								tabPanel.getTabWidget(6).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+							}
+						} catch (AssertionError|IndexOutOfBoundsException ex) {
+							while (!(parent instanceof ScrollPanel)) {
+								parent = parent.getParent();
+							}
+							widgetIndex = tabPanel.getWidgetIndex(parent);
+							if (tabPanel.getTabWidget(widgetIndex).getElement().getStyle().getColor() != "rgb(237, 28, 36)") {
+								tabPanel.getTabWidget(widgetIndex).getElement().setAttribute("style","color: rgb(0,0,200) !important;");
+							}
+						}
+						notCompleted++;
+					}
+				}
+			}
+		}
+		rootLogger.log(Level.INFO, "Checking textboxes and suggestboxes finished...");
 		rootLogger.log(Level.INFO, "Checking dateboxes ...");
 		for (int i = 0; i < allDateBoxes.size(); i++) {
 			if (allDateBoxes.get(i).getValue().after(actualDate)) {
@@ -2372,7 +2461,6 @@ public class Emc_eufar implements EntryPoint {
 			notCompleted++;
 			tabPanel.getTabWidget(1).getElement().setAttribute("style","color: #ED1C24 !important;");
 		}
-		
 		oneCheckboxChecked = false;
 		for (int i = 0; i < allRequiredKeyCheckboxes.size(); i++) {
 			if (((CheckBox) allRequiredKeyCheckboxes.get(i).getWidget(0)).getValue() == true) {
@@ -2480,6 +2568,35 @@ public class Emc_eufar implements EntryPoint {
 		return result;
 	}
 	
+	
+	// check if all SuggestBoxes have been correctly filled in before saving it
+	private static boolean runCorrect(final SuggestBox textBox, final String string) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Check of text in textbox in progress...");
+		boolean result = true;
+			switch (string) {
+				case "number":
+					if (!textBox.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
+						textBox.getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
+						result = false;
+					}
+					break;
+				case "string":
+					if (textBox.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
+						textBox.getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
+						result = false;
+					}
+					break;
+				case "email":
+					if (!textBox.getText().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+						textBox.getElement().setAttribute("style","border-color: rgb(0,0,200) !important;");
+						result = false;
+					}
+					break;
+			}
+		rootLogger.log(Level.INFO, "Check of text in textbox finished.");
+		return result;
+	}
+	
 
 	// functions to navigate between tabs
 	private void navigateTab(final int direction) {
@@ -2521,5 +2638,224 @@ public class Emc_eufar implements EntryPoint {
 	    public HandlerRegistration addClickHandler(ClickHandler handler) {
 	         return addDomHandler(handler, ClickEvent.getType());
 	    }
+	}
+	
+	
+	// request XML from EUFAR server and build a HashMap containing informations
+	public void parseXMLDataFromServer(final String field) {
+		String XML_URL = emcPath + "FetchDataFromServer?flux=" + field;
+		String url = URL.encode(XML_URL);
+		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
+	    try {
+	    	@SuppressWarnings("unused")
+			Request request = builder.sendRequest(null, new RequestCallback() {
+			    public void onError(Request request, Throwable exception) {
+			    	rootLogger.log(Level.WARNING, "An error occured after the sending of the request : " + exception.getMessage());
+			    }
+			    public void onResponseReceived(Request request, Response response) {
+			    	if (200 == response.getStatusCode()) {
+			    		rootLogger.log(Level.INFO, "response received from server, parsing " + field + "...");
+			    		Document doc = XMLParser.parse(response.getText());
+			    		if (field == "aircraft") {
+			    			NodeList aircraftNode = doc.getElementsByTagName("aircraft");
+			    			String[][] updatedOperatorsAircraft = new String[aircraftNode.getLength()][5];
+			    			for (int i = 0; i < aircraftNode.getLength(); i++) {
+			    				HashMap<String, String> map = new HashMap<String, String>();
+			    				String acronym = "";
+			    				try {
+			    					acronym = ((Element) aircraftNode.item(i)).getElementsByTagName("acronym").
+			    						item(0).getFirstChild().getNodeValue();
+			    				} catch (Exception ex) {
+			    					acronym = "";
+			    				}
+			    				String registration_number = "";
+			    				try {
+			    					registration_number = ((Element) aircraftNode.item(i)).getElementsByTagName("registration_number").
+			    						item(0).getFirstChild().getNodeValue();
+			    				} catch (Exception ex) {
+			    					registration_number = "";
+			    				}
+			    				String operator = "";
+			    				try {
+			    					operator = ((Element) aircraftNode.item(i)).getElementsByTagName("operator").
+			    						item(0).getFirstChild().getNodeValue();
+			    				} catch (Exception ex) {
+			    					operator = "";
+			    				}
+			    				String country = "";
+			    				try {
+			    					country = ((Element) aircraftNode.item(i)).getElementsByTagName("country").
+			    						item(0).getFirstChild().getNodeValue();
+			    				} catch (Exception ex) {
+			    					country = "";
+			    				}
+			    				String manufacturer_and_aircraft_type = "";
+			    				try {
+			    					manufacturer_and_aircraft_type = ((Element) aircraftNode.item(i)).getElementsByTagName("manufacturer_and_aircraft_type").
+			    						item(0).getFirstChild().getNodeValue();
+			    				} catch (Exception ex) {
+			    					manufacturer_and_aircraft_type = "";
+			    				}
+			    				String link = "";
+			    				try {
+			    					link = ((Element) aircraftNode.item(i)).getElementsByTagName("large_image").
+			    						item(0).getFirstChild().getNodeValue();
+			    				} catch (Exception ex) {
+			    					link = "";
+			    				}
+				    			map.put("acronym", acronym);
+				    			map.put("registration number", registration_number);
+				    			map.put("operator", operator);
+				    			map.put("country", country);
+				    			map.put("manufacturer and aircraft type", manufacturer_and_aircraft_type);
+				    			map.put("image link", link);
+			    				aircraftDBMap.put(((Element) aircraftNode.item(i)).getElementsByTagName("acronym").
+			    						item(0).getFirstChild().getNodeValue(), map);
+			    				updatedOperatorsAircraft[i] = new String[]{operator,manufacturer_and_aircraft_type,registration_number,country, link};
+			    			}
+			    			
+			    			aircraftInfo = updatedOperatorsAircraft;
+			    			String aircraft = null;
+			    			if (airAircraftLst.getSelectedItemText() != "Make your choice...") {
+			    				aircraft = airAircraftLst.getSelectedItemText();
+			    			}
+			    			airAircraftLst.clear();
+			    			Utilities.populateAircraftListBox(airAircraftLst, aircraftInfo, 0);
+			    			if (aircraft != null) {
+			    				Utilities.checkList(aircraft, airAircraftLst);
+			    			}
+			    		} else if (field == "projects") {
+			    			NodeList project = doc.getElementsByTagName("project");
+			    			for (int i = 0; i < project.getLength(); i++) {
+			    				HashMap<String, String> map = new HashMap<String, String>();
+			    				try {
+				    				map.put("acronym", ((Element) project.item(i)).getElementsByTagName("acronym").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("acronym", "");
+			    				}
+			    				try {
+				    				map.put("title", ((Element) project.item(i)).getElementsByTagName("title").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("title","");
+			    				}
+			    				try {
+				    				map.put("leader", ((Element) project.item(i)).getElementsByTagName("leader").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("leader","");
+			    				}
+			    				try {
+				    				map.put("abstract", ((Element) project.item(i)).getElementsByTagName("abstract").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("abstract","");
+			    				}
+			    				try {
+				    				map.put("aircraft", ((Element) project.item(i)).getElementsByTagName("aircraft").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("aircraft","");
+			    				}
+			    				try {
+				    				map.put("operator", ((Element) project.item(i)).getElementsByTagName("operator").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("operator","");
+			    				}
+			    				try {
+				    				map.put("campaign_start", ((Element) project.item(i)).getElementsByTagName("campaign_start").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("campaign_start","");
+			    				}
+			    				try {
+				    				map.put("campaign_end", ((Element) project.item(i)).getElementsByTagName("campaign_end").
+				    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("campaign_end","");
+			    				}
+			    				MultiWordSuggestOracle multiWordOracle = (MultiWordSuggestOracle)identIdentifierBox.getSuggestOracle();
+				    			projectsDBMap.put(((Element) project.item(i)).getElementsByTagName("acronym").
+				    					item(0).getFirstChild().getNodeValue(), map);
+				    			for(Entry<String, HashMap<String, String>> e : projectsDBMap.entrySet()) {
+				    				multiWordOracle.add(e.getKey().toString());
+				    		    }
+			    			}
+			    		} else if (field == "operators") {
+			    			NodeList operator = doc.getElementsByTagName("operator");
+		    				for (int i = 0; i < operator.getLength(); i++) {
+		    					HashMap<String, String> map = new HashMap<String, String>();
+		    					try {
+			    				map.put("acronym", ((Element) operator.item(i)).getElementsByTagName("acronym").
+			    						item(0).getFirstChild().getNodeValue());
+		    					} catch (Exception ex) {
+		    						map.put("acronym", "");
+		    					}
+			    				try {
+			    				map.put("name", ((Element) operator.item(i)).getElementsByTagName("name").
+			    						item(0).getFirstChild().getNodeValue());
+			    				} catch (Exception ex) {
+			    					map.put("name", "");
+			    				}
+			    				operatorsDBMap.put(((Element) operator.item(i)).getElementsByTagName("acronym").
+			    						item(0).getFirstChild().getNodeValue(), map);
+		    				}
+			    		} else if (field == "instruments") {
+			    			NodeList instrumentNode = doc.getElementsByTagName("instrument");
+			    			String[][] updatedInstruments = new String[instrumentNode.getLength()][2];
+		    				for (int i = 0; i < instrumentNode.getLength(); i++) {
+		    					HashMap<String, String> map = new HashMap<String, String>();
+		    					String name = "";
+		    					String manufacturer = "";
+		    					String acronym = "";
+		    					try {
+			    					name = ((Element) instrumentNode.item(i)).getElementsByTagName("name").
+				    						item(0).getFirstChild().getNodeValue();
+		    					} catch (Exception ex) {
+		    						name = "";
+		    					}
+		    					try {
+			    					manufacturer = ((Element) instrumentNode.item(i)).getElementsByTagName("manufacturer").
+				    						item(0).getFirstChild().getNodeValue();
+		    					} catch (Exception ex) {
+		    						manufacturer = "";
+		    					}
+		    					try {
+			    					acronym = ((Element) instrumentNode.item(i)).getElementsByTagName("acronym").
+				    						item(0).getFirstChild().getNodeValue();
+		    					} catch (Exception ex) {
+		    						acronym = "";
+		    					}
+			    				map.put("acronym", acronym);
+			    				map.put("name", name);
+			    				map.put("manufacturer", manufacturer);
+			    				instrumentsDBMap.put(acronym, map);
+			    				if (manufacturer == "") {
+			    					manufacturer = "Other";
+			    				}
+			    				updatedInstruments[i] = new String[]{name,manufacturer};
+		    				}
+		    				instrumentInfo = updatedInstruments;
+		    				String instrument = null;
+		    				if (airInstrumentLst.getSelectedItemText() != "Make your choice...") {
+			    				instrument = airInstrumentLst.getSelectedItemText();
+			    			}
+		    				airInstrumentLst.clear();
+		    				Utilities.populateInstrumentListBox(airInstrumentLst, instrumentInfo, 0);
+		    				if (instrument != null) {
+			    				Utilities.checkList(instrument, airInstrumentLst);
+			    			}
+			    		}
+			    		rootLogger.log(Level.INFO, "parsing finished, map object ready");
+			    	} else {
+			    		rootLogger.log(Level.WARNING, "An error occured during the processing of the response : " + response.getStatusText());
+			    	}
+			    }
+			});
+		} catch (RequestException e) {
+			rootLogger.log(Level.WARNING, "An error occured during the sending of the request : " + e.getMessage());
+		}
 	}
 }

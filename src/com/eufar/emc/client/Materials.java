@@ -1,6 +1,5 @@
 package com.eufar.emc.client;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,6 +10,7 @@ import com.google.gwt.resources.client.DataResource.MimeType;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
 import com.google.gwt.user.datepicker.client.DateBox;
 
@@ -94,35 +94,6 @@ public class Materials {
 	}
 
 	
-	public static ArrayList<String> aircraftList() {
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("Make a choice...");
-		list.add("Other...");
-		list.add("AWI - POLAR 5");
-		list.add("CNR - ERA Skyarrow");
-		list.add("CNR - Partenavia");
-		list.add("CzechGlobe - C 208");
-		list.add("DLR - C 208");
-		list.add("DLR - DO 228 D-CFFU");
-		list.add("DLR - DO 228 D-CODE");
-		list.add("DLR - Falcon 20");
-		list.add("ENVISCOPE - Learjet 35");
-		list.add("ENVISCOPE - Partenavia");
-		list.add("FAAM - BAe 146");
-		list.add("FUB - C 207");
-		list.add("INTA - CASA 212 AR");
-		list.add("INTA - CASA 212 RS");
-		list.add("KIT - Enduro");
-		list.add("NERC - Twin Otter VP-FAZ");
-		list.add("NERC - Twin Otter VP-FBL");
-		list.add("SAFIRE - ATR 42");
-		list.add("SAFIRE - Falcon 20");
-		list.add("SAFIRE - PIPER Aztec");
-		list.add("UEDIN - ECO Dimona");
-		return list;
-	}
-
-	
 	public static ArrayList<String> locationList() {
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("Make a choice...");
@@ -188,303 +159,259 @@ public class Materials {
 	}
 
 	
-	public static ArrayList<String> countryList() {
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("Make a choice...");
-		list.add("Afghanistan");
-		list.add("Albania");
-		list.add("Algeria");
-		list.add("Amazonia");
-		list.add("American Samoa");
-		list.add("Amsterdam And St. Paul Islands");
-		list.add("Andaman Islands");
-		list.add("Andorra");
-		list.add("Angola");
-		list.add("Anguilla");
-		list.add("Antigua And Barbuda");
-		list.add("Argentina");
-		list.add("Armenia");
-		list.add("Aruba");
-		list.add("Ascension Island");
-		list.add("Australia");
-		list.add("Austria");
-		list.add("Azerbaijan");
-		list.add("Bahamas");
-		list.add("Bahrain");
-		list.add("Baker Island");
-		list.add("Bangladesh");
-		list.add("Barbados");
-		list.add("Belarus");
-		list.add("Belgium");
-		list.add("Belize");
-		list.add("Benin");
-		list.add("Bhutan");
-		list.add("Bolivia");
-		list.add("Bonaire");
-		list.add("Bosnia And Herzegovina");
-		list.add("Botswana");
-		list.add("Bouvet Island");
-		list.add("Brazil");
-		list.add("British Isles");
-		list.add("Brunei");
-		list.add("Bulgaria");
-		list.add("Burkina Faso");
-		list.add("Burma");
-		list.add("Burundi");
-		list.add("Cambodia");
-		list.add("Cameroon");
-		list.add("Canada");
-		list.add("Caribbean");
-		list.add("Cayman Islands");
-		list.add("Central African Republic");
-		list.add("Ceuta");
-		list.add("Chad");
-		list.add("Channel Islands");
-		list.add("Chile");
-		list.add("China");
-		list.add("Christmas Island");
-		list.add("Cocos Islands");
-		list.add("Colombia");
-		list.add("Comoros");
-		list.add("Congo, Democratic Republic");
-		list.add("Congo, Republic");
-		list.add("Cook Islands");
-		list.add("Corsica");
-		list.add("Costa Rica");
-		list.add("Cote D'ivoire");
-		list.add("Croatia");
-		list.add("Crozet Islands");
-		list.add("Cuba");
-		list.add("Curacao");
-		list.add("Cyprus");
-		list.add("Czech Republic");
-		list.add("Denmark");
-		list.add("Dhekelia");
-		list.add("Djibouti");
-		list.add("Dominica");
-		list.add("Dominican Republic");
-		list.add("Ecuador");
-		list.add("Egypt");
-		list.add("El Salvador");
-		list.add("Equatorial Guinea");
-		list.add("Eritrea");
-		list.add("Estonia");
-		list.add("Ethiopia");
-		list.add("Faeroe Islands");
-		list.add("Falkland Islands");
-		list.add("Fiji");
-		list.add("Finland");
-		list.add("France");
-		list.add("French Guiana");
-		list.add("French Polynesia");
-		list.add("Gabon");
-		list.add("Galapagos Islands");
-		list.add("Gambia");
-		list.add("Gaza Strip");
-		list.add("Georgia, Republic");
-		list.add("Germany");
-		list.add("Ghana");
-		list.add("Gibraltar");
-		list.add("Gough Island");
-		list.add("Greece");
-		list.add("Greenland");
-		list.add("Grenada");
-		list.add("Guadeloupe");
-		list.add("Guam");
-		list.add("Guatemala");
-		list.add("Guinea");
-		list.add("Guinea-Bissau");
-		list.add("Guyana");
-		list.add("Haiti");
-		list.add("Hawaii Island");
-		list.add("Hawaiian Islands");
-		list.add("Honduras");
-		list.add("Hong Kong");
-		list.add("Howland Island");
-		list.add("Hungary");
-		list.add("Iceland");
-		list.add("India");
-		list.add("Indonesia");
-		list.add("Iran");
-		list.add("Iraq");
-		list.add("Ireland");
-		list.add("Israel");
-		list.add("Italy");
-		list.add("Jamaica");
-		list.add("Japan");
-		list.add("Jarvis Island");
-		list.add("Johnston Atoll");
-		list.add("Jordan");
-		list.add("Kahoolawe");
-		list.add("Kauai");
-		list.add("Kazakhstan");
-		list.add("Kenya");
-		list.add("Kerguelen Islands");
-		list.add("Kingman Reef");
-		list.add("Kiribati");
-		list.add("Kosovo");
-		list.add("Kuwait");
-		list.add("Kyrgyzstan");
-		list.add("Laeso");
-		list.add("Lake Chad");
-		list.add("Lake Malawi");
-		list.add("Lake Tanganyika");
-		list.add("Lake Victoria");
-		list.add("Lanai");
-		list.add("Laos");
-		list.add("Latvia");
-		list.add("Lebanon");
-		list.add("Lesotho");
-		list.add("Liberia");
-		list.add("Libya");
-		list.add("Liechtenstein");
-		list.add("Lithuania");
-		list.add("Luxembourg");
-		list.add("Macau");
-		list.add("Macedonia");
-		list.add("Madagascar");
-		list.add("Madeira");
-		list.add("Malawi");
-		list.add("Malaysia");
-		list.add("Maldives");
-		list.add("Mali");
-		list.add("Malta");
-		list.add("Marshall Islands");
-		list.add("Martinique");
-		list.add("Maui");
-		list.add("Mauritania");
-		list.add("Mauritius");
-		list.add("Melanesia");
-		list.add("Mexico");
-		list.add("Micronesia");
-		list.add("Midway Atoll");
-		list.add("Moldova");
-		list.add("Molokai");
-		list.add("Monaco");
-		list.add("Mongolia");
-		list.add("Montenegro");
-		list.add("Montserrat");
-		list.add("Morocco");
-		list.add("Mozambique");
-		list.add("Namibia");
-		list.add("Nauru");
-		list.add("Navassa Island");
-		list.add("Nepal");
-		list.add("Netherlands Antilles");
-		list.add("Netherlands");
-		list.add("New Caledonia");
-		list.add("New Zealand");
-		list.add("Nicaragua");
-		list.add("Nicobar Islands");
-		list.add("Niger");
-		list.add("Nigeria");
-		list.add("Niihau");
-		list.add("Niue");
-		list.add("Norfolk Island");
-		list.add("North Korea");
-		list.add("Northern Mariana Islands");
-		list.add("Norway");
-		list.add("Oahu");
-		list.add("Okinawa");
-		list.add("Oman");
-		list.add("Pakistan");
-		list.add("Palau");
-		list.add("Palestine");
-		list.add("Palmyra Atoll");
-		list.add("Panama");
-		list.add("Papua New Guinea");
-		list.add("Paraguay");
-		list.add("Peru");
-		list.add("Philippines");
-		list.add("Pitcairn Island");
-		list.add("Pitcairn Islands");
-		list.add("Poland");
-		list.add("Polynesia");
-		list.add("Portugal");
-		list.add("Puerto Rico");
-		list.add("Qatar");
-		list.add("Red Sea");
-		list.add("Reunion");
-		list.add("Romania");
-		list.add("Russia");
-		list.add("Rwanda");
-		list.add("Saba");
-		list.add("Sable Island");
-		list.add("Samoa");
-		list.add("San Marino");
-		list.add("Sao Tome And Principe");
-		list.add("Sardinia");
-		list.add("Saudi Arabia");
-		list.add("Scandinavia");
-		list.add("Senegal");
-		list.add("Serbia");
-		list.add("Seychelles");
-		list.add("Sicily");
-		list.add("Sierra Leone");
-		list.add("Singapore");
-		list.add("Slovakia");
-		list.add("Slovenia");
-		list.add("Solomon Islands");
-		list.add("Somalia");
-		list.add("South Africa");
-		list.add("South Georgia Island");
-		list.add("South Korea");
-		list.add("South Orkney Islands");
-		list.add("South Sandwich Islands");
-		list.add("Spain");
-		list.add("Spratly Islands");
-		list.add("Sri Lanka");
-		list.add("St Barthelemy");
-		list.add("St Eustatius");
-		list.add("St Helena");
-		list.add("St Kitts And Nevis");
-		list.add("St Lucia");
-		list.add("St Maarten");
-		list.add("St Martin");
-		list.add("St Pierre And Miquelon");
-		list.add("St Vincent And The Grenadines");
-		list.add("Sudan");
-		list.add("Suriname");
-		list.add("Svalbard And Jan Mayen");
-		list.add("Swaziland");
-		list.add("Sweden");
-		list.add("Switzerland");
-		list.add("Syria");
-		list.add("Taiwan");
-		list.add("Tajikistan");
-		list.add("Tanzania");
-		list.add("Thailand");
-		list.add("Togo");
-		list.add("Tokelau");
-		list.add("Tonga");
-		list.add("Trinidad And Tobago");
-		list.add("Tristan Da Cunha");
-		list.add("Tunisia");
-		list.add("Turkey");
-		list.add("Turkmenistan");
-		list.add("Turks And Caicos Islands");
-		list.add("Tuvalu");
-		list.add("Uganda");
-		list.add("Ukraine");
-		list.add("United Arab Emirates");
-		list.add("United Kingdom");
-		list.add("United States of America");
-		list.add("Uruguay");
-		list.add("Uzbekistan");
-		list.add("Vanuatu");
-		list.add("Vatican City");
-		list.add("Venezuela");
-		list.add("Vietnam");
-		list.add("Virgin Islands");
-		list.add("Wake Island");
-		list.add("Wallis And Futuna Islands");
-		list.add("Yemen");
-		list.add("Zambia");
-		list.add("Zanzibar");
-		list.add("Zimbabwe");
-		return list;
+	public static HashMap<String, String> countryCodeList() {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("Afghanistan","AF");
+		map.put("Aland Islands","AX");
+		map.put("Albania","AL");
+		map.put("Algeria","DZ");
+		map.put("American Samoa","AS");
+		map.put("Andorra","AD");
+		map.put("Angola","AO");
+		map.put("Anguilla","AI");
+		map.put("Antarctica","AQ");
+		map.put("Antigua And Barbuda","AG");
+		map.put("Argentina","AR");
+		map.put("Armenia","AM");
+		map.put("Aruba","AW");
+		map.put("Australia","AU");
+		map.put("Austria","AT");
+		map.put("Azerbaijan","AZ");
+		map.put("Bahamas","BS");
+		map.put("Bahrain","BH");
+		map.put("Bangladesh","BD");
+		map.put("Barbados","BB");
+		map.put("Belarus","BY");
+		map.put("Belgium","BE");
+		map.put("Belize","BZ");
+		map.put("Benin","BJ");
+		map.put("Bermuda","BM");
+		map.put("Bhutan","BT");
+		map.put("Bolivia","BO");
+		map.put("Bonaire","BQ");
+		map.put("Bosnia And Herzegovina","BA");
+		map.put("Botswana","BW");
+		map.put("Bouvet Island","BV");
+		map.put("Brazil","BR");
+		map.put("British Indian Ocean Territory","IO");
+		map.put("Brunei","BN");
+		map.put("Bulgaria","BG");
+		map.put("Burkina Faso","BF");
+		map.put("Burundi","BI");
+		map.put("Cabo Verde","CV");
+		map.put("Cambodia","KH");
+		map.put("Cameroon","CM");
+		map.put("Canada","CA");
+		map.put("Cayman Islands","KY");
+		map.put("Central African Republic","CF");
+		map.put("Chad","TD");
+		map.put("Chile","CL");
+		map.put("China","CN");
+		map.put("Christmas Island","CX");
+		map.put("Cocos Islands","CC");
+		map.put("Colombia","CO");
+		map.put("Comoros","KM");
+		map.put("Congo, Democratic Republic","CD");
+		map.put("Congo, Republic","CG");
+		map.put("Cook Islands","CK");
+		map.put("Costa Rica","CR");
+		map.put("Cote d'Ivoire","CI");
+		map.put("Croatia","HR");
+		map.put("Cuba","CU");
+		map.put("Curacao","CW");
+		map.put("Cyprus","CY");
+		map.put("Czech Republic","CZ");
+		map.put("Denmark","DK");
+		map.put("Djibouti","DJ");
+		map.put("Dominica","DM");
+		map.put("Dominican Republic","DO");
+		map.put("Ecuador","EC");
+		map.put("Egypt","EG");
+		map.put("El Salvador","SV");
+		map.put("Equatorial Guinea","GQ");
+		map.put("Eritrea","ER");
+		map.put("Estonia","EE");
+		map.put("Ethiopia","ET");
+		map.put("Falkland Islands","KF");
+		map.put("Faroe Islands","FO");
+		map.put("Fiji","FJ");
+		map.put("Finland","FI");
+		map.put("France","FR");
+		map.put("French Guiana","GF");
+		map.put("French Polynesia","PF");
+		map.put("French Southern Territories","TF");
+		map.put("Gabon","GA");
+		map.put("Gambia","GM");
+		map.put("Georgia, Republic","GE");
+		map.put("Germany","DE");
+		map.put("Ghana","GH");
+		map.put("Gibraltar","GI");
+		map.put("Greece","GR");
+		map.put("Greenland","GL");
+		map.put("Grenada","GD");
+		map.put("Guadeloupe","GP");
+		map.put("Guam","GU");
+		map.put("Guatemala","GT");
+		map.put("Guernsey","GG");
+		map.put("Guinea","GN");
+		map.put("Guinea-Bissau","GW");
+		map.put("Guyana","GY");
+		map.put("Haiti","HT");
+		map.put("Heard Island and McDonald","HM");
+		map.put("Holy See","VA");
+		map.put("Honduras","HN");
+		map.put("Hong Kong","HK");
+		map.put("Hungary","HU");
+		map.put("Iceland","IS");
+		map.put("India","IN");
+		map.put("Indonesia","ID");
+		map.put("Iran","IR");
+		map.put("Iraq","IQ");
+		map.put("Ireland","IE");
+		map.put("Isle of Man","IM");
+		map.put("Israel","IL");
+		map.put("Italy","IT");
+		map.put("Jamaica","JM");
+		map.put("Japan","JP");
+		map.put("Jersey","JE");
+		map.put("Jordan","JO");
+		map.put("Kazakhstan","KZ");
+		map.put("Kenya","KE");
+		map.put("Kiribati","KI");
+		map.put("Korea (the Democratic People's Republic of)","KP");
+		map.put("Korea (the Republic of)","KR");
+		map.put("Kuwait","KW");
+		map.put("Kyrgyzstan","KG");
+		map.put("Lao People's Democratic Republic (the)","LA");
+		map.put("Latvia","LV");
+		map.put("Lebanon","LB");
+		map.put("Lesotho","LS");
+		map.put("Liberia","LR");
+		map.put("Libya","LY");
+		map.put("Liechtenstein","LI");
+		map.put("Lithuania","LT");
+		map.put("Luxembourg","LU");
+		map.put("Macao","MO");
+		map.put("Macedonia","MK");
+		map.put("Madagascar","MG");
+		map.put("Malawi","MW");
+		map.put("Malaysia","MY");
+		map.put("Maldives","MV");
+		map.put("Mali","ML");
+		map.put("Malta","MT");
+		map.put("Marshall Islands","MH");
+		map.put("Martinique","MQ");
+		map.put("Mauritania","MR");
+		map.put("Mauritius","MU");
+		map.put("Mayotte","YT");
+		map.put("Mexico","MX");
+		map.put("Micronesia","FM");
+		map.put("Moldova","MD");
+		map.put("Monaco","MC");
+		map.put("Mongolia","MN");
+		map.put("Montenegro","ME");
+		map.put("Montserrat","MS");
+		map.put("Morocco","MA");
+		map.put("Mozambique","MZ");
+		map.put("Myanmar","MM");
+		map.put("Namibia","NA");
+		map.put("Nauru","NR");
+		map.put("Nepal","NP");
+		map.put("Netherlands","NL");
+		map.put("New Caledonia","NC");
+		map.put("New Zealand","NZ");
+		map.put("Nicaragua","NI");
+		map.put("Niger","NE");
+		map.put("Nigeria","NG");
+		map.put("Niue","NU");
+		map.put("Norfolk Island","NF");
+		map.put("Northern Mariana Islands","MP");
+		map.put("Norway","NO");
+		map.put("Oman","OM");
+		map.put("Pakistan","PK");
+		map.put("Palau","PW");
+		map.put("Palestine","PS");
+		map.put("Panama","PA");
+		map.put("Papua New Guinea","PG");
+		map.put("Paraguay","PY");
+		map.put("Peru","PE");
+		map.put("Philippines","PH");
+		map.put("Pitcairn","PN");
+		map.put("Poland","PL");
+		map.put("Portugal","PT");
+		map.put("Puerto Rico","PR");
+		map.put("Qatar","QA");
+		map.put("Reunion","RE");
+		map.put("Romania","RO");
+		map.put("Russia","RU");
+		map.put("Rwanda","RW");
+		map.put("Saint Helena, Ascension and Tristan da Cunha","SH");
+		map.put("Saint Kitts and Nevis","KN");
+		map.put("Saint Lucia","LC");
+		map.put("Saint Martin","MF");
+		map.put("Saint Pierre and Miquelon","PM");
+		map.put("Saint Vincent and the Grenadines","VC");
+		map.put("Samoa","WS");
+		map.put("San Marino","SM");
+		map.put("Sao Tome And Principe","ST");
+		map.put("Saudi Arabia","SA");
+		map.put("Senegal","SN");
+		map.put("Serbia","RS");
+		map.put("Seychelles","SC");
+		map.put("Sierra Leone","SL");
+		map.put("Singapore","SG");
+		map.put("Sint Maarten","SX");
+		map.put("Slovakia","SK");
+		map.put("Slovenia","SI");
+		map.put("Solomon Islands","SB");
+		map.put("Somalia","SO");
+		map.put("South Africa","ZA");
+		map.put("South Georgia and the South Sandwich Island","GS");
+		map.put("South Sudan","SS");
+		map.put("Spain","ES");
+		map.put("Sri Lanka","LK");
+		map.put("Sudan","SD");
+		map.put("Suriname","SR");
+		map.put("Svalbard And Jan Mayen","SJ");
+		map.put("Swaziland","SZ");
+		map.put("Sweden","SE");
+		map.put("Switzerland","CH");
+		map.put("Syria","SY");
+		map.put("Taiwan","TW");
+		map.put("Tajikistan","TJ");
+		map.put("Tanzania","TZ");
+		map.put("Thailand","TH");
+		map.put("Timor-Leste","TL");
+		map.put("Togo","TG");
+		map.put("Tokelau","TK");
+		map.put("Tonga","TO");
+		map.put("Trinidad And Tobago","TT");
+		map.put("Tunisia","TN");
+		map.put("Turkey","TR");
+		map.put("Turkmenistan","TM");
+		map.put("Turks And Caicos Islands","TC");
+		map.put("Tuvalu","TV");
+		map.put("Uganda","UG");
+		map.put("Ukraine","UA");
+		map.put("United Arab Emirates","AE");
+		map.put("United Kingdom","GB");
+		map.put("United States Minor Outlying Islands","UM");
+		map.put("United States of America","US");
+		map.put("Uruguay","UY");
+		map.put("Uzbekistan","UZ");
+		map.put("Vanuatu","VU");
+		map.put("Venezuela","VE");
+		map.put("Vietnam","VN");
+		map.put("Virgin Islands (British)","VG");
+		map.put("Virgin Islands (U.S.)","VI");
+		map.put("Wallis And Futuna","WF");
+		map.put("Western Sahara","EH");
+		map.put("Yemen","YE");
+		map.put("Zambia","ZM");
+		map.put("Zimbabwe","ZW");
+		return map;
 	}
-
+	
 	
 	public static ArrayList<String> resolutionList() {
 		ArrayList<String> list = new ArrayList<String>();
@@ -691,7 +618,6 @@ public class Materials {
 		list.add(Emc_eufar.identTitleBox);
 		list.add(Emc_eufar.identAbstractAre);
 		list.add(Emc_eufar.identLocatorBox);
-		list.add(Emc_eufar.identIdentifierBox);
 		list.add(Emc_eufar.airManufacturerBox);
 		list.add(Emc_eufar.airTypeBox);
 		list.add(Emc_eufar.airOperatorBox);
@@ -712,6 +638,13 @@ public class Materials {
 	}
 	
 	
+	public static ArrayList<SuggestBox> allRequiredSuggestboxes() {
+		ArrayList<SuggestBox> list = new ArrayList<SuggestBox>();
+		list.add(Emc_eufar.identIdentifierBox);
+		return list;
+	}
+	
+	
 	public static ArrayList<String> allCorrectFields() {
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("string");
@@ -723,7 +656,6 @@ public class Materials {
 		list.add("string");
 		list.add("string");
 		list.add("string");
-		list.add("string");
 		list.add("number");
 		list.add("number");
 		list.add("number");
@@ -734,6 +666,13 @@ public class Materials {
 		list.add("email");
 		list.add("string");
 		list.add("email");
+		return list;
+	}
+	
+	
+	public static ArrayList<String> allCorrectFields2() {
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("string");
 		return list;
 	}
 	
@@ -854,262 +793,261 @@ public class Materials {
 	}
 	
 	
-	public static HashMap<String, String> instrumentMap() {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("1.108","Grimm Technologies Inc.");
-        map.put("1.109","Grimm Technologies Inc.");
-        map.put("1011C","Buck Research Instruments L.L.C.");
-        map.put("1201","Rosemount");
-        map.put("1221","Rosemount");
-        map.put("2D-C","Particle Measuring Systems");
-        map.put("2D-P","Particle Measuring Systems");
-        map.put("2D-S","Stratton Park Engineering Company");
-        map.put("2D2C","Particle Measuring Systems");
-        map.put("2DGB2","Particle Measuring Systems");
-        map.put("3150","ICSensors / Measurement Specialties");
-        map.put("4PI-SR","METEO-CONSULT");
-        map.put("5-hole Turbulence Probe","Other");
-        map.put("858AJ28","Rosemount");
-        map.put("AA-300","Sperry");
-        map.put("AADC II","Scintrex Ltd");
-        map.put("AARP","University of Manchester");
-        map.put("ADA-100-PDPA","TSI Inc.");
-        map.put("AE-42","Magee Scientific");
-        map.put("AE-52 Aethelometer","Magee Scientific");
-        map.put("AHV16","Thales");
-        map.put("AHV8","TRT");
-        map.put("AIMMS-20","Aventech Inc.");
-        map.put("AIRINS","iXBlue");
-        map.put("AL5002","Aero-Laser Gmbh");
-        map.put("AL5003","Aero-Laser Gmbh");
-        map.put("ALS-450","Leosphere");
-        map.put("ALS50","Leica Geosystems");
-        map.put("ARIES","Met Office / ABB Bomem");
-        map.put("AT4","Javad GNSS Inc.");
-        map.put("AVAPS","Vaisala");
-        map.put("Airborne Hyperspectral Scanner","Argon ST");
-        map.put("Airborne Prism EXperiment","ESA");
-        map.put("Airborne Thematic Mapper","DLR");
-        map.put("Airborne Visibility Meter","HSS Inc.");
-        map.put("Aircraft Systems","Other");
-        map.put("AisaDUAL","SPECIM");
-        map.put("AisaEAGLE 1K","SPECIM");
-        map.put("AisaEAGLE","SPECIM");
-        map.put("AisaFENIX 1K","SPECIM");
-        map.put("AisaFENIX","SPECIM");
-        map.put("AisaOWL","SPECIM");
-        map.put("B270","Setra Systems");
-        map.put("BAT","NOAA / Airborne Research Australia");
-        map.put("BCP","Droplet Measurement Technologies");
-        map.put("CAPS - LWC","Droplet Measurement Technologies");
-        map.put("CAPS","Droplet Measurement Technologies");
-        map.put("CAS Spectrometer","Baumgardner et al., 2001");
-        map.put("CASI","ITRES Research Ltd");
-        map.put("CASI-1500i","ITRES Research Ltd");
-        map.put("CASI-550","ITRES Research Ltd");
-        map.put("CCN Counter","Droplet Measurement Technologies");
-        map.put("CCNS4","IGI mbH");
-        map.put("CDP-2","Droplet Measurement Technologies");
-        map.put("CEV","INTA");
-        map.put("CGR-4","Kipp & Zonen");
-        map.put("CIP","Droplet Measurement Technologies");
-        map.put("CIP-100","Droplet Measurement Technologies");
-        map.put("CIP-15","Droplet Measurement Technologies");
-        map.put("CMP-22","Kipp & Zonen");
-        map.put("COPAS","University of Mainz");
-        map.put("CPI","Stratton Park Engineering Company");
-        map.put("CR-1","Buck Research Instruments L.L.C.");
-        map.put("CR-2","Buck Research Instruments L.L.C.");
-        map.put("CRISTA New Frontiers","ForschungsZentrum Juelich");
-        map.put("CW-QCLAS","Aerodyne Research Inc.");
-        map.put("Campbell Q7.1","Campbell Scientific");
-        map.put("Cloud Imaging Probe","Other");
-        map.put("Counterflow Virtual Impactor","Met Office");
-        map.put("DEIMOS","Met Office");
-        map.put("Dewtrak-137","EdgeTech Instruments");
-        map.put("Dewtrak-200","EdgeTech Instruments");
-        map.put("dIGIcam K14","IGI mbH");
-        map.put("E-SAR","DLR");
-        map.put("ERS microjoule Lidar EMB-ER 1/2","ERS");
-        map.put("Eppley PS Pyranometer","The Eppley Laboratory Inc.");
-        map.put("Eppley Pyrgeometer","The Eppley Laboratory Inc.");
-        map.put("Everest 4000.4ZL","Everest Interscience Inc.");
-        map.put("F-SAR","DLR");
-        map.put("FAGE","University of Leeds");
-        map.put("FLIR M40","FLIR Systems Inc.");
-        map.put("FLIR SC3000","FLIR Systems Inc.");
-        map.put("FS2 Relative Humidity","Aerodata GmbH");
-        map.put("FSSP-100","Particle Measuring Systems");
-        map.put("FSSP-100ER","Particle Measuring Systems");
-        map.put("FSSP-300","Particle Measuring Systems");
-        map.put("FTIR","Midac Inc.");
-        map.put("FUBISS","Free University of Berlin");
-        map.put("FUBISS-ASA2","Free University Berlin");
-        map.put("Filter Sampler","Other");
-        map.put("Flask Array Sampler","Atmospheric Observing Systems Inc.");
-        map.put("Flask Sampling System","MetAir");
-        map.put("Flourescence Water Vapour Sensor","Met Office");
-        map.put("Formaldehyde Detectors","Other");
-        map.put("GASCOD-A","FISBAT-CNR");
-        map.put("GE-1011B","General Eastern");
-        map.put("GE-1011C","General Eastern");
-        map.put("GR-DV400","JVC");
-        map.put("Garmin GPS","Garmin");
-        map.put("Gyro-4","Javad GNSS Inc.");
-        map.put("HAGAR","University of Frankfurt");
-        map.put("HALOX","Forschungszentrum Julich GmbH");
-        map.put("HMP","Vaisala / Rosemount");
-        map.put("HMP233","Vaisala");
-        map.put("HRSC AX","DLR");
-        map.put("HVPS","Stratton Park Engineering Company");
-        map.put("High Accuracy INS","SAGEM");
-        map.put("Hyperspectral Imagery Sensor","DLR");
-        map.put("HySpecScan","Analytical Spectral Devices Inc.");
-        map.put("IR Gas analyzer","Edinburgh Sensors");
-        map.put("IR/UV Line Scanner","OPTIMARE Systems GmbH");
-        map.put("IRCAM","Jenoptik AG");
-        map.put("IS-2","Interspect Ltd.");
-        map.put("IS-3","Interspect Ltd.");
-        map.put("IS-4","Interspect Ltd.");
-        map.put("IS2+","Interspect Ltd.");
-        map.put("Ice Nucleus Counter","University of Manchester");
-        map.put("J-W LWC","Johnson-Williams");
-        map.put("JO1D / JNO2 Photometer","Unknown");
-        map.put("KA-131","Bendix King");
-        map.put("KT-15","Heitronics Infrarot Messtechnik");
-        map.put("King Probe","Particle Measuring Systems");
-        map.put("Kistler 3 axes accelerometers","Kistler Instrumente AG");
-        map.put("LASAIR-5295","Particle Measurement Systems");
-        map.put("LD90","Riegl Laser Measurement Systems GmbH");
-        map.put("LGR 907","Los Gatos Research Inc.");
-        map.put("LGR DLT100","Los Gatos Research Inc.");
-        map.put("LI-COR 6262","LI-COR");
-        map.put("LI-COR 7500","LI-COR");
-        map.put("LI-COR Pyranometer","LI-COR");
-        map.put("LI-COR Quantum Sensor","LI-COR");
-        map.put("LMS-Q280","Riegl Laser Measurement Systems GmbH");
-        map.put("LMS-Q560","Riegl Laser Measurement Systems GmbH");
-        map.put("LMS-Q680i","Riegl Laser Measurement Systems GmbH");
-        map.put("LTC 0600","Philipps");
-        map.put("LTN 90-100","Litton");
-        map.put("Lasernav YG1761B","Honeywell");
-        map.put("Lyman-alpha HMS-2","Buck Research Instruments L.L.C.");
-        map.put("Lyman-alpha L-5","Buck Research Instruments L.L.C.");
-        map.put("MARSS","Met Office");
-        map.put("MS4100","Duncantech");
-        map.put("MetAir NOxTOy","MetAir AG");
-        map.put("Meteorological Sensor Package","DLR");
-        map.put("Mobile Flux Platform","IBIMET CNR");
-        map.put("NO CLD","DLR");
-        map.put("Nevzorov IVO-2a","Sky Tech Research Inc.");
-        map.put("Nevzorov","Sky Tech Research Inc.");
-        map.put("OAP-200X","Particle Measuring Systems");
-        map.put("OAP-230X","Particle Measuring Systems");
-        map.put("OAP-230Y","Particle Measuring Systems");
-        map.put("OEM4-G2","NovAtel Inc.");
-        map.put("ORAC","University of Leeds");
-        map.put("Others","Other");
-        map.put("Ozone Lidar EXperiment","DLR");
-        map.put("Ozone Monitor 202","2B Technologies");
-        map.put("Ozone Monitor","2B Technologies");
-        map.put("PAN GC","Ai Qualitek Ltd");
-        map.put("PCASP-100X","Droplet Measurement Technologies");
-        map.put("PCASP-SPP200","Droplet Measurement Technologies");
-        map.put("PELICAN","ONERA");
-        map.put("PERCA","University of Leceister");
-        map.put("POS AV 510","Applanix");
-        map.put("POSAV-410","Applanix");
-        map.put("PRT 6","Barnes");
-        map.put("PSAP","Radiance Research Inc.");
-        map.put("PSI-O3","Paul Scherrer Institut");
-        map.put("PT","Rosemount");
-        map.put("PT100","Rosemount");
-        map.put("PT102AL","Rosemount");
-        map.put("PT102BL","Rosemount");
-        map.put("PT102BW","Rosemount");
-        map.put("PT102DB1 AG","Rosemount");
-        map.put("PT102E2 AL","Rosemount");
-        map.put("PT102E4 AL","Rosemount");
-        map.put("PT50","Rosemount");
-        map.put("PT500","Rosemount");
-        map.put("PTR-MS","University of East Anglia");
-        map.put("PVM-100","Gerber Scientific Inc.");
-        map.put("Peroxide Detectors","Other");
-        map.put("Pitot Probe","Other");
-        map.put("Polifemo M21","SUPERELECTRIC s.r.l.");
-        map.put("Portable Lidar System","University of Munich");
-        map.put("R4903","Met One Instruments");
-        map.put("RALI","LATMOS");
-        map.put("RALI","LATMOS");
-        map.put("RCD105","Leica-Geosystems");
-        map.put("RDR-4B","Honeywell");
-        map.put("RMK A 30/23","Zeiss");
-        map.put("RMK A","Zeiss");
-        map.put("RR-0150","RadianceResearch");
-        map.put("RT3102","Oxford Technical Solutions");
-        map.put("Radar Echo Sounding System","AWI");
-        map.put("S-5002","Sistemas Instalaciones Redes S.A.");
-        map.put("S-5006","Sistemas Instalaciones Redes S.A.");
-        map.put("S-5012","Sistemas Instalaciones Redes S.A.");
-        map.put("S3000","Michell Instruments GmbH");
-        map.put("S56","Micro-g LaCoste");
-        map.put("SA 41M","Environment S.A.");
-        map.put("SETHI","ONERA");
-        map.put("SFIM 3 axes accelerometers","SFIM");
-        map.put("SID-2","University of Hertfordshire");
-        map.put("SIELETERS","ONERA");
-        map.put("SIOUX","DLR");
-        map.put("SMPS","Grimm Technologies Inc.");
-        map.put("SP-2","Droplet Measurement Technologies");
-        map.put("SPEC Hawkeye","Stratton Park Engineering Company");
-        map.put("SWS","Met Office");
-        map.put("Solent HS","Gill Instruments Ltd");
-        map.put("Solent HS-100","Gill Instruments Ltd");
-        map.put("Solent HS-50","Gill Instruments Ltd");
-        map.put("Sony Video Camera","Sony");
-        map.put("Sundstrand 3 axes accelerometers","Sundstrand");
-        map.put("TABI320","ITRES Research Ltd");
-        map.put("TAFTS","Imperial College London");
-        map.put("TASI-600","ITRES Research Ltd");
-        map.put("TDLAS","Imperial College London");
-        map.put("TDLAS","National Physical Laboratory");
-        map.put("TECO 42C","ThermoScientific");
-        map.put("TECO 42C","ThermoScientific");
-        map.put("TECO 42S","ThermoScientific");
-        map.put("TECO 43C","ThermoScientific");
-        map.put("TECO 48","ThermoScientific");
-        map.put("TECO 48CS","ThermoScientific");
-        map.put("TECO 49PS","ThermoScientific");
-        map.put("TECO 49S","ThermoScientific");
-        map.put("TOF-AMS","Aerodyne Research Inc.");
-        map.put("TP3-S","Meteolabor AG");
-        map.put("TS9260","NEC Corporation");
-        map.put("TSI-3007","TSI Inc.");
-        map.put("TSI-3010","TSI Inc.");
-        map.put("TSI-3022","TSI Inc.");
-        map.put("TSI-3025","TSI Inc.");
-        map.put("TSI-3563","TSI Inc.");
-        map.put("TSI-3776","TSI Inc.");
-        map.put("TSI-3786","TSI Inc.");
-        map.put("Total Water Content","Met Office");
-        map.put("Trimble 2101","Trimble Navigation");
-        map.put("Trimble 4000 SSI","Trimble Navigation");
-        map.put("Trimble TNL 2000","Trimble Navigation");
-        map.put("UHSAS-A","Droplet Measurement Technologies");
-        map.put("ULISS 45i","SAGEM");
-        map.put("ULS","Laser Technology Inc.");
-        map.put("UMP40","Sextant");
-        map.put("VACC","University of Leeds");
-        map.put("VIS Line Scanner","OPTIMARE Systems GmbH");
-        map.put("VIS/NIR Spectrometer ","Other");
-        map.put("VOC GC","Airmotec AG");
-        map.put("Video Camera","Other");
-        map.put("WIND","DLR / CNRS / INSU");
-        map.put("WVSS-II","SpectraSensors Inc.");
-        map.put("Walz UV Pyranometer","Heinz Walz Company");
-        map.put("Whole Air Sampling System","University of York");
-        map.put("XR5","Navstar Electronics");
-		return map;
+	public static String[][] newInstrumentInfo() {
+		String[][] string = {{"1.108","Grimm Technologies Inc."},
+				{"1.109","Grimm Technologies Inc."},
+				{"1011C","Buck Research Instruments L.L.C."},
+				{"1201","Rosemount"},
+				{"1221","Rosemount"},
+				{"2D-C","Particle Measuring Systems"},
+				{"2D-P","Particle Measuring Systems"},
+				{"2D-S","Stratton Park Engineering Company"},
+				{"2D2C","Particle Measuring Systems"},
+				{"2DGB2","Particle Measuring Systems"},
+				{"3150","ICSensors / Measurement Specialties"},
+				{"4PI-SR","METEO-CONSULT"},
+				{"5-hole Turbulence Probe","Other"},
+				{"858AJ28","Rosemount"},
+				{"AA-300","Sperry"},
+				{"AADC II","Scintrex Ltd"},
+				{"AARP","University of Manchester"},
+				{"ADA-100-PDPA","TSI Inc."},
+				{"AE-42","Magee Scientific"},
+				{"AE-52 Aethelometer","Magee Scientific"},
+				{"AHV16","Thales"},
+				{"AHV8","TRT"},
+				{"AIMMS-20","Aventech Inc."},
+				{"AIRINS","iXBlue"},
+				{"AL5002","Aero-Laser Gmbh"},
+				{"AL5003","Aero-Laser Gmbh"},
+				{"ALS-450","Leosphere"},
+				{"ALS50","Leica Geosystems"},
+				{"ARIES","Met Office / ABB Bomem"},
+				{"AT4","Javad GNSS Inc."},
+				{"AVAPS","Vaisala"},
+				{"Airborne Hyperspectral Scanner","Argon ST"},
+				{"Airborne Prism EXperiment","ESA"},
+				{"Airborne Thematic Mapper","DLR"},
+				{"Airborne Visibility Meter","HSS Inc."},
+				{"Aircraft Systems","Other"},
+				{"AisaDUAL","SPECIM"},
+				{"AisaEAGLE 1K","SPECIM"},
+				{"AisaEAGLE","SPECIM"},
+				{"AisaFENIX 1K","SPECIM"},
+				{"AisaFENIX","SPECIM"},
+				{"AisaOWL","SPECIM"},
+				{"B270","Setra Systems"},
+				{"BAT","NOAA / Airborne Research Australia"},
+				{"BCP","Droplet Measurement Technologies"},
+				{"CAPS - LWC","Droplet Measurement Technologies"},
+				{"CAPS","Droplet Measurement Technologies"},
+				{"CAS Spectrometer","Baumgardner et al., 2001"},
+				{"CASI","ITRES Research Ltd"},
+				{"CASI-1500i","ITRES Research Ltd"},
+				{"CASI-550","ITRES Research Ltd"},
+				{"CCN Counter","Droplet Measurement Technologies"},
+				{"CCNS4","IGI mbH"},
+				{"CDP-2","Droplet Measurement Technologies"},
+				{"CEV","INTA"},
+				{"CGR-4","Kipp & Zonen"},
+				{"CIP","Droplet Measurement Technologies"},
+				{"CIP-100","Droplet Measurement Technologies"},
+				{"CIP-15","Droplet Measurement Technologies"},
+				{"CMP-22","Kipp & Zonen"},
+				{"COPAS","University of Mainz"},
+				{"CPI","Stratton Park Engineering Company"},
+				{"CR-1","Buck Research Instruments L.L.C."},
+				{"CR-2","Buck Research Instruments L.L.C."},
+				{"CRISTA New Frontiers","ForschungsZentrum Juelich"},
+				{"CW-QCLAS","Aerodyne Research Inc."},
+				{"Campbell Q7.1","Campbell Scientific"},
+				{"Cloud Imaging Probe","Other"},
+				{"Counterflow Virtual Impactor","Met Office"},
+				{"DEIMOS","Met Office"},
+				{"Dewtrak-137","EdgeTech Instruments"},
+				{"Dewtrak-200","EdgeTech Instruments"},
+				{"dIGIcam K14","IGI mbH"},
+				{"E-SAR","DLR"},
+				{"ERS microjoule Lidar EMB-ER 1/2","ERS"},
+				{"Eppley PS Pyranometer","The Eppley Laboratory Inc."},
+				{"Eppley Pyrgeometer","The Eppley Laboratory Inc."},
+				{"Everest 4000.4ZL","Everest Interscience Inc."},
+				{"F-SAR","DLR"},
+				{"FAGE","University of Leeds"},
+				{"FLIR M40","FLIR Systems Inc."},
+				{"FLIR SC3000","FLIR Systems Inc."},
+				{"FS2 Relative Humidity","Aerodata GmbH"},
+				{"FSSP-100","Particle Measuring Systems"},
+				{"FSSP-100ER","Particle Measuring Systems"},
+				{"FSSP-300","Particle Measuring Systems"},
+				{"FTIR","Midac Inc."},
+				{"FUBISS","Free University of Berlin"},
+				{"FUBISS-ASA2","Free University Berlin"},
+				{"Filter Sampler","Other"},
+				{"Flask Array Sampler","Atmospheric Observing Systems Inc."},
+				{"Flask Sampling System","MetAir"},
+				{"Flourescence Water Vapour Sensor","Met Office"},
+				{"Formaldehyde Detectors","Other"},
+				{"GASCOD-A","FISBAT-CNR"},
+				{"GE-1011B","General Eastern"},
+				{"GE-1011C","General Eastern"},
+				{"GR-DV400","JVC"},
+				{"Garmin GPS","Garmin"},
+				{"Gyro-4","Javad GNSS Inc."},
+				{"HAGAR","University of Frankfurt"},
+				{"HALOX","Forschungszentrum Julich GmbH"},
+				{"HMP","Vaisala / Rosemount"},
+				{"HMP233","Vaisala"},
+				{"HRSC AX","DLR"},
+				{"HVPS","Stratton Park Engineering Company"},
+				{"High Accuracy INS","SAGEM"},
+				{"Hyperspectral Imagery Sensor","DLR"},
+				{"HySpecScan","Analytical Spectral Devices Inc."},
+				{"IR Gas analyzer","Edinburgh Sensors"},
+				{"IR/UV Line Scanner","OPTIMARE Systems GmbH"},
+				{"IRCAM","Jenoptik AG"},
+				{"IS-2","Interspect Ltd."},
+				{"IS-3","Interspect Ltd."},
+				{"IS-4","Interspect Ltd."},
+				{"IS2+","Interspect Ltd."},
+				{"Ice Nucleus Counter","University of Manchester"},
+				{"J-W LWC","Johnson-Williams"},
+				{"JO1D / JNO2 Photometer","Unknown"},
+				{"KA-131","Bendix King"},
+				{"KT-15","Heitronics Infrarot Messtechnik"},
+				{"King Probe","Particle Measuring Systems"},
+				{"Kistler 3 axes accelerometers","Kistler Instrumente AG"},
+				{"LASAIR-5295","Particle Measurement Systems"},
+				{"LD90","Riegl Laser Measurement Systems GmbH"},
+				{"LGR 907","Los Gatos Research Inc."},
+				{"LGR DLT100","Los Gatos Research Inc."},
+				{"LI-COR 6262","LI-COR"},
+				{"LI-COR 7500","LI-COR"},
+				{"LI-COR Pyranometer","LI-COR"},
+				{"LI-COR Quantum Sensor","LI-COR"},
+				{"LMS-Q280","Riegl Laser Measurement Systems GmbH"},
+				{"LMS-Q560","Riegl Laser Measurement Systems GmbH"},
+				{"LMS-Q680i","Riegl Laser Measurement Systems GmbH"},
+				{"LTC 0600","Philipps"},
+				{"LTN 90-100","Litton"},
+				{"Lasernav YG1761B","Honeywell"},
+				{"Lyman-alpha HMS-2","Buck Research Instruments L.L.C."},
+				{"Lyman-alpha L-5","Buck Research Instruments L.L.C."},
+				{"MARSS","Met Office"},
+				{"MS4100","Duncantech"},
+				{"MetAir NOxTOy","MetAir AG"},
+				{"Meteorological Sensor Package","DLR"},
+				{"Mobile Flux Platform","IBIMET CNR"},
+				{"NO CLD","DLR"},
+				{"Nevzorov IVO-2a","Sky Tech Research Inc."},
+				{"Nevzorov","Sky Tech Research Inc."},
+				{"OAP-200X","Particle Measuring Systems"},
+				{"OAP-230X","Particle Measuring Systems"},
+				{"OAP-230Y","Particle Measuring Systems"},
+				{"OEM4-G2","NovAtel Inc."},
+				{"ORAC","University of Leeds"},
+				{"Others","Other"},
+				{"Ozone Lidar EXperiment","DLR"},
+				{"Ozone Monitor 202","2B Technologies"},
+				{"Ozone Monitor","2B Technologies"},
+				{"PAN GC","Ai Qualitek Ltd"},
+				{"PCASP-100X","Droplet Measurement Technologies"},
+				{"PCASP-SPP200","Droplet Measurement Technologies"},
+				{"PELICAN","ONERA"},
+				{"PERCA","University of Leceister"},
+				{"POS AV 510","Applanix"},
+				{"POS AV-410","Applanix"},
+				{"PRT 6","Barnes"},
+				{"PSAP","Radiance Research Inc."},
+				{"PSI-O3","Paul Scherrer Institut"},
+				{"PT","Rosemount"},
+				{"PT100","Rosemount"},
+				{"PT102AL","Rosemount"},
+				{"PT102BL","Rosemount"},
+				{"PT102BW","Rosemount"},
+				{"PT102DB1 AG","Rosemount"},
+				{"PT102E2 AL","Rosemount"},
+				{"PT102E4 AL","Rosemount"},
+				{"PT50","Rosemount"},
+				{"PT500","Rosemount"},
+				{"PTR-MS","University of East Anglia"},
+				{"PVM-100","Gerber Scientific Inc."},
+				{"Peroxide Detectors","Other"},
+				{"Pitot Probe","Other"},
+				{"Polifemo M21","SUPERELECTRIC s.r.l."},
+				{"Portable Lidar System","University of Munich"},
+				{"R4903","Met One Instruments"},
+				{"RALI","LATMOS"},
+				{"RALI","LATMOS"},
+				{"RCD105","Leica-Geosystems"},
+				{"RDR-4B","Honeywell"},
+				{"RMK A 30/23","Zeiss"},
+				{"RMK A","Zeiss"},
+				{"RR-0150","RadianceResearch"},
+				{"RT3102","Oxford Technical Solutions"},
+				{"Radar Echo Sounding System","AWI"},
+				{"S-5002","Sistemas Instalaciones Redes S.A."},
+				{"S-5006","Sistemas Instalaciones Redes S.A."},
+				{"S-5012","Sistemas Instalaciones Redes S.A."},
+				{"S3000","Michell Instruments GmbH"},
+				{"S56","Micro-g LaCoste"},
+				{"SA 41M","Environment S.A."},
+				{"SETHI","ONERA"},
+				{"SFIM 3 axes accelerometers","SFIM"},
+				{"SID-2","University of Hertfordshire"},
+				{"SIELETERS","ONERA"},
+				{"SIOUX","DLR"},
+				{"SMPS","Grimm Technologies Inc."},
+				{"SP-2","Droplet Measurement Technologies"},
+				{"SPEC Hawkeye","Stratton Park Engineering Company"},
+				{"SWS","Met Office"},
+				{"Solent HS","Gill Instruments Ltd"},
+				{"Solent HS-100","Gill Instruments Ltd"},
+				{"Solent HS-50","Gill Instruments Ltd"},
+				{"Sony Video Camera","Sony"},
+				{"Sundstrand 3 axes accelerometers","Sundstrand"},
+				{"TABI320","ITRES Research Ltd"},
+				{"TAFTS","Imperial College London"},
+				{"TASI-600","ITRES Research Ltd"},
+				{"TDLAS","Imperial College London"},
+				{"TDLAS","National Physical Laboratory"},
+				{"TECO 42C","ThermoScientific"},
+				{"TECO 42C","ThermoScientific"},
+				{"TECO 42S","ThermoScientific"},
+				{"TECO 43C","ThermoScientific"},
+				{"TECO 48","ThermoScientific"},
+				{"TECO 48CS","ThermoScientific"},
+				{"TECO 49PS","ThermoScientific"},
+				{"TECO 49S","ThermoScientific"},
+				{"TOF-AMS","Aerodyne Research Inc."},
+				{"TP3-S","Meteolabor AG"},
+				{"TS9260","NEC Corporation"},
+				{"TSI-3007","TSI Inc."},
+				{"TSI-3010","TSI Inc."},
+				{"TSI-3022","TSI Inc."},
+				{"TSI-3025","TSI Inc."},
+				{"TSI-3563","TSI Inc."},
+				{"TSI-3776","TSI Inc."},
+				{"TSI-3786","TSI Inc."},
+				{"Total Water Content","Met Office"},
+				{"Trimble 2101","Trimble Navigation"},
+				{"Trimble 4000 SSI","Trimble Navigation"},
+				{"Trimble TNL 2000","Trimble Navigation"},
+				{"UHSAS-A","Droplet Measurement Technologies"},
+				{"ULISS 45i","SAGEM"},
+				{"ULS","Laser Technology Inc."},
+				{"UMP40","Sextant"},
+				{"VACC","University of Leeds"},
+				{"VIS Line Scanner","OPTIMARE Systems GmbH"},
+				{"VIS/NIR Spectrometer ","Other"},
+				{"VOC GC","Airmotec AG"},
+				{"Video Camera","Other"},
+				{"WIND","DLR / CNRS / INSU"},
+				{"WVSS-II","SpectraSensors Inc."},
+				{"Walz UV Pyranometer","Heinz Walz Company"},
+				{"Whole Air Sampling System","University of York"},
+				{"XR5","Navstar Electronics"}};
+		return string;
 	}
 
 	
@@ -1125,79 +1063,29 @@ public class Materials {
 	}
 	
 	
-	public static String[][] aircraftInfo() {
-		String[][] string = {
-			{"Do your choice...", " ", " ", " ", " ", " ", "EUFAR"},
-			{"AWI - POLAR 5", "Basler Turbo Conversions", "BT-67", "Alfred Wegener Institute (AWI)", "Germany", "C-GAWI",
-			"Alfred Wegener Institute"},
-			{"CNR - ERA Skyarrow", "3I / Magnaghi Aeronautica", "Sky Arrow 650", "Consiglio Nazionale delle Ricerche (CNR) - ISAFoM", "Italy",
-				"CNR, Istituto per i Sistemi Agricoli e Forestali del Mediterraneo"},
-			{"CNR - Partenavia", "Partenavia / Vulcanair", "P-68", "Consiglio Nazionale delle Ricerche (CNR) - IMAA", "Italy", "I-ALTM", 
-				"CNR, Istituto di Metodologie per l'Analisi Ambientale"},
-			{"CzechGlobe - C 208", "Cessna Aircraft Company", "Cessna 208", "Ústav výzkumu globální změny AV ČR", "Czech Republic", 
-					"OK-CZG", "CzechGlobe"},
-			{"DLR - C 208", "Cessna Aircraft Company", "Cessna 208", "Deutsches Zentrum fur Luft- und Raumfahrt (DLR)", "Germany", "D-FDLR", 
-				"DLR, CC-BY 3.0"},
-			{"DLR - DO 228 D-CFFU", "Dornier Flugzeugwerke", "DO-228", "Deutsches Zentrum fur Luft- und Raumfahrt (DLR)", "Germany", "D-CFFU", 
-				"DLR, CC-BY 3.0"},
-			{"DLR - DO 228 D-CODE", "Dornier Flugzeugwerke", "DO-228", "Deutsches Zentrum fur Luft- und Raumfahrt (DLR)", "Germany", 
-				"D-CODE", "DLR, CC-BY 3.0"},
-			{"DLR - Falcon 20", "Dassault Aviation", "Mystere/Falcon 20", "Deutsches Zentrum fur Luft- und Raumfahrt (DLR)", "Germany", 
-				"D-CMET", "DLR, CC-BY 3.0"},
-			{"ENVISCOPE - Learjet 35", "Learjet Aircraft Company", "Learjet 35", "ENVISCOPE", "Germany", "D-CGFD", "ENVISCOPE GmbH"},
-			{"ENVISCOPE - Partenavia", "Partenavia / Vulcanair", "P-68", "ENVISCOPE", "Germany", "D-GERY", "ENVISCOPE GmbH"},
-			{"FAAM - BAe 146", "BAE Systems", "BAe-146", "Facility for Airborne Atmospheric Measurements (FAAM)", "United Kingdom", "G-LUXE", 
-				"NERC, Facility for Airborne Atmospheric Measurements"},
-			{"FUB - C 207", "Cessna Aircraft Company", "Cessna 207", "Freie Universitat Berlin (FUB) - ISS", "Germany", "D-EAFU", 
-				"Institut fur Weltraumwissenschaften"},
-			{"INTA - CASA 212 AR", "Construcciones Aeronauticas S.A.", "CASA-212", "Instituto Nacional de Tecnica Aeroespacial (INTA)", "Spain", 
-				"EC-DTV", "Instituto Nacional de Tecnica Aeroespacial"},
-			{"INTA - CASA 212 RS", "Construcciones Aeronauticas S.A.", "CASA-212", "Instituto Nacional de Tecnica Aeroespacial (INTA)", "Spain", 
-				"EC-DUQ", "Instituto Nacional de Tecnica Aeroespacial"},
-			{"KIT - Enduro", "Ultraleichtflug Schmidtler", "Enduro", "Karlsruhe Institute of Technology (KIT) - IMK-IFU", "Germany", "D-MIFU", 
-				"KIT, Institute of Meteorology and Climate Research"},
-			{"NERC - Twin Otter VP-FAZ", "De Havilland Canada", "DHC-6", "Natural Environment Research Council (NERC) - BAS", "United Kingdom", 
-				"VP-FAZ", "NERC, British Antarctic Survey"},
-			{"NERC - Twin Otter VP-FBL", "De Havilland Canada", "DHC-6", "Natural Environment Research Council (NERC) - BAS", "United Kingdom", 
-				"VP-FBL", "NERC, British Antarctic Survey"},
-			{"SAFIRE - ATR 42", "ATR", "ATR-42", "Service des Avions Francais Instrumentés pour la Recherche en Environnement (SAFIRE)", 
-				"France", "F-HMTO", "SAFIRE"},
-			{"SAFIRE - Falcon 20", "Dassault Aviation", "Mystere/Falcon 20", "Service des Avions Francais Instrumentés pour la Recherche en "
-				+ "Environnement (SAFIRE)", "France", "F-GBTM","Collection Saspozatlse"},
-			{"SAFIRE - PIPER Aztec", "Piper Aircraft", "PA23", "Service des Avions Francais Instrumentés pour la Recherche en Environnement "
-				+ "(SAFIRE)", "France", "F-BLEB", "SAFIRE"},
-			{"UEDIN - ECO Dimona", "Diamond Aircraft Industries", "HK36TTC ECO Dimona", "The University of Edinburgh (UEDIN) - IAES", 
-				"United Kingdom", "G-GEOS", "UEDIN, Airborne GeoSciences"},
-		};
+	public static String[][] newAircraftInfo() {
+		String[][] string = {{"AWI","Basler Turbo Conversions, BT-67","C-GAWI","DE","http://www.eufar.net/media/uploads/aircrafts/AWI_Polar5_-_2_692x288.jpg"},
+				{"CNR-ISAFoM","3I / Magnaghi Aeronautica, Sky Arrow 650 TCNS","I-AMMO","IT","http://www.eufar.net/media/uploads/aircrafts/ISAFOM_SkyArrow_-_1_692x288.jpg"},
+				{"CNR-IMAA","Partenavia / Vulcanair, P-68 Observer 2","I-OBPC","IT","http://www.eufar.net/media/uploads/aircrafts/IMMA_Partenavia_-_1_692x288_1.jpg"},
+				{"CzechGlobe","Cessna Aircraft Company, C-208 B Grand Caravan","OK-CZG","CZ","http://www.eufar.net/media/uploads/aircrafts/CzechGlobe_C208_-_5_692x288_1.jpg"},
+				{"DLR","Cessna Aircraft Company, C-208 B Grand Caravan","D-FDLR","DE","http://www.eufar.net/media/uploads/aircrafts/DLR_C208_Grand_Caravan_-_1_692x288.jpg"},
+				{"DLR","Dornier Flugzeugwerke, Do 228 - 212","D-CFFU","DE","http://www.eufar.net/media/uploads/aircrafts/DLR_Dornier_Do228_D-CFFU_-_1_692x288_1.jpg"},
+				{"DLR","Dornier Flugzeugwerke, Do 228 - 101","D-CODE","DE","http://www.eufar.net/media/uploads/aircrafts/DLR_Dornier_Do228_D-CODE_-_3_692x288_1.jpg"},
+				{"DLR","Dassault Aviation, Mystere / Falcon 20 E-5","D-CMET","DE","http://www.eufar.net/media/uploads/aircrafts/DLR_Falcon_20_-_1_692x288.jpg"},
+				{"Enviscope","Partenavia / Vulcanair, P-68B","D-GERY","DE","http://www.eufar.net/media/uploads/aircrafts/ENVISCOPE_Partenavia_-_1_692x288.jpg"},
+				{"Enviscope","Learjet / Bombardier Aerospace, 35A","D-CGFD","DE","http://www.eufar.net/media/uploads/aircrafts/ENVISCOPE_Learjet_35A_-_1_692x288.jpg"},
+				{"FAAM","BAE Systems, BAe146-301","G-LUXE","GB","http://www.eufar.net/media/uploads/aircrafts/FAAM_BAe146_-_3_692x288.jpg"},
+				{"FUB","Cessna Aircraft Company, T207A Turbo Skywagon","D-EAFU","DE","http://www.eufar.net/media/uploads/aircrafts/FUB_C_207_-_1.jpg"},
+				{"INTA","Construcciones Aeronauticas S.A, C-212-200","EC-DTV","ES","http://www.eufar.net/media/uploads/aircrafts/INTA_CASA_212_AR_-_1_692x288.jpg"},
+				{"INTA","Construcciones Aeronauticas S.A, C-212-200","EC-DUQ","ES","http://www.eufar.net/media/uploads/aircrafts/CASA_212_RS_692x288.jpg"},
+				{"KIT, IMK-IFU","Ultraleichtflug Schmidtler, Enduro","D-MIFU","DE","http://www.eufar.net/media/uploads/aircrafts/KIT_ENDURO_-_2_692x288.jpg"},
+				{"NERC","De Havilland Canada, DHC-6 Twin Otter","VP-FAZ","GB","http://www.eufar.net/media/uploads/aircrafts/BAS_DHC6_-_2_692x288.jpg"},
+				{"NERC","De Havilland Canada, DHC-6 Twin Otter","VP-FBL","GB","http://www.eufar.net/media/uploads/aircrafts/Twin_Otter_BAS_VP-FBL_-_2.jpg"},
+				{"SAFIRE","ATR, ATR42-320","F-HMTO","FR","http://www.eufar.net/media/uploads/aircrafts/SAFIRE_ATR42_-_2_692x288.jpg"},
+				{"SAFIRE","Piper Aircraft, PA23-250 Aztec","F-BLEB","FR","http://www.eufar.net/media/uploads/aircrafts/SAFIRE_PIPER_AZTEC_-_2_692x288.jpg"},
+				{"SAFIRE","Dassault Aviation, Mystere / Falcon 20 GF","F-GBTM","FR","http://www.eufar.net/media/uploads/aircrafts/SAFIRE_FA20_-_1_692x288.jpg"},
+				{"UEDIN","Diamond Aircraft, HK36 TTC ECO Dimona","G-GEOS","GB","http://www.eufar.net/media/uploads/aircrafts/UEDIN_HK36_-_2_692x288.jpg"}};
 		return string;
-	}
-	
-	
-	public static ArrayList<ImageResource> aircraftImages() {
-		ArrayList<ImageResource> list = new ArrayList<ImageResource>();
-		list.add(Emc_eufar.resources.eufarLogo());
-		list.add(Emc_eufar.resources.polarAwi());
-		list.add(Emc_eufar.resources.eraIsafom());
-		list.add(Emc_eufar.resources.partenaviaCnr());
-		list.add(Emc_eufar.resources.cessnaCzechglobe());
-		list.add(Emc_eufar.resources.cessnaDlr());
-		list.add(Emc_eufar.resources.do1Dlr());
-		list.add(Emc_eufar.resources.do2Dlr());
-		list.add(Emc_eufar.resources.falconDlr());
-		list.add(Emc_eufar.resources.learjetEnviscope());
-		list.add(Emc_eufar.resources.partenaviaEnviscope());
-		list.add(Emc_eufar.resources.baeFaam());
-		list.add(Emc_eufar.resources.cessnaFub());
-		list.add(Emc_eufar.resources.casaInta());
-		list.add(Emc_eufar.resources.casaInta());
-		list.add(Emc_eufar.resources.enduroKit());
-		list.add(Emc_eufar.resources.twinotterNerc());
-		list.add(Emc_eufar.resources.twinotter2Nerc());
-		list.add(Emc_eufar.resources.atrSafire());
-		list.add(Emc_eufar.resources.falconSafire());
-		list.add(Emc_eufar.resources.aztecSafire());
-		list.add(Emc_eufar.resources.diamondUedin());
-		return list;
 	}
 	
 	
@@ -1209,68 +1097,8 @@ public class Materials {
         @Source("images/icons/menu_tab_arrow_v3.png")
         ImageResource menu();
         
-        @Source("images/eufar_aircraft/logo_eufar_emc_v2.png")
+        @Source("images/icons/logo_eufar_emc_v2.jpg")
         ImageResource eufarLogo();
-        
-        @Source("images/eufar_aircraft/POLAR5-AWI.png")
-        ImageResource polarAwi();
-        
-        @Source("images/eufar_aircraft/ERA-ISAFM.png")
-        ImageResource eraIsafom();
-        
-        @Source("images/eufar_aircraft/PARTENAVIA-CNR.png")
-        ImageResource partenaviaCnr();
-        
-        @Source("images/eufar_aircraft/C208-DLR.png")
-        ImageResource cessnaDlr();
-        
-        @Source("images/eufar_aircraft/DO228-DLR-1.png")
-        ImageResource do1Dlr();
-        
-        @Source("images/eufar_aircraft/DLR - DO228-2.png")
-        ImageResource do2Dlr();
-        
-        @Source("images/eufar_aircraft/FALCON20-DLR.png")
-        ImageResource falconDlr();
-        
-        @Source("images/eufar_aircraft/LEARJET25-ENVISCOPE-3.png")
-        ImageResource learjetEnviscope();
-        
-        @Source("images/eufar_aircraft/PARTENAVIA68-ENVISCOPE-2.png")
-        ImageResource partenaviaEnviscope();
-        
-        @Source("images/eufar_aircraft/BAE146-FAAM.png")
-        ImageResource baeFaam();
-        
-        @Source("images/eufar_aircraft/C207-FUB.png")
-        ImageResource cessnaFub();
-        
-        @Source("images/eufar_aircraft/CASA212-INTA.png")
-        ImageResource casaInta();
-        
-        @Source("images/eufar_aircraft/ENDURO-KIT.png")
-        ImageResource enduroKit();
-        
-        @Source("images/eufar_aircraft/TWINOTTER-NERC.png")
-        ImageResource twinotterNerc();
-        
-        @Source("images/eufar_aircraft/TWINOTTER2-NERC.png")
-        ImageResource twinotter2Nerc();
-        
-        @Source("images/eufar_aircraft/C208-CZECHGLOBE.png")
-        ImageResource cessnaCzechglobe();
-        
-        @Source("images/eufar_aircraft/ATR42-SAFIRE.png")
-        ImageResource atrSafire();
-        
-        @Source("images/eufar_aircraft/FALCON20-SAFIRE-3.png")
-        ImageResource falconSafire();
-        
-        @Source("images/eufar_aircraft/PIPERAZTEC-SAFIRE.png")
-        ImageResource aztecSafire();
-        
-        @Source("images/eufar_aircraft/DIAMOND-UEDIN-1.png")
-        ImageResource diamondUedin();
         
         @Source("images/icons/info_icon.svg")
     	@MimeType("image/svg+xml")
@@ -1333,4 +1161,24 @@ public class Materials {
         DataResource transfert();
         
     }
+	
+	
+	public static HashMap<String, String> monthMap() {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("Jan.", "01");
+		map.put("Feb.", "02");
+		map.put("March", "03");
+		map.put("April", "04");
+		map.put("May", "05");
+		map.put("June", "06");
+		map.put("July", "07");
+		map.put("Aug.", "08");
+		map.put("Sept.", "09");
+		map.put("Oct.", "10");
+		map.put("Nov.", "11");
+		map.put("Dec.", "12");
+		return map;
+	}
+	
+	
 }

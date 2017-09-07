@@ -61,15 +61,61 @@ public class Utilities {
 	// populate easily each List Box - 2
 	public static void populateListBox(ListBox listBox, HashMap<String, String> map, int defaultItem) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Populating " + listBox.getName() + " in progress...");
-		ArrayList<String> test = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<String>();
 		for (Entry<String, String> entry : map.entrySet()) {
-			test.add(entry.getValue() + " - " + entry.getKey());
+			list.add(entry.getKey());
 		}
-		Collections.sort(test);
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+		listBox.addItem("Make a choice...");
+		for (int i = 0; i < list.size(); i++) {
+			listBox.addItem(list.get(i));
+		}
+		listBox.setItemSelected(defaultItem, true);
+		Emc_eufar.rootLogger.log(Level.INFO, "Populating finished");
+	}
+	
+	
+	// populate easily instrument List Box
+	public static void populateAircraftListBox(ListBox listBox, String[][] string, int defaultItem) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Populating " + listBox.getName() + " in progress...");
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i = 0; i < string.length; i++) {
+			String fullAircraft = string[i][1];
+			try {
+				if (fullAircraft == string[i - 1][1] & string[i][0] == string[i - 1][0]) {
+					fullAircraft = fullAircraft + " - " + string[i][2];
+				}
+			} catch (Exception e) {}
+			try {
+				if (fullAircraft == string[i + 1][1] & string[i][0] == string[i + 1][0]) {
+					fullAircraft = fullAircraft + " - " + string[i][2];
+				}
+			} catch (Exception e) {}
+			list.add(string[i][0] + " - " + fullAircraft.substring(fullAircraft.indexOf(", ") + 2));
+		}
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 		listBox.addItem("Make a choice...");
 		listBox.addItem("Other...");
-		for (int i = 0; i < test.size(); i++) {
-			listBox.addItem(test.get(i));
+		for (int i = 0; i < list.size(); i++) {
+			listBox.addItem(list.get(i));
+		}
+		listBox.setItemSelected(defaultItem, true);
+		Emc_eufar.rootLogger.log(Level.INFO, "Populating finished");
+	}
+	
+	
+	// populate easily instrument List Box
+	public static void populateInstrumentListBox(ListBox listBox, String[][] string, int defaultItem) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Populating " + listBox.getName() + " in progress...");
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i = 0; i < string.length; i++) {
+			list.add(string[i][1] + " - " + string[i][0]);
+		}
+		Collections.sort(list);
+		listBox.addItem("Make a choice...");
+		listBox.addItem("Other...");
+		for (int i = 0; i < list.size(); i++) {
+			listBox.addItem(list.get(i));
 		}
 		listBox.setItemSelected(defaultItem, true);
 		Emc_eufar.rootLogger.log(Level.INFO, "Populating finished");
@@ -129,6 +175,17 @@ public class Utilities {
 		}
 		listBox.setSelectedIndex(indexToFind);
 	}
+	
+	
+	public static void checkList(String string, ListBox listBox) {
+		Emc_eufar.rootLogger.log(Level.INFO, "Link between listbox and string invoked...");
+		for (int i = 0; i < listBox.getItemCount(); i++) {
+			if (listBox.getItemText(i).equals(string)) {
+				listBox.setSelectedIndex(i);
+				break;
+			}
+		}
+	}
 
 
 	// find the correct check box in a panel, and tick or untick it, from an entry in an xml file
@@ -180,6 +237,11 @@ public class Utilities {
 			String style = Emc_eufar.allTextBoxes.get(i).getStylePrimaryName();
 			Emc_eufar.allTextBoxes.get(i).getElement().setAttribute("style","");
 			Emc_eufar.allTextBoxes.get(i).setStyleName(style);
+		}
+		for (int i = 0; i < Emc_eufar.allSuggestBoxes.size(); i++) {
+			String style = Emc_eufar.allSuggestBoxes.get(i).getStylePrimaryName();
+			Emc_eufar.allSuggestBoxes.get(i).getElement().setAttribute("style","");
+			Emc_eufar.allSuggestBoxes.get(i).setStyleName(style);
 		}
 		for (int i = 0; i < Emc_eufar.allDateBoxes.size(); i++) {
 			String style = Emc_eufar.allDateBoxes.get(i).getStylePrimaryName();
@@ -280,9 +342,8 @@ public class Utilities {
 			allDateBox.get(i).setValue(new Date());
 		}
 		Emc_eufar.identTypeLst.setSelectedIndex(0);
-		Emc_eufar.identLanguageLst.setSelectedIndex(4);
-		Emc_eufar.airAircraftLst.setSelectedIndex(0);
-		GuiModification.aircraftInformation(0);
+		Emc_eufar.identLanguageLst.setSelectedIndex(5);
+		GuiModification.newAircraftInformation("Make a choice...", "");
 		Emc_eufar.airInstrumentLst.setSelectedIndex(0);
 		GuiModification.otherInstrument();
 		Emc_eufar.geoLocationLst.setSelectedIndex(0);
@@ -290,7 +351,7 @@ public class Utilities {
 		Emc_eufar.geoResolutionLst.setSelectedIndex(0);
 		GuiModification.geoResolutionSet(0);
 		Emc_eufar.orgRoleLst.setSelectedIndex(5);
-		Emc_eufar.metLanguageLst.setSelectedIndex(4);
+		Emc_eufar.metLanguageLst.setSelectedIndex(5);
 		Emc_eufar.useConditionsAddTab.removeAllRows();
 		Emc_eufar.useConditionsAddTab.setWidget(0, 0, Emc_eufar.useConditionsBox);
 		Emc_eufar.useConditionsAddTab.setWidget(0, 1, Emc_eufar.auDelButton1);
@@ -338,6 +399,11 @@ public class Utilities {
 		Emc_eufar.refDelButton.setStyleName("emptyButton");
 		Emc_eufar.airInstrumentTable.removeAllRows();
 		Emc_eufar.airAircraftTable.removeAllRows();
+		Emc_eufar.aircraftTabList.clear();
+		Emc_eufar.operatorTabList.clear();
+		Emc_eufar.manufacturairTabList.clear();
+		Emc_eufar.countryTabList.clear();
+		Emc_eufar.identificationTabList.clear();
 		Emc_eufar.instrumentTabList.clear();
 		Emc_eufar.manufacturerTabList.clear();
 		Emc_eufar.qvTabPanel.clear();
@@ -352,5 +418,15 @@ public class Utilities {
 		Emc_eufar.useLimitationsBox.setText("No limitations");
 		Emc_eufar.identLocatorBox.setText("http://browse.ceda.ac.uk/browse/badc/eufar/docs/00eufararchivecontents.html");
 		Emc_eufar.rootLogger.log(Level.INFO, "Cleaning all fields finished.");
+	}
+	
+	
+	// remove point from date string if it exists
+	public static String dateStringCorrection(final String string) {
+		String splitString[] = string.split(" ");
+		String year = splitString[2];
+		String day = splitString[1].substring(0, splitString[1].length() - 1);
+		String month = Emc_eufar.monthMap.get(splitString[0]);
+		return year + "-" + month + "-" + day;
 	}
 }

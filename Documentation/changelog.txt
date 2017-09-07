@@ -12,6 +12,29 @@ ONLINE VERSION TESTED ON:
     - Vivaldi 1.4+
 
 
+September 07 2017, Release version 1.4.0 [ONLINE]
+=================================================
+  The new API of the EUFAR website has been implemented in ASMM. The user has now the possibility to select a project from the Project acronym textbox, the function will then fill in different fields automatically.
+  
+  ADDED:
+    - a new function to retrieve data from EUFAR database has been put in place.
+    - the arcraft and operators are now updated automatically based on EUFAR database.
+    - a link to the EUFAR website has been added to the header.
+    - a new popup panel has been added to inform all users of the different modifications induced by the integration of the new API.
+    
+  MODIFIED:
+    - the list of countries has been modified to reflect the ISO 3166-1 list with alpha-2 codes.
+    - the functions to read, write and check xml code have been modified to take into account the new API, the new operators/aircraft object and the new country list.
+    - the code of the application has been cleaned.
+    - letter to separate QV elements has been changed.
+    
+  FIXED:
+    - when saving a file, information about aircraft weren't saved properly.
+    - aircraft information lists weren't cleared properly when creating a new file.
+    - old QV section wasn't read properly.
+    - the height of the Imagery QV panel was too small.
+    
+    
 June 15 2017, Release version 1.3.2 [ONLINE]
 ============================================
   FIXED:

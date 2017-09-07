@@ -1,12 +1,13 @@
 package com.eufar.emc.client;
 
-
 import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -41,7 +42,6 @@ import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 public class GuiModification {
-	
 	
 	// change the resolution type, scale or distance, in theGeographic Information tab
 	protected static void geoResolutionSet(final int index) {
@@ -850,24 +850,31 @@ public class GuiModification {
 			if (row == 0) {
 				final Label nameTitle = new Label("Aircraft");
 				final Label manufacturerTitle = new Label("Operator");
+				final Label registrationTitle = new Label("Registration number");
 				Emc_eufar.airAircraftTable.insertRow(row);
 				Emc_eufar.airAircraftTable.setWidget(row, 0, nameTitle);
 				Emc_eufar.airAircraftTable.setWidget(row, 1, manufacturerTitle);
+				Emc_eufar.airAircraftTable.setWidget(row, 2, registrationTitle);
 				row++;
 				nameTitle.setStyleName("airTitleTextLabel3");
 				manufacturerTitle.setStyleName("airTitleTextLabel3");
+				registrationTitle.setStyleName("airTitleTextLabel3");
 			}
 			Emc_eufar.airAircraftTable.insertRow(row);
 			Emc_eufar.airAircraftTable.setWidget(row, 0, name);
 			Emc_eufar.airAircraftTable.setWidget(row, 1, operator);
-			Emc_eufar.airAircraftTable.setWidget(row, 2, delButton);
+			Emc_eufar.airAircraftTable.setWidget(row, 2, identification);
+			Emc_eufar.airAircraftTable.setWidget(row, 3, delButton);
 			FlexCellFormatter cellFormatter = Emc_eufar.airAircraftTable.getFlexCellFormatter();
 			cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 			cellFormatter.setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(0, 2, HasHorizontalAlignment.ALIGN_CENTER);
 			cellFormatter.setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 			cellFormatter.setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
+			cellFormatter.setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_CENTER);
 			name.setStyleName("airFlexTableLabel7");
 			operator.setStyleName("airFlexTableLabel7");
+			identification.setStyleName("airFlexTableLabel7");
 			Emc_eufar.aircraftTabList.add(name.getText());
 			Emc_eufar.operatorTabList.add(operator.getText());
 			Emc_eufar.manufacturairTabList.add(manufacturer.getText());
@@ -883,6 +890,9 @@ public class GuiModification {
 					Emc_eufar.airAircraftTable.removeRow(rowIndex);
 					Emc_eufar.aircraftTabList.remove(rowIndex-1);
 					Emc_eufar.operatorTabList.remove(rowIndex-1);
+					Emc_eufar.manufacturairTabList.remove(rowIndex-1);
+					Emc_eufar.countryTabList.remove(rowIndex-1);
+					Emc_eufar.identificationTabList.remove(rowIndex-1);
 					int row = Emc_eufar.airAircraftTable.getRowCount();
 					if (row == 1) {
 						Emc_eufar.airAircraftTable.removeRow(row-1);
@@ -913,24 +923,31 @@ public class GuiModification {
 		if (row == 0) {
 			final Label nameTitle = new Label("Aircraft");
 			final Label manufacturerTitle = new Label("Operator");
+			final Label registrationTitle = new Label("Registration number");
 			Emc_eufar.airAircraftTable.insertRow(row);
 			Emc_eufar.airAircraftTable.setWidget(row, 0, nameTitle);
 			Emc_eufar.airAircraftTable.setWidget(row, 1, manufacturerTitle);
+			Emc_eufar.airAircraftTable.setWidget(row, 2, registrationTitle);
 			row++;
 			nameTitle.setStyleName("airTitleTextLabel3");
 			manufacturerTitle.setStyleName("airTitleTextLabel3");
+			registrationTitle.setStyleName("airTitleTextLabel3");
 		}
 		Emc_eufar.airAircraftTable.insertRow(row);
 		Emc_eufar.airAircraftTable.setWidget(row, 0, name);
 		Emc_eufar.airAircraftTable.setWidget(row, 1, operator);
-		Emc_eufar.airAircraftTable.setWidget(row, 2, delButton);
+		Emc_eufar.airAircraftTable.setWidget(row, 2, identification);
+		Emc_eufar.airAircraftTable.setWidget(row, 3, delButton);
 		FlexCellFormatter cellFormatter = Emc_eufar.airAircraftTable.getFlexCellFormatter();
 		cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		cellFormatter.setHorizontalAlignment(0, 1, HasHorizontalAlignment.ALIGN_CENTER);
+		cellFormatter.setHorizontalAlignment(0, 2, HasHorizontalAlignment.ALIGN_CENTER);
 		cellFormatter.setHorizontalAlignment(row, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		cellFormatter.setHorizontalAlignment(row, 1, HasHorizontalAlignment.ALIGN_CENTER);
+		cellFormatter.setHorizontalAlignment(row, 2, HasHorizontalAlignment.ALIGN_CENTER);
 		name.setStyleName("airFlexTableLabel7");
 		operator.setStyleName("airFlexTableLabel7");
+		identification.setStyleName("airFlexTableLabel7");
 		Emc_eufar.aircraftTabList.add(name.getText());
 		Emc_eufar.operatorTabList.add(operator.getText());
 		Emc_eufar.manufacturairTabList.add(manufacturer.getText());
@@ -946,6 +963,9 @@ public class GuiModification {
 				Emc_eufar.airAircraftTable.removeRow(rowIndex);
 				Emc_eufar.aircraftTabList.remove(rowIndex-1);
 				Emc_eufar.operatorTabList.remove(rowIndex-1);
+				Emc_eufar.manufacturairTabList.remove(rowIndex-1);
+				Emc_eufar.countryTabList.remove(rowIndex-1);
+				Emc_eufar.identificationTabList.remove(rowIndex-1);
 				int row = Emc_eufar.airAircraftTable.getRowCount();
 				if (row == 1) {
 					Emc_eufar.airAircraftTable.removeRow(row-1);
@@ -957,9 +977,9 @@ public class GuiModification {
 	
 	
 	// update all Aircraft information when a particular aircraft is selected in the Aircraft and Instruments tab
-	public static void aircraftInformation(final int index) {
+	public static void newAircraftInformation(final String operatorAircraft, String registration) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Aircraft information function invoked...");
-		if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Make a choice...") {
+		if (operatorAircraft == "Make a choice...") {
 			Emc_eufar.airManufacturerInfo.setVisible(true);
 			Emc_eufar.airTypeInfo.setVisible(true);
 			Emc_eufar.airOperatorInfo.setVisible(true);
@@ -975,10 +995,11 @@ public class GuiModification {
 			Emc_eufar.airOperatorInfo.setText("");
 			Emc_eufar.airCountryInfo.setText("");
 			Emc_eufar.airRegistrationInfo.setText("");
-			Emc_eufar.airAircraftImg.setResource(Emc_eufar.airAircraftImages.get(0));
-			Emc_eufar.airCopyrightInfo.setText("EUFAR");
+			Emc_eufar.airAircraftImg.setResource(Emc_eufar.resources.eufarLogo());
+			Emc_eufar.airAircraftImg.setStyleName("airAircraftImage2");
+			Emc_eufar.airAircraftLst.setSelectedIndex(0);
 			Emc_eufar.rootLogger.log(Level.INFO, "Make a choice... loaded.");
-		} else if (Emc_eufar.airAircraftLst.getSelectedItemText() == "Other...") {
+		} else if (operatorAircraft == "Other...") {
 			Emc_eufar.airManufacturerInfo.setVisible(false);
 			Emc_eufar.airTypeInfo.setVisible(false);
 			Emc_eufar.airOperatorInfo.setVisible(false);
@@ -987,11 +1008,11 @@ public class GuiModification {
 			Emc_eufar.airManufacturerBox.setText("");
 			Emc_eufar.airTypeBox.setText("");
 			Emc_eufar.airOperatorBox.setText("");
-			Emc_eufar.airCountryLst.setSelectedIndex(0);
 			Emc_eufar.airRegistrationBox.setText("");
+			Emc_eufar.airCountryLst.clear();
 			Utilities.populateListBox(Emc_eufar.airCountryLst, Emc_eufar.countryList, 0);
-			Emc_eufar.airAircraftImg.setResource(Emc_eufar.airAircraftImages.get(0));
-			Emc_eufar.airCopyrightInfo.setText("EUFAR");
+			Emc_eufar.airAircraftImg.setResource(Emc_eufar.resources.eufarLogo());
+			Emc_eufar.airAircraftImg.setStyleName("airAircraftImage2");
 			Emc_eufar.airManufacturerInfo.setText("");
 			Emc_eufar.airTypeInfo.setText("");
 			Emc_eufar.airOperatorInfo.setText("");
@@ -1007,26 +1028,99 @@ public class GuiModification {
 			Emc_eufar.airOperatorBox.setStyleName("airTextBox");
 			Emc_eufar.airCountryLst.setStyleName("airTextList3");
 			Emc_eufar.airRegistrationBox.setStyleName("airTextBox");
+			Emc_eufar.airAircraftLst.setSelectedIndex(1);
 		} else {
-			Emc_eufar.airManufacturerInfo.setVisible(true);
-			Emc_eufar.airTypeInfo.setVisible(true);
-			Emc_eufar.airOperatorInfo.setVisible(true);
-			Emc_eufar.airCountryInfo.setVisible(true);
-			Emc_eufar.airRegistrationInfo.setVisible(true);
-			Emc_eufar.airManufacturerBox.setVisible(false);
-			Emc_eufar.airTypeBox.setVisible(false);
-			Emc_eufar.airOperatorBox.setVisible(false);
-			Emc_eufar.airCountryLst.setVisible(false);
-			Emc_eufar.airRegistrationBox.setVisible(false);
-			Emc_eufar.airManufacturerInfo.setText(Emc_eufar.airAircraftInfo[index-1][1]);
-			Emc_eufar.airTypeInfo.setText(Emc_eufar.airAircraftInfo[index-1][2]);
-			Emc_eufar.airOperatorInfo.setText(Emc_eufar.airAircraftInfo[index-1][3]);
-			Emc_eufar.airCountryInfo.setText(Emc_eufar.airAircraftInfo[index-1][4]);
-			Emc_eufar.airRegistrationInfo.setText(Emc_eufar.airAircraftInfo[index-1][5]);
-			Emc_eufar.airCopyrightInfo.setText(Emc_eufar.airAircraftInfo[index-1][6]);
-			Emc_eufar.airAircraftImg.setResource(Emc_eufar.airAircraftImages.get(index - 1));
-			Emc_eufar.rootLogger.log(Level.INFO, "Aircraft information loaded.");
+			String operator = "";
+			String aircraft = "";
+			String registrationNumber = "";
+			String country = "";
+			String picture = "";
+			String manufacturer = "";
+			if (operatorAircraft != "") {
+				if (Emc_eufar.airAircraftLst.getSelectedItemText() != operatorAircraft) {
+					Utilities.checkList(operatorAircraft, Emc_eufar.airAircraftLst);	
+				}
+				Emc_eufar.airManufacturerInfo.setVisible(true);
+				Emc_eufar.airTypeInfo.setVisible(true);
+				Emc_eufar.airOperatorInfo.setVisible(true);
+				Emc_eufar.airCountryInfo.setVisible(true);
+				Emc_eufar.airRegistrationInfo.setVisible(true);
+				Emc_eufar.airManufacturerBox.setVisible(false);
+				Emc_eufar.airTypeBox.setVisible(false);
+				Emc_eufar.airOperatorBox.setVisible(false);
+				Emc_eufar.airCountryLst.setVisible(false);
+				Emc_eufar.airRegistrationBox.setVisible(false);
+				int index = operatorAircraft.indexOf(" - ");
+				operator = operatorAircraft.substring(0, index);
+				aircraft = operatorAircraft.substring(index + 3);
+				index = aircraft.indexOf(" - ");
+				if (index != -1 & aircraft.substring(index + 3).length() > 3) {
+					registrationNumber = aircraft.substring(index + 3);
+						aircraft = aircraft.substring(0, index);
+				}
+				for (int i = 0; i < Emc_eufar.aircraftInfo.length; i++) {
+					if (registrationNumber != "") {
+						if (registrationNumber == Emc_eufar.aircraftInfo[i][2]) {
+							country = Emc_eufar.aircraftInfo[i][3];
+							picture = Emc_eufar.aircraftInfo[i][4];
+							manufacturer = Emc_eufar.aircraftInfo[i][1].substring(0, Emc_eufar.aircraftInfo[i][1].indexOf(", "));
+							break;
+						}
+					} else {
+						if (aircraft == Emc_eufar.aircraftInfo[i][1].substring(Emc_eufar.aircraftInfo[i][1].indexOf(", ") + 2) 
+								& operator == Emc_eufar.aircraftInfo[i][0]) {
+							country = Emc_eufar.aircraftInfo[i][3];
+							picture = Emc_eufar.aircraftInfo[i][4];
+							manufacturer = Emc_eufar.aircraftInfo[i][1].substring(0, Emc_eufar.aircraftInfo[i][1].indexOf(", "));
+							registrationNumber = Emc_eufar.aircraftInfo[i][2];
+							break;
+						}
+					}
+				}
+			} else if (registration != "") {
+				for (int i = 0; i < Emc_eufar.aircraftInfo.length; i++) {
+					if (registration == Emc_eufar.aircraftInfo[i][2]) {
+						registrationNumber = registration;
+						country = Emc_eufar.aircraftInfo[i][3];
+						picture = Emc_eufar.aircraftInfo[i][4];
+						manufacturer = Emc_eufar.aircraftInfo[i][1].substring(0, Emc_eufar.aircraftInfo[i][1].indexOf(", "));
+						operator = Emc_eufar.aircraftInfo[i][0];
+						aircraft = Emc_eufar.aircraftInfo[i][1].substring(Emc_eufar.aircraftInfo[i][1].indexOf(", ") + 2);
+						String manufacturerAircraft = manufacturer + ", " + aircraft;
+						int numCor = 0;
+						for (int j = 0; j < Emc_eufar.aircraftInfo.length; j++) {
+							if (manufacturerAircraft == Emc_eufar.aircraftInfo[j][1]) {
+								numCor ++;
+							}
+						}
+						String aircraftFull = "";
+						if (numCor > 1) {
+							aircraftFull = operator + " - " + aircraft + " - " + registrationNumber;
+						} else {
+							aircraftFull = operator + " - " + aircraft;
+						}
+						if (Emc_eufar.airAircraftLst.getSelectedItemText() != aircraftFull) {
+							Utilities.checkList(aircraftFull, Emc_eufar.airAircraftLst);	
+						}
+						break;
+					}
+				}	
+			}
+			for (Entry<String, String> entry : Emc_eufar.countryList.entrySet()) {
+				if (country == entry.getValue()) {
+					country = entry.getKey();
+					break;
+				}
+			}
+			Emc_eufar.airManufacturerInfo.setText(manufacturer);
+			Emc_eufar.airTypeInfo.setText(aircraft);
+			Emc_eufar.airOperatorInfo.setText(operator);
+			Emc_eufar.airCountryInfo.setText(country);
+			Emc_eufar.airRegistrationInfo.setText(registrationNumber);
+			Emc_eufar.airAircraftImg.setUrl(picture);
+			Emc_eufar.airAircraftImg.setStyleName("airAircraftImage");
 		}
+			
 	}
 	
 	
@@ -1064,7 +1158,7 @@ public class GuiModification {
 		} else if (domain == "imagery") {
 			if (tabNum == 0) {
 				Emc_eufar.simplePanel01.add(Emc_eufar.qvTabPanel);
-				Emc_eufar.qvTabPanel.setHeight("1200px");
+				Emc_eufar.qvTabPanel.setHeight("1220px");
 			}
 			Emc_eufar.imageryNum++;
 			pushButton.setText("Earth observation/Remote sensing data " + Integer.toString(Emc_eufar.imageryNum));
@@ -1112,7 +1206,7 @@ public class GuiModification {
 						if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(actualTab)).getText().contains("Atmospheric")) {
 							Emc_eufar.qvTabPanel.setHeight("710px");
 						} else if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(actualTab)).getText().contains("Earth")) {
-							Emc_eufar.qvTabPanel.setHeight("1200px");
+							Emc_eufar.qvTabPanel.setHeight("1220px");
 						}
 					} catch (AssertionError | IndexOutOfBoundsException e) {}
 					tabNum = Emc_eufar.qvTabPanel.getWidgetCount();
@@ -1149,7 +1243,7 @@ public class GuiModification {
 					if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(tabIndex)).getText().contains("Atmospheric")) {
 						Emc_eufar.qvTabPanel.setHeight("710px");
 					} else if (((PushButton) Emc_eufar.qvTabPanel.getTabWidget(tabIndex)).getText().contains("Earth")) {
-						Emc_eufar.qvTabPanel.setHeight("1200px");
+						Emc_eufar.qvTabPanel.setHeight("1220px");
 					}
 				}
 			}
@@ -1331,10 +1425,7 @@ public class GuiModification {
 		insituLinkBox.setStyleName("qv_insituBox");
 		insituConstBox.setStyleName("qv_insituBox");
 		insituMatBox.setStyleName("qv_insituBox");
-		//insituImage.getElement().setAttribute("style", "margin-left: 23px; margin-top: 7px;");
-		
 		insituImage.setStyleName("qv_insituForwardImage");
-		
 		insituOtherBox.setStyleName("qv_otherBox");
 		insituFlagAre.setStyleName("qv_insituTextAre");
 		insituAssumptionAre.setStyleName("qv_insituTextAre");
@@ -1461,11 +1552,9 @@ public class GuiModification {
 				if (((CheckBox) insituChk07.getWidget(0)).getValue() == true) {
 					insituImage.setVisible(true);
 					insituOtherBox.setVisible(true);
-					//insituImage.setPixelSize(20, 12);
 				} else {
 					insituImage.setVisible(false);
 					insituOtherBox.setVisible(false);
-					//insituImage.setPixelSize(20, 12);
 				}
 			}
 		});
@@ -2254,5 +2343,39 @@ public class GuiModification {
 			allQVListboxes.get(0).setEnabled(false);
 		}
 		Emc_eufar.rootLogger.log(Level.INFO, "Updating of the tab list for control in all QV forms finished");
+	}
+	
+
+	// Fill in autmatically other fields from project acronym
+	public static void fillInFieldsFromProject(final String acronym) {
+		Emc_eufar.rootLogger.log(Level.INFO, "fillInFieldsFromProject requested from: " + acronym);
+		HashMap<String, String> projectData = null;
+		projectData = Emc_eufar.projectsDBMap.get(acronym);
+		if (projectData != null) {
+			String title = projectData.get("title");
+			String platform = projectData.get("aircraft");
+			String campaignStart = Utilities.dateStringCorrection(projectData.get("campaign_start"));
+			String campaignEnd = Utilities.dateStringCorrection(projectData.get("campaign_end"));
+			String projectAbstract = projectData.get("abstract");
+			Emc_eufar.identTitleBox.setText(title);
+			Emc_eufar.identAbstractAre.setText(projectAbstract);
+			Emc_eufar.refStartDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(campaignStart));
+			Emc_eufar.refEndDat.setValue(DateTimeFormat.getFormat("yyyy-MM-dd").parse(campaignEnd));
+			HashMap<String, String> platformData = Emc_eufar.aircraftDBMap.get(platform);
+			Emc_eufar.airAircraftTable.removeAllRows();
+			Emc_eufar.aircraftTabList.clear();
+			Emc_eufar.operatorTabList.clear();
+			Emc_eufar.manufacturairTabList.clear();
+			Emc_eufar.countryTabList.clear();
+			Emc_eufar.identificationTabList.clear();
+			if (platformData != null) {
+				String registration = platformData.get("registration number");
+				newAircraftInformation("", registration);
+				addAircraftPlus();
+			} else {
+				newAircraftInformation("Make a choice...", "");
+			}
+		}
+		Utilities.docIsModified();
 	}
 }

@@ -31,6 +31,16 @@
  	<filter-class>com.eufar.emc.server.clearCache</filter-class>
   </filter>
 
+ <servlet>
+    <servlet-name>FetchDataFromServer</servlet-name>
+    <servlet-class>com.eufar.emc.server.FetchDataFromServer</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>FetchDataFromServer</servlet-name>
+    <url-pattern>/FetchDataFromServer</url-pattern>
+  </servlet-mapping>
+
   <filter-mapping>
  	<filter-name>clearCache</filter-name>
  	<url-pattern>/*</url-pattern>

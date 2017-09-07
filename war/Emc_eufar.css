@@ -474,6 +474,7 @@ body {
   color: #4f4f4f;
   font-family: MyFont;
   font-size: 14px;
+  margin-top: 12px;
 }
 
 
@@ -532,6 +533,18 @@ body {
 .airPushButton1:active {
   transform: translateX(1px) translateY(1px);
 }
+
+
+.airAircraftImage {
+  box-shadow: 1px 1px 8px #555;
+  margin-top: 70px;
+}
+
+
+.airAircraftImage2 {
+  margin-top: 70px;
+}
+
 
 
 .geoTitleTextLabel {

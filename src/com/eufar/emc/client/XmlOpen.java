@@ -110,10 +110,14 @@ public class XmlOpen {
 					Utilities.geoLocationSet(1);
 					Emc_eufar.geoDetailLst.setSelectedIndex(index);
 					Emc_eufar.geoLocationLst.setSelectedIndex(1);
-				} else if (Emc_eufar.countryList.contains(description)) {
-					int index = Emc_eufar.countryList.indexOf(description);
+				} else if (Emc_eufar.countryList.get(description) != null) {
 					Utilities.geoLocationSet(2);
-					Emc_eufar.geoDetailLst.setSelectedIndex(index);
+					for (int i = 0; i < Emc_eufar.geoDetailLst.getItemCount(); i++) {
+						if (description == Emc_eufar.geoDetailLst.getItemText(i)) {
+							Emc_eufar.geoDetailLst.setSelectedIndex(i);
+							break;
+						}
+					}
 					Emc_eufar.geoLocationLst.setSelectedIndex(2);
 				} else if (Emc_eufar.oceanList.contains(description)) {
 					int index = Emc_eufar.oceanList.indexOf(description);
@@ -395,7 +399,7 @@ public class XmlOpen {
 		}
 	}
 	
-	/// read the string containing all QV xml code for in-situ and imagery data
+	/// read the string containing all QV xml code for in-situ data
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void readInsituCode(String string, int mapIndex) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the In-situ string invoked");
@@ -408,16 +412,16 @@ public class XmlOpen {
 		
 		/// collect all substrings
 		ArrayList<String> stringList = new ArrayList<String>();
-		int indexStart = string.indexOf(":");
+		int indexStart = string.indexOf(":: ");
 		int indexEnd = string.indexOf("|", indexStart);
-		stringList.add(string.substring(indexStart + 2, indexEnd));
+		stringList.add(string.substring(indexStart + 3, indexEnd));
 		while (indexEnd >= 0) {
-			indexStart = string.indexOf(":", indexStart + 1);
+			indexStart = string.indexOf(":: ", indexStart + 1);
 			indexEnd = string.indexOf("|", indexEnd + 1);
-			stringList.add(string.substring(indexStart + 2, indexEnd));
+			stringList.add(string.substring(indexStart + 3, indexEnd));
 		}
 		stringList.remove(stringList.size() - 1);
-		stringList.add(string.substring(indexStart + 2, string.length()));
+		stringList.add(string.substring(indexStart + 3, string.length()));
 
 		/// instrument
 		if (stringList.get(0) != "") {
@@ -475,7 +479,7 @@ public class XmlOpen {
 	}
 	
 	
-	/// read the string containing all QV xml code for in-situ and imagery data
+	/// read the string containing all QV xml code for imagery data
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void readImageryCode(String string, int mapIndex) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the Imagery string invoked");
@@ -487,16 +491,16 @@ public class XmlOpen {
 		
 		/// collect all substrings
 		ArrayList<String> stringList = new ArrayList<String>();
-		int indexStart = string.indexOf(":");
+		int indexStart = string.indexOf(":: ");
 		int indexEnd = string.indexOf("|", indexStart);
-		stringList.add(string.substring(indexStart + 2, indexEnd));
+		stringList.add(string.substring(indexStart + 3, indexEnd));
 		while (indexEnd >= 0) {
-			indexStart = string.indexOf(":", indexStart + 1);
+			indexStart = string.indexOf(":: ", indexStart + 1);
 			indexEnd = string.indexOf("|", indexEnd + 1);
-			stringList.add(string.substring(indexStart + 2, indexEnd));
+			stringList.add(string.substring(indexStart + 3, indexEnd));
 		}
 		stringList.remove(stringList.size() - 1);
-		stringList.add(string.substring(indexStart + 2, string.length()));
+		stringList.add(string.substring(indexStart + 3, string.length()));
 				
 		/// instrument
 		if (stringList.get(0) != "") {
@@ -584,7 +588,7 @@ public class XmlOpen {
 	}
 	
 	
-	/// read the string containing all QV xml code for in-situ and imagery data
+	/// read the string containing all QV xml code for in-situ data
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void readInsituCode_Old(String string) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the old In-situ string invoked");
@@ -596,16 +600,16 @@ public class XmlOpen {
 		
 		/// collect all substrings
 		ArrayList<String> stringList = new ArrayList<String>();
-		int indexStart = string.indexOf(":");
+		int indexStart = string.indexOf(":: ");
 		int indexEnd = string.indexOf("|", indexStart);
-		stringList.add(string.substring(indexStart + 2, indexEnd));
+		stringList.add(string.substring(indexStart + 3, indexEnd));
 		while (indexEnd >= 0) {
-			indexStart = string.indexOf(":", indexStart + 1);
+			indexStart = string.indexOf(":: ", indexStart + 1);
 			indexEnd = string.indexOf("|", indexEnd + 1);
-			stringList.add(string.substring(indexStart + 2, indexEnd));
+			stringList.add(string.substring(indexStart + 3, indexEnd));
 		}
 		stringList.remove(stringList.size() - 1);
-		stringList.add(string.substring(indexStart + 2, string.length()));
+		stringList.add(string.substring(indexStart + 3, string.length()));
 		
 		/// procedures
 		allTextBoxes.get(0).setText(stringList.get(0));
@@ -653,7 +657,7 @@ public class XmlOpen {
 	}
 	
 	
-	/// read the string containing all QV xml code for in-situ and imagery data
+	/// read the string containing all QV xml code for imagery data
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void readImageryCode_Old(String string) {
 		Emc_eufar.rootLogger.log(Level.INFO, "Reading of the old Imagery string invoked");
@@ -665,16 +669,16 @@ public class XmlOpen {
 
 		/// collect all substrings
 		ArrayList<String> stringList = new ArrayList<String>();
-		int indexStart = string.indexOf(":");
+		int indexStart = string.indexOf(":: ");
 		int indexEnd = string.indexOf("|", indexStart);
-		stringList.add(string.substring(indexStart + 2, indexEnd));
+		stringList.add(string.substring(indexStart + 3, indexEnd));
 		while (indexEnd >= 0) {
-			indexStart = string.indexOf(":", indexStart + 1);
+			indexStart = string.indexOf(":: ", indexStart + 1);
 			indexEnd = string.indexOf("|", indexEnd + 1);
-			stringList.add(string.substring(indexStart + 2, indexEnd));
+			stringList.add(string.substring(indexStart + 3, indexEnd));
 		}
 		stringList.remove(stringList.size() - 1);
-		stringList.add(string.substring(indexStart + 2, string.length()));
+		stringList.add(string.substring(indexStart + 3, string.length()));
 			
 		/// calibration information
 		allTextBoxes.get(0).setText(stringList.get(0));

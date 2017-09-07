@@ -1,6 +1,5 @@
 package com.eufar.emc.client;
 
-
 import java.util.logging.Level;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -32,6 +31,42 @@ public class PopupMessages {
 		MMDATE, MMLANGUAGE, MMPARTY, QVLINEAGE1, QVLINEAGE2, QVLINEAGE3, QVLINEAGE4, QVLINEAGE5, QVLINEAGE6, QVLINEAGE7, QVLINEAGE8, 
 		QVLINEAGE9, QVLINEAGE10, QVLINEAGE11, QVLINEAGE12, QVLINEAGE13, QVLINEAGE14, QVLINEAGE15, QVLINEAGE16, QVLINEAGE17, QVLINEAGE18, 
 		QVLINEAGE19, QVLINEAGE20;}
+	
+	
+	// Information about the new API, since v1.4.0
+	public static void apiInformation() {
+		final DialogBox aboutDialog = new DialogBox();
+		final VerticalPanel verticalPanel01 = new VerticalPanel();
+		final HorizontalPanel horizontalPanel01 = new HorizontalPanel();
+		final HTML label = new HTML("<p>Since version 1.4.0, EMC is now directly connected to the EUFAR database through an API. It will load "
+				+ "automatically project data, aicraft data, operators data and instrument data. The list of operators, aircraft and instrumen"
+				+ "t in EMC is now automatically updated from the EUFAR database.</p><p>The <b>Project acronym TextBox</b>"
+				+ " has been replaced by a <b>SuggestBox</b>. Just write the first letters of a project acronym, and EMC will list you all projects incl"
+				+ "uding those letters. Then just select a project in the list, and the relevant fields will be automatically filled in.</p>");
+		final Button button = new Button("Ok");
+		final Image image = new Image(Emc_eufar.resources.warningPopup().getSafeUri());
+		image.setSize("68px", "68px");
+		button.addClickHandler(new ClickHandler() {			
+			@Override
+			public void onClick(ClickEvent event) {
+				aboutDialog.hide();
+			}
+		});
+		aboutDialog.setGlassEnabled(true);
+		horizontalPanel01.add(image);
+		horizontalPanel01.add(label);
+		verticalPanel01.add(horizontalPanel01);
+		verticalPanel01.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		verticalPanel01.add(button);
+		label.setStyleName("infoExplorerText");
+		button.addStyleName("infoExplorerButton");
+		aboutDialog.setStyleName("infoExplorerPanel");
+		aboutDialog.add(verticalPanel01);
+		aboutDialog.setSize("500px","180px");
+		aboutDialog.setModal(true);
+		aboutDialog.center();
+		aboutDialog.show();
+	}
 	
 	
 	// build and launch an About window with a dedicated text to present EMC
@@ -783,6 +818,19 @@ public class PopupMessages {
 				+ "(succeeded)</li><li>Internet Explorer 11 (failed on one computer and succeeded on others)</li><li>Safari 5.1.7, 8.0.5 "
 				+ "(succeeded)</li><li>Opera 30, 40 (succeeded)</li><li>Vivaldi 1.4</li></ul><br>"
 				
+				+ "<b><u>September 07 2017, Release version 1.4.0 [ONLINE]</u></b><br>The new API of the EUFAR website has been implemented "
+				+ "in ASMM. The user has now the possibility to select a project from the Project acronym textbox, the function will then fi"
+				+ "ll in different fields automatically.<br><ul style='list-style-type:none'><li>ADDED:<ul><li>a new function to retrieve da"
+				+ "ta from EUFAR database has been put in place.</li><li>the arcraft and operators are now updated automatically based on EU"
+				+ "FAR database.</li><li>a link to the EUFAR website has been added to the header.</li><li>a new popup panel has been added "
+				+ "to inform all users of the different modifications induced by the integration of the new API.</li></ul></li></ul><ul styl"
+				+ "e='list-style-type:none'><li>MODIFIED:<ul><li>the list of countries has been modified to reflect the ISO 3166-1 list with"
+				+ " alpha-2 codes.</li><li>the functions to read, write and check xml code have been modified to take into account the new AP"
+				+ "I, the new operators/aircraft object and the new country list.</li><li>the code of the application has been cleaned.</li>"
+				+ "<li>letter to separate QV elements has been changed.</li></ul></li></ul><ul style='list-style-type:none'><li>FIXED:<ul><l"
+				+ "i>when saving a file, information about aircraft weren't saved properly.</li><li>aircraft information lists weren't clear"
+				+ "ed properly when creating a new file.</li><li>old QV section wasn't read properly.</li><li>the height of the Imagery QV p"
+				+ "anel was too small.</li></ul></li></ul>"
 				+ "<b><u>June 15 2017, Release version 1.3.2 [ONLINE]</u></b><br><ul style='list-style-type:none'><li>FIXED:<ul><li>textboxes"
 				+ " for instrument in the Aircraft & Instrument section weren't well tested for text during the saving of a document, and gen"
 				+ "erated blue text for the parent tab. It has been fixed.</li></ul><li>MODIFIED:<ul><li>the list of aircraft has been updated."
@@ -803,7 +851,7 @@ public class PopupMessages {
 				+ "an issue has been corrected in the function to read QV data for insitu data.</li><li>if a textbox is empty, the tab number "
 				+ "6 is always in red. It has been fixed.</li><li>if 'Other' is selected in the Aircraft list, during checking, textboxes for "
 				+ "'Other' instrument appear. It has been fixed.</li><li>once checked, and if text is present, textboxes for aircraft and "
-				+ "instrument weren't displayed properly.</li><li>an issue with the navigation between tabs has been fixed.- because of "
+				+ "instrument weren't displayed properly.</li><li>an issue with the navigation between tabs has been fixed.</li><li>because of "
 				+ "security policy of few browsers, a 'fakepath' string is present in the filename when opening a file. It has been fixed."
 				+ "</li><li> fixed an issue with the size of the Earth globe in the 'Geographic Information' section.</li></ul></li></ul>"
 				+ "<ul style='list-style-type:none'>"
