@@ -12,6 +12,12 @@ ONLINE VERSION TESTED ON:
     - Vivaldi 1.4+
 
 
+January 29 2018, Release version 1.4.1 [ONLINE]
+===============================================
+  MODIFIED:
+    - the email adress linked to EMC has been changed.
+
+
 September 07 2017, Release version 1.4.0 [ONLINE]
 =================================================
   The new API of the EUFAR website has been implemented in ASMM. The user has now the possibility to select a project from the Project acronym textbox, the function will then fill in different fields automatically.
