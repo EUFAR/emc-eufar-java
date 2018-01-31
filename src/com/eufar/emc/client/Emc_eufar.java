@@ -99,7 +99,7 @@ public class Emc_eufar implements EntryPoint {
 	public static ArrayList<HorizontalPanel> allRadioButtons = new ArrayList<HorizontalPanel>();
 	public static ArrayList<HorizontalPanel> allCheckBoxes = new ArrayList<HorizontalPanel>();
 	public static ArrayList<DateBox> allDateBoxes = new ArrayList<DateBox>();
-	private String emcVersion = new String("v1.4.0 (2017-09-07)");
+	private String emcVersion = new String("v1.4.2 (2018-31-01)");
 	private String gwtVersion = new String("2.7.0");
 	private String eclipseVersion = new String("4.6.1");
 	private String javaVersion = new String("1.8.0");
