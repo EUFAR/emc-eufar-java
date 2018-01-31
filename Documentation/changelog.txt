@@ -12,6 +12,12 @@ ONLINE VERSION TESTED ON:
     - Vivaldi 1.4+
 
 
+January 31 2018, Release version 1.4.2 [ONLINE]
+===============================================
+  FIXED:
+    - links to the EMC GitHub repository have been fixed.
+
+
 January 29 2018, Release version 1.4.1 [ONLINE]
 ===============================================
   MODIFIED:
